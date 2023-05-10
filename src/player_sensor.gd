@@ -1,4 +1,4 @@
-class_name PlayerControl
+class_name PlayerSensor
 extends Marker2D
 
 signal swipe(direction: Vector2)

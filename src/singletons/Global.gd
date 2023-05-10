@@ -4,8 +4,10 @@ extends Node
 
 # ---------------------- VARIABLES ----------------------
 
+var floor_group_names: Array[String]
 var screen_width: int; var screen_height: int; var ratio := ":"
 var settings: Dictionary
+
 
 func _ready() -> void:
 	screen_width = int(get_viewport().get_visible_rect().size.x)

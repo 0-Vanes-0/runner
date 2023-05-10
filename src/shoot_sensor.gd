@@ -1,4 +1,4 @@
-class_name ShootControl
+class_name ShootSensor
 extends Marker2D
 
 signal tap(position: Vector2)
@@ -10,7 +10,6 @@ func _ready():
 	self.position = Vector2(Global.screen_width / 2, 0)
 	_size.x = Global.screen_width / 2
 	_size.y = Global.screen_height
-	print_debug("self.position=", self.position, " _size=", _size)
 
 
 func _process(delta):
