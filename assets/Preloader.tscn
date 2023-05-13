@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_1x2in"]
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="2_nw0x7"]
-[ext_resource type="PackedScene" uid="uid://d3qx8b5m2y734" path="res://src/game.tscn" id="3_m0eon"]
+[ext_resource type="PackedScene" uid="uid://duibtqoink1qm" path="res://src/game.tscn" id="3_m0eon"]
 [ext_resource type="Texture2D" uid="uid://b6uchnpspnh85" path="res://assets/sprites/fire_orb.png" id="4_haqrm"]
 
 [node name="ResourcePreloader" type="Node"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3qx8b5m2y734"]
+[gd_scene load_steps=10 format=3 uid="uid://cw8ujdd0tak01"]
 
-[ext_resource type="Script" path="res://src/level_handler.gd" id="1_t5fp1"]
-[ext_resource type="Texture2D" uid="uid://cbdh1xcvs1rij" path="res://icon.svg" id="2_jqhok"]
-[ext_resource type="Script" path="res://src/player.gd" id="3_nr288"]
-[ext_resource type="Script" path="res://src/player_sensor.gd" id="5_if4ho"]
-[ext_resource type="Script" path="res://src/fps.gd" id="5_moa7s"]
-[ext_resource type="Script" path="res://src/shoot_sensor.gd" id="6_ova6b"]
+[ext_resource type="Script" path="res://src/scenes/game_level_handler.gd" id="1_njpto"]
+[ext_resource type="Script" path="res://src/gameplay/player.gd" id="2_b3rwp"]
+[ext_resource type="Texture2D" uid="uid://cbdh1xcvs1rij" path="res://icon.svg" id="3_8js7u"]
+[ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
+[ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
+[ext_resource type="Script" path="res://src/fps.gd" id="6_mpehs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s63ud"]
 size = Vector2(140, 20)
@@ -20,7 +20,7 @@ font_size = 60
 metadata/_edit_lock_ = true
 
 [node name="Level" type="Node2D" parent="."]
-script = ExtResource("1_t5fp1")
+script = ExtResource("1_njpto")
 
 [node name="Floors" type="Node2D" parent="Level"]
 
@@ -28,7 +28,7 @@ script = ExtResource("1_t5fp1")
 
 [node name="Player" type="CharacterBody2D" parent="Level" node_paths=PackedStringArray("player_control", "shoot_control")]
 position = Vector2(240, 0)
-script = ExtResource("3_nr288")
+script = ExtResource("2_b3rwp")
 player_control = NodePath("../../PlayerSensor")
 shoot_control = NodePath("../../ShootSensor")
 metadata/_edit_group_ = true
@@ -37,7 +37,7 @@ metadata/_edit_group_ = true
 modulate = Color(1, 0.737255, 0.0196078, 1)
 position = Vector2(0, -60)
 scale = Vector2(0.9375, 0.9375)
-texture = ExtResource("2_jqhok")
+texture = ExtResource("3_8js7u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Player"]
 position = Vector2(0, -10)
@@ -52,11 +52,11 @@ debug_color = Color(0.721569, 0.145098, 0.145098, 0.419608)
 
 [node name="PlayerSensor" type="Marker2D" parent="."]
 gizmo_extents = 100.0
-script = ExtResource("5_if4ho")
+script = ExtResource("4_8ttyi")
 
 [node name="ShootSensor" type="Marker2D" parent="."]
 gizmo_extents = 100.0
-script = ExtResource("6_ova6b")
+script = ExtResource("5_ysdi3")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -65,5 +65,5 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "100"
 label_settings = SubResource("LabelSettings_aavuu")
-script = ExtResource("5_moa7s")
+script = ExtResource("6_mpehs")
 metadata/_edit_lock_ = true
