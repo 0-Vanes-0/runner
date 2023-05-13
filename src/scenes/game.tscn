@@ -26,11 +26,12 @@ script = ExtResource("1_njpto")
 
 [node name="Enemies" type="Node2D" parent="Level"]
 
-[node name="Player" type="CharacterBody2D" parent="Level" node_paths=PackedStringArray("player_control", "shoot_control")]
+[node name="Player" type="CharacterBody2D" parent="Level" node_paths=PackedStringArray("player_control", "shoot_control", "shoot_field")]
 position = Vector2(240, 0)
 script = ExtResource("2_b3rwp")
 player_control = NodePath("../../PlayerSensor")
 shoot_control = NodePath("../../ShootSensor")
+shoot_field = NodePath("../ShootField")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Level/Player"]
@@ -49,6 +50,8 @@ position = Vector2(40, -60)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Player/Hitbox"]
 shape = SubResource("RectangleShape2D_ek10s")
 debug_color = Color(0.721569, 0.145098, 0.145098, 0.419608)
+
+[node name="ShootField" type="Node2D" parent="Level"]
 
 [node name="PlayerSensor" type="Marker2D" parent="."]
 gizmo_extents = 100.0
