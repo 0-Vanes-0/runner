@@ -23,11 +23,11 @@ func start_preload():
 		"game_scene": game_scene,
 		"fire_orb_texture": fire_orb_texture,
 	}
-	for name in resources.keys():
-		if resources.get(name) != null:
+	for resource in resources.keys():
+		if resources.get(resource) != null:
 			counter += 1
 		else:
-			error.emit("Failed to load: " + name)
+			error.emit("Failed to load: " + resource)
 	
 	if counter == resources.size():
 		loaded.emit()

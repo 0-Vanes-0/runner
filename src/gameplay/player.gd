@@ -52,7 +52,7 @@ func _get_colliding_floor() -> int:
 	return -1
 
 
-func _tap_shoot(position: Vector2):
+func _tap_shoot(target_position: Vector2):
 	var start_position: Vector2 = self.position + $Hitbox.position
-	var projectile := Projectile.new(self, start_position, position, 0, Global.screen_width, Preloader.fire_orb_texture)
+	var projectile := Projectile.new(self, start_position, target_position, 0, Global.screen_width, Preloader.fire_orb_texture)
 	shoot_field.add_child(projectile)

@@ -12,10 +12,6 @@ func _ready():
 	_size.y = Global.screen_height
 
 
-func _process(delta):
-	pass
-
-
 func _input(event):
 	if event is InputEventScreenTouch:
 		if self.position < event.position and event.position < self.position + _size:
