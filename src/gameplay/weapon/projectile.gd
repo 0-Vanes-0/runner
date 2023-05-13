@@ -5,11 +5,15 @@ var area: Area2D
 var sprite: Sprite2D
 var visibler: VisibleOnScreenNotifier2D
 
+var direction: Vector2
+var speed: float
 
-func _init(entity_owner: Object, start_position: Vector2, target_position: Vector2, damage: int, texture: Texture2D):
+
+func _init(entity_owner: Object, start_position: Vector2, target_position: Vector2, damage: int, speed: float, texture: Texture2D):
 	super(entity_owner, start_position, target_position, damage)
 	type = ShootType.PROJECTILE_LINEAR
 	self.name = "Projectile"
+	self.speed = speed
 	
 	sprite = Sprite2D.new()
 	sprite.texture = texture
@@ -33,10 +37,11 @@ func _init(entity_owner: Object, start_position: Vector2, target_position: Vecto
 
 func _ready():
 	self.position = start_position
+	direction = start_position.direction_to(target_position)
 
 
 func _process(delta):
-	pass
+	self.position += direction * speed * delta
 
 
 func _on_screen_exited():

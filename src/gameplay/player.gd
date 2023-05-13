@@ -1,23 +1,23 @@
 class_name Player
 extends CharacterBody2D
 
-@export var player_control: PlayerSensor
-@export var shoot_control: ShootSensor
+@export var player_sensor: PlayerSensor
+@export var shoot_sensor: ShootSensor
 @export var shoot_field: Node2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jump_speed: float
 
 
 func _ready():
-	if player_control == null:
+	if player_sensor == null:
 		print_debug("PlayerSensor is null")
 	else:
-		player_control.swipe.connect(_move_vert)
+		player_sensor.swipe.connect(_move_vert)
 	
-	if shoot_control == null:
+	if shoot_sensor == null:
 		print_debug("ShootSensor is null")
 	else:
-		shoot_control.tap.connect(_tap_shoot)
+		shoot_sensor.tap.connect(_tap_shoot)
 	
 	if shoot_field == null:
 		print_debug("ShootField is null")
@@ -53,9 +53,6 @@ func _get_colliding_floor() -> int:
 
 
 func _tap_shoot(position: Vector2):
-	var projectile := Projectile.new(self, position, Vector2.ZERO, 0, Preloader.fire_orb_texture)
+	var start_position: Vector2 = self.position + $Hitbox.position
+	var projectile := Projectile.new(self, start_position, position, 0, Global.screen_width, Preloader.fire_orb_texture)
 	shoot_field.add_child(projectile)
-#	var spawn_spr := Sprite2D.new()
-#	spawn_spr.texture = Preloader.fire_orb_texture
-#	spawn_spr.position = position
-#	get_tree().current_scene.add_child(spawn_spr)

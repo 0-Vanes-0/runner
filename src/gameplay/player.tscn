@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3k63gqoyexbb"]
+
+[ext_resource type="Script" path="res://src/gameplay/player.gd" id="1_fgvy3"]
+[ext_resource type="Texture2D" uid="uid://cbdh1xcvs1rij" path="res://icon.svg" id="2_446st"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s63ud"]
+size = Vector2(140, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek10s"]
+size = Vector2(20, 100)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_fgvy3")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.737255, 0.0196078, 1)
+position = Vector2(0, -60)
+scale = Vector2(0.9375, 0.9375)
+texture = ExtResource("2_446st")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_s63ud")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(40, -60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_ek10s")
+debug_color = Color(0.721569, 0.145098, 0.145098, 0.419608)

@@ -1,17 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cw8ujdd0tak01"]
+[gd_scene load_steps=7 format=3 uid="uid://cw8ujdd0tak01"]
 
 [ext_resource type="Script" path="res://src/scenes/game_level_handler.gd" id="1_njpto"]
-[ext_resource type="Script" path="res://src/gameplay/player.gd" id="2_b3rwp"]
-[ext_resource type="Texture2D" uid="uid://cbdh1xcvs1rij" path="res://icon.svg" id="3_8js7u"]
+[ext_resource type="PackedScene" uid="uid://d3k63gqoyexbb" path="res://src/gameplay/player.tscn" id="2_ws7xf"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
 [ext_resource type="Script" path="res://src/fps.gd" id="6_mpehs"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s63ud"]
-size = Vector2(140, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek10s"]
-size = Vector2(20, 100)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
 font_size = 60
@@ -26,30 +19,11 @@ script = ExtResource("1_njpto")
 
 [node name="Enemies" type="Node2D" parent="Level"]
 
-[node name="Player" type="CharacterBody2D" parent="Level" node_paths=PackedStringArray("player_control", "shoot_control", "shoot_field")]
-position = Vector2(240, 0)
-script = ExtResource("2_b3rwp")
-player_control = NodePath("../../PlayerSensor")
-shoot_control = NodePath("../../ShootSensor")
+[node name="Player" parent="Level" node_paths=PackedStringArray("player_sensor", "shoot_sensor", "shoot_field") instance=ExtResource("2_ws7xf")]
+position = Vector2(360, 0)
+player_sensor = NodePath("../../PlayerSensor")
+shoot_sensor = NodePath("../../ShootSensor")
 shoot_field = NodePath("../ShootField")
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Level/Player"]
-modulate = Color(1, 0.737255, 0.0196078, 1)
-position = Vector2(0, -60)
-scale = Vector2(0.9375, 0.9375)
-texture = ExtResource("3_8js7u")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Player"]
-position = Vector2(0, -10)
-shape = SubResource("RectangleShape2D_s63ud")
-
-[node name="Hitbox" type="Area2D" parent="Level/Player"]
-position = Vector2(40, -60)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Player/Hitbox"]
-shape = SubResource("RectangleShape2D_ek10s")
-debug_color = Color(0.721569, 0.145098, 0.145098, 0.419608)
 
 [node name="ShootField" type="Node2D" parent="Level"]
 
