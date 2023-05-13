@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3qx8b5m2y734"]
+[gd_scene load_steps=10 format=3 uid="uid://d3qx8b5m2y734"]
 
 [ext_resource type="Script" path="res://src/level_handler.gd" id="1_t5fp1"]
 [ext_resource type="Texture2D" uid="uid://cbdh1xcvs1rij" path="res://icon.svg" id="2_jqhok"]
@@ -10,6 +10,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s63ud"]
 size = Vector2(140, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek10s"]
+size = Vector2(20, 100)
+
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
 font_size = 60
 
@@ -19,8 +22,12 @@ metadata/_edit_lock_ = true
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("1_t5fp1")
 
+[node name="Floors" type="Node2D" parent="Level"]
+
+[node name="Enemies" type="Node2D" parent="Level"]
+
 [node name="Player" type="CharacterBody2D" parent="Level" node_paths=PackedStringArray("player_control", "shoot_control")]
-position = Vector2(300, 720)
+position = Vector2(240, 0)
 script = ExtResource("3_nr288")
 player_control = NodePath("../../PlayerSensor")
 shoot_control = NodePath("../../ShootSensor")
@@ -35,6 +42,13 @@ texture = ExtResource("2_jqhok")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Player"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_s63ud")
+
+[node name="Hitbox" type="Area2D" parent="Level/Player"]
+position = Vector2(40, -60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Player/Hitbox"]
+shape = SubResource("RectangleShape2D_ek10s")
+debug_color = Color(0.721569, 0.145098, 0.145098, 0.419608)
 
 [node name="PlayerSensor" type="Marker2D" parent="."]
 gizmo_extents = 100.0

@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var player := $Player as Player
+@onready var floors := $Floors as Node2D
 const FLOORS_COUNT = 4
-var floors: Array[Node2D]
 
 func _ready():
 	var height := Global.screen_height
@@ -10,10 +10,10 @@ func _ready():
 	
 	for i in FLOORS_COUNT:
 		var floor := Node2D.new()
-		self.add_child(floor)
+		floors.add_child(floor)
 		floor.name = "Floor" + str(i)
 		
-		var platform: Platform = preload("res://src/gameplay/enviroment/platform.tscn").instantiate()
+		var platform: Platform = Preloader.platform.instantiate()
 		floor.add_child(platform)
 		platform.position.x = platform.size.x
 		Global.floor_group_names.append(floor.name)
@@ -22,8 +22,6 @@ func _ready():
 		var gap: float = (height - platform.size.y) / FLOORS_COUNT
 		floor.position.y = height - platform.size.y - i * gap
 		jump_height = gap + platform.size.y
-		
-		floors.append(floor)
 	
+	player.position.y = Global.screen_height / 2
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
-	self.move_child(player, -1)

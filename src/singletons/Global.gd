@@ -15,12 +15,15 @@ func _ready() -> void:
 	var gcd := _gcd(screen_width, screen_height)
 	ratio = str(screen_width / gcd) + ratio + str(screen_height / gcd)
 	print_debug("\t", "screen_width=", screen_width, ", screen_height=", screen_height, ", ratio=", ratio)
+	
+	Preloader.error.connect(_on_preloader_error)
+	
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
 
 # ---------------------- FUNCTIONS ----------------------
 
-func on_close_game():
-	pass
+func _on_preloader_error(message: String):
+	print_debug(message)
 
 # NOD
 func _gcd(a: int, b: int) -> int:

@@ -35,7 +35,7 @@ func _move_vert(direction: Vector2):
 			$CollisionShape2D.disabled = false
 		
 		# Jump up:
-		elif direction.y < 0 and _get_colliding_floor() > -1 and _get_colliding_floor() < Global.floor_group_names.size() - 1:
+		elif direction.y < 0 and _get_colliding_floor() < Global.floor_group_names.size() - 1 and _get_colliding_floor() > -1:
 			self.velocity.y = direction.y * jump_speed
 
 
@@ -50,6 +50,6 @@ func _get_colliding_floor() -> int:
 
 func _tap_shoot(position: Vector2):
 	var spawn_spr := Sprite2D.new()
-	spawn_spr.texture = preload("res://assets/sprites/fire_orb.png")
+	spawn_spr.texture = Preloader.fire_orb_texture
 	spawn_spr.position = position
 	get_tree().current_scene.add_child(spawn_spr)
