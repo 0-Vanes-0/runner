@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var player := $Player as Player
-@onready var floors := $Floors as Node2D
+@onready var player: Player = $Player 
+@onready var floors: Node2D = $Floors
 const FLOORS_COUNT = 4
 
 func _ready():
