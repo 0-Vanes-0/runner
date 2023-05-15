@@ -2,9 +2,9 @@
 
 importer="texture_atlas"
 type="Texture2D"
-uid="uid://ma83vjb14ya3"
+uid="uid://bywt6lon1fc0t"
 path="res://.godot/imported/mothership.png-73ff177e60cd64c40dc75fa0d361e898.res"
-group_file="res://assets/sprites/sprite_sheets/static_sprites_sheet.png"
+group_file="res://assets/sprites/atlases/overall_atlas.png"
 valid=true
 [deps]
 
@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/mothership.png-73ff177e60cd64c40dc75fa0d361e8
 
 [params]
 
-atlas_file="res://assets/sprites/sprite_sheets/static_sprites_sheet.png"
+atlas_file="res://assets/sprites/atlases/overall_atlas.png"
 import_mode=0
 crop_to_region=false
 trim_alpha_border_from_region=true

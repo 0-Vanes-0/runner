@@ -81,10 +81,8 @@ func _move(direction: Vector2):
 		elif direction.x > 0 and not is_dodging():
 			dodge_timer = 0
 			hitbox.monitorable = false
-			print_debug("false")
 			await get_tree().create_timer(DODGE_TIME).timeout
 			hitbox.monitorable = true
-			print_debug("true")
 
 
 func _get_colliding_floor() -> int:
