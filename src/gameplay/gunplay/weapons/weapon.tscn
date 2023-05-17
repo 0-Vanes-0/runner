@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ajutqtx6uo4"]
+
+[ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon.gd" id="1_72x0q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t7h6m"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_72x0q")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_t7h6m")
+centered = false
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(10, 0)

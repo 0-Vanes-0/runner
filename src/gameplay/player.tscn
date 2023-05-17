@@ -184,7 +184,6 @@ script = ExtResource("1_wg1tk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_k2dkm")
-animation = &"dodge"
 offset = Vector2(0, -42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

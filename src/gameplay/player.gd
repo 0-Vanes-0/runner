@@ -97,5 +97,12 @@ func _get_colliding_floor() -> int:
 func _tap_shoot(target_position: Vector2):
 	if not is_dodging():
 		var start_position: Vector2 = self.position + $Hitbox.position
-		var projectile := Projectile.new(self, start_position, target_position, 0, Global.screen_width, Preloader.fire_orb_texture)
-		shoot_field.add_child(projectile)
+		var projectile_linear := ProjectileLinear.new(
+			ShootEntity.Owner.PLAYER, 
+			start_position, 
+			target_position, 
+			0, 
+			Preloader.fire_orb_texture, 
+			Global.screen_width
+		)
+		shoot_field.add_child(projectile_linear)
