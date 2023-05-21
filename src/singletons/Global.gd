@@ -4,8 +4,6 @@ extends Node
 
 # ---------------------- VARIABLES ----------------------
 
-const PROJECTILE_SIZE := Vector2(50, 50)
-
 var floor_group_names: Array[String]
 var screen_width: int; var screen_height: int; var ratio := ":"
 var settings: Dictionary

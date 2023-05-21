@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ProjectileLinearSER" load_steps=5 format=3 uid="uid://m784j726moj4"]
+
+[ext_resource type="Script" path="res://assets/game_recources/shoot_entities/projectile_linear_ser.gd" id="1_w5eyq"]
+[ext_resource type="Texture2D" uid="uid://dtqqk5b4ox0m8" path="res://assets/sprites/arrow.png" id="2_gjdm8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xp7gu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nso2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gjdm8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[resource]
+script = ExtResource("1_w5eyq")
+shape = SubResource("RectangleShape2D_xp7gu")
+size_x_percent = 4.0
+size_y_percent = 1.0
+speed_percent = 100.0
+damage = 10
+sprite_frames = SubResource("SpriteFrames_nso2p")

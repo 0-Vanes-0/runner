@@ -7,18 +7,13 @@ signal error(message: String)
 @export var platform: PackedScene
 @export var game_scene: PackedScene
 
-@export_group("Textures", "")
-@export var fire_orb_texture: AtlasTexture
-
 var counter := 0
-
 
 
 func start_preload():
 	var resources: Dictionary = {
 		"platform": platform,
 		"game_scene": game_scene,
-		"fire_orb_texture": fire_orb_texture,
 	}
 	for resource in resources.keys():
 		if resources.get(resource) != null:

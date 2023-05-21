@@ -10,6 +10,7 @@ const DODGE_TIME := 1.0
 
 var jump_speed: float
 var dodge_timer: float
+var weapon: Weapon
 
 @onready var is_jump_middle_on: bool = false
 @onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -32,6 +33,10 @@ func _ready():
 	
 	if shoot_field == null:
 		print_debug("ShootField is null")
+	
+	weapon = Weapon.new(preload("res://assets/game_recources/weapons/crossbow.tres"), shoot_field)
+	self.add_child(weapon)
+	weapon.position = hitbox.position
 
 
 func _process(delta):
@@ -49,7 +54,7 @@ func is_dodging() -> bool:
 func _play_animations():
 	if is_on_floor():
 		if is_dodging():
-			sprite.play("dodge")
+			sprite.play("dodge") # TODO: Make const Dict with animation names
 		else:
 			sprite.play("run")
 		
@@ -96,13 +101,5 @@ func _get_colliding_floor() -> int:
 
 func _tap_shoot(target_position: Vector2):
 	if not is_dodging():
-		var start_position: Vector2 = self.position + $Hitbox.position
-		var projectile_linear := ProjectileLinear.new(
-			ShootEntity.Owner.PLAYER, 
-			start_position, 
-			target_position, 
-			0, 
-			Preloader.fire_orb_texture, 
-			Global.screen_width
-		)
-		shoot_field.add_child(projectile_linear)
+#		var start_position: Vector2 = $Weapon.position
+		weapon.shoot(self.position + weapon.position, target_position)
