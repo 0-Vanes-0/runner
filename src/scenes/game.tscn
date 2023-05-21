@@ -1,10 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw8ujdd0tak01"]
+[gd_scene load_steps=11 format=3 uid="uid://cw8ujdd0tak01"]
 
 [ext_resource type="Script" path="res://src/scenes/game_level_handler.gd" id="1_njpto"]
 [ext_resource type="PackedScene" uid="uid://trhj046vbo13" path="res://src/gameplay/player.tscn" id="2_00gd8"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
 [ext_resource type="Script" path="res://src/fps.gd" id="6_mpehs"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
+b = Vector2(100, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r6n8m"]
+a = Vector2(100, 0)
+b = Vector2(100, 100)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_p3ter"]
+a = Vector2(100, 100)
+b = Vector2(0, 100)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q0vek"]
+b = Vector2(0, 100)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
 font_size = 60
@@ -14,6 +28,20 @@ metadata/_edit_lock_ = true
 
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("1_njpto")
+
+[node name="ScreenBorder" type="StaticBody2D" parent="Level"]
+
+[node name="Top" type="CollisionShape2D" parent="Level/ScreenBorder"]
+shape = SubResource("SegmentShape2D_wbvkj")
+
+[node name="Right" type="CollisionShape2D" parent="Level/ScreenBorder"]
+shape = SubResource("SegmentShape2D_r6n8m")
+
+[node name="Bottom" type="CollisionShape2D" parent="Level/ScreenBorder"]
+shape = SubResource("SegmentShape2D_p3ter")
+
+[node name="Left" type="CollisionShape2D" parent="Level/ScreenBorder"]
+shape = SubResource("SegmentShape2D_q0vek")
 
 [node name="Floors" type="Node2D" parent="Level"]
 

@@ -4,6 +4,14 @@ extends Node
 
 # ---------------------- VARIABLES ----------------------
 
+enum Layers {
+	PLATFORM = 1,
+	PLAYER = 2,
+	ENEMY = 3,
+	SHOOT_ENTITY_PLAYER = 4,
+	SHOOT_ENTITY_ENEMY = 5,
+	BOUNDS = 6,
+}
 var floor_group_names: Array[String]
 var screen_width: int; var screen_height: int; var ratio := ":"
 var settings: Dictionary
@@ -21,6 +29,12 @@ func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
 
 # ---------------------- FUNCTIONS ----------------------
+
+func clean_layers(obj: CollisionObject2D) -> CollisionObject2D:
+	obj.set_collision_layer_value(1, false)
+	obj.set_collision_mask_value(1, false)
+	return obj
+
 
 func _on_preloader_error(message: String):
 	print_debug(message)

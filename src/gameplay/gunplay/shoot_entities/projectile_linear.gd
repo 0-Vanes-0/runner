@@ -21,7 +21,13 @@ func _init(resource: ProjectileLinearSER, entity_owner: Owner, start_position: V
 	sprite.scale = Vector2(game_size / resource.get_sprite_size())
 	self.add_child(sprite)
 	
-	area = Area2D.new()
+	area = Global.clean_layers(Area2D.new())
+	if entity_owner == Owner.PLAYER:
+		area.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
+		area.set_collision_mask_value(Global.Layers.ENEMY, true)
+	elif entity_owner == Owner.ENEMY:
+		area.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
+		area.set_collision_mask_value(Global.Layers.PLAYER, true)
 	var collision := CollisionShape2D.new()
 	collision.shape = resource.get_shape()
 	area.add_child(collision)

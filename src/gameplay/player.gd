@@ -19,6 +19,10 @@ var weapon: Weapon
 
 
 func _ready():
+	Global.clean_layers(self).collision_layer = Global.Layers.PLAYER
+	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
+	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
+	
 	dodge_timer = DODGE_TIME
 	
 	if player_sensor == null:

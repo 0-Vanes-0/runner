@@ -7,6 +7,7 @@ const FLOORS_COUNT = 4
 func _ready():
 	var height := Global.screen_height
 	var jump_height: float
+	var platform_width: float
 	
 	for i in FLOORS_COUNT:
 		var floor := Node2D.new()
@@ -18,10 +19,13 @@ func _ready():
 		platform.position.x = platform.size.x
 		Global.floor_group_names.append(floor.name)
 		platform.add_to_group(Global.floor_group_names[i])
+		platform_width = platform.size.x
 		
 		var gap: float = (height - platform.size.y) / FLOORS_COUNT
 		floor.position.y = height - platform.size.y - i * gap
 		jump_height = gap + platform.size.y
 	
-	player.position.y = Global.screen_height / 2
+	player.position = Vector2(platform_width / 2, Global.screen_height / 2)
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
+	
+	
