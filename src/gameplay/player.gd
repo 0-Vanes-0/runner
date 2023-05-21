@@ -19,7 +19,7 @@ var weapon: Weapon
 
 
 func _ready():
-	Global.clean_layers(self).collision_layer = Global.Layers.PLAYER
+	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
 	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
 	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
 	

@@ -1,5 +1,6 @@
 - Add rotation to ProjectileLinearSER
 - Player's "dodge" animation must be not looping
 - Simple enemies (shooting, moving up and down)
+- Add to ShootEntity functions for inherited children
 
 + Add Weapon class and give one obj to Player

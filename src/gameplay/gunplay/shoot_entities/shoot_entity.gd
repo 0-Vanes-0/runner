@@ -16,3 +16,6 @@ func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: V
 	self.entity_owner = entity_owner
 	self.start_position = start_position
 	self.target_position = target_position
+
+
+# TODO
