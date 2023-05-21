@@ -20,5 +20,5 @@ script = ExtResource("1_fcdqg")
 sprite_frames = SubResource("SpriteFrames_e1352")
 scale_value = 3
 shoot_entity_resource = ExtResource("2_ghh8w")
-fire_rate_time = 1.0
+shoot_rate_time = 1.0
 spread_angle = 0
