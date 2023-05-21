@@ -1,3 +1,5 @@
+- Add rotation to ProjectileLinearSER
 - Player's "dodge" animation must be not looping
-- Add Weapon class and give one obj to Player
 - Simple enemies (shooting, moving up and down)
+
++ Add Weapon class and give one obj to Player
