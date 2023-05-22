@@ -49,9 +49,11 @@ func shoot(start_position: Vector2, target_position: Vector2):
 
 
 func _init_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position, target_position) -> ShootEntity:
-	if weapon_resource.shoot_entity_resource is ProjectileLinearSER:
+	if weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_LINEAR:
 		return ProjectileLinear.new(res, owner, start_position, target_position)
-	print_debug("Unknown shoot_entity_resource class")
+	elif weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_RICO:
+		return ProjectileRico.new(res, owner, start_position, target_position)
+	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
 	return Node2D.new()
 
 

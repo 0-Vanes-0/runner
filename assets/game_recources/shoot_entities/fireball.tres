@@ -1,3 +1,27 @@
-[gd_resource type="Resource" format=3 uid="uid://btaino63u1ui2"]
+[gd_resource type="Resource" script_class="ProjectileSER" load_steps=5 format=3 uid="uid://b1hda4s3fs5vt"]
+
+[ext_resource type="Script" path="res://src/gameplay/gunplay/shoot_entities/projectile_ser.gd" id="1_eifuv"]
+[ext_resource type="Texture2D" uid="uid://b4xeskgs3768s" path="res://assets/sprites/fire_orb.png" id="2_gwlqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5dcpy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qsryl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gwlqw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
+script = ExtResource("1_eifuv")
+shape = SubResource("CircleShape2D_5dcpy")
+size_x_percent = 5.0
+size_y_percent = 5.0
+speed_percent = 100.0
+entity_class = 2
+damage = 10
+sprite_frames = SubResource("SpriteFrames_qsryl")

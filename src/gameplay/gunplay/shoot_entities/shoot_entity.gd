@@ -18,4 +18,4 @@ func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: V
 	self.target_position = target_position
 
 
-# TODO
+#func do_damage(to: HealthComponent):

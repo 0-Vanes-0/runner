@@ -29,18 +29,18 @@ metadata/_edit_lock_ = true
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("1_njpto")
 
-[node name="ScreenBorder" type="StaticBody2D" parent="Level"]
+[node name="Bounds" type="StaticBody2D" parent="Level"]
 
-[node name="Top" type="CollisionShape2D" parent="Level/ScreenBorder"]
+[node name="Top" type="CollisionShape2D" parent="Level/Bounds"]
 shape = SubResource("SegmentShape2D_wbvkj")
 
-[node name="Right" type="CollisionShape2D" parent="Level/ScreenBorder"]
+[node name="Right" type="CollisionShape2D" parent="Level/Bounds"]
 shape = SubResource("SegmentShape2D_r6n8m")
 
-[node name="Bottom" type="CollisionShape2D" parent="Level/ScreenBorder"]
+[node name="Bottom" type="CollisionShape2D" parent="Level/Bounds"]
 shape = SubResource("SegmentShape2D_p3ter")
 
-[node name="Left" type="CollisionShape2D" parent="Level/ScreenBorder"]
+[node name="Left" type="CollisionShape2D" parent="Level/Bounds"]
 shape = SubResource("SegmentShape2D_q0vek")
 
 [node name="Floors" type="Node2D" parent="Level"]

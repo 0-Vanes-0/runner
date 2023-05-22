@@ -1,4 +1,4 @@
-class_name ProjectileLinearSER
+class_name ProjectileSER
 extends ShootEntityResource
 
 @export var shape: Shape2D
@@ -10,7 +10,7 @@ extends ShootEntityResource
 func get_shape() -> Shape2D:
 	if shape != null:
 		if shape is CircleShape2D:
-			shape.radius = size_x_percent / 100 * Global.screen_height
+			shape.radius = (size_x_percent / 100 * Global.screen_height) / 2
 			return shape
 		elif shape is RectangleShape2D:
 			shape.size = Vector2(

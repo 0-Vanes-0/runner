@@ -1,16 +1,14 @@
-class_name WeaponResource
+class_name ShootEntityResource
 extends Resource
 
-const Animations := {
-	default = "default",
-	reload = "reload",
+enum EntityClasses {
+	NONE,
+	PROJECTILE_LINEAR,
+	PROJECTILE_RICO,
 }
-
+@export var entity_class: EntityClasses = EntityClasses.NONE
+@export_range(1, 1000, 1) var damage: int = 10
 @export var sprite_frames: SpriteFrames
-@export_range(1, 10) var scale_value: int = 1
-@export var shoot_entity_resource: Resource
-@export_range(0.1, 5.0, 0.1) var shoot_rate_time: float = 1.0
-@export_range(0, 45, 1, "degrees") var spread_angle: int = 0
 
 
 func get_sprite_size() -> Vector2:

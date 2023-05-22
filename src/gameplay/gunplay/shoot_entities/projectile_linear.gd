@@ -9,7 +9,7 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileLinearSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2):
+func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2):
 	super(resource, entity_owner, start_position, target_position)
 	self.name = "ProjectileLinear"
 	

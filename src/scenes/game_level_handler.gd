@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player: Player = $Player 
 @onready var floors: Node2D = $Floors
+@onready var bounds: StaticBody2D = $Bounds
 const FLOORS_COUNT = 4
 
 func _ready():
@@ -28,4 +29,12 @@ func _ready():
 	player.position = Vector2(platform_width / 2, Global.screen_height / 2)
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
 	
-	
+	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
+	($Bounds/Top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
+	($Bounds/Right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
+	($Bounds/Right.shape as SegmentShape2D).b = Vector2(Global.screen_width, Global.screen_height)
+	($Bounds/Bottom.shape as SegmentShape2D).a = Vector2(Global.screen_width, Global.screen_height)
+	($Bounds/Bottom.shape as SegmentShape2D).b = Vector2(0, Global.screen_height)
+	($Bounds/Left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
+	($Bounds/Left.shape as SegmentShape2D).b = Vector2(0, 0)
+	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
