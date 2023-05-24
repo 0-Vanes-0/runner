@@ -74,33 +74,35 @@ func _play_animations():
 
 
 func _move(direction: Vector2):
-	if is_on_floor() and not is_dodging():
-		# Jump down:
-		if direction.y > 0 and _get_colliding_floor() > 0:
+	var platform := _get_colliding_platform()
+	var floor_number := 0 if platform == null else platform.floor
+	if not is_dodging():
+		if direction.y > 0:
+			# Jump down:
+			self.velocity.y = direction.y
 			is_jump_middle_on = false
-			$CollisionShape2D.disabled = true
-			await get_tree().create_timer(0.1).timeout
-			$CollisionShape2D.disabled = false
+			if platform != null and floor_number > 1:
+				platform.toggle_collision()
 		
-		# Jump up:
-		elif direction.y < 0 and _get_colliding_floor() < Global.floor_group_names.size() - 1 and _get_colliding_floor() > -1:
-			self.velocity.y = direction.y * jump_speed
-		
-		# Dodge:
-		elif direction.x > 0 and not is_dodging():
-			dodge_timer = 0
-			hitbox.monitorable = false
-			await get_tree().create_timer(DODGE_TIME).timeout
-			hitbox.monitorable = true
+		if is_on_floor():
+			# Jump up:
+			if direction.y < 0 and floor_number < Global.MAX_FLOORS:
+				self.velocity.y = direction.y * jump_speed
+			
+			# Dodge:
+			elif direction.x > 0 and not is_dodging():
+				dodge_timer = 0
+				hitbox.monitorable = false
+				await get_tree().create_timer(DODGE_TIME).timeout
+				hitbox.monitorable = true
 
 
-func _get_colliding_floor() -> int:
+func _get_colliding_platform() -> Platform:
 	for i in self.get_slide_collision_count():
 		var collider = self.get_slide_collision(i).get_collider()
 		if collider is Platform:
-			var group_name: String = collider.get_groups().back()
-			return Global.floor_group_names.find(group_name)
-	return -1
+			return collider
+	return null
 
 
 func _tap_shoot(target_position: Vector2):

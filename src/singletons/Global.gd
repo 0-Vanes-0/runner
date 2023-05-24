@@ -12,7 +12,7 @@ enum Layers {
 	SHOOT_ENTITY_ENEMY = 5,
 	BOUNDS = 6,
 }
-var floor_group_names: Array[String]
+const MAX_FLOORS := 4
 var screen_width: int; var screen_height: int; var ratio := ":"
 var settings: Dictionary
 
