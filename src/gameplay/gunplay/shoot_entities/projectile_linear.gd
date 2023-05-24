@@ -45,7 +45,7 @@ func _ready():
 	_direction = start_position.direction_to(target_position)
 
 
-func _process(delta):
+func _physics_process(delta):
 	self.position += _direction * speed * delta
 
 

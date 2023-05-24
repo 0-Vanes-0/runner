@@ -13,6 +13,7 @@ var dodge_timer: float
 var weapon: Weapon
 
 @onready var is_jump_middle_on: bool = false
+@onready var is_jumping_down: bool = false
 @onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D 
 @onready var hitbox: Area2D = $Hitbox 
@@ -43,16 +44,25 @@ func _ready():
 	weapon.position = hitbox.position
 
 
-func _process(delta):
+func _physics_process(delta):
 	self.velocity.y += gravity * delta
 	dodge_timer = dodge_timer + delta if is_dodging() else DODGE_TIME
-	
 	move_and_slide()
+	_check_flags()
+
+
+func _process(delta):
 	_play_animations()
 
 
 func is_dodging() -> bool:
 	return dodge_timer < DODGE_TIME
+
+
+func _check_flags():
+	if self.is_on_floor():
+		is_jump_middle_on = true
+		is_jumping_down = false
 
 
 func _play_animations():
@@ -61,9 +71,6 @@ func _play_animations():
 			sprite.play("dodge") # TODO: Make const Dict with animation names
 		else:
 			sprite.play("run")
-		
-		if not is_jump_middle_on:
-			is_jump_middle_on = true
 	else:
 		if is_jump_middle_on and abs(self.velocity.y) < JUMP_MIDDLE_VELOCITY:
 			sprite.play("jump_middle")
@@ -77,10 +84,11 @@ func _move(direction: Vector2):
 	var platform := _get_colliding_platform()
 	var floor_number := 0 if platform == null else platform.floor
 	if not is_dodging():
-		if direction.y > 0:
+		if direction.y > 0 and not is_jumping_down:
 			# Jump down:
 			self.velocity.y = direction.y
 			is_jump_middle_on = false
+			is_jumping_down = true
 			if platform != null and floor_number > 1:
 				platform.toggle_collision()
 		
