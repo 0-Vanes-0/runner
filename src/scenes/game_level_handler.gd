@@ -1,33 +1,29 @@
 extends Node2D
 
+signal level_complete
+
 @onready var player: Player = $Player 
-@onready var floors: Node2D = $Floors
+@onready var segments: Node2D = $Segments
 @onready var bounds: StaticBody2D = $Bounds
+var segments_speed: float
+var segments_length_x: float
+var is_level_complete: bool
 
 
 func _ready():
 	var height := Global.screen_height
-	var jump_height: float
-	var platform_width: float
+	Preloader.segments.shuffle()
+	for value in Preloader.segments:
+		var segment: Segment = value.clone()
+		segment.position.x = segments_length_x
+		segments_length_x += segment.get_width()
+		segments.add_child(segment, true)
 	
-	for i in Global.MAX_FLOORS:
-		var floor := Node2D.new()
-		floors.add_child(floor)
-		floor.name = "Floor" + str(i+1)
-		
-		var platform: Platform = Preloader.platform.instantiate()
-		platform.floor = i + 1
-		platform.set_one_way(i > 0)
-		floor.add_child(platform)
-		
-		var gap: float = (height - platform.size.y) / Global.MAX_FLOORS
-		floor.position.y = height - platform.size.y - i * gap
-		
-		if i == 0:
-			platform_width = platform.size.x
-			jump_height = gap + platform.size.y
+	segments_speed = Global.screen_width / 2
 	
-	player.position = Vector2(platform_width / 2, Global.screen_height / 2)
+	player.position = Vector2(100, height / 2)
+	
+	var jump_height: float = (height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
 	
 	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
@@ -39,3 +35,25 @@ func _ready():
 	($Bounds/Left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
 	($Bounds/Left.shape as SegmentShape2D).b = Vector2(0, 0)
 	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
+
+
+func _physics_process(delta):
+	if segments_length_x > Global.screen_width:
+		for child in segments.get_children():
+			if child is Segment:
+				child.position.x -= delta * segments_speed
+				if child.position.x + child.get_width() < 0:
+					child.queue_free()
+		segments_length_x -= delta * segments_speed
+	elif not is_level_complete:
+		is_level_complete = true
+		_on_level_complete()
+		
+
+func _on_level_complete():
+	level_complete.emit()
+	(get_tree().current_scene.get_node("HUD/Button") as Button).visible = true
+
+
+func _on_reset_pressed():
+	get_tree().reload_current_scene()

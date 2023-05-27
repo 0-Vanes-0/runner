@@ -23,6 +23,7 @@ func _ready():
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
 	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
 	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
+	self.set_collision_mask_value(Global.Layers.BOUNDS, true)
 	
 	dodge_timer = DODGE_TIME
 	
@@ -61,7 +62,7 @@ func is_dodging() -> bool:
 
 func _check_flags():
 	if self.is_on_floor():
-		is_jump_middle_on = true
+		is_jump_middle_on = false
 		is_jumping_down = false
 
 
@@ -82,12 +83,11 @@ func _play_animations():
 
 func _move(direction: Vector2):
 	var platform := _get_colliding_platform()
-	var floor_number := 0 if platform == null else platform.floor
+	var floor_number := 0 if platform == null else platform.floor_number
 	if not is_dodging():
 		if direction.y > 0 and not is_jumping_down:
 			# Jump down:
 			self.velocity.y = direction.y
-			is_jump_middle_on = false
 			is_jumping_down = true
 			if platform != null and floor_number > 1:
 				platform.toggle_collision()
@@ -96,6 +96,7 @@ func _move(direction: Vector2):
 			# Jump up:
 			if direction.y < 0 and floor_number < Global.MAX_FLOORS:
 				self.velocity.y = direction.y * jump_speed
+				is_jump_middle_on = true
 			
 			# Dodge:
 			elif direction.x > 0 and not is_dodging():

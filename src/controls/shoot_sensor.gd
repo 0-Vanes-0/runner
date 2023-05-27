@@ -12,7 +12,7 @@ func _ready():
 	_size.y = Global.screen_height
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventScreenTouch:
 		if self.position < event.position and event.position < self.position + _size:
 			if event.pressed:

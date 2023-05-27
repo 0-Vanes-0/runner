@@ -23,7 +23,7 @@ func _process(delta):
 		_timer += delta
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventScreenTouch:
 		if self.position < event.position and event.position < self.position + _size:
 			if event.pressed:

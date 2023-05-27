@@ -1,15 +1,21 @@
 class_name Platform
 extends StaticBody2D
 
-var size := Vector2.ZERO
-var floor := 0
+const SIZE := Vector2(480, 40)
+var floor_number: int = 0
+
 
 func _ready():
 	var texture_size: Vector2 = $Sprite2D.texture.get_size()
-	var sprite_scale: Vector2 = $Sprite2D.scale
-	size = Vector2(texture_size * sprite_scale)
+	$Sprite2D.scale = Vector2(SIZE / texture_size)
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLATFORM, true)
 	self.collision_mask = Global.Layers.PLAYER
+	$VisibleOnScreenEnabler2D.rect = Rect2(
+		self.position.x, 
+		self.position.y,
+		SIZE.x,
+		SIZE.y
+	)
 
 
 func set_one_way(value: bool):

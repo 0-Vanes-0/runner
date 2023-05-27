@@ -43,6 +43,7 @@ func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2
 func _ready():
 	self.position = start_position
 	_direction = start_position.direction_to(target_position)
+	self.rotate(_direction.angle())
 
 
 func _physics_process(delta):

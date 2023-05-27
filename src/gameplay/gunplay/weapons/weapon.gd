@@ -42,7 +42,8 @@ func _process(delta):
 
 func shoot(start_position: Vector2, target_position: Vector2):
 	if not _is_shoot_paused():
-		var entity := _init_entity(weapon_resource.shoot_entity_resource, ShootEntity.Owner.PLAYER, start_position, target_position.rotated(deg_to_rad(spread_angle)))
+		var angle: float = deg_to_rad(spread_angle / 2 * randf()) * (1 if randi_range(0, 1) == 1 else -1)
+		var entity := _init_entity(weapon_resource.shoot_entity_resource, ShootEntity.Owner.PLAYER, start_position, target_position.rotated(angle))
 #		shoot_entities.append(entity)
 		shoot_field.add_child(entity)
 		shoot_timer = 0

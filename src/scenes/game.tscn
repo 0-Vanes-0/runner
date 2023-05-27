@@ -43,7 +43,7 @@ shape = SubResource("SegmentShape2D_p3ter")
 [node name="Left" type="CollisionShape2D" parent="Level/Bounds"]
 shape = SubResource("SegmentShape2D_q0vek")
 
-[node name="Floors" type="Node2D" parent="Level"]
+[node name="Segments" type="Node2D" parent="Level"]
 
 [node name="Enemies" type="Node2D" parent="Level"]
 
@@ -72,3 +72,16 @@ text = "100"
 label_settings = SubResource("LabelSettings_aavuu")
 script = ExtResource("6_mpehs")
 metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="HUD"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -360.0
+offset_bottom = 240.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 72
+text = "Reset"
+
+[connection signal="pressed" from="HUD/Button" to="Level" method="_on_reset_pressed"]

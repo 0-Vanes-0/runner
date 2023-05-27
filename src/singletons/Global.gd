@@ -14,7 +14,6 @@ enum Layers {
 }
 const MAX_FLOORS := 4
 var screen_width: int; var screen_height: int; var ratio := ":"
-var settings: Dictionary
 
 
 func _ready() -> void:
@@ -27,6 +26,8 @@ func _ready() -> void:
 	Preloader.error.connect(_on_preloader_error)
 	
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
+	
+	randomize()
 
 # ---------------------- FUNCTIONS ----------------------
 
