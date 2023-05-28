@@ -40,3 +40,11 @@ func _unhandled_input(event):
 							swipe.emit(Vector2(0, sign(direction.y)))
 				_timer = 0.0
 				_touch_start_position = Vector2.ZERO
+	elif event is InputEventKey:
+		print_debug("boop")
+		if event.is_action("jump_up"):
+			swipe.emit(Vector2.UP)
+		elif event.is_action("jump_down"):
+			swipe.emit(Vector2.DOWN)
+		elif event.is_action("dodge"):
+			swipe.emit(Vector2.RIGHT)

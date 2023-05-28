@@ -15,7 +15,7 @@ var weapon: Weapon
 @onready var is_jump_middle_on: bool = false
 @onready var is_jumping_down: bool = false
 @onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox 
 
 
@@ -69,7 +69,7 @@ func _check_flags():
 func _play_animations():
 	if is_on_floor():
 		if is_dodging():
-			sprite.play("dodge") # TODO: Make const Dict with animation names
+			sprite.play("dodge")
 		else:
 			sprite.play("run")
 	else:

@@ -114,7 +114,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("23_odr2x")
 }],
-"loop": true,
+"loop": false,
 "name": &"dodge",
 "speed": 10.0
 }, {
@@ -184,6 +184,7 @@ script = ExtResource("1_wg1tk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_k2dkm")
+animation = &"run"
 offset = Vector2(0, -42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
