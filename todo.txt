@@ -1,8 +1,9 @@
-- Player's "dodge" animation must be not looping
 - Simple enemies (shooting, moving up and down)
 - Add to ShootEntity functions for inherited children? (?)
 - Maybe redo shoot entity resources and remove additional classes?
 
++ Add StateMachine
++ Player's "dodge" animation must be not looping
 + Add rotation to ProjectileLinearSER
 + Add platforms
 + Add Weapon class and give one obj to Player
