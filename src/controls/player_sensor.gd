@@ -1,7 +1,7 @@
 class_name PlayerSensor
 extends Marker2D
 
-signal swipe(direction: Vector2)
+signal movement(direction: Vector2)
 
 const SWIPE_MAX_DIAGONAL_SLOPE := 1.35
 const SWIPE_MAX_TIME := 0.2 # Else it's drag gesture.
@@ -35,15 +35,15 @@ func _unhandled_input(event):
 					var direction := Vector2(event.position - _touch_start_position).normalized()
 					if abs(direction.x) + abs(direction.y) < SWIPE_MAX_DIAGONAL_SLOPE:
 						if abs(direction.x) > abs(direction.y):
-							swipe.emit(Vector2(sign(direction.x), 0))
+							movement.emit(Vector2(sign(direction.x), 0))
 						else: 
-							swipe.emit(Vector2(0, sign(direction.y)))
+							movement.emit(Vector2(0, sign(direction.y)))
 				_timer = 0.0
 				_touch_start_position = Vector2.ZERO
 	elif event is InputEventKey:
 		if event.is_action("jump_up"):
-			swipe.emit(Vector2.UP)
+			movement.emit(Vector2.UP)
 		elif event.is_action("jump_down"):
-			swipe.emit(Vector2.DOWN)
+			movement.emit(Vector2.DOWN)
 		elif event.is_action("dodge"):
-			swipe.emit(Vector2.RIGHT)
+			movement.emit(Vector2.RIGHT)

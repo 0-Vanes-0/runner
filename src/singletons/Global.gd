@@ -13,6 +13,7 @@ enum Layers {
 	BOUNDS = 6,
 }
 const MAX_FLOORS := 4
+const JUMP_DOWN_DISABLE_TIME := 0.1
 var screen_width: int; var screen_height: int; var ratio := ":"
 
 

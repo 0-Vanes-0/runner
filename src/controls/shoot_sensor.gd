@@ -1,9 +1,11 @@
 class_name ShootSensor
 extends Marker2D
 
-signal tap(position: Vector2)
+signal shoot_activated(target_position: Vector2)
 
 var _size: Vector2
+var _is_shooting: bool
+var _shoot_position: Vector2
 
 
 func _ready():
@@ -12,8 +14,23 @@ func _ready():
 	_size.y = Global.screen_height
 
 
+func _physics_process(_delta):
+	if _is_shooting:
+		shoot_activated.emit(_shoot_position)
+
+
 func _unhandled_input(event):
 	if event is InputEventScreenTouch:
-		if self.position < event.position and event.position < self.position + _size:
+		if _is_position_within(event.position):
 			if event.pressed:
-				tap.emit(event.position)
+				_shoot_position = event.position
+				_is_shooting = true
+			else:
+				_is_shooting = false
+	elif event is InputEventScreenDrag:
+		if _is_position_within(event.position) and _is_shooting:
+			_shoot_position = event.position
+
+
+func _is_position_within(position: Vector2) -> bool:
+	return self.position < position and position < self.position + _size

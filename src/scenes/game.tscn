@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cw8ujdd0tak01"]
 
 [ext_resource type="Script" path="res://src/scenes/game_level_handler.gd" id="1_njpto"]
-[ext_resource type="PackedScene" uid="uid://trhj046vbo13" path="res://src/gameplay/player.tscn" id="2_00gd8"]
+[ext_resource type="PackedScene" uid="uid://trhj046vbo13" path="res://src/gameplay/player.tscn" id="2_gh8y5"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
 [ext_resource type="Script" path="res://src/fps.gd" id="6_mpehs"]
@@ -45,13 +45,13 @@ shape = SubResource("SegmentShape2D_q0vek")
 
 [node name="Segments" type="Node2D" parent="Level"]
 
-[node name="Enemies" type="Node2D" parent="Level"]
-
-[node name="Player" parent="Level" node_paths=PackedStringArray("player_sensor", "shoot_sensor", "shoot_field") instance=ExtResource("2_00gd8")]
+[node name="Player" parent="Level" node_paths=PackedStringArray("player_sensor", "shoot_sensor", "shoot_field") instance=ExtResource("2_gh8y5")]
 position = Vector2(240, 0)
 player_sensor = NodePath("../../PlayerSensor")
 shoot_sensor = NodePath("../../ShootSensor")
 shoot_field = NodePath("../ShootField")
+
+[node name="Enemies" type="Node2D" parent="Level"]
 
 [node name="ShootField" type="Node2D" parent="Level"]
 

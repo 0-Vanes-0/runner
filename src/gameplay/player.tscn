@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://trhj046vbo13"]
+[gd_scene load_steps=44 format=3 uid="uid://trhj046vbo13"]
 
 [ext_resource type="Script" path="res://src/gameplay/player.gd" id="1_wg1tk"]
 [ext_resource type="Texture2D" uid="uid://ica0l22hpti8" path="res://assets/sprites/players/test/test_dead_0.png" id="2_1k7cn"]
@@ -34,6 +34,12 @@
 [ext_resource type="Texture2D" uid="uid://bxqfko67ghw3a" path="res://assets/sprites/players/test/test_run_5.png" id="32_vpu3c"]
 [ext_resource type="Texture2D" uid="uid://pocn7jqus55o" path="res://assets/sprites/players/test/test_run_6.png" id="33_1vy2s"]
 [ext_resource type="Texture2D" uid="uid://dy20mswd7pcj7" path="res://assets/sprites/players/test/test_run_7.png" id="34_ykb6c"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="35_vkaae"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/run_player_state.gd" id="36_fsq51"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/jump_up_player_state.gd" id="37_iekko"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/jump_down_player_state.gd" id="38_dscwl"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/dead_player_state.gd" id="39_n6ckq"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/dodge_player_state.gd" id="40_inaag"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k2dkm"]
 animations = [{
@@ -79,7 +85,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_brnh2")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 10.0
 }, {
@@ -122,7 +128,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("24_bdykr")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_down",
 "speed": 10.0
 }, {
@@ -130,7 +136,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_aehld")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_middle",
 "speed": 10.0
 }, {
@@ -138,7 +144,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("26_2n7hg")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_up",
 "speed": 10.0
 }, {
@@ -167,7 +173,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("34_ykb6c")
 }],
-"loop": true,
+"loop": false,
 "name": &"run",
 "speed": 10.0
 }]
@@ -178,16 +184,21 @@ size = Vector2(100, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqchl"]
 size = Vector2(20, 100)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead")]
 script = ExtResource("1_wg1tk")
+state_run = NodePath("StateMachine/RunPlayerState")
+state_jump_up = NodePath("StateMachine/JumpUpPlayerState")
+state_jump_down = NodePath("StateMachine/JumpDownPlayerState")
+state_dodge = NodePath("StateMachine/DodgePlayerState")
+state_dead = NodePath("StateMachine/DeadPlayerState")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_k2dkm")
-animation = &"run"
+animation = &"dodge"
 offset = Vector2(0, -42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2(-30, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
@@ -197,3 +208,27 @@ position = Vector2(30, -60)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_hqchl")
 debug_color = Color(0.996078, 0, 0.219608, 0.419608)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("35_vkaae")
+initial_state = NodePath("RunPlayerState")
+
+[node name="RunPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("36_fsq51")
+connections_paths = Array[NodePath]([NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState")])
+
+[node name="JumpUpPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("37_iekko")
+connections_paths = Array[NodePath]([NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState")])
+
+[node name="JumpDownPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("38_dscwl")
+connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState")])
+
+[node name="DodgePlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("40_inaag")
+connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState")])
+
+[node name="DeadPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("39_n6ckq")
+connections_paths = Array[NodePath]([NodePath("")])

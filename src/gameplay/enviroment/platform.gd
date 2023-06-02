@@ -20,9 +20,3 @@ func _ready():
 
 func set_one_way(value: bool):
 	$CollisionShape2D.one_way_collision = value
-
-
-func toggle_collision():
-	$CollisionShape2D.disabled = true
-	await get_tree().create_timer(0.1).timeout
-	$CollisionShape2D.disabled = false
