@@ -45,7 +45,7 @@ func _ready():
 	assert(shoot_sensor != null, "Shoot Sensor not assigned!")
 	shoot_sensor.shoot_activated.connect(
 		func(target_position: Vector2):
-			if not state_machine.state is DodgePlayerState:
+			if not state_machine.state is DodgePlayerState and not state_machine.state is DeadPlayerState:
 				weapon.shoot(self.position + weapon.position, target_position)
 	)
 	
