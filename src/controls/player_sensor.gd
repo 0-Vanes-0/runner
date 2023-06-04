@@ -12,18 +12,18 @@ var _touch_start_position: Vector2
 var _size: Vector2
 
 
-func _ready():
+func _ready() -> void:
 	self.position = Vector2.ZERO
 	_size.x = Global.screen_width / 2
 	_size.y = Global.screen_height
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if _is_timer_active:
 		_timer += delta
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		if self.position < event.position and event.position < self.position + _size:
 			if event.pressed:

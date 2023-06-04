@@ -8,18 +8,18 @@ var _is_shooting: bool
 var _shoot_position: Vector2
 
 
-func _ready():
+func _ready() -> void:
 	self.position = Vector2(Global.screen_width / 2, 0)
 	_size.x = Global.screen_width / 2
 	_size.y = Global.screen_height
 
 
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
 	if _is_shooting:
 		shoot_activated.emit(_shoot_position)
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		if _is_position_within(event.position):
 			if event.pressed:

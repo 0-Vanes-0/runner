@@ -7,7 +7,7 @@ var is_level_complete: bool
 @onready var bounds: StaticBody2D = $Bounds
 
 
-func _ready():
+func _ready() -> void:
 	var height := Global.screen_height
 	Preloader.segments.shuffle()
 	for value in Preloader.segments:
@@ -33,7 +33,7 @@ func _ready():
 	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if segments_length_x > Global.screen_width:
 		for child in segments.get_children():
 			if child is Segment:

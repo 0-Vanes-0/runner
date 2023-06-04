@@ -51,11 +51,11 @@ func _gcd(a: int, b: int) -> int:
 	return a + b
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		get_tree().quit()
 
 
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		get_tree().quit()

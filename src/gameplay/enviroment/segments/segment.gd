@@ -2,7 +2,7 @@ class_name Segment
 extends Node2D
 
 
-func _ready():
+func _ready() -> void:
 	var height := Global.screen_height
 	self.position.y = height
 	var platform_h := Platform.SIZE.y

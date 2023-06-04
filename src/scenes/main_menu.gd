@@ -1,7 +1,7 @@
 extends Control
 
 
-func _ready():
+func _ready() -> void:
 	$Button.disabled = true
 	Preloader.loaded.connect(_on_loaded)
 	Preloader.start_preload()

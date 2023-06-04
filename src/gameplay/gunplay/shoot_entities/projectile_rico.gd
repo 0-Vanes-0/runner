@@ -10,7 +10,7 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2):
+func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2) -> void:
 	super(resource, entity_owner, start_position, target_position)
 	self.name = "ProjectileRico"
 	
@@ -37,12 +37,12 @@ func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2
 	self.add_child(body)
 
 
-func _ready():
+func _ready() -> void:
 	body.position = start_position
 	_direction = start_position.direction_to(target_position)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	var collision: KinematicCollision2D = body.move_and_collide(_direction * speed * delta)
 	if collision:
 		var motion = collision.get_remainder().bounce(collision.get_normal())

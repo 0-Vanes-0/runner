@@ -11,7 +11,7 @@ var sprite: AnimatedSprite2D
 var shoot_timer: float
 
 
-func _init(weapon_resource: WeaponResource, shoot_field: Node2D):
+func _init(weapon_resource: WeaponResource, shoot_field: Node2D) -> void:
 	sprite = AnimatedSprite2D.new()
 	self.add_child(sprite)
 	
@@ -27,7 +27,7 @@ func _init(weapon_resource: WeaponResource, shoot_field: Node2D):
 	self.shoot_field = shoot_field
 
 
-func _ready():
+func _ready() -> void:
 	sprite.centered = false
 	sprite.position = Vector2.ZERO
 	sprite.scale = Vector2(weapon_resource.scale_value, weapon_resource.scale_value)
@@ -36,7 +36,7 @@ func _ready():
 	sprite.play("default")
 
 
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	shoot_timer = shoot_timer + delta if _is_shoot_paused() else shoot_rate_time
 
 

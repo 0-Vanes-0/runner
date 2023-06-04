@@ -26,7 +26,7 @@ var weapon: Weapon
 @onready var state_machine := $StateMachine as StateMachine
 
 
-func _ready():
+func _ready() -> void:
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
 	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
 	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)

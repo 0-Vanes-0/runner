@@ -13,7 +13,7 @@ const HISTORY_SIZE := 5
 var state_history: Array[State] = []
 
 
-func _ready():
+func _ready() -> void:
 	assert(owner != null)
 	await owner.ready
 	for child in get_children():
@@ -23,15 +23,15 @@ func _ready():
 	_add_to_history(state)
 
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event: InputEvent) -> void:
 	state.handle_input(event)
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	state.update(delta)
 
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
 

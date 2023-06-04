@@ -5,7 +5,7 @@ const SIZE := Vector2(480, 40)
 var floor_number: int = 0
 
 
-func _ready():
+func _ready() -> void:
 	var texture_size: Vector2 = $Sprite2D.texture.get_size()
 	$Sprite2D.scale = Vector2(SIZE / texture_size)
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLATFORM, true)

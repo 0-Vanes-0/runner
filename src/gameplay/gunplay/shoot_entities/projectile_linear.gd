@@ -9,7 +9,7 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2):
+func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2) -> void:
 	super(resource, entity_owner, start_position, target_position)
 	self.name = "ProjectileLinear"
 	
@@ -40,13 +40,13 @@ func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2
 	self.add_child(visibler)
 
 
-func _ready():
+func _ready() -> void:
 	self.position = start_position
 	_direction = start_position.direction_to(target_position)
 	self.rotate(_direction.angle())
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	self.position += _direction * speed * delta
 
 

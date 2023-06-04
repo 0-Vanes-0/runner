@@ -1,3 +1,4 @@
+- DOWNLOAD ANIMATED SPRITE 2D TO ANIMATION PLAYER PLUGIN
 - Simple enemies (shooting, moving up and down)
 - Add to ShootEntity functions for inherited children? (?)
 - Maybe redo shoot entity resources and remove additional classes?
