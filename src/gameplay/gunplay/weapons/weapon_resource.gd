@@ -20,5 +20,4 @@ func get_sprite_size() -> Vector2:
 			return texture.get_size()
 		else: 
 			print_debug("texture of 'default' is null")
-	print_debug("sprite_frames is null or have not animation 'default'!")
 	return Vector2.ZERO

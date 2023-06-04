@@ -2,9 +2,10 @@ extends Node2D
 
 var segments_length_x: float
 var is_level_complete: bool
-@onready var player: Player = $Player 
-@onready var segments: Node2D = $Segments
-@onready var bounds: StaticBody2D = $Bounds
+@onready var bounds := $Bounds as StaticBody2D
+@onready var segments := $Segments as Node2D
+@onready var player := $Player as Player
+@onready var enemies := $Enemies as Node2D
 
 
 func _ready() -> void:
@@ -21,6 +22,8 @@ func _ready() -> void:
 	var jump_height: float = (height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
 	player.dodge_time = 1.0
+	
+	enemies.add_child(Preloader.enemy_test_dragon.instantiate())
 	
 	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
 	($Bounds/Top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)

@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
 
-func transition_to(target_state: State, msg := ""):
+func transition_to(target_state: State):
 	var can_transition: bool = (
 		self.has_node(target_state.get_path())
 		and state.connections.has(target_state)
@@ -44,7 +44,7 @@ func transition_to(target_state: State, msg := ""):
 	if can_transition:
 		state.exit()
 		state = target_state
-		state.enter(msg)
+		state.enter()
 		transitioned.emit(state.name)
 		_add_to_history(state)
 

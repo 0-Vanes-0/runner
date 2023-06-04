@@ -3,11 +3,17 @@ extends Node
 signal loaded
 signal error(message: String)
 
-@export_group("Packed Scenes", "")
-@export var platform_scene: PackedScene
+@export_group("Game Screens")
 @export var game_scene: PackedScene
 @export var tilemap_scene: PackedScene
+
+@export_group("Game Objects")
+@export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
+
+@export_group("Enemies", "enemy_")
+@export var enemy_test_dragon: PackedScene
+
 var segments: Array[Segment]
 
 var counter := 0
@@ -15,10 +21,13 @@ var counter := 0
 
 func start_preload():
 	var export_resources: Dictionary = {
-		"platform_scene": platform_scene,
 		"game_scene": game_scene,
 		"tilemap_scene": tilemap_scene,
+		
+		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
+		
+		"enemy_test_dragon": enemy_test_dragon,
 	}
 	var runtime_resources: Dictionary = {
 		"segments": segments,

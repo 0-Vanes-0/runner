@@ -4,27 +4,22 @@ extends Node2D
 @export var weapon_resource: WeaponResource
 
 #var shoot_entities: Array[ShootEntity] = []
-var shoot_field: Node2D
 var shoot_rate_time: float
 var spread_angle: int
 var sprite: AnimatedSprite2D
 var shoot_timer: float
 
 
-func _init(weapon_resource: WeaponResource, shoot_field: Node2D) -> void:
+func _init(weapon_resource: WeaponResource) -> void:
 	sprite = AnimatedSprite2D.new()
 	self.add_child(sprite)
 	
-	if weapon_resource != null:
-		self.weapon_resource = weapon_resource
-		shoot_rate_time = weapon_resource.shoot_rate_time
-		shoot_timer = shoot_rate_time
-		spread_angle = weapon_resource.spread_angle
-		sprite.sprite_frames = weapon_resource.sprite_frames
-	else:
-		print_debug("weapon_resource is null")
-	
-	self.shoot_field = shoot_field
+	assert(weapon_resource != null, "weapon_resource is null")
+	self.weapon_resource = weapon_resource
+	shoot_rate_time = weapon_resource.shoot_rate_time
+	shoot_timer = shoot_rate_time
+	spread_angle = weapon_resource.spread_angle
+	sprite.sprite_frames = weapon_resource.sprite_frames if weapon_resource.sprite_frames != null else SpriteFrames.new()
 
 
 func _ready() -> void:
@@ -33,7 +28,8 @@ func _ready() -> void:
 	sprite.scale = Vector2(weapon_resource.scale_value, weapon_resource.scale_value)
 	sprite.offset.y = -weapon_resource.get_sprite_size().y / 2
 	
-	sprite.play("default")
+	if sprite.sprite_frames.has_animation("default"):
+		sprite.play("default")
 
 
 func _physics_process(delta: float) -> void:
@@ -43,20 +39,22 @@ func _physics_process(delta: float) -> void:
 func shoot(start_position: Vector2, target_position: Vector2):
 	if not _is_shoot_paused():
 		var angle: float = deg_to_rad(spread_angle / 2 * randf()) * (1 if randi_range(0, 1) == 1 else -1)
-		var entity := _init_entity(weapon_resource.shoot_entity_resource, ShootEntity.Owner.PLAYER, start_position, target_position.rotated(angle))
+		_spawn_entity(weapon_resource.shoot_entity_resource, ShootEntity.Owner.PLAYER, start_position, target_position.rotated(angle))
 		self.look_at(target_position)
-#		shoot_entities.append(entity)
-		shoot_field.add_child(entity)
 		shoot_timer = 0
 
 
-func _init_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position, target_position) -> ShootEntity:
+func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position, target_position):
+	assert(res.shoot_field_path != null)
+	var shoot_field := get_tree().current_scene.get_node(res.shoot_field_path) as Node2D
+	assert(shoot_field != null)
 	if weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_LINEAR:
-		return ProjectileLinear.new(res, owner, start_position, target_position)
+		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position))
+		return
 	elif weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_RICO:
-		return ProjectileRico.new(res, owner, start_position, target_position)
+		shoot_field.add_child(ProjectileRico.new(res, owner, start_position, target_position))
+		return
 	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
-	return Node2D.new()
 
 
 func _is_shoot_paused() -> bool:

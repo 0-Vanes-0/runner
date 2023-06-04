@@ -10,8 +10,8 @@ func can_go_to_state() -> bool:
 	return player.is_on_floor() and floor_number < Global.MAX_FLOORS
 
 
-func enter(msg := ""):
-	super.enter(msg)
+func enter():
+	super.enter()
 	player.sprite.play(ANIM)
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.velocity.y = Vector2.UP.y * player.jump_speed

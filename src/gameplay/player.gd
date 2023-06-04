@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 @export var player_sensor: PlayerSensor
 @export var shoot_sensor: ShootSensor
-@export var shoot_field: Node2D
 
 @export_group("States", "state_")
 @export var state_run: RunPlayerState
@@ -49,8 +48,6 @@ func _ready() -> void:
 				weapon.shoot(self.position + weapon.position, target_position)
 	)
 	
-	assert(shoot_field != null, "Shoot Field not assigned!")
-	
-	weapon = Weapon.new(preload("res://assets/game_recources/weapons/crossbow.tres"), shoot_field)
+	weapon = Weapon.new(preload("res://assets/game_recources/weapons/crossbow.tres"))
 	self.add_child(weapon)
 	weapon.position = hitbox.position

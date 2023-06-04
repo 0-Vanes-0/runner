@@ -10,8 +10,8 @@ func can_go_to_state() -> bool:
 	return platform == null or platform.floor_number > 1
 
 
-func enter(msg := ""):
-	super.enter(msg)
+func enter():
+	super.enter()
 	player.sprite.play(ANIM)
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.velocity.y = 0.0

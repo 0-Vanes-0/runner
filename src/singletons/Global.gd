@@ -54,6 +54,8 @@ func _gcd(a: int, b: int) -> int:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		get_tree().quit()
+	elif  event is InputEventKey and event.keycode == KEY_TAB:
+		get_tree().reload_current_scene()
 
 
 func _notification(what: int) -> void:

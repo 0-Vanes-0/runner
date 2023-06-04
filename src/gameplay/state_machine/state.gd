@@ -10,6 +10,11 @@ var connections: Array[State]
 var state_machine: StateMachine = null
 
 
+# For creating states in code, not in editor
+func _init() -> void:
+	connections_paths.resize(1)
+
+
 func can_go_to_state() -> bool:
 	return true
 
@@ -30,8 +35,8 @@ func physics_update(delta: float):
 
 
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter is a dictionary with arbitrary data the state can use to initialize itself.
-func enter(msg := ""):
-	assert(not connections_paths.is_empty(), "No connections for State!")
+func enter():
+	assert(not connections_paths.is_empty() or not connections.is_empty(), "No connections for State!")
 	if connections_paths.size() == 1 and connections_paths[0].is_empty():
 		connections.resize(1)
 	else:

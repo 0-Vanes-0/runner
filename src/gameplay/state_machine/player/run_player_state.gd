@@ -4,8 +4,8 @@ extends PlayerState
 const ANIM := "run"
 
 
-func enter(msg := ""):
-	super.enter(msg)
+func enter():
+	super.enter()
 	player.sprite.play(ANIM)
 	player.sprite.set_frame_and_progress(0, 0.0)
 

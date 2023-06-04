@@ -4,14 +4,14 @@ extends PlayerState
 const ANIM := "dead"
 
 
-func enter(msg := ""):
-	super.enter(msg)
+func enter():
+	super.enter()
 	player.sprite.play(ANIM)
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.run_speed = 0.0
 	
 	player.weapon.look_at(player.position + player.weapon.position + Vector2.RIGHT)
-	var tween = get_tree().create_tween()
+	var tween := get_tree().create_tween()
 	tween.tween_property(
 		player.weapon,
 		"position",
