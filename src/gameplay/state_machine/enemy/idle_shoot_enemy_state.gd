@@ -11,7 +11,7 @@ func enter():
 
 
 func physics_update(delta: float):
-	enemy.weapon.shoot(enemy.position + enemy.weapon_marker.position, Vector2(0, Global.screen_height / 2))
+	enemy.weapon.shoot(enemy.position + enemy.weapon_marker.position, enemy.player.get_hitbox_position())
 
 
 func update(delta: float):

@@ -10,9 +10,12 @@ var battle_states: Array[EnemyState]
 @onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
 @onready var weapon_marker := $WeaponMarker as Marker2D
 @onready var state_machine := $StateMachine as StateMachine
+@onready var player := $"../../Player" as Player
 
 
 func _ready() -> void:
+	assert(player != null, "Player not found.")
+	
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.ENEMY, true)
 	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 	

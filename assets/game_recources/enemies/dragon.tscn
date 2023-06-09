@@ -103,6 +103,7 @@ size = Vector2(30, 40)
 
 [node name="Dragon" type="CharacterBody2D"]
 script = ExtResource("1_kkofi")
+size_y_percent = 15.0
 weapon_resource = ExtResource("2_ygfbs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

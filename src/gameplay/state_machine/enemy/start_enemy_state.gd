@@ -10,7 +10,7 @@ func enter():
 	connections.append_array(enemy.battle_states)
 	super.enter()
 	enemy.position.x = Global.screen_width + enemy.get_game_size().x / 2
-	enemy.position.y = randf_range(enemy.get_game_size().y / 2, Global.screen_height - enemy.get_game_size().y / 2) #enemy.get_game_size().y / 2 + randf() * Global.screen_height - enemy.get_game_size().y
+	enemy.position.y = randf_range(enemy.get_game_size().y / 2, Global.screen_height - enemy.get_game_size().y / 2)
 	enemy.sprite.play(ANIM)
 	
 	var tween := get_tree().create_tween()

@@ -51,3 +51,7 @@ func _ready() -> void:
 	weapon = Weapon.new(preload("res://assets/game_recources/weapons/crossbow.tres"))
 	self.add_child(weapon)
 	weapon.position = hitbox.position
+
+
+func get_hitbox_position() -> Vector2:
+	return self.position + hitbox.position
