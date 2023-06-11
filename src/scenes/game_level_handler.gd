@@ -22,6 +22,10 @@ func _ready() -> void:
 	var jump_height: float = (height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
 	player.dodge_time = 1.0
+	player.state_dead.died.connect(
+		func():
+			show_reset_button()
+	)
 	
 	enemies.add_child(Preloader.enemy_test_dragon.instantiate())
 	
@@ -55,7 +59,10 @@ func show_reset_button():
 
 func _on_level_complete():
 	show_reset_button()
-	player.state_machine.transition_to(player.state_dead) # player.state_level_complete
+	player.state_machine.transition_to(player.state_end_level) # player.state_level_complete
+	for enemy in enemies.get_children():
+		if enemy is Enemy:
+			enemy.state_machine.transition_to(enemy.state_dead)
 
 
 func _on_reset_pressed():

@@ -49,14 +49,22 @@ func transition_to(target_state: State):
 		_add_to_history(state)
 
 
+func get_prevoius_state(state: State) -> State:
+	var i := state_history.find(state)
+	if i != -1 and i+1 < HISTORY_SIZE and state_history[i+1] != null:
+		return state_history[i+1]
+	return null
+
+
 func _add_to_history(state: State):
 	if state_history.size() == HISTORY_SIZE:
 		state_history.pop_back()
 	state_history.push_front(state)
 
 
-func get_prevoius_state(state: State) -> State:
-	var i := state_history.find(state)
-	if i != -1 and i+1 < HISTORY_SIZE and state_history[i+1] != null:
-		return state_history[i+1]
-	return null
+func _print_transition_conditions(target_state: State):
+	print_debug(
+		"StateMachine has target state: ", self.has_node(target_state.get_path()), "\n",
+		"Current state has target state in connections: ", state.connections.has(target_state), "\n",
+		"Is target state available: ", target_state.can_go_to_state()
+	)

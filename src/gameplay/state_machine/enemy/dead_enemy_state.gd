@@ -6,7 +6,7 @@ const ANIM := "dead"
 
 func enter():
 	super.enter()
-	enemy.health_comp
+	enemy.health_comp.monitorable = false
 	enemy.sprite.animation_finished.connect(
 		func():
 			enemy.queue_free()

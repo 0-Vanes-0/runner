@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://trhj046vbo13"]
+[gd_scene load_steps=46 format=3 uid="uid://trhj046vbo13"]
 
 [ext_resource type="Script" path="res://src/gameplay/player.gd" id="1_wg1tk"]
 [ext_resource type="Texture2D" uid="uid://ica0l22hpti8" path="res://assets/sprites/players/test/test_dead_0.png" id="2_1k7cn"]
@@ -41,6 +41,7 @@
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/jump_down_player_state.gd" id="38_dscwl"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/dead_player_state.gd" id="39_n6ckq"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/dodge_player_state.gd" id="40_inaag"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/end_level_player_state.gd" id="42_dfvqb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k2dkm"]
 animations = [{
@@ -185,18 +186,18 @@ size = Vector2(100, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgdn0"]
 size = Vector2(20, 100)
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead")]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead", "state_end_level")]
 script = ExtResource("1_wg1tk")
 state_run = NodePath("StateMachine/RunPlayerState")
 state_jump_up = NodePath("StateMachine/JumpUpPlayerState")
 state_jump_down = NodePath("StateMachine/JumpDownPlayerState")
 state_dodge = NodePath("StateMachine/DodgePlayerState")
 state_dead = NodePath("StateMachine/DeadPlayerState")
+state_end_level = NodePath("StateMachine/EndLevelPlayerState")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_k2dkm")
-animation = &"run"
 offset = Vector2(0, -42)
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
@@ -204,10 +205,11 @@ position = Vector2(-30, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
 [node name="HealthComponent" type="Area2D" parent="."]
-position = Vector2(20, -60)
+position = Vector2(0, -80)
 script = ExtResource("35_o3t41")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_cgdn0")
 debug_color = Color(0.992157, 0, 0.266667, 0.419608)
 
@@ -217,20 +219,24 @@ initial_state = NodePath("RunPlayerState")
 
 [node name="RunPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("36_fsq51")
-connections_paths = Array[NodePath]([NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
 
 [node name="JumpUpPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("37_iekko")
-connections_paths = Array[NodePath]([NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
 
 [node name="JumpDownPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("38_dscwl")
-connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
 
 [node name="DodgePlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("40_inaag")
-connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
 
 [node name="DeadPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("39_n6ckq")
+connections_paths = Array[NodePath]([NodePath("")])
+
+[node name="EndLevelPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("42_dfvqb")
 connections_paths = Array[NodePath]([NodePath("")])

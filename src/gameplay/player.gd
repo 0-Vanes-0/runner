@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var state_jump_down: JumpDownPlayerState
 @export var state_dodge: DodgePlayerState
 @export var state_dead: DeadPlayerState
+@export var state_end_level: EndLevelPlayerState
 
 var jump_speed: float
 var run_speed: float
