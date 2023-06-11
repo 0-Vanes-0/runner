@@ -5,13 +5,12 @@ const ANIM := "default"
 
 
 func enter():
-	connections.append_array(enemy.battle_states)
 	super.enter()
 	enemy.sprite.play(ANIM)
 
 
 func physics_update(delta: float):
-	enemy.weapon.shoot(enemy.position + enemy.weapon_marker.position, enemy.player.get_hitbox_position())
+	enemy.weapon.shoot(get_weapon_position(), get_plyaer_position())
 
 
 func update(delta: float):

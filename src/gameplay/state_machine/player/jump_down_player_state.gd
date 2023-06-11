@@ -25,8 +25,6 @@ func enter():
 
 
 func physics_update(delta: float):
-#	if player.get_health() <= 0:
-#		state_machine.transition_to("Dead")
 	if not is_passing_platform and get_colliding_platform() != null:
 		state_machine.transition_to(player.state_run)
 	apply_player_gravity(delta)

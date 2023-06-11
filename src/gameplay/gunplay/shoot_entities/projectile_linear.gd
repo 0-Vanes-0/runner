@@ -9,7 +9,7 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2) -> void:
+func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
 	super(resource, entity_owner, start_position, target_position)
 	self.name = "ProjectileLinear"
 	
@@ -21,7 +21,7 @@ func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2
 	sprite.scale = Vector2(game_size / resource.get_sprite_size())
 	self.add_child(sprite)
 	
-	area = Global.clean_layers(Area2D.new())
+	area = Global.clean_layers(Area2D.new()) as Area2D
 	if entity_owner == Owner.PLAYER:
 		area.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 		area.set_collision_mask_value(Global.Layers.ENEMY, true)
@@ -32,6 +32,13 @@ func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2
 	collision.shape = resource.get_shape()
 	area.add_child(collision)
 	self.add_child(area)
+	
+	area.area_entered.connect(
+		func(area: Area2D):
+			if area is HealthComponent:
+				area.take_damage(self.damage)
+				self.queue_free()
+	)
 	
 	visibler = VisibleOnScreenNotifier2D.new()
 	visibler.rect.position = Vector2(- game_size / 2)

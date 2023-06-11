@@ -6,8 +6,9 @@ const ANIM := "dead"
 
 func enter():
 	super.enter()
+	enemy.health_comp
 	enemy.sprite.animation_finished.connect(
 		func():
-			self.queue_free()
+			enemy.queue_free()
 	)
 	enemy.sprite.play(ANIM)

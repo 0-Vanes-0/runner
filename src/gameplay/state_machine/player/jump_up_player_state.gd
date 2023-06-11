@@ -18,8 +18,6 @@ func enter():
 
 
 func physics_update(delta: float):
-#	if player.get_health() <= 0:
-#		state_machine.transition_to("Dead")
 	apply_player_gravity(delta)
 	if player.velocity.y > 0:
 		state_machine.transition_to(player.state_jump_down)

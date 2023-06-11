@@ -10,13 +10,13 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2) -> void:
+func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
 	super(resource, entity_owner, start_position, target_position)
 	self.name = "ProjectileRico"
 	
 	self.speed = resource.get_speed()
 	
-	body = Global.clean_layers(CharacterBody2D.new())
+	body = Global.clean_layers(CharacterBody2D.new()) as CharacterBody2D
 	if entity_owner == Owner.PLAYER:
 		body.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 		body.set_collision_mask_value(Global.Layers.ENEMY, true)
@@ -49,4 +49,4 @@ func _physics_process(delta: float) -> void:
 		_direction = _direction.bounce(collision.get_normal())
 		body.move_and_collide(motion)
 	
-	speed += 5 if speed < MAX_SPEED else 0
+	speed += 5.0 if speed < MAX_SPEED else 0

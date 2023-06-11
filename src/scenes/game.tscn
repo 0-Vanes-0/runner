@@ -64,12 +64,13 @@ script = ExtResource("5_ysdi3")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="FpsLabel" type="Label" parent="HUD"]
+[node name="FpsLabel" type="Label" parent="HUD" node_paths=PackedStringArray("player")]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "100"
 label_settings = SubResource("LabelSettings_aavuu")
 script = ExtResource("6_mpehs")
+player = NodePath("../../Level/Player")
 metadata/_edit_lock_ = true
 
 [node name="Button" type="Button" parent="HUD"]

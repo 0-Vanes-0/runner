@@ -47,11 +47,15 @@ func _physics_process(delta: float) -> void:
 	elif not is_level_complete:
 		is_level_complete = true
 		_on_level_complete()
-		
+
+
+func show_reset_button():
+	(get_tree().current_scene.get_node("HUD/Button") as Button).visible = true 
+
 
 func _on_level_complete():
-	(get_tree().current_scene.get_node("HUD/Button") as Button).visible = true
-	player.state_machine.transition_to(player.state_dead)
+	show_reset_button()
+	player.state_machine.transition_to(player.state_dead) # player.state_level_complete
 
 
 func _on_reset_pressed():

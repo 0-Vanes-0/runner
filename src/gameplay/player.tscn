@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://trhj046vbo13"]
+[gd_scene load_steps=45 format=3 uid="uid://trhj046vbo13"]
 
 [ext_resource type="Script" path="res://src/gameplay/player.gd" id="1_wg1tk"]
 [ext_resource type="Texture2D" uid="uid://ica0l22hpti8" path="res://assets/sprites/players/test/test_dead_0.png" id="2_1k7cn"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://bxqfko67ghw3a" path="res://assets/sprites/players/test/test_run_5.png" id="32_vpu3c"]
 [ext_resource type="Texture2D" uid="uid://pocn7jqus55o" path="res://assets/sprites/players/test/test_run_6.png" id="33_1vy2s"]
 [ext_resource type="Texture2D" uid="uid://dy20mswd7pcj7" path="res://assets/sprites/players/test/test_run_7.png" id="34_ykb6c"]
+[ext_resource type="Script" path="res://src/gameplay/health_component.gd" id="35_o3t41"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="35_vkaae"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/run_player_state.gd" id="36_fsq51"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/jump_up_player_state.gd" id="37_iekko"]
@@ -181,7 +182,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogtel"]
 size = Vector2(100, 10)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqchl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgdn0"]
 size = Vector2(20, 100)
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead")]
@@ -195,19 +196,20 @@ state_dead = NodePath("StateMachine/DeadPlayerState")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_k2dkm")
-animation = &"dodge"
+animation = &"run"
 offset = Vector2(0, -42)
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2(-30, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
-[node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(30, -60)
+[node name="HealthComponent" type="Area2D" parent="."]
+position = Vector2(20, -60)
+script = ExtResource("35_o3t41")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_hqchl")
-debug_color = Color(0.996078, 0, 0.219608, 0.419608)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+shape = SubResource("RectangleShape2D_cgdn0")
+debug_color = Color(0.992157, 0, 0.266667, 0.419608)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("35_vkaae")

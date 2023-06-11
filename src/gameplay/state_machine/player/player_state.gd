@@ -9,6 +9,11 @@ func _ready():
 	await owner.ready
 	player = owner as Player
 	assert(player != null)
+	
+	player.health_comp.out_of_health.connect(
+		func():
+			state_machine.transition_to(player.state_dead)
+	)
 
 
 func apply_player_gravity(delta: float):
