@@ -10,7 +10,7 @@ func enter():
 
 
 func physics_update(delta: float):
-	enemy.weapon.shoot(get_weapon_position(), get_plyaer_position())
+	enemy.weapon.shoot(get_weapon_position(), get_player_position())
 
 
 func update(delta: float):

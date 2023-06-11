@@ -41,12 +41,14 @@ func _physics_process(delta: float) -> void:
 func shoot(start_position: Vector2, target_position: Vector2):
 	if not _is_shoot_paused():
 		var angle: float = deg_to_rad(randf_range(-spread_angle / 2, spread_angle / 2))
-		_spawn_entity(weapon_resource.shoot_entity_resource, weapon_owner, start_position, target_position.rotated(angle))
+		var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
+		_spawn_entity(weapon_resource.shoot_entity_resource, weapon_owner, start_position, start_position + spreaded_target_position)
+		print_debug(target_position.rotated(angle))
 		self.look_at(target_position)
 		shoot_timer = 0
 
 
-func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position, target_position) -> void:
+func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
 	assert(res.shoot_field_path != null)
 	var shoot_field := get_tree().current_scene.get_node(res.shoot_field_path) as Node2D
 	assert(shoot_field != null)

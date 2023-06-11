@@ -27,8 +27,6 @@ func _ready() -> void:
 			show_reset_button()
 	)
 	
-	enemies.add_child(Preloader.enemy_test_dragon.instantiate())
-	
 	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
 	($Bounds/Top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
 	($Bounds/Right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
@@ -41,7 +39,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if segments_length_x > Global.screen_width:
+	if enemies.get_child_count() == 0 and not is_level_complete:
+		enemies.add_child(Preloader.enemy_test_dragon.instantiate())
+	
+	if segments_length_x > Global.screen_width: # TODO: REPLACE WITH SIGNAL!!!
 		for child in segments.get_children():
 			if child is Segment:
 				child.position.x -= delta * player.run_speed

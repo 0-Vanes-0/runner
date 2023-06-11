@@ -32,7 +32,11 @@ func take_damage(damage: int) -> void:
 		out_of_health.emit()
 
 
-func switch_monitorable(time: float):
-	self.monitorable = false
+func switch_collision(time: float):
+	shape.disabled = true
 	await get_tree().create_timer(time).timeout
-	self.monitorable = true
+	shape.disabled = false
+
+
+func turn_off_collision():
+	shape.disabled = true

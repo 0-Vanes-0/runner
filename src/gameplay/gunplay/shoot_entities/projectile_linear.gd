@@ -35,7 +35,7 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 	
 	area.area_entered.connect(
 		func(area: Area2D):
-			if area is HealthComponent:
+			if area is HealthComponent and not area.shape.disabled:
 				area.take_damage(self.damage)
 				self.queue_free()
 	)
