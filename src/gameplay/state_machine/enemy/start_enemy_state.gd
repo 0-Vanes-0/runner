@@ -9,14 +9,14 @@ var timer := 0.0
 func enter():
 	super.enter()
 	enemy.position.x = Global.screen_width + enemy.get_game_size().x / 2
-	enemy.position.y = randf_range(enemy.get_game_size().y / 2, Global.screen_height - enemy.get_game_size().y / 2)
+	enemy.position.y = Global.enemy_spawn_spots[randi_range(0, 3)]
 	enemy.sprite.play(ANIM)
 	
 	var tween := get_tree().create_tween()
 	tween.tween_property(
 		enemy, 
-		"position", 
-		Vector2(Global.screen_width - enemy.get_game_size().x / 2, enemy.position.y),
+		"position:x", 
+		Global.screen_width - enemy.get_game_size().x,
 		ENTER_TIME
 	).set_ease(Tween.EASE_IN)
 

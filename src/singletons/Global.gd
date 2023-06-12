@@ -14,6 +14,10 @@ enum Layers {
 }
 const MAX_FLOORS := 4
 const JUMP_DOWN_DISABLE_TIME := 0.1
+const PLATFORM_H := Platform.SIZE.y
+var floors_gap: float
+var enemy_spawn_spots: Array[float]
+
 var screen_width: int; var screen_height: int; var ratio := ":"
 
 
@@ -25,6 +29,12 @@ func _ready() -> void:
 	print_debug("\t", "screen_width=", screen_width, ", screen_height=", screen_height, ", ratio=", ratio)
 	
 	Preloader.error.connect(_on_preloader_error)
+	
+	floors_gap = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
+	enemy_spawn_spots.append(floors_gap * 0.5)
+	enemy_spawn_spots.append(floors_gap * 1.5)
+	enemy_spawn_spots.append(floors_gap * 2.5)
+	enemy_spawn_spots.append(floors_gap * 3.5)
 	
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
 	

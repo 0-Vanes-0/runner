@@ -60,10 +60,10 @@ func show_reset_button():
 
 func _on_level_complete():
 	show_reset_button()
-	player.state_machine.transition_to(player.state_end_level) # player.state_level_complete
+	player.state_machine.transition_to(player.state_end_level)
 	for enemy in enemies.get_children():
 		if enemy is Enemy:
-			enemy.state_machine.transition_to(enemy.state_dead)
+			enemy.state_machine.transition_to(enemy.state_go_away)
 
 
 func _on_reset_pressed():

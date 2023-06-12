@@ -47,6 +47,8 @@ func transition_to(target_state: State):
 		state.enter()
 		transitioned.emit(state.name)
 		_add_to_history(state)
+	else:
+		_print_transition_conditions(target_state)
 
 
 func get_prevoius_state(state: State) -> State:

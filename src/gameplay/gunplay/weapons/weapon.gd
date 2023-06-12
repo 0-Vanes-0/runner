@@ -43,7 +43,6 @@ func shoot(start_position: Vector2, target_position: Vector2):
 		var angle: float = deg_to_rad(randf_range(-spread_angle / 2, spread_angle / 2))
 		var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
 		_spawn_entity(weapon_resource.shoot_entity_resource, weapon_owner, start_position, start_position + spreaded_target_position)
-		print_debug(target_position.rotated(angle))
 		self.look_at(target_position)
 		shoot_timer = 0
 

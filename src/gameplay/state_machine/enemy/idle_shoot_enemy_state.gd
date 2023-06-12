@@ -15,4 +15,4 @@ func physics_update(delta: float):
 
 func update(delta: float):
 	if not enemy.sprite.is_playing():
-		enemy.sprite.play(ANIM)
+		enemy.sprite.play()

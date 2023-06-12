@@ -6,6 +6,7 @@ extends Node2D
 @export var weapon_resource: WeaponResource # todo: Array of Weapons, pick random when spawn
 var weapon: Weapon
 var battle_states: Array[EnemyState]
+var state_go_away: GoAwayEnemyState
 var state_dead: DeadEnemyState
 
 @onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
@@ -37,6 +38,8 @@ func _ready() -> void:
 		if state is EnemyState:
 			if state is DeadEnemyState:
 				state_dead = state
+			elif state is GoAwayEnemyState:
+				state_go_away = state
 			elif not state is StartEnemyState:
 				battle_states.append(state as EnemyState)
 

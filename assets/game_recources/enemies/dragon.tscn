@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://danf4b1ogrc6f"]
+[gd_scene load_steps=29 format=3 uid="uid://danf4b1ogrc6f"]
 
 [ext_resource type="Script" path="res://src/gameplay/enemies/enemy.gd" id="1_kkofi"]
 [ext_resource type="Texture2D" uid="uid://pl1ubst2wbt4" path="res://assets/sprites/enemies/test/dragon_default_0.png" id="2_3hl6v"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/start_enemy_state.gd" id="22_4s2p1"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/idle_shoot_enemy_state.gd" id="23_ygvda"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/dead_enemy_state.gd" id="24_lctud"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/go_away_enemy_state.gd" id="25_aaejf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y2qj8"]
 animations = [{
@@ -104,7 +105,7 @@ size = Vector2(30, 40)
 
 [node name="Dragon" type="Node2D"]
 script = ExtResource("1_kkofi")
-size_y_percent = 15.0
+size_y_percent = 20.0
 weapon_resource = ExtResource("2_ygfbs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -133,7 +134,11 @@ connections_paths = Array[NodePath]([NodePath("../IdleShootEnemyState")])
 
 [node name="IdleShootEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("23_ygvda")
-connections_paths = Array[NodePath]([NodePath("."), NodePath("../DeadEnemyState")])
+connections_paths = Array[NodePath]([NodePath("."), NodePath("../GoAwayEnemyState"), NodePath("../DeadEnemyState")])
+
+[node name="GoAwayEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("25_aaejf")
+connections_paths = Array[NodePath]([NodePath("../DeadEnemyState")])
 
 [node name="DeadEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("24_lctud")

@@ -3,11 +3,10 @@ extends Node2D
 
 
 func _ready() -> void:
-	var height := Global.screen_height
-	self.position.y = height
-	var platform_h := Platform.SIZE.y
+	self.position.y = Global.screen_height
+	var platform_h := Global.PLATFORM_H
+	var gap := Global.floors_gap
 	
-	var gap: float = (height - platform_h) / Global.MAX_FLOORS
 	$Floor1.position.y = - platform_h
 	$Floor2.position.y = - platform_h - 1 * gap
 	$Floor3.position.y = - platform_h - 2 * gap
