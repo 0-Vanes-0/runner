@@ -10,5 +10,6 @@ func enter():
 	enemy.sprite.animation_finished.connect(
 		func():
 			enemy.queue_free()
-	)
+	, CONNECT_ONE_SHOT)
 	enemy.sprite.play(ANIM)
+	enemy.dead.emit()

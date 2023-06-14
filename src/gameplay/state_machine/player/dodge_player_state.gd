@@ -14,3 +14,7 @@ func enter():
 	
 	await player.health_comp.switch_collision(player.dodge_time)
 	state_machine.transition_to(player.state_run)
+
+
+func exit():
+	player.health_comp.turn_on_collision()

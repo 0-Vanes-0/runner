@@ -14,6 +14,7 @@ enum Layers {
 }
 const MAX_FLOORS := 4
 const JUMP_DOWN_DISABLE_TIME := 0.1
+const LEVEL_END_TIME := 1.5
 const PLATFORM_H := Platform.SIZE.y
 var floors_gap: float
 var enemy_spawn_spots: Array[float]
@@ -64,8 +65,6 @@ func _gcd(a: int, b: int) -> int:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		get_tree().quit()
-	elif  event is InputEventKey and event.keycode == KEY_TAB:
-		get_tree().reload_current_scene()
 
 
 func _notification(what: int) -> void:

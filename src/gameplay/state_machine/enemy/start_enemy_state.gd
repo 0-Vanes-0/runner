@@ -16,7 +16,7 @@ func enter():
 	tween.tween_property(
 		enemy, 
 		"position:x", 
-		Global.screen_width - enemy.get_game_size().x,
+		Global.screen_width * 0.8,
 		ENTER_TIME
 	).set_ease(Tween.EASE_IN)
 

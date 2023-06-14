@@ -2,6 +2,7 @@ extends Label
 
 @export var player: Player
 var hp := ""
+var enemies := 0
 
 
 func _ready() -> void:
@@ -19,4 +20,9 @@ func _process(delta: float) -> void:
 	self.text = (
 		str(Engine.get_frames_per_second()) 
 		+ ", " + hp + " hp"
+		+ ", " + str(enemies) + " enemies killed"
 	)
+
+
+func on_enemy_dead():
+	enemies += 1

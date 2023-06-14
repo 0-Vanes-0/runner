@@ -35,8 +35,10 @@ func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
 
-func transition_to(target_state: State):
+func transition_to(target_state: State, is_transition_forced: bool = false):
 	var can_transition: bool = (
+		is_transition_forced
+		or
 		self.has_node(target_state.get_path())
 		and state.connections.has(target_state)
 		and target_state.can_go_to_state()
@@ -47,8 +49,6 @@ func transition_to(target_state: State):
 		state.enter()
 		transitioned.emit(state.name)
 		_add_to_history(state)
-	else:
-		_print_transition_conditions(target_state)
 
 
 func get_prevoius_state(state: State) -> State:

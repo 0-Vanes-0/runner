@@ -13,7 +13,7 @@ func _ready() -> void:
 	enemy.health_comp.out_of_health.connect(
 		func():
 			state_machine.transition_to(enemy.state_dead)
-	)
+	, CONNECT_ONE_SHOT)
 
 
 func get_weapon_position() -> Vector2:

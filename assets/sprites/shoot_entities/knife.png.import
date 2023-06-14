@@ -3,14 +3,14 @@
 importer="texture_atlas"
 type="Texture2D"
 uid="uid://tqo5nsymbjef"
-path="res://.godot/imported/knife.png-efed002f1bbad0bc772ad5157831d189.res"
+path="res://.godot/imported/knife.png-bd72ededb7e8f7d5e1aa011ff57bad8f.res"
 group_file="res://assets/sprites/atlases/overall_atlas.png"
 valid=true
 [deps]
 
 
-source_file="res://assets/sprites/knife.png"
-dest_files=["res://.godot/imported/knife.png-efed002f1bbad0bc772ad5157831d189.res"]
+source_file="res://assets/sprites/shoot_entities/knife.png"
+dest_files=["res://.godot/imported/knife.png-bd72ededb7e8f7d5e1aa011ff57bad8f.res"]
 
 [params]
 

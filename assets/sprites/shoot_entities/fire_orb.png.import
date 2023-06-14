@@ -2,15 +2,15 @@
 
 importer="texture_atlas"
 type="Texture2D"
-uid="uid://dtqqk5b4ox0m8"
-path="res://.godot/imported/arrow.png-18e607c3398c94c410f88abf48695716.res"
+uid="uid://b4xeskgs3768s"
+path="res://.godot/imported/fire_orb.png-5541ed3f97e1129263e2912ea50acc2a.res"
 group_file="res://assets/sprites/atlases/overall_atlas.png"
 valid=true
 [deps]
 
 
-source_file="res://assets/sprites/arrow.png"
-dest_files=["res://.godot/imported/arrow.png-18e607c3398c94c410f88abf48695716.res"]
+source_file="res://assets/sprites/shoot_entities/fire_orb.png"
+dest_files=["res://.godot/imported/fire_orb.png-5541ed3f97e1129263e2912ea50acc2a.res"]
 
 [params]
 

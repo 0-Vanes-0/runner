@@ -1,8 +1,13 @@
+- Add GameOver menu
 - Simple enemies (shooting, moving up and down)
-- GoAwayEnemyState
-- Add to ShootEntity functions for inherited children? (?)
-- Maybe redo shoot entity resources and remove additional classes?
+- Add Chest and Portal classes
+- Add StartLevelPlayerState
+-¿Add Player object to Global?
+-¿Add to ShootEntity functions for inherited children?
+-¿Maybe redo shoot entity resources and remove additional classes?
 
++ End level
++ GoAwayEnemyState
 + Add StateMachine
 + Player's "dodge" animation must be not looping
 + Add rotation to ProjectileLinearSER

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ProjectileSER" load_steps=5 format=3 uid="uid://cwigob8g3uygx"]
+[gd_resource type="Resource" script_class="ProjectileSER" load_steps=5 format=3 uid="uid://bsbauycwrglkt"]
 
 [ext_resource type="Script" path="res://src/gameplay/gunplay/shoot_entities/projectile_ser.gd" id="1_w5eyq"]
-[ext_resource type="Texture2D" uid="uid://dtqqk5b4ox0m8" path="res://assets/sprites/arrow.png" id="2_gjdm8"]
+[ext_resource type="Texture2D" uid="uid://dtqqk5b4ox0m8" path="res://assets/sprites/shoot_entities/arrow.png" id="2_gjdm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xp7gu"]
 

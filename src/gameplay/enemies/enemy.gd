@@ -1,6 +1,8 @@
 class_name Enemy
 extends Node2D
 
+signal dead
+
 # enum of types of enemies?
 @export_range(1, 50) var size_y_percent: float = 25.0
 @export var weapon_resource: WeaponResource # todo: Array of Weapons, pick random when spawn

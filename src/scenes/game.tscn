@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cw8ujdd0tak01"]
 
 [ext_resource type="Script" path="res://src/scenes/game_level_handler.gd" id="1_njpto"]
-[ext_resource type="PackedScene" uid="uid://trhj046vbo13" path="res://src/gameplay/player.tscn" id="2_gh8y5"]
+[ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player.tscn" id="2_gh8y5"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
 [ext_resource type="Script" path="res://src/fps.gd" id="6_mpehs"]
@@ -64,7 +64,7 @@ script = ExtResource("5_ysdi3")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="FpsLabel" type="Label" parent="HUD" node_paths=PackedStringArray("player")]
+[node name="InfoLabel" type="Label" parent="HUD" node_paths=PackedStringArray("player")]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "100"
@@ -73,15 +73,11 @@ script = ExtResource("6_mpehs")
 player = NodePath("../../Level/Player")
 metadata/_edit_lock_ = true
 
-[node name="Button" type="Button" parent="HUD"]
-visible = false
-anchors_preset = 1
-anchor_left = 1.0
+[node name="BlackColorRect" type="ColorRect" parent="HUD"]
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -360.0
-offset_bottom = 240.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 72
-text = "Reset"
-
-[connection signal="pressed" from="HUD/Button" to="Level" method="_on_reset_pressed"]
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

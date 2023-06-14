@@ -1,6 +1,13 @@
 class_name Segment
 extends Node2D
 
+signal level_about_to_end
+signal level_end
+
+var is_last := false
+var is_level_about_to_end_emitted := false
+var is_level_end_emitted := false
+
 
 func _ready() -> void:
 	self.position.y = Global.screen_height
@@ -19,7 +26,20 @@ func clone() -> Segment:
 		for child in segment.get_floor(i).get_children():
 			if child is Platform:
 				child.floor_number = i
+	segment.is_last = self.is_last
 	return segment
+
+
+func move(speed: float):
+	self.position.x -= speed
+	if is_last and not is_level_about_to_end_emitted and self.position.x + get_width() < Global.screen_width:
+		level_about_to_end.emit()
+		is_level_about_to_end_emitted = true
+	if self.position.x + get_width() < 0:
+		if is_last and not is_level_end_emitted:
+			level_end.emit()
+			is_level_end_emitted = true
+		self.queue_free()
 
 
 func get_floor(number: int) -> Node2D:

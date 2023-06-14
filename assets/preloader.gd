@@ -15,6 +15,7 @@ signal error(message: String)
 @export var enemy_test_dragon: PackedScene
 
 var segments: Array[Segment]
+var default_segment: Segment
 
 var counter := 0
 
@@ -53,7 +54,10 @@ func start_preload():
 			segment.get_floor(floor_number).add_child(platfrom, true)
 			segment.set_end_x(maxf(segment.get_width(), (v.x + 1) * width))
 		
-		segments.append(segment)
+		if default_segment == null and tilemap.get_layer_name(i) == "DEFAULT":
+			default_segment = segment
+		else:
+			segments.append(segment)
 		
 	counter += 1
 	

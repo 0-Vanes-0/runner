@@ -13,7 +13,7 @@ func _ready():
 	player.health_comp.out_of_health.connect(
 		func():
 			state_machine.transition_to(player.state_dead)
-	)
+	, CONNECT_ONE_SHOT)
 
 
 func apply_player_gravity(delta: float):

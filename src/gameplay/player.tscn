@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://trhj046vbo13"]
+[gd_scene load_steps=46 format=3 uid="uid://dt3oww1tlogys"]
 
 [ext_resource type="Script" path="res://src/gameplay/player.gd" id="1_wg1tk"]
 [ext_resource type="Texture2D" uid="uid://ica0l22hpti8" path="res://assets/sprites/players/test/test_dead_0.png" id="2_1k7cn"]
@@ -41,7 +41,7 @@
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/jump_down_player_state.gd" id="38_dscwl"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/dead_player_state.gd" id="39_n6ckq"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/player/dodge_player_state.gd" id="40_inaag"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/player/end_level_player_state.gd" id="42_dfvqb"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/player/level_end_player_state.gd" id="42_2ob23"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k2dkm"]
 animations = [{
@@ -184,16 +184,16 @@ animations = [{
 size = Vector2(100, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgdn0"]
-size = Vector2(20, 100)
+size = Vector2(20, 80)
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead", "state_end_level")]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead", "state_level_end")]
 script = ExtResource("1_wg1tk")
 state_run = NodePath("StateMachine/RunPlayerState")
 state_jump_up = NodePath("StateMachine/JumpUpPlayerState")
 state_jump_down = NodePath("StateMachine/JumpDownPlayerState")
 state_dodge = NodePath("StateMachine/DodgePlayerState")
 state_dead = NodePath("StateMachine/DeadPlayerState")
-state_end_level = NodePath("StateMachine/EndLevelPlayerState")
+state_level_end = NodePath("StateMachine/LevelEndPlayerState")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -219,24 +219,24 @@ initial_state = NodePath("RunPlayerState")
 
 [node name="RunPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("36_fsq51")
-connections_paths = Array[NodePath]([NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
 
 [node name="JumpUpPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("37_iekko")
-connections_paths = Array[NodePath]([NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
 
 [node name="JumpDownPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("38_dscwl")
-connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
 
 [node name="DodgePlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("40_inaag")
-connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../EndLevelPlayerState")])
+connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
 
 [node name="DeadPlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("39_n6ckq")
 connections_paths = Array[NodePath]([NodePath("")])
 
-[node name="EndLevelPlayerState" type="Node" parent="StateMachine"]
-script = ExtResource("42_dfvqb")
+[node name="LevelEndPlayerState" type="Node" parent="StateMachine"]
+script = ExtResource("42_2ob23")
 connections_paths = Array[NodePath]([NodePath("")])

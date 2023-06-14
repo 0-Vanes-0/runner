@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+signal call_level_end_objects
+signal go_to_portal(portal_position: Vector2)
+signal in_portal
+
 # Input objects
 @export var player_sensor: PlayerSensor
 @export var shoot_sensor: ShootSensor
@@ -12,7 +16,7 @@ extends CharacterBody2D
 @export var state_jump_down: JumpDownPlayerState
 @export var state_dodge: DodgePlayerState
 @export var state_dead: DeadPlayerState
-@export var state_end_level: EndLevelPlayerState
+@export var state_level_end: LevelEndPlayerState
 
 var jump_speed: float
 var run_speed: float
@@ -47,7 +51,11 @@ func _ready() -> void:
 	assert(shoot_sensor != null, "Shoot Sensor not assigned!")
 	shoot_sensor.shoot_activated.connect(
 		func(target_position: Vector2):
-			if not state_machine.state is DodgePlayerState and not state_machine.state is DeadPlayerState:
+			if(
+				not state_machine.state is DodgePlayerState 
+				and not state_machine.state is DeadPlayerState
+				and not state_machine.state is LevelEndPlayerState
+			):
 				weapon.shoot(self.position + weapon.position, target_position)
 	)
 	
@@ -56,6 +64,13 @@ func _ready() -> void:
 	weapon.name = "Weapon"
 	self.add_child(weapon)
 	weapon.position = health_comp.position
+	
+	self.scale = get_game_size() / (sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale)
+
+
+func get_game_size() -> Vector2:
+	# WHEN I'LL HAVE BETTER PLAYER SPRITES - MAKE --> / 2
+	return Vector2.ONE * Global.floors_gap
 
 
 func get_health_comp_position() -> Vector2:
