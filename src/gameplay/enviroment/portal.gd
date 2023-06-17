@@ -8,13 +8,13 @@ var sprite: AnimatedSprite2D
 var collision_shape: CollisionShape2D
 
 
-func _init(size: Vector2, modulate: Color) -> void: 												#func _init(size: Vector2) -> void:
+func _init(size: Vector2, color: Color) -> void: 												#func _init(size: Vector2) -> void:
 	sprite = AnimatedSprite2D.new()
 	sprite.sprite_frames = SpriteFrames.new()
 	sprite.sprite_frames.add_frame("default", preload("res://assets/sprites/BG 4.png")) 			# Remove later
 	
 #	sprite.modulate = destination.portal_color
-	sprite.modulate = modulate 																		# Remove later
+	sprite.modulate = color 																		# Remove later
 	self.add_child(sprite)
 	sprite.scale = size / sprite.sprite_frames.get_frame_texture("default", 0).get_size()
 	

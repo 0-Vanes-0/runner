@@ -26,8 +26,14 @@ font_size = 60
 [node name="GameScene" type="Node2D"]
 metadata/_edit_lock_ = true
 
-[node name="Level" type="Node2D" parent="."]
+[node name="Level" type="Node2D" parent="." node_paths=PackedStringArray("bounds", "segments", "player", "enemies", "black_color_rect", "info_label")]
 script = ExtResource("1_njpto")
+bounds = NodePath("Bounds")
+segments = NodePath("Segments")
+player = NodePath("Player")
+enemies = NodePath("Enemies")
+black_color_rect = NodePath("../HUD/BlackColorRect")
+info_label = NodePath("../HUD/InfoLabel")
 
 [node name="Bounds" type="StaticBody2D" parent="Level"]
 

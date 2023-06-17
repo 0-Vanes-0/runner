@@ -49,4 +49,4 @@ func _physics_process(delta: float) -> void:
 		_direction = _direction.bounce(collision.get_normal())
 		body.move_and_collide(motion)
 	
-	speed += 5.0 if speed < MAX_SPEED else 0
+	speed += 5.0 if speed < MAX_SPEED else 0.0

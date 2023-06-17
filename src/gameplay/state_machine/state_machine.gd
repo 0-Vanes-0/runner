@@ -9,8 +9,8 @@ signal transitioned(state_name: StringName)
 @export var initial_state: State
 # The current active state. At the start of the game, we get the `initial_state`.
 @onready var state: State = get_node(initial_state.get_path())
-const HISTORY_SIZE := 5
-var state_history: Array[State] = []
+#const HISTORY_SIZE := 5
+#var state_history: Array[State] = []
 
 
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _ready() -> void:
 		if child is State:
 			child.state_machine = self
 	state.enter()
-	_add_to_history(state)
+#	_add_to_history(state)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,20 +48,20 @@ func transition_to(target_state: State, is_transition_forced: bool = false):
 		state = target_state
 		state.enter()
 		transitioned.emit(state.name)
-		_add_to_history(state)
+#		_add_to_history(state)
 
 
-func get_prevoius_state(state: State) -> State:
-	var i := state_history.find(state)
-	if i != -1 and i+1 < HISTORY_SIZE and state_history[i+1] != null:
-		return state_history[i+1]
-	return null
+#func get_prevoius_state(state: State) -> State:
+#	var i := state_history.find(state)
+#	if i != -1 and i+1 < HISTORY_SIZE and state_history[i+1] != null:
+#		return state_history[i+1]
+#	return null
 
 
-func _add_to_history(state: State):
-	if state_history.size() == HISTORY_SIZE:
-		state_history.pop_back()
-	state_history.push_front(state)
+#func _add_to_history(state: State):
+#	if state_history.size() == HISTORY_SIZE:
+#		state_history.pop_back()
+#	state_history.push_front(state)
 
 
 func _print_transition_conditions(target_state: State):

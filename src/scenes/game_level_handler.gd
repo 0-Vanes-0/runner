@@ -2,12 +2,12 @@ extends Node2D
 
 var is_level_complete: bool
 var is_enemies_permitted: bool
-@onready var bounds := $Bounds as StaticBody2D
-@onready var segments := $Segments as Node2D
-@onready var player := $Player as Player
-@onready var enemies := $Enemies as Node2D
-@onready var black_color_rect := $"../HUD/BlackColorRect" as ColorRect
-@onready var info_label := $"../HUD/InfoLabel" as Label
+@export var bounds: StaticBody2D
+@export var segments: Node2D
+@export var player: Player
+@export var enemies: Node2D
+@export var black_color_rect: ColorRect
+@export var info_label: Label
 
 
 func _ready() -> void:
@@ -48,7 +48,7 @@ func setup_level():
 	
 	Preloader.segments.shuffle()
 	var size: int = Preloader.segments.size()
-	var segments_length_x: float
+	var segments_length_x := 0.0
 	for i in size:
 		var segment: Segment = Preloader.segments[i].clone()
 		segment.position.x = segments_length_x
