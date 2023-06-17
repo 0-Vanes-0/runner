@@ -8,6 +8,7 @@ signal error(message: String)
 @export var tilemap_scene: PackedScene
 
 @export_group("Game Objects")
+@export var player: PackedScene
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
 
@@ -17,7 +18,8 @@ signal error(message: String)
 var segments: Array[Segment]
 var default_segment: Segment
 
-var counter := 0
+var export_counter := 0
+var segments_counter := 0
 
 
 func start_preload():
@@ -25,17 +27,16 @@ func start_preload():
 		"game_scene": game_scene,
 		"tilemap_scene": tilemap_scene,
 		
+		"player": player,
 		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
 		
 		"enemy_test_dragon": enemy_test_dragon,
 	}
-	var runtime_resources: Dictionary = {
-		"segments": segments,
-	}
+	
 	for resource in export_resources.keys():
 		if export_resources.get(resource) != null:
-			counter += 1
+			export_counter += 1
 		else:
 			error.emit("Failed to load: " + resource)
 	
@@ -59,7 +60,15 @@ func start_preload():
 		else:
 			segments.append(segment)
 		
-	counter += 1
+		segments_counter += 1
 	
-	if counter == (export_resources.size() + runtime_resources.size()):
+	var load_result: int = export_counter + segments_counter
+	var load_goal: int = export_resources.size() + tilemap.get_layers_count()
+	if load_result == load_goal:
 		loaded.emit()
+	else:
+		print_debug(
+			"Signal 'loaded' condition failed:", "\n",
+			"\t", "export_resources: ", export_counter, "/", export_resources.size(), "\n",
+			"\t", "segments: ", segments_counter, "/", tilemap.get_layers_count(), "\n",
+		)

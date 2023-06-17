@@ -1,21 +1,20 @@
+class_name GameLevelHandler
 extends Node2D
 
 var is_level_complete: bool
 var is_enemies_permitted: bool
+var player: Player
 @export var bounds: StaticBody2D
 @export var segments: Node2D
-@export var player: Player
 @export var enemies: Node2D
-@export var black_color_rect: ColorRect
+@export var player_sensor: PlayerSensor
+@export var shoot_sensor: ShootSensor
 @export var info_label: Label
+@export var game_over_menu: GameOverMenu
+@export var black_color_rect: ColorRect
 
 
 func _ready() -> void:
-	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
-	player.jump_speed = sqrt(2 * player.gravity * jump_height)
-	player.state_dead.died.connect(func(): pass) # show_game_over_menu
-	player.call_level_end_objects.connect(process_level_end_objects)
-	
 	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
 	($Bounds/Top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
 	($Bounds/Right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
@@ -26,8 +25,15 @@ func _ready() -> void:
 	($Bounds/Left.shape as SegmentShape2D).b = Vector2(0, 0)
 	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 	
-	black_color_rect.color.a = 0
+	game_over_menu.restart_called.connect(
+		func():
+			setup_player()
+			setup_level()
+	)
+	setup_player()
 	setup_level()
+	black_color_rect.color = Color(0, 0, 0, 0)
+	info_label.set_player(player)
 
 
 func _physics_process(delta: float) -> void:
@@ -40,6 +46,26 @@ func _physics_process(delta: float) -> void:
 		var enemy: Enemy = Preloader.enemy_test_dragon.instantiate()
 		enemy.dead.connect(info_label.on_enemy_dead)
 		enemies.add_child(enemy)
+
+
+func setup_player():
+	if player != null:
+		player.queue_free()
+	player = Preloader.player.instantiate() as Player
+	player.player_sensor = player_sensor
+	player.shoot_sensor = shoot_sensor
+	player.name = "Player"
+	self.add_child(player)
+	self.move_child(player, segments.get_index() + 1)
+	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
+	player.jump_speed = sqrt(2 * player.gravity * jump_height)
+	player.state_dead.died.connect(
+		func():
+			game_over_menu.appear()
+			is_enemies_permitted = false
+	)
+	player.call_level_end_objects.connect(process_level_end_objects)
+	player.health_comp.health = 10
 
 
 func setup_level():

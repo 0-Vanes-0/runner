@@ -10,7 +10,10 @@ func enter():
 
 
 func physics_update(delta: float):
-	enemy.weapon.shoot(get_weapon_position(), get_player_position())
+	if enemy.get_player().health_comp.health > 0:
+		enemy.weapon.shoot(get_weapon_position(), get_player_position())
+	else:
+		enemy.state_machine.transition_to(enemy.state_go_away, true)
 
 
 func update(delta: float):

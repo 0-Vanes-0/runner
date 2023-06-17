@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://cr7xqdjn4hvxu"]
 
 [ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_cq5wt"]
-[ext_resource type="Resource" uid="uid://b1hda4s3fs5vt" path="res://assets/game_recources/shoot_entities/fireball.tres" id="2_xc5ra"]
+[ext_resource type="Resource" uid="uid://bkd68jjyv5gql" path="res://assets/game_recources/shoot_entities/fireball.tres" id="2_xc5ra"]
 
 [resource]
 script = ExtResource("1_cq5wt")
 scale_value = 1
 shoot_entity_resource = ExtResource("2_xc5ra")
 shoot_rate_time = 2.0
-spread_angle = 20
+spread_angle = 0

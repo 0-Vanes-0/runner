@@ -21,4 +21,4 @@ func get_weapon_position() -> Vector2:
 
 
 func get_player_position() -> Vector2:
-	return enemy.player.get_health_comp_position()
+	return enemy.get_player().get_health_comp_position()
