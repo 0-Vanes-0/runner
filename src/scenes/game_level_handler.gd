@@ -3,7 +3,6 @@ extends Node2D
 
 var is_level_complete: bool
 var is_enemies_permitted: bool
-var player: Player
 @export var bounds: StaticBody2D
 @export var segments: Node2D
 @export var enemies: Node2D
@@ -33,14 +32,13 @@ func _ready() -> void:
 	setup_player()
 	setup_level()
 	black_color_rect.color = Color(0, 0, 0, 0)
-	info_label.set_player(player)
 
 
 func _physics_process(delta: float) -> void:
 	if not is_level_complete:
 		for segment in segments.get_children():
 			if segment is Segment:
-				segment.move(delta * player.run_speed)
+				segment.move(delta * Global.player.run_speed)
 	
 	if is_enemies_permitted and enemies.get_child_count() == 0:
 		var enemy: Enemy = Preloader.enemy_test_dragon.instantiate()
@@ -49,9 +47,11 @@ func _physics_process(delta: float) -> void:
 
 
 func setup_player():
-	if player != null:
-		player.queue_free()
-	player = Preloader.player.instantiate() as Player
+	if Global.player != null:
+		Global.player.queue_free()
+	Global.player = Preloader.player.instantiate() as Player
+	
+	var player := Global.player
 	player.player_sensor = player_sensor
 	player.shoot_sensor = shoot_sensor
 	player.name = "Player"
@@ -65,7 +65,7 @@ func setup_player():
 			is_enemies_permitted = false
 	)
 	player.call_level_end_objects.connect(process_level_end_objects)
-	player.health_comp.health = 10
+	player.health_comp.health = 100
 
 
 func setup_level():
@@ -89,16 +89,20 @@ func setup_level():
 			plane.position.x = segments_length_x
 			segments.add_child(plane)
 	
+	var player := Global.player
 	player.position = Vector2(Global.screen_width / 10, Global.screen_height / 2)
 	player.run_speed = Platform.SIZE.x * 2
 	player.dodge_time = 1.0
 	player.state_machine.transition_to(player.state_run, true)
+	
+	info_label.set_player(player)
 	
 	is_level_complete = false
 	is_enemies_permitted = true
 
 
 func process_level_end_objects():
+	var player := Global.player
 	var chest_sprite := Sprite2D.new() # Chest
 	chest_sprite.name = "Chest"
 	chest_sprite.texture = preload("res://assets/sprites/mothership.png")
@@ -150,7 +154,7 @@ func process_level_end_objects():
 
 func _on_level_complete():
 	is_level_complete = true
-	player.state_machine.transition_to(player.state_level_end)
+	Global.player.state_machine.transition_to(Global.player.state_level_end)
 
 
 func _remove_enemies():

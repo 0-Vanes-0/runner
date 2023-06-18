@@ -2,6 +2,7 @@ class_name PlayerState
 extends State
 
 var player: Player
+var is_anim_looped := false
 
 
 func _ready():
@@ -14,6 +15,16 @@ func _ready():
 		func():
 			state_machine.transition_to(player.state_dead)
 	, CONNECT_ONE_SHOT)
+
+
+func update(delta: float):
+	if is_anim_looped:
+		if not player.sprite.is_playing():
+			player.sprite.play()
+
+
+func set_anim_looped():
+	is_anim_looped = true
 
 
 func apply_player_gravity(delta: float):

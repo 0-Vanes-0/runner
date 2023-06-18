@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/scenes/game_level_handler.gd" id="1_njpto"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
-[ext_resource type="PackedScene" uid="uid://myo3nb28x4w5" path="res://src/scenes/game_over_menu.tscn" id="6_dstik"]
+[ext_resource type="PackedScene" uid="uid://7omuysl27jjp" path="res://src/scenes/game_over_menu.tscn" id="6_dstik"]
 [ext_resource type="Script" path="res://src/fps.gd" id="6_mpehs"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]

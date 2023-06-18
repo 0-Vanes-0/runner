@@ -19,6 +19,7 @@ const PLATFORM_H := Platform.SIZE.y
 var floors_gap: float
 var enemy_spawn_spots: Array[float]
 
+var player: Player
 var screen_width: int; var screen_height: int; var ratio := ":"
 
 

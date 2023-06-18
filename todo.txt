@@ -1,11 +1,10 @@
-- Add GameOver menu
-- Simple enemies (shooting, moving up and down)
+- Simple enemies (shooting, moving up and down, other states and mb weapons)
 - Add Chest and Portal classes
-- Add StartLevelPlayerState
 -¿Add Player object to Global?
 -¿Add to ShootEntity functions for inherited children?
 -¿Maybe redo shoot entity resources and remove additional classes?
 
++ Add GameOver menu
 + End level
 + GoAwayEnemyState
 + Add StateMachine

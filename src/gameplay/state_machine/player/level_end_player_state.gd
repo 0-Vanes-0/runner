@@ -9,6 +9,7 @@ const ANIM_FLY := "jump_down"
 func enter():
 	super.enter()
 	player.sprite.play(ANIM_RUN)
+	set_anim_looped()
 	var tween := create_tween()
 	tween.tween_property(
 		player,
@@ -51,8 +52,3 @@ func enter():
 					player.in_portal.emit()
 			)
 	, CONNECT_ONE_SHOT)
-
-
-func update(delta: float):
-	if not player.sprite.is_playing():
-		player.sprite.play()

@@ -2,13 +2,12 @@ class_name DeadPlayerState
 extends PlayerState
 
 signal died
-const ANIM := "dead"
 
 
 func enter():
 	super.enter()
 	died.emit()
-	player.sprite.play(ANIM)
+	player.sprite.play("dead")
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.run_speed = 0.0
 	

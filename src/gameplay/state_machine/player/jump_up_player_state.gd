@@ -1,8 +1,6 @@
 class_name JumpUpPlayerState
 extends PlayerState
 
-const ANIM := "jump_up"
-
 
 func can_go_to_state() -> bool:
 	var platform := get_colliding_platform()
@@ -12,7 +10,7 @@ func can_go_to_state() -> bool:
 
 func enter():
 	super.enter()
-	player.sprite.play(ANIM)
+	player.sprite.play("jump_down")
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.velocity.y = Vector2.UP.y * player.jump_speed
 

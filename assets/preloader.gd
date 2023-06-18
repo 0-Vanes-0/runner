@@ -40,10 +40,11 @@ func start_preload():
 		else:
 			error.emit("Failed to load: " + resource)
 	
-	var tilemap := tilemap_scene.instantiate() as TileMap
+	var tilemap := tilemap_scene.instantiate() as SegmentTileMap
+	var biome1_tilemap := tilemap.biome1_tilemap
 	var non_empty := Vector2i(1, 0)
-	for i in tilemap.get_layers_count():
-		var segment_data: Array[Vector2i] = tilemap.get_used_cells_by_id(i, 0, non_empty)
+	for i in biome1_tilemap.get_layers_count():
+		var segment_data: Array[Vector2i] = biome1_tilemap.get_used_cells_by_id(i, 0, non_empty)
 		var segment := segment_scene.instantiate() as Segment
 		var width := Platform.SIZE.x
 		
@@ -55,7 +56,7 @@ func start_preload():
 			segment.get_floor(floor_number).add_child(platfrom, true)
 			segment.set_end_x(maxf(segment.get_width(), (v.x + 1) * width))
 		
-		if default_segment == null and tilemap.get_layer_name(i) == "DEFAULT":
+		if default_segment == null and biome1_tilemap.get_layer_name(i) == "DEFAULT":
 			default_segment = segment
 		else:
 			segments.append(segment)
@@ -63,12 +64,12 @@ func start_preload():
 		segments_counter += 1
 	
 	var load_result: int = export_counter + segments_counter
-	var load_goal: int = export_resources.size() + tilemap.get_layers_count()
+	var load_goal: int = export_resources.size() + biome1_tilemap.get_layers_count()
 	if load_result == load_goal:
 		loaded.emit()
 	else:
 		print_debug(
 			"Signal 'loaded' condition failed:", "\n",
 			"\t", "export_resources: ", export_counter, "/", export_resources.size(), "\n",
-			"\t", "segments: ", segments_counter, "/", tilemap.get_layers_count(), "\n",
+			"\t", "segments: ", segments_counter, "/", biome1_tilemap.get_layers_count(), "\n",
 		)

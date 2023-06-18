@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://myo3nb28x4w5"]
+[gd_scene load_steps=7 format=3 uid="uid://7omuysl27jjp"]
 
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/controls/default_theme.tres" id="1_e6gxa"]
 [ext_resource type="Script" path="res://src/scenes/game_over_menu.gd" id="1_sr5md"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njbu0"]
@@ -15,27 +16,39 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="Animation" id="Animation_0incp"]
+[sub_resource type="Animation" id="Animation_4g4w1"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/MarginContainer/VBoxContainer/GameOverLabel:visible_ratio")
+tracks/0/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/RestartButton:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/VBoxContainer:modulate")
+tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/QuitButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -60,10 +73,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/VBoxContainer:modulate")
+tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/RestartButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/QuitButton:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(1, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -72,7 +109,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n8cjl"]
 _data = {
-"RESET": SubResource("Animation_0incp"),
+"RESET": SubResource("Animation_4g4w1"),
 "start": SubResource("Animation_34qoc")
 }
 
@@ -83,6 +120,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
+theme = ExtResource("1_e6gxa")
 theme_override_constants/margin_left = 320
 theme_override_constants/margin_top = 180
 theme_override_constants/margin_right = 320
@@ -116,27 +154,57 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.78
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Enemies killed: _"
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="RestartButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
+disabled = true
 text = "Новый забег"
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Ещё чота тут..."
-horizontal_alignment = 1
-vertical_alignment = 1
+disabled = true
+text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_n8cjl")
 }
 
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

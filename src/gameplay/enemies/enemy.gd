@@ -11,8 +11,6 @@ var battle_states: Array[EnemyState]
 var state_go_away: GoAwayEnemyState
 var state_dead: DeadEnemyState
 
-var _player: Player
-
 @onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
 @onready var health_comp := $HealthComponent as HealthComponent
 @onready var weapon_marker := $WeaponMarker as Marker2D
@@ -24,8 +22,6 @@ func _ready() -> void:
 	assert(health_comp)
 	assert(weapon_marker)
 	assert(state_machine)
-	_player = get_game_level_handler().player
-	assert(_player, "Player not found.")
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
@@ -59,12 +55,3 @@ func get_sprite_size() -> Vector2:
 func get_game_size() -> Vector2:
 	var game_y_size := size_y_percent / 100 * Global.screen_height
 	return Vector2(game_y_size, game_y_size)
-
-
-func get_game_level_handler() -> GameLevelHandler:
-	return get_node(NodePath("../..")) as GameLevelHandler
-
-
-func get_player() -> Player:
-	assert(_player, "Player is null.")
-	return _player
