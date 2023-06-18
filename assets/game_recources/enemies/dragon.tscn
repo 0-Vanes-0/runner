@@ -103,10 +103,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
 size = Vector2(30, 40)
 
-[node name="Dragon" type="Node2D"]
+[node name="Dragon" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine")]
 script = ExtResource("1_kkofi")
 size_y_percent = 20.0
 weapon_resource = ExtResource("2_ygfbs")
+sprite = NodePath("AnimatedSprite2D")
+health_comp = NodePath("HealthComponent")
+weapon_marker = NodePath("WeaponMarker")
+state_machine = NodePath("StateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2qj8")
@@ -115,7 +119,6 @@ flip_h = true
 
 [node name="HealthComponent" type="Area2D" parent="."]
 script = ExtResource("21_d0ebv")
-health = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
 position = Vector2(-5, 0)

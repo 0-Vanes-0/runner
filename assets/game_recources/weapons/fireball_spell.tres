@@ -8,4 +8,4 @@ script = ExtResource("1_cq5wt")
 scale_value = 1
 shoot_entity_resource = ExtResource("2_xc5ra")
 shoot_rate_time = 2.0
-spread_angle = 0
+spread_angle = 10

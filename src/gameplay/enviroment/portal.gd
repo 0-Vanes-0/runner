@@ -1,19 +1,19 @@
 class_name Portal
 extends Area2D
 
-signal portal_chosen																				#portal_chosen(destination: Biome)
+signal portal_chosen																				#portal_chosen(level_reward)
 
-#var destination: Biome
+#var level_reward: LevelReward
 var sprite: AnimatedSprite2D
 var collision_shape: CollisionShape2D
 
 
-func _init(size: Vector2, color: Color) -> void: 												#func _init(size: Vector2) -> void:
+func _init(size: Vector2, color: Color) -> void: 													#func _init(size: Vector2) -> void:
 	sprite = AnimatedSprite2D.new()
 	sprite.sprite_frames = SpriteFrames.new()
 	sprite.sprite_frames.add_frame("default", preload("res://assets/sprites/BG 4.png")) 			# Remove later
 	
-#	sprite.modulate = destination.portal_color
+#	sprite.modulate = level_reward.portal_color
 	sprite.modulate = color 																		# Remove later
 	self.add_child(sprite)
 	sprite.scale = size / sprite.sprite_frames.get_frame_texture("default", 0).get_size()

@@ -12,7 +12,7 @@ var is_level_end_emitted := false
 func _ready() -> void:
 	self.position.y = Global.screen_height
 	var platform_h := Global.PLATFORM_H
-	var gap := Global.floors_gap
+	var gap := Global.FLOORS_GAP
 	
 	$Floor1.position.y = - platform_h
 	$Floor2.position.y = - platform_h - 1 * gap

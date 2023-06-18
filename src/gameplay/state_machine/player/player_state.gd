@@ -38,3 +38,11 @@ func get_colliding_platform() -> Platform:
 		if collider is Platform:
 			return collider
 	return null
+
+
+func eat_stamina(amount: float) -> bool:
+	if player.stamina - amount >= 0:
+		player.stamina -= amount
+		return true
+	else:
+		return false

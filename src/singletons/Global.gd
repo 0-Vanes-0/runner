@@ -16,14 +16,15 @@ const MAX_FLOORS := 4
 const JUMP_DOWN_DISABLE_TIME := 0.1
 const LEVEL_END_TIME := 1.5
 const PLATFORM_H := Platform.SIZE.y
-var floors_gap: float
-var enemy_spawn_spots: Array[float]
+var FLOORS_GAP: float
+var ENEMY_SPAWN_SPOTS: Array[float]
 
 var player: Player
 var screen_width: int; var screen_height: int; var ratio := ":"
 
 
 func _ready() -> void:
+	print_debug()
 	screen_width = int(get_viewport().get_visible_rect().size.x)
 	screen_height = int(get_viewport().get_visible_rect().size.y)
 	var gcd := _gcd(screen_width, screen_height)
@@ -32,11 +33,11 @@ func _ready() -> void:
 	
 	Preloader.error.connect(_on_preloader_error)
 	
-	floors_gap = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
-	enemy_spawn_spots.append(floors_gap * 0.5)
-	enemy_spawn_spots.append(floors_gap * 1.5)
-	enemy_spawn_spots.append(floors_gap * 2.5)
-	enemy_spawn_spots.append(floors_gap * 3.5)
+	FLOORS_GAP = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
+	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 0.5)
+	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 1.5)
+	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 2.5)
+	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 3.5)
 	
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
 	
@@ -48,6 +49,11 @@ func clean_layers(obj: CollisionObject2D) -> CollisionObject2D:
 	obj.set_collision_layer_value(1, false)
 	obj.set_collision_mask_value(1, false)
 	return obj
+
+
+func check_null(vars: Dictionary):
+	for key in vars.keys():
+		assert(vars.get(key) != null, "Variable " + key + " is null")
 
 
 func _on_preloader_error(message: String):

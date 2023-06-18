@@ -6,22 +6,19 @@ signal dead
 # enum of types of enemies?
 @export_range(1, 50) var size_y_percent: float = 25.0
 @export var weapon_resource: WeaponResource # todo: Array of Weapons, pick random when spawn
+@export var sprite: AnimatedSprite2D
+@export var health_comp: HealthComponent
+@export var weapon_marker: Marker2D
+@export var state_machine: StateMachine
+
 var weapon: Weapon
 var battle_states: Array[EnemyState]
 var state_go_away: GoAwayEnemyState
 var state_dead: DeadEnemyState
 
-@onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
-@onready var health_comp := $HealthComponent as HealthComponent
-@onready var weapon_marker := $WeaponMarker as Marker2D
-@onready var state_machine := $StateMachine as StateMachine
-
 
 func _ready() -> void:
-	assert(sprite)
-	assert(health_comp)
-	assert(weapon_marker)
-	assert(state_machine)
+	assert(size_y_percent and weapon_resource and sprite and health_comp and weapon_marker and state_machine)
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)

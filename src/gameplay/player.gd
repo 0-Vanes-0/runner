@@ -8,7 +8,12 @@ signal in_portal
 # Input objects
 @export var player_sensor: PlayerSensor
 @export var shoot_sensor: ShootSensor
-
+# Children Nodes
+@export_group("Children")
+@export var sprite: AnimatedSprite2D
+@export var body_shape: CollisionShape2D
+@export var health_comp: HealthComponent
+@export var state_machine: StateMachine
 # References to states from StateMachine
 @export_group("States", "state_")
 @export var state_run: RunPlayerState
@@ -21,16 +26,16 @@ signal in_portal
 var jump_speed: float
 var run_speed: float
 var dodge_time: float
+var stamina: float
+var stamina_max: float
 var weapon: Weapon
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var sprite := $AnimatedSprite2D as AnimatedSprite2D
-@onready var body_shape := $BodyShape as CollisionShape2D
-@onready var health_comp := $HealthComponent as HealthComponent
-@onready var state_machine := $StateMachine as StateMachine
 
 
 func _ready() -> void:
+	assert(player_sensor and shoot_sensor and state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end)
+	
 	# "Global" is singleton script
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
 	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
@@ -38,7 +43,6 @@ func _ready() -> void:
 	self.set_collision_mask_value(Global.Layers.BOUNDS, true)
 	
 	# Connecting input objects' signals:
-	assert(player_sensor != null, "Player Sensor not assigned!")
 	player_sensor.movement.connect(
 		func(direction: Vector2):
 			if direction.x > 0:
@@ -48,7 +52,6 @@ func _ready() -> void:
 			elif direction.y < 0:
 				state_machine.transition_to(state_jump_up)
 	)
-	assert(shoot_sensor != null, "Shoot Sensor not assigned!")
 	shoot_sensor.shoot_activated.connect(
 		func(target_position: Vector2):
 			if(
@@ -70,7 +73,7 @@ func _ready() -> void:
 
 func get_game_size() -> Vector2:
 	# WHEN I'LL HAVE BETTER PLAYER SPRITES - MAKE --> / 2
-	return Vector2.ONE * Global.floors_gap
+	return Vector2.ONE * Global.FLOORS_GAP
 
 
 func get_health_comp_position() -> Vector2:

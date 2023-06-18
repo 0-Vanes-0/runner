@@ -8,7 +8,7 @@ var timer := 0.0
 func enter():
 	super.enter()
 	enemy.position.x = Global.screen_width + enemy.get_game_size().x / 2
-	enemy.position.y = Global.enemy_spawn_spots[randi_range(0, 3)]
+	enemy.position.y = Global.ENEMY_SPAWN_SPOTS[randi_range(0, 3)]
 	enemy.sprite.play("default")
 	set_anim_looped()
 	

@@ -2,11 +2,12 @@ class_name JumpDownPlayerState
 extends PlayerState
 
 var is_passing_platform: bool
+var stamina_cost := 15.0
 
 
 func can_go_to_state() -> bool:
 	var platform := get_colliding_platform()
-	return platform == null or platform.floor_number > 1
+	return platform == null or platform.floor_number > 1 and eat_stamina(stamina_cost)
 
 
 func enter():

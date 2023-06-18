@@ -14,6 +14,8 @@ var is_enemies_permitted: bool
 
 
 func _ready() -> void:
+	assert(bounds and segments and enemies and player_sensor and shoot_sensor and info_label and game_over_menu and black_color_rect)
+	
 	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
 	($Bounds/Top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
 	($Bounds/Right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
@@ -66,6 +68,7 @@ func setup_player():
 	)
 	player.call_level_end_objects.connect(process_level_end_objects)
 	player.health_comp.health = 100
+	player.stamina_max = 100.0
 
 
 func setup_level():
@@ -93,9 +96,8 @@ func setup_level():
 	player.position = Vector2(Global.screen_width / 10, Global.screen_height / 2)
 	player.run_speed = Platform.SIZE.x * 2
 	player.dodge_time = 1.0
+	player.stamina = player.stamina_max
 	player.state_machine.transition_to(player.state_run, true)
-	
-	info_label.set_player(player)
 	
 	is_level_complete = false
 	is_enemies_permitted = true
