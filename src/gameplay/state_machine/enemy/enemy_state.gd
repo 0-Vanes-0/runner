@@ -12,8 +12,8 @@ func _ready() -> void:
 	assert(enemy != null)
 	
 	enemy.health_comp.out_of_health.connect(
-		func():
-			state_machine.transition_to(enemy.state_dead)
+			func():
+				state_machine.transition_to(enemy.state_dead)
 	, CONNECT_ONE_SHOT)
 
 

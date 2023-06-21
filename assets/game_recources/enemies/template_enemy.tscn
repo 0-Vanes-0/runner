@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://ba73bkg4ao25w"]
+
+[ext_resource type="Script" path="res://src/gameplay/enemies/enemy.gd" id="1_jjbrk"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/fireball_spell.tres" id="2_3qsrb"]
+[ext_resource type="Script" path="res://src/gameplay/health_component.gd" id="3_42ayq"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="4_e4vy3"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/start_enemy_state.gd" id="5_adcol"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/go_away_enemy_state.gd" id="6_ypg4f"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/dead_enemy_state.gd" id="7_qpuoh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gvfid"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine")]
+script = ExtResource("1_jjbrk")
+size_y_percent = 20.0
+weapon_resource = ExtResource("2_3qsrb")
+sprite = NodePath("AnimatedSprite2D")
+health_comp = NodePath("HealthComponent")
+weapon_marker = NodePath("WeaponMarker")
+state_machine = NodePath("StateMachine")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gvfid")
+flip_h = true
+
+[node name="HealthComponent" type="Area2D" parent="."]
+script = ExtResource("3_42ayq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+shape = SubResource("RectangleShape2D_7anvf")
+
+[node name="WeaponMarker" type="Marker2D" parent="."]
+position = Vector2(-20, 0)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_e4vy3")
+initial_state = NodePath("StartEnemyState")
+
+[node name="StartEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("5_adcol")
+connections_paths = Array[NodePath]([NodePath(""), NodePath("../GoAwayEnemyState")])
+
+[node name="GoAwayEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("6_ypg4f")
+connections_paths = Array[NodePath]([NodePath("../DeadEnemyState")])
+
+[node name="DeadEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("7_qpuoh")
+connections_paths = Array[NodePath]([NodePath("")])

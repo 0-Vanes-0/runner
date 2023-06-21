@@ -29,16 +29,16 @@ func take_damage(damage: int) -> void:
 	assert(get_parent().sprite != null)
 	var tween := create_tween()
 	tween.tween_property(
-		get_parent().sprite,
-		"modulate",
-		Color.RED,
-		0.15
+			get_parent().sprite,
+			"modulate",
+			Color.RED,
+			0.15
 	)
 	tween.tween_property(
-		get_parent().sprite,
-		"modulate",
-		Color.WHITE,
-		0.35
+			get_parent().sprite,
+			"modulate",
+			Color.WHITE,
+			0.35
 	)
 	health = maxi(health - damage, 0)
 	took_damage.emit()

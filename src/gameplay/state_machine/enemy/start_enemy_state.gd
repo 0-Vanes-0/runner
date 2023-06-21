@@ -1,7 +1,7 @@
 class_name StartEnemyState
 extends EnemyState
 
-const ENTER_TIME := 1.0
+const ENTER_TIME := 1.5
 var timer := 0.0
 
 
@@ -14,11 +14,11 @@ func enter():
 	
 	var tween := get_tree().create_tween()
 	tween.tween_property(
-		enemy, 
-		"position:x", 
-		Global.screen_width * 0.8,
-		ENTER_TIME
-	).set_ease(Tween.EASE_IN)
+			enemy, 
+			"position:x", 
+			Global.screen_width * 0.8,
+			ENTER_TIME
+	)
 
 
 func physics_update(delta: float):

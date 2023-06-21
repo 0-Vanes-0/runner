@@ -10,3 +10,7 @@ extends Node2D
 
 func _ready() -> void:
 	assert(biome1_tilemap and biome2_tilemap and biome3_tilemap and biome4_tilemap and biome5_tilemap)
+
+
+func get_biomes_tilemaps() -> Array[TileMap]:
+	return [biome1_tilemap, biome2_tilemap, biome3_tilemap, biome4_tilemap, biome5_tilemap, ]

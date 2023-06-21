@@ -27,9 +27,10 @@ func _ready() -> void:
 	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 	
 	game_over_menu.restart_called.connect(
-		func():
-			setup_player()
-			setup_level()
+			func():
+				Global.kills_count = 0
+				setup_player()
+				setup_level()
 	)
 	setup_player()
 	setup_level()
@@ -44,7 +45,10 @@ func _physics_process(delta: float) -> void:
 	
 	if is_enemies_permitted and enemies.get_child_count() == 0:
 		var enemy: Enemy = Preloader.enemy_test_dragon.instantiate()
-		enemy.dead.connect(info_label.on_enemy_dead)
+		enemy.dead.connect(
+				func():
+					Global.kills_count += 1
+		)
 		enemies.add_child(enemy)
 
 
@@ -62,9 +66,9 @@ func setup_player():
 	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	player.jump_speed = sqrt(2 * player.gravity * jump_height)
 	player.state_dead.died.connect(
-		func():
-			game_over_menu.appear()
-			is_enemies_permitted = false
+			func():
+				game_over_menu.appear()
+				is_enemies_permitted = false
 	)
 	player.call_level_end_objects.connect(process_level_end_objects)
 	player.health_comp.health = 100
@@ -75,15 +79,14 @@ func setup_level():
 	for child in segments.get_children():
 		child.queue_free()
 	
-	Preloader.segments.shuffle()
-	var size: int = Preloader.segments.size()
+	var biome1_segments: Array[Segment] = Preloader.get_segments_by_biome(1)
 	var segments_length_x := 0.0
-	for i in size:
-		var segment: Segment = Preloader.segments[i].clone()
+	for i in biome1_segments.size():
+		var segment: Segment = biome1_segments[i].clone()
 		segment.position.x = segments_length_x
 		segments_length_x += segment.get_width()
 		segments.add_child(segment, true)
-		if i == size - 1:
+		if i == biome1_segments.size() - 1:
 			segment.is_last = true
 			segment.level_about_to_end.connect(_remove_enemies)
 			segment.level_end.connect(_on_level_complete)
@@ -131,26 +134,27 @@ func process_level_end_objects():
 		portal.position = portal_poses[i]
 		
 		portal.portal_chosen.connect(
-			func():
-				player.go_to_portal.emit(portal_poses[i])
-				var anon_tween := create_tween()
-				anon_tween.tween_property(
-					black_color_rect,
-					"color:a",
-					1.0,
-					Global.LEVEL_END_TIME
-				)
+				func():
+					player.go_to_portal.emit(portal_poses[i])
+					var anon_tween := create_tween()
+					anon_tween.tween_property(
+							black_color_rect,
+							"color:a",
+							1.0,
+							Global.LEVEL_END_TIME
+					)
 		, CONNECT_ONE_SHOT)
+		
 		player.in_portal.connect(
-			func():
-				var anon_tween := create_tween()
-				anon_tween.tween_property(
-					black_color_rect,
-					"color:a",
-					0.0,
-					Global.LEVEL_END_TIME * 0.5
-				)
-				setup_level()
+				func():
+					var anon_tween := create_tween()
+					anon_tween.tween_property(
+							black_color_rect,
+							"color:a",
+							0.0,
+							Global.LEVEL_END_TIME * 0.5
+					)
+					setup_level()
 		, CONNECT_ONE_SHOT)
 
 

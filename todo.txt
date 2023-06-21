@@ -1,4 +1,5 @@
 - Simple enemies (shooting, moving up and down, other states and mb weapons)
+- Add Status class and make composition to PlayerState + EnemyState
 - Add Chest and Portal classes
 -¿Add Player object to Global?
 -¿Add to ShootEntity functions for inherited children?

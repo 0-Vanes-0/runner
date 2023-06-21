@@ -20,11 +20,11 @@ var FLOORS_GAP: float
 var ENEMY_SPAWN_SPOTS: Array[float]
 
 var player: Player
+var kills_count: int = 0
 var screen_width: int; var screen_height: int; var ratio := ":"
 
 
 func _ready() -> void:
-	print_debug()
 	screen_width = int(get_viewport().get_visible_rect().size.x)
 	screen_height = int(get_viewport().get_visible_rect().size.y)
 	var gcd := _gcd(screen_width, screen_height)

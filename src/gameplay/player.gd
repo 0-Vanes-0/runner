@@ -44,22 +44,22 @@ func _ready() -> void:
 	
 	# Connecting input objects' signals:
 	player_sensor.movement.connect(
-		func(direction: Vector2):
-			if direction.x > 0:
-				state_machine.transition_to(state_dodge)
-			elif direction.y > 0:
-				state_machine.transition_to(state_jump_down)
-			elif direction.y < 0:
-				state_machine.transition_to(state_jump_up)
+			func(direction: Vector2):
+				if direction.x > 0:
+					state_machine.transition_to(state_dodge)
+				elif direction.y > 0:
+					state_machine.transition_to(state_jump_down)
+				elif direction.y < 0:
+					state_machine.transition_to(state_jump_up)
 	)
 	shoot_sensor.shoot_activated.connect(
-		func(target_position: Vector2):
-			if(
-				not state_machine.state is DodgePlayerState 
-				and not state_machine.state is DeadPlayerState
-				and not state_machine.state is LevelEndPlayerState
-			):
-				weapon.shoot(self.position + weapon.position, target_position)
+			func(target_position: Vector2):
+				if(
+					not state_machine.state is DodgePlayerState 
+					and not state_machine.state is DeadPlayerState
+					and not state_machine.state is LevelEndPlayerState
+				):
+					weapon.shoot(self.position + weapon.position, target_position)
 	)
 	
 	# Adding Weapon:

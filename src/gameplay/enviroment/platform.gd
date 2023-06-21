@@ -11,10 +11,10 @@ func _ready() -> void:
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLATFORM, true)
 	self.collision_mask = Global.Layers.PLAYER
 	$VisibleOnScreenEnabler2D.rect = Rect2(
-		self.position.x, 
-		self.position.y,
-		SIZE.x,
-		SIZE.y
+			self.position.x, 
+			self.position.y,
+			SIZE.x,
+			SIZE.y
 	)
 
 

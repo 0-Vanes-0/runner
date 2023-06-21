@@ -37,11 +37,11 @@ func _physics_process(delta: float) -> void:
 
 func transition_to(target_state: State, is_transition_forced: bool = false):
 	var can_transition: bool = (
-		is_transition_forced
-		or
-		self.has_node(target_state.get_path())
-		and state.connections.has(target_state)
-		and target_state.can_go_to_state()
+			is_transition_forced
+			or
+			self.has_node(target_state.get_path())
+			and state.connections.has(target_state)
+			and target_state.can_go_to_state()
 	)
 	if can_transition:
 		state.exit()

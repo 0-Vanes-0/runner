@@ -14,11 +14,11 @@ func enter():
 	player.weapon.look_at(player.position + player.weapon.position + Vector2.RIGHT)
 	var tween := get_tree().create_tween()
 	tween.tween_property(
-		player.weapon,
-		"position",
-		Vector2(player.weapon.position.x, player.body_shape.position.y),
-		0.5
-	).set_ease(Tween.EASE_IN)
+			player.weapon,
+			"position",
+			Vector2(player.weapon.position.x, player.body_shape.position.y),
+			0.5
+	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 
 
 func physics_update(delta: float):

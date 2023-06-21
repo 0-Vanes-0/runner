@@ -3,11 +3,15 @@ extends Control
 
 signal restart_called
 
-@onready var panel := $Panel as Panel
-@onready var anim_player := $AnimationPlayer as AnimationPlayer
+@export var panel: Panel
+@export var anim_player: AnimationPlayer
+@export var left_label: RichTextLabel
+var kills_count: int
 
 
 func _ready() -> void:
+	assert(panel and anim_player and left_label)
+	
 	self.add_theme_constant_override("margin_top", Global.screen_height / 6)
 	self.add_theme_constant_override("margin_right", Global.screen_width / 6)
 	self.add_theme_constant_override("margin_bottom", Global.screen_height / 6)
@@ -21,6 +25,7 @@ func _ready() -> void:
 func appear():
 	self.visible = true
 	anim_player.play("start")
+	left_label.text = "Enemies killed: " + str(Global.kills_count)
 
 
 func _on_restart_button_pressed() -> void:

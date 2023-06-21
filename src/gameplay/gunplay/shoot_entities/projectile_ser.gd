@@ -14,8 +14,8 @@ func get_shape() -> Shape2D:
 			return shape
 		elif shape is RectangleShape2D:
 			shape.size = Vector2(
-				size_x_percent / 100 * Global.screen_height
-				, size_y_percent / 100 * Global.screen_height
+					size_x_percent / 100 * Global.screen_height
+					, size_y_percent / 100 * Global.screen_height
 			)
 			return shape
 		else:
