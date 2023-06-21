@@ -43,21 +43,29 @@ func _ready() -> void:
 	self.set_collision_mask_value(Global.Layers.BOUNDS, true)
 	
 	# Connecting input objects' signals:
-	player_sensor.movement.connect(
+	player_sensor.swipe.connect(
 			func(direction: Vector2):
-				if direction.x > 0:
+				if direction == Vector2.RIGHT:
 					state_machine.transition_to(state_dodge)
-				elif direction.y > 0:
-					state_machine.transition_to(state_jump_down)
-				elif direction.y < 0:
-					state_machine.transition_to(state_jump_up)
+				elif direction == Vector2.LEFT:
+					print_debug("Switch weapon")
+				elif direction == Vector2.DOWN:
+					print_debug("Reload weapon")
+				elif direction == Vector2.UP:
+					print_debug("Use current ability")
+	)
+	player_sensor.tap_up.connect(
+			state_machine.transition_to.bind(state_jump_up)
+	)
+	player_sensor.tap_down.connect(
+			state_machine.transition_to.bind(state_jump_down)
 	)
 	shoot_sensor.shoot_activated.connect(
 			func(target_position: Vector2):
 				if(
-					not state_machine.state is DodgePlayerState 
-					and not state_machine.state is DeadPlayerState
-					and not state_machine.state is LevelEndPlayerState
+						not state_machine.state is DodgePlayerState 
+						and not state_machine.state is DeadPlayerState
+						and not state_machine.state is LevelEndPlayerState
 				):
 					weapon.shoot(self.position + weapon.position, target_position)
 	)

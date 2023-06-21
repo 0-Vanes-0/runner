@@ -181,7 +181,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogtel"]
-size = Vector2(100, 10)
+size = Vector2(140, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgdn0"]
 size = Vector2(20, 80)
@@ -202,10 +202,11 @@ state_level_end = NodePath("StateMachine/LevelEndPlayerState")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_k2dkm")
+animation = &"jump_down"
 offset = Vector2(0, -42)
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-position = Vector2(-30, -5)
+position = Vector2(-10, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
 [node name="HealthComponent" type="Area2D" parent="."]

@@ -2,7 +2,7 @@ class_name HealthComponent
 extends Area2D
 
 signal out_of_health
-signal took_damage
+#signal took_damage
 
 @export_range(1, 9999) var health: int = 100
 var shape: CollisionShape2D
@@ -27,6 +27,7 @@ func _ready() -> void:
 
 func take_damage(damage: int) -> void:
 	assert(get_parent().sprite != null)
+	var orig_modulate: Color = get_parent().sprite.modulate
 	var tween := create_tween()
 	tween.tween_property(
 			get_parent().sprite,
@@ -37,11 +38,11 @@ func take_damage(damage: int) -> void:
 	tween.tween_property(
 			get_parent().sprite,
 			"modulate",
-			Color.WHITE,
+			orig_modulate,
 			0.35
 	)
 	health = maxi(health - damage, 0)
-	took_damage.emit()
+#	took_damage.emit()
 	if health == 0:
 		out_of_health.emit()
 	
