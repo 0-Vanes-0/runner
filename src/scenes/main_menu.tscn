@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnp3x14mc2hay"]
+[gd_scene load_steps=6 format=3 uid="uid://dnp3x14mc2hay"]
 
 [ext_resource type="Script" path="res://src/scenes/main_menu.gd" id="1_noaao"]
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/controls/default_theme.tres" id="1_tny1b"]
+[ext_resource type="FontFile" uid="uid://dv1loa1pu1eml" path="res://assets/fonts/Fairfax.ttf" id="3_ebaty"]
+[ext_resource type="Texture2D" uid="uid://c1elmwh1wwaun" path="res://assets/sprites/players/test/test_default_0.png" id="3_ipheb"]
 
-[node name="Control" type="Control"]
+[sub_resource type="Theme" id="Theme_38a2o"]
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/normal_font = ExtResource("3_ebaty")
+
+[node name="Control" type="Control" node_paths=PackedStringArray("play_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,23 +18,127 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tny1b")
 script = ExtResource("1_noaao")
+play_button = NodePath("MarginContainer/VBoxContainer/HBoxContainer/PlayButton")
 
-[node name="Button" type="Button" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -45.5
-offset_right = 77.0
-offset_bottom = 45.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(480, 240)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/PanelContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_38a2o")
+text = "Эта штука пока не работает, просто можно полистать спрайтики"
+fit_content = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("3_ipheb")
+stretch_mode = 6
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("3_ipheb")
+stretch_mode = 6
+
+[node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("3_ipheb")
+stretch_mode = 6
+
+[node name="TextureButton4" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("3_ipheb")
+stretch_mode = 6
+
+[node name="TextureButton5" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("3_ipheb")
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 100
+text = "QUIT"
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 100
 text = "PLAY"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_button_pressed"]

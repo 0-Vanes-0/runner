@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2kvcal35lx24"]
+[gd_scene load_steps=9 format=3 uid="uid://c2kvcal35lx24"]
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_1x2in"]
+[ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_id4ow"]
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="2_nw0x7"]
 [ext_resource type="PackedScene" uid="uid://dmcwvqoipty50" path="res://assets/segment_tile_map.tscn" id="2_t8vpo"]
 [ext_resource type="PackedScene" uid="uid://cw8ujdd0tak01" path="res://src/scenes/game.tscn" id="3_m0eon"]
@@ -10,6 +11,7 @@
 
 [node name="ResourcePreloader" type="Node"]
 script = ExtResource("1_1x2in")
+main_menu_scene = ExtResource("2_id4ow")
 game_scene = ExtResource("3_m0eon")
 tilemap_scene = ExtResource("2_t8vpo")
 player = ExtResource("4_n2ku8")

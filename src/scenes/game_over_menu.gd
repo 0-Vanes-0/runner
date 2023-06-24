@@ -34,4 +34,4 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().quit()
+	get_tree().change_scene_to_packed(Preloader.main_menu_scene)
