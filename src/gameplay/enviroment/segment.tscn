@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dfrttu63j8rto"]
 
 [ext_resource type="Script" path="res://src/gameplay/enviroment/segment.gd" id="1_bproq"]
 [ext_resource type="Texture2D" uid="uid://b4xeskgs3768s" path="res://assets/sprites/shoot_entities/fire_orb.png" id="2_3slm7"]

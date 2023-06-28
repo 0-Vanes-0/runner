@@ -1,6 +1,9 @@
 - Simple enemies (shooting, moving up and down, other states and mb weapons)
 - Add Status class and make composition to PlayerState + EnemyState
 - Add Chest and Portal classes
+- Add State script template
+- Add load seed screen after pressing Play (if is_run_seed_generated is false)
+- Make custom collection class(es), see game_info.gd
 -¿Add Player object to Global?
 -¿Add to ShootEntity functions for inherited children?
 -¿Maybe redo shoot entity resources and remove additional classes?

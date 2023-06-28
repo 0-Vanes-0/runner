@@ -17,6 +17,7 @@ func enter():
 	player.velocity.y = 0.0
 	var platform := get_colliding_platform()
 	if platform != null:
+		player.velocity.y = player.jump_speed / 6
 		is_passing_platform = true
 		player.body_shape.disabled = true
 		await get_tree().create_timer(Global.JUMP_DOWN_DISABLE_TIME).timeout

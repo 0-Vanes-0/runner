@@ -23,9 +23,11 @@ func _ready() -> void:
 func clone() -> Segment:
 	var segment := self.duplicate() as Segment
 	for i in range(1, Global.MAX_FLOORS + 1):
-		for child in segment.get_floor(i).get_children():
-			if child is Platform:
-				child.floor_number = i
+		for j in segment.get_floor(i).get_child_count():
+			var orig := self.get_floor(i).get_child(j) as Platform
+			var dup := segment.get_floor(i).get_child(j) as Platform
+			dup.floor_number = orig.floor_number
+			dup.order_number = orig.order_number
 	segment.is_last = self.is_last
 	return segment
 
@@ -60,3 +62,27 @@ func set_end_x(x: float):
 
 func get_width() -> float:
 	return $End.position.x
+
+
+func get_length() -> int:
+	return $Floor1.get_child_count()
+
+
+func cut_segment_at(index: int):
+	for platform in $Floor1.get_children():
+		if platform is Platform:
+			if platform.order_number >= index:
+				set_end_x(minf(get_width(), platform.position.x))
+				platform.queue_free()
+	for platform in $Floor2.get_children():
+		if platform is Platform:
+			if platform.order_number >= index:
+				platform.queue_free()
+	for platform in $Floor3.get_children():
+		if platform is Platform:
+			if platform.order_number >= index:
+				platform.queue_free()
+	for platform in $Floor4.get_children():
+		if platform is Platform:
+			if platform.order_number >= index:
+				platform.queue_free()

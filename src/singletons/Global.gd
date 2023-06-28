@@ -12,15 +12,17 @@ enum Layers {
 	SHOOT_ENTITY_ENEMY = 5,
 	BOUNDS = 6,
 }
-const MAX_FLOORS := 4
+const MAX_FLOORS: int = 4
 const JUMP_DOWN_DISABLE_TIME := 0.1
 const LEVEL_END_TIME := 1.5
+const PLATFORM_W := Platform.SIZE.x
 const PLATFORM_H := Platform.SIZE.y
 var FLOORS_GAP: float
 var ENEMY_SPAWN_SPOTS: Array[float]
 
 var player: Player
-var kills_count: int = 0
+var game_res_loaded := false
+
 var screen_width: int; var screen_height: int; var ratio := ":"
 
 
@@ -30,8 +32,6 @@ func _ready() -> void:
 	var gcd := _gcd(screen_width, screen_height)
 	ratio = str(screen_width / gcd) + ratio + str(screen_height / gcd)
 	print_debug("\t", "screen_width=", screen_width, ", screen_height=", screen_height, ", ratio=", ratio)
-	
-	Preloader.error.connect(_on_preloader_error)
 	
 	FLOORS_GAP = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
 	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 0.5)
@@ -50,14 +50,6 @@ func clean_layers(obj: CollisionObject2D) -> CollisionObject2D:
 	obj.set_collision_mask_value(1, false)
 	return obj
 
-
-func check_null(vars: Dictionary):
-	for key in vars.keys():
-		assert(vars.get(key) != null, "Variable " + key + " is null")
-
-
-func _on_preloader_error(message: String):
-	print_debug(message)
 
 # NOD
 func _gcd(a: int, b: int) -> int:

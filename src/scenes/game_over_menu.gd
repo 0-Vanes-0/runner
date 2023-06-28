@@ -6,7 +6,6 @@ signal restart_called
 @export var panel: Panel
 @export var anim_player: AnimationPlayer
 @export var left_label: RichTextLabel
-var kills_count: int
 
 
 func _ready() -> void:
@@ -25,7 +24,10 @@ func _ready() -> void:
 func appear():
 	self.visible = true
 	anim_player.play("start")
-	left_label.text = "Enemies killed: " + str(Global.kills_count)
+	left_label.text = (
+			"Enemies killed: " + str(GameInfo.kills_count) + "\n"
+			+ "Died on level " + str(GameInfo.level_number) + " in biome " + str(GameInfo.biome_number) + "\n"
+	)
 
 
 func _on_restart_button_pressed() -> void:

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://doqkwoo6hgnks"]
+
+[ext_resource type="Script" path="res://src/singletons/game_info.gd" id="1_syts5"]
+
+[node name="GameInfo" type="Node"]
+script = ExtResource("1_syts5")

@@ -1,7 +1,6 @@
 extends Node
 
 signal loaded
-signal error(message: String)
 
 @export_group("Game Screens")
 @export var main_menu_scene: PackedScene
@@ -40,7 +39,7 @@ func start_preload():
 		if export_resources.get(resource) != null:
 			export_counter += 1
 		else:
-			error.emit("Failed to load: " + resource)
+			print_debug("Failed to load: " + resource)
 	
 	var non_empty := Vector2i(1, 0)
 	var segment_tilemap := tilemap_scene.instantiate() as SegmentTileMap
@@ -56,6 +55,7 @@ func start_preload():
 				var floor_number: int = 4 - v.y
 				var platfrom := Preloader.platform_scene.instantiate() as Platform
 				platfrom.position.x = v.x * width
+				platfrom.order_number = v.x
 				platfrom.floor_number = floor_number
 				segment.get_floor(floor_number).add_child(platfrom, true)
 				segment.set_end_x(maxf(segment.get_width(), (v.x + 1) * width))

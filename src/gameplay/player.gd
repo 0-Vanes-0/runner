@@ -6,8 +6,8 @@ signal go_to_portal(portal_position: Vector2)
 signal in_portal
 
 # Input objects
-@export var player_sensor: PlayerSensor
-@export var shoot_sensor: ShootSensor
+var player_sensor: PlayerSensor
+var shoot_sensor: ShootSensor
 # Children Nodes
 @export_group("Children")
 @export var sprite: AnimatedSprite2D
@@ -28,9 +28,11 @@ var run_speed: float
 var dodge_time: float
 var stamina: float
 var stamina_max: float
+
+var platforms_left: int
 var weapon: Weapon
 
-@onready var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var gravity: float = 1000 # ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _ready() -> void:
@@ -77,6 +79,14 @@ func _ready() -> void:
 	weapon.position = health_comp.position
 	
 	self.scale = get_game_size() / (sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale)
+
+
+func prepare_to_run():
+	self.position = Vector2(Global.screen_width / 10, Global.screen_height / 2)
+	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
+	jump_speed = sqrt(2 * gravity * jump_height)
+	stamina = stamina_max
+	state_machine.transition_to(state_run, true)
 
 
 func get_game_size() -> Vector2:

@@ -26,15 +26,17 @@ func _ready() -> void:
 	($Bounds/Left.shape as SegmentShape2D).b = Vector2(0, 0)
 	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 	
+	black_color_rect.color = Color(0, 0, 0, 1)
+	
 	game_over_menu.restart_called.connect(
 			func():
-				Global.kills_count = 0
+				GameInfo.kills_count = 0
+				Global.player.queue_free()
 				setup_player()
 				setup_level()
 	)
 	setup_player()
 	setup_level()
-	black_color_rect.color = Color(0, 0, 0, 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -47,63 +49,85 @@ func _physics_process(delta: float) -> void:
 		var enemy: Enemy = Preloader.enemy_test_dragon.instantiate()
 		enemy.dead.connect(
 				func():
-					Global.kills_count += 1
+					GameInfo.kills_count += 1
 		)
 		enemies.add_child(enemy)
 
 
 func setup_player():
-	if Global.player != null:
-		Global.player.queue_free()
-	Global.player = Preloader.player.instantiate() as Player
-	
-	var player := Global.player
-	player.player_sensor = player_sensor
-	player.shoot_sensor = shoot_sensor
-	player.name = "Player"
-	self.add_child(player)
-	self.move_child(player, segments.get_index() + 1)
-	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
-	player.jump_speed = sqrt(2 * player.gravity * jump_height)
-	player.state_dead.died.connect(
-			func():
-				game_over_menu.appear()
-				is_enemies_permitted = false
-	)
-	player.call_level_end_objects.connect(process_level_end_objects)
-	player.health_comp.health = 100
-	player.stamina_max = 100.0
+	if Global.player != null and not Global.player.is_queued_for_deletion():
+		Global.player.prepare_to_run()
+	else:
+		Global.player = Preloader.player.instantiate() as Player
+		var player := Global.player
+		player.player_sensor = player_sensor
+		player.shoot_sensor = shoot_sensor
+		player.name = "Player"
+		self.add_child(player)
+		self.move_child(player, segments.get_index() + 1)
+		player.state_dead.died.connect(
+				func():
+					game_over_menu.appear()
+					is_enemies_permitted = false
+		)
+		player.call_level_end_objects.connect(process_level_end_objects)
+		player.health_comp.health = 10
+		player.stamina_max = 100.0
+		player.run_speed = Platform.SIZE.x * 2
+		player.dodge_time = 1.0
+		player.prepare_to_run()
 
 
 func setup_level():
 	for child in segments.get_children():
 		child.queue_free()
 	
-	var biome1_segments: Array[Segment] = Preloader.get_segments_by_biome(1)
-	var segments_length_x := 0.0
-	for i in biome1_segments.size():
-		var segment: Segment = biome1_segments[i].clone()
-		segment.position.x = segments_length_x
-		segments_length_x += segment.get_width()
+	var biome_segments: Array[Segment] = Preloader.get_segments_by_biome(GameInfo.biome_number)
+	var LEVEL_LENGTH: int = GameInfo.get_level_length(GameInfo.level_number)
+	var segments_length: int = 0
+	for segment_i in GameInfo.get_level_segments_numbers(GameInfo.biome_number, GameInfo.level_number):
+		var segment: Segment = biome_segments[segment_i].clone()
+		segment.position.x = segments_length * Global.PLATFORM_W
+		segments_length += segment.get_length()
 		segments.add_child(segment, true)
-		if i == biome1_segments.size() - 1:
-			segment.is_last = true
-			segment.level_about_to_end.connect(_remove_enemies)
-			segment.level_end.connect(_on_level_complete)
-			var plane: Segment = Preloader.default_segment.duplicate()
-			plane.name = "Plane"
-			plane.position.x = segments_length_x
-			segments.add_child(plane)
 	
-	var player := Global.player
-	player.position = Vector2(Global.screen_width / 10, Global.screen_height / 2)
-	player.run_speed = Platform.SIZE.x * 2
-	player.dodge_time = 1.0
-	player.stamina = player.stamina_max
-	player.state_machine.transition_to(player.state_run, true)
+	var last_segment := segments.get_child(-1) as Segment
+	last_segment.cut_segment_at(last_segment.get_length() - (segments_length - LEVEL_LENGTH))
+	last_segment.is_last = true
+	last_segment.level_about_to_end.connect(_remove_enemies)
+	last_segment.level_end.connect(_on_level_complete)
+	var plane: Segment = Preloader.default_segment.duplicate()
+	plane.name = "Plane"
+	plane.position.x = LEVEL_LENGTH * Global.PLATFORM_W
+	segments.add_child(plane)
 	
-	is_level_complete = false
-	is_enemies_permitted = true
+	Global.player.platforms_left = LEVEL_LENGTH
+	
+	var tween := create_tween()
+	tween.tween_property(
+			black_color_rect,
+			"color:a",
+			1.0,
+			0
+	)
+	tween.tween_property(
+			black_color_rect,
+			"color:a",
+			0.0,
+			Global.LEVEL_END_TIME * 0.5
+	)
+	tween.tween_property(
+			self,
+			"is_level_complete",
+			false,
+			0
+	)
+	tween.tween_property(
+			self,
+			"is_enemies_permitted",
+			true,
+			0
+	)
 
 
 func process_level_end_objects():
@@ -144,18 +168,13 @@ func process_level_end_objects():
 							Global.LEVEL_END_TIME
 					)
 		, CONNECT_ONE_SHOT)
-		
-		player.in_portal.connect(
-				func():
-					var anon_tween := create_tween()
-					anon_tween.tween_property(
-							black_color_rect,
-							"color:a",
-							0.0,
-							Global.LEVEL_END_TIME * 0.5
-					)
-					setup_level()
-		, CONNECT_ONE_SHOT)
+	
+	player.in_portal.connect(
+			func():
+				GameInfo.level_number = min(GameInfo.level_number + 1, GameInfo.LEVELS_COUNT)
+				setup_player()
+				setup_level()
+	, CONNECT_ONE_SHOT)
 
 
 func _on_level_complete():
