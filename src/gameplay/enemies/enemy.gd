@@ -6,15 +6,19 @@ signal dead
 # enum of types of enemies?
 @export_range(1, 50) var size_y_percent: float = 25.0
 @export var weapon_resource: WeaponResource # todo: Array of Weapons, pick random when spawn
+#@export var clothes: ClothesResource
+@export_group("Children")
 @export var sprite: AnimatedSprite2D
 @export var health_comp: HealthComponent
 @export var weapon_marker: Marker2D
 @export var state_machine: StateMachine
 
 var weapon: Weapon
+#var clothes: Clothes
 var battle_states: Array[EnemyState]
 var state_go_away: GoAwayEnemyState
 var state_dead: DeadEnemyState
+var current_floor: int
 
 
 func _ready() -> void:
@@ -31,14 +35,13 @@ func _ready() -> void:
 	weapon_marker.add_child(weapon)
 	weapon.scale.x *= -1.0
 	
-	for state in state_machine.get_children():
-		if state is EnemyState:
-			if state is DeadEnemyState:
-				state_dead = state
-			elif state is GoAwayEnemyState:
-				state_go_away = state
-			elif not state is StartEnemyState:
-				battle_states.append(state as EnemyState)
+	for state in (state_machine.get_children() as Array[EnemyState]):
+		if state is DeadEnemyState:
+			state_dead = state
+		elif state is GoAwayEnemyState:
+			state_go_away = state
+		elif not state is StartEnemyState:
+			battle_states.append(state as EnemyState)
 
 
 func get_sprite_size() -> Vector2:

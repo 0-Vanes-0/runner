@@ -32,14 +32,15 @@ func take_damage(damage: int) -> void:
 	tween.tween_property(
 			get_parent().sprite,
 			"modulate",
-			Color.RED,
-			0.15
+			orig_modulate.inverted(), # todo: make better here
+			0.0
 	)
+	tween.tween_interval(0.2)
 	tween.tween_property(
 			get_parent().sprite,
 			"modulate",
 			orig_modulate,
-			0.35
+			0.0
 	)
 	health = maxi(health - damage, 0)
 #	took_damage.emit()

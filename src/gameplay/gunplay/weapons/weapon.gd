@@ -6,6 +6,7 @@ extends Node2D
 var weapon_owner: ShootEntity.Owner
 var shoot_rate_time: float
 var spread_angle: int
+var extra_spread_angle: int
 var sprite: AnimatedSprite2D
 var shoot_timer: float
 
@@ -19,6 +20,7 @@ func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> 
 	shoot_rate_time = weapon_resource.shoot_rate_time
 	shoot_timer = shoot_rate_time
 	spread_angle = weapon_resource.spread_angle
+	extra_spread_angle = 0
 	sprite.sprite_frames = weapon_resource.sprite_frames if weapon_resource.sprite_frames != null else SpriteFrames.new()
 	
 	self.weapon_owner = weapon_owner
@@ -35,12 +37,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	shoot_timer = shoot_timer + delta if _is_shoot_paused() else shoot_rate_time
+	shoot_timer = shoot_timer + delta if not can_shoot() else shoot_rate_time
 
 
 func shoot(start_position: Vector2, target_position: Vector2):
-	if not _is_shoot_paused():
-		var angle: float = deg_to_rad(randf_range(-spread_angle / 2, spread_angle / 2))
+	if can_shoot():
+		var sum_spread_angle: int = spread_angle + extra_spread_angle
+		var angle: float = deg_to_rad(randf_range(-sum_spread_angle / 2, sum_spread_angle / 2))
 		var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
 		_spawn_entity(weapon_resource.shoot_entity_resource, weapon_owner, start_position, start_position + spreaded_target_position)
 		self.look_at(target_position)
@@ -60,5 +63,13 @@ func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_pos
 	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
 
 
-func _is_shoot_paused() -> bool:
-	return shoot_timer < shoot_rate_time
+func can_shoot() -> bool:
+	return shoot_timer >= shoot_rate_time
+
+
+func add_extra_spread_angle(angle: int):
+	extra_spread_angle = angle
+
+
+func remove_extra_spread_angle():
+	extra_spread_angle = 0

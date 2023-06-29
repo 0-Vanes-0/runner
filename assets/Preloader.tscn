@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2kvcal35lx24"]
+[gd_scene load_steps=9 format=3 uid="uid://c4m565kqjx3ba"]
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_1x2in"]
 [ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_id4ow"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://sbipqdrygvq4" path="res://src/scenes/game.tscn" id="3_m0eon"]
 [ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player.tscn" id="4_n2ku8"]
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="5_q2ntc"]
-[ext_resource type="PackedScene" uid="uid://danf4b1ogrc6f" path="res://assets/game_recources/enemies/dragon.tscn" id="6_sus6a"]
+[ext_resource type="PackedScene" path="res://assets/game_recources/enemies/sphere_mage.tscn" id="8_2k1cc"]
 
 [node name="ResourcePreloader" type="Node"]
 script = ExtResource("1_1x2in")
@@ -17,4 +17,4 @@ tilemap_scene = ExtResource("2_t8vpo")
 player = ExtResource("4_n2ku8")
 platform_scene = ExtResource("2_nw0x7")
 segment_scene = ExtResource("5_q2ntc")
-enemy_test_dragon = ExtResource("6_sus6a")
+enemy_test_dragon = ExtResource("8_2k1cc")

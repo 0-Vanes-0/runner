@@ -1,8 +1,6 @@
 class_name DeadEnemyState
 extends EnemyState
 
-const ANIM := "dead"
-
 
 func enter():
 	super.enter()
@@ -11,5 +9,5 @@ func enter():
 			func():
 				enemy.queue_free()
 	, CONNECT_ONE_SHOT)
-	enemy.sprite.play(ANIM)
+	enemy.sprite.play("dead")
 	enemy.dead.emit()

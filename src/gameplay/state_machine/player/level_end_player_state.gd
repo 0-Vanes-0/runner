@@ -4,6 +4,9 @@ extends PlayerState
 const ANIM_RUN := "run"
 const ANIM_DEFAULT := "default"
 const ANIM_FLY := "jump_down"
+var is_gravity_needed: bool = true
+var is_x_right: bool = false
+var tween: Tween
 
 
 func enter():
@@ -13,23 +16,29 @@ func enter():
 	
 	player.platforms_left = 0
 	var run_speed := player.run_speed
-	var tween := create_tween()
+	tween = create_tween()
 	tween.tween_property(
 			player,
 			"position:x",
 			Global.screen_width / 2,
 			Global.LEVEL_END_TIME
 	)
-	tween.parallel().tween_property(
-			player,
-			"position:y",
-			Global.screen_height - Platform.SIZE.y,
-			Global.LEVEL_END_TIME
-	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tween.tween_property(
 			player,
 			"run_speed",
 			0,
+			0.0
+	)
+	tween.tween_property(
+			self,
+			"is_x_right",
+			true,
+			0.0
+	)
+	tween.tween_property(
+			self,
+			"is_gravity_needed",
+			false,
 			0.0
 	)
 	tween.tween_callback(player.sprite.play.bind(ANIM_DEFAULT))
@@ -64,3 +73,12 @@ func enter():
 						player.run_speed = run_speed
 			)
 	, CONNECT_ONE_SHOT)
+
+
+func physics_update(delta: float):
+	if not player.is_on_floor():
+		apply_player_gravity(delta)
+		if is_x_right and tween.is_running():
+			tween.pause()
+	elif not tween.is_running() and tween.is_valid():
+		tween.play() # Fix error in debugger

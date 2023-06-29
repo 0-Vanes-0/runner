@@ -1,0 +1,151 @@
+[gd_scene load_steps=30 format=3 uid="uid://hyemkxy2t4rp"]
+
+[ext_resource type="Script" path="res://src/gameplay/enemies/enemy.gd" id="1_b5wxb"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="2_4vt26"]
+[ext_resource type="Texture2D" uid="uid://by8hyullh546b" path="res://assets/sprites/enemies/test/dragon_dead_0.png" id="3_47uja"]
+[ext_resource type="Texture2D" uid="uid://bjbvjhk2m6ppq" path="res://assets/sprites/enemies/test/dragon_dead_1.png" id="4_xgbl8"]
+[ext_resource type="Texture2D" uid="uid://p87wvb0afkk1" path="res://assets/sprites/enemies/test/dragon_dead_2.png" id="5_ii7ub"]
+[ext_resource type="Texture2D" uid="uid://bkgt5yjpuydyc" path="res://assets/sprites/enemies/test/dragon_dead_3.png" id="6_ajcpu"]
+[ext_resource type="Texture2D" uid="uid://ctco5i3gdbao1" path="res://assets/sprites/enemies/test/dragon_dead_4.png" id="7_fl5w7"]
+[ext_resource type="Texture2D" uid="uid://cmgys0gfteioj" path="res://assets/sprites/enemies/test/dragon_dead_5.png" id="8_wmnoa"]
+[ext_resource type="Texture2D" uid="uid://c5443ecjuyr4v" path="res://assets/sprites/enemies/test/dragon_dead_6.png" id="9_k3jfk"]
+[ext_resource type="Texture2D" uid="uid://cv5m2d2r5oiuw" path="res://assets/sprites/enemies/test/dragon_dead_7.png" id="10_x77bs"]
+[ext_resource type="Texture2D" uid="uid://qcfmor5860a6" path="res://assets/sprites/enemies/test/dragon_dead_8.png" id="11_b43pt"]
+[ext_resource type="Texture2D" uid="uid://pl1ubst2wbt4" path="res://assets/sprites/enemies/test/dragon_default_0.png" id="12_fttu5"]
+[ext_resource type="Texture2D" uid="uid://b8lia4r3mqyx7" path="res://assets/sprites/enemies/test/dragon_default_1.png" id="13_0omjy"]
+[ext_resource type="Texture2D" uid="uid://djeaf5hjlqsuo" path="res://assets/sprites/enemies/test/dragon_default_2.png" id="14_hlo0f"]
+[ext_resource type="Texture2D" uid="uid://f7m0k2f0axp8" path="res://assets/sprites/enemies/test/dragon_default_3.png" id="15_d7q6y"]
+[ext_resource type="Texture2D" uid="uid://cia042i715gg" path="res://assets/sprites/enemies/test/dragon_default_4.png" id="16_teksb"]
+[ext_resource type="Texture2D" uid="uid://bk3n4s8cu58a" path="res://assets/sprites/enemies/test/dragon_default_5.png" id="17_mvkbu"]
+[ext_resource type="Texture2D" uid="uid://dlcou77ev6807" path="res://assets/sprites/enemies/test/dragon_default_6.png" id="18_04n43"]
+[ext_resource type="Texture2D" uid="uid://dgn3mmxqrn5ng" path="res://assets/sprites/enemies/test/dragon_default_7.png" id="19_m0ubg"]
+[ext_resource type="Texture2D" uid="uid://3lkwmp0qdyki" path="res://assets/sprites/enemies/test/dragon_default_8.png" id="20_wk2mf"]
+[ext_resource type="Script" path="res://src/gameplay/health_component.gd" id="21_4vij8"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="22_431if"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/start_enemy_state.gd" id="23_niexa"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/idle_shoot_enemy_state.gd" id="24_8amow"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/go_away_enemy_state.gd" id="25_5kgiy"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/vert_slide_enemy_state.gd" id="25_f2wpk"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/dead_enemy_state.gd" id="26_gbky4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2qj8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_47uja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xgbl8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ii7ub")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xgbl8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ii7ub")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ajcpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fl5w7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wmnoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_k3jfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_x77bs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b43pt")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_fttu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_0omjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hlo0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_d7q6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_teksb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_mvkbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_04n43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_m0ubg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_wk2mf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
+size = Vector2(30, 40)
+
+[node name="Dragon" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine")]
+modulate = Color(0.8, 0.4, 0, 1)
+script = ExtResource("1_b5wxb")
+size_y_percent = 20.0
+weapon_resource = ExtResource("2_4vt26")
+sprite = NodePath("AnimatedSprite2D")
+health_comp = NodePath("HealthComponent")
+weapon_marker = NodePath("WeaponMarker")
+state_machine = NodePath("StateMachine")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y2qj8")
+frame = 8
+flip_h = true
+
+[node name="HealthComponent" type="Area2D" parent="."]
+script = ExtResource("21_4vij8")
+health = 75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+position = Vector2(-5, 0)
+shape = SubResource("RectangleShape2D_7anvf")
+
+[node name="WeaponMarker" type="Marker2D" parent="."]
+position = Vector2(-20, -10)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("22_431if")
+initial_state = NodePath("StartEnemyState")
+
+[node name="StartEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("23_niexa")
+
+[node name="IdleShootEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("24_8amow")
+
+[node name="VertSlideEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("25_f2wpk")
+extra_spread_angle = 20
+
+[node name="GoAwayEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("25_5kgiy")
+
+[node name="DeadEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("26_gbky4")

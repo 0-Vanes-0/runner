@@ -23,6 +23,6 @@ size_x_percent = 5.0
 size_y_percent = 5.0
 speed_percent = 100.0
 entity_class = 1
-damage = 10
+damage = 1
 sprite_frames = SubResource("SpriteFrames_qsryl")
 shoot_field_path = NodePath("Level/ShootField")

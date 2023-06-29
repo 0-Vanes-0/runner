@@ -24,11 +24,12 @@ func _init(size: Vector2, color: Color) -> void: 													#func _init(size: 
 	self.add_child(collision_shape)
 	
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.BOUNDS, true)
-	self.input_event.connect(
-		func(viewport: Node, event: InputEvent, shape_idx: int):
-			if event is InputEventScreenTouch and event.pressed:
-				portal_chosen.emit()
-	)
+	self.input_event.connect(_on_input_event)
+
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
+	if event is InputEventScreenTouch and event.pressed:
+		portal_chosen.emit()
 
 
 #func _ready() -> void:

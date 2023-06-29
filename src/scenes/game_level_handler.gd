@@ -41,9 +41,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_level_complete:
-		for segment in segments.get_children():
-			if segment is Segment:
-				segment.move(delta * Global.player.run_speed)
+		for segment in (segments.get_children() as Array[Segment]):
+			segment.move(delta * Global.player.run_speed)
 	
 	if is_enemies_permitted and enemies.get_child_count() == 0:
 		var enemy: Enemy = Preloader.enemy_test_dragon.instantiate()
@@ -71,7 +70,7 @@ func setup_player():
 					is_enemies_permitted = false
 		)
 		player.call_level_end_objects.connect(process_level_end_objects)
-		player.health_comp.health = 10
+		player.health_comp.health = 100
 		player.stamina_max = 100.0
 		player.run_speed = Platform.SIZE.x * 2
 		player.dodge_time = 1.0
@@ -79,7 +78,7 @@ func setup_player():
 
 
 func setup_level():
-	for child in segments.get_children():
+	for child in (segments.get_children() as Array[Segment]):
 		child.queue_free()
 	
 	var biome_segments: Array[Segment] = Preloader.get_segments_by_biome(GameInfo.biome_number)
@@ -184,6 +183,5 @@ func _on_level_complete():
 
 func _remove_enemies():
 	is_enemies_permitted = false
-	for enemy in enemies.get_children():
-		if enemy is Enemy:
-			enemy.state_machine.transition_to(enemy.state_go_away)
+	for enemy in (enemies.get_children() as Array[Enemy]):
+		enemy.state_machine.transition_to(enemy.state_go_away, true)

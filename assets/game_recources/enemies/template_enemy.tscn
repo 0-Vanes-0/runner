@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ba73bkg4ao25w"]
+[gd_scene load_steps=10 format=3 uid="uid://btpcfixose26a"]
 
 [ext_resource type="Script" path="res://src/gameplay/enemies/enemy.gd" id="1_jjbrk"]
-[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/fireball_spell.tres" id="2_3qsrb"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="2_8mmxc"]
 [ext_resource type="Script" path="res://src/gameplay/health_component.gd" id="3_42ayq"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="4_e4vy3"]
 [ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/start_enemy_state.gd" id="5_adcol"]
@@ -26,7 +26,7 @@ animations = [{
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine")]
 script = ExtResource("1_jjbrk")
 size_y_percent = 20.0
-weapon_resource = ExtResource("2_3qsrb")
+weapon_resource = ExtResource("2_8mmxc")
 sprite = NodePath("AnimatedSprite2D")
 health_comp = NodePath("HealthComponent")
 weapon_marker = NodePath("WeaponMarker")

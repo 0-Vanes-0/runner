@@ -35,7 +35,7 @@ func start_preload():
 		"enemy_test_dragon": enemy_test_dragon,
 	}
 	
-	for resource in export_resources.keys():
+	for resource in (export_resources.keys() as Array[String]):
 		if export_resources.get(resource) != null:
 			export_counter += 1
 		else:

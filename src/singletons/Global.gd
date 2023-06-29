@@ -18,7 +18,7 @@ const LEVEL_END_TIME := 1.5
 const PLATFORM_W := Platform.SIZE.x
 const PLATFORM_H := Platform.SIZE.y
 var FLOORS_GAP: float
-var ENEMY_SPAWN_SPOTS: Array[float]
+var ENEMY_Y_SPOTS: Array[float]
 
 var player: Player
 var game_res_loaded := false
@@ -34,10 +34,11 @@ func _ready() -> void:
 	print_debug("\t", "screen_width=", screen_width, ", screen_height=", screen_height, ", ratio=", ratio)
 	
 	FLOORS_GAP = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
-	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 0.5)
-	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 1.5)
-	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 2.5)
-	ENEMY_SPAWN_SPOTS.append(FLOORS_GAP * 3.5)
+	ENEMY_Y_SPOTS.append(0.0)
+	ENEMY_Y_SPOTS.append(FLOORS_GAP * 3.5)
+	ENEMY_Y_SPOTS.append(FLOORS_GAP * 2.5)
+	ENEMY_Y_SPOTS.append(FLOORS_GAP * 1.5)
+	ENEMY_Y_SPOTS.append(FLOORS_GAP * 0.5)
 	
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
 	

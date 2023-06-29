@@ -69,20 +69,16 @@ func get_length() -> int:
 
 
 func cut_segment_at(index: int):
-	for platform in $Floor1.get_children():
-		if platform is Platform:
-			if platform.order_number >= index:
-				set_end_x(minf(get_width(), platform.position.x))
-				platform.queue_free()
-	for platform in $Floor2.get_children():
-		if platform is Platform:
-			if platform.order_number >= index:
-				platform.queue_free()
-	for platform in $Floor3.get_children():
-		if platform is Platform:
-			if platform.order_number >= index:
-				platform.queue_free()
-	for platform in $Floor4.get_children():
-		if platform is Platform:
-			if platform.order_number >= index:
-				platform.queue_free()
+	for platform in ($Floor1.get_children() as Array[Platform]):
+		if platform.order_number >= index:
+			set_end_x(minf(get_width(), platform.position.x))
+			platform.queue_free()
+	for platform in ($Floor2.get_children() as Array[Platform]):
+		if platform.order_number >= index:
+			platform.queue_free()
+	for platform in ($Floor3.get_children() as Array[Platform]):
+		if platform.order_number >= index:
+			platform.queue_free()
+	for platform in ($Floor4.get_children() as Array[Platform]):
+		if platform.order_number >= index:
+			platform.queue_free()

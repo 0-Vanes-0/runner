@@ -7,6 +7,7 @@ signal died
 func enter():
 	super.enter()
 	died.emit()
+	player.health_comp.call_deferred("turn_off_collision") # Fix???
 	player.sprite.play("dead")
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.run_speed = 0.0
