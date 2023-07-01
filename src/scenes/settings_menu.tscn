@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn6mq75q012wn"]
+
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/controls/default_theme.tres" id="1_8sl8f"]
+[ext_resource type="Script" path="res://src/scenes/settings_menu.gd" id="2_8087c"]
+
+[node name="SettingsMenu" type="ColorRect" node_paths=PackedStringArray("dodge_swipe_button", "reload_swipe_button", "switch_weapon_swipe_button", "activity_swipe_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8sl8f")
+color = Color(0, 0, 0, 0.501961)
+script = ExtResource("2_8087c")
+dodge_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/DodgeSwipeCheckButton")
+reload_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ReloadSwipeCheckButton")
+switch_weapon_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/SwitchSwipeCheckButton")
+activity_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/CheckButton3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BackButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 60
+text = "Back"
+
+[node name="SectionsVBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SettingsVBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SectionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "CONTROLS"
+
+[node name="DodgeSwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Swipe right to dodge"
+
+[node name="ReloadSwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Swipe down to reload weapon"
+
+[node name="SwitchSwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Swipe left to switch weapon"
+
+[node name="CheckButton3" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Swipe up to use activity"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/DodgeSwipeCheckButton" to="." method="_on_dodge_swipe_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ReloadSwipeCheckButton" to="." method="_on_reload_swipe_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/SwitchSwipeCheckButton" to="." method="_on_switch_swipe_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/CheckButton3" to="." method="_on_activity_swipe_toggled"]

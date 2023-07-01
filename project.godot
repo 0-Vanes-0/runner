@@ -11,16 +11,19 @@ config_version=5
 [application]
 
 config/name="runner"
-run/main_scene="res://src/scenes/main_menu.tscn"
+run/main_scene="res://src/scenes/scene_handler.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.0", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
 
+Text="*res://src/singletons/text_singleton.gd"
+SaveLoad="*res://src/singletons/save_load_singleton.gd"
 Preloader="*res://assets/Preloader.tscn"
-GameInfo="*res://src/singletons/game_info.tscn"
-Global="*res://src/singletons/global.gd"
+GameInfo="*res://src/singletons/game_info_singleton.tscn"
+Global="*res://src/singletons/global_singleton.gd"
 
 [debug]
 

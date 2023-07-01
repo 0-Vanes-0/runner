@@ -52,7 +52,7 @@ func shoot(start_position: Vector2, target_position: Vector2):
 
 func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
 	assert(res.shoot_field_path != null)
-	var shoot_field := get_tree().current_scene.get_node(res.shoot_field_path) as Node2D
+	var shoot_field := Global.get_current_scene().get_node(res.shoot_field_path) as Node2D
 	assert(shoot_field != null)
 	if weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_LINEAR:
 		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position))

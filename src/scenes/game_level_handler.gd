@@ -49,8 +49,13 @@ func _physics_process(delta: float) -> void:
 		enemy.dead.connect(
 				func():
 					GameInfo.kills_count += 1
-		)
+		, CONNECT_ONE_SHOT)
 		enemies.add_child(enemy)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		Global.switch_to_scene(Preloader.main_menu_scene)
 
 
 func setup_player():

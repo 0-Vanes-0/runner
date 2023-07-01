@@ -1,14 +1,16 @@
-- Simple enemies (shooting, moving up and down, other states and mb weapons)
+- FIX LEVEL END STATE WHEN DODGE IS ACTIVE!!!!!!!!!!!
 - Add Status class and make composition to PlayerState + EnemyState
 - Add Chest and Portal classes
-- Add State script template
-- Add load seed screen after pressing Play (if is_run_seed_generated is false)
 - Make custom collection class(es), see game_info.gd
 - Add shoot entity damage override to weapon
+-¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 -¿Add Player object to Global?
 -¿Add to ShootEntity functions for inherited children?
 -¿Maybe redo shoot entity resources and remove additional classes?
 
+
++ Add State script template
++ Simple enemies (shooting, moving up and down, other states and mb weapons)
 + Add GameOver menu
 + End level
 + GoAwayEnemyState

@@ -4,6 +4,7 @@ signal loaded
 
 @export_group("Game Screens")
 @export var main_menu_scene: PackedScene
+@export var settings_menu_scene: PackedScene
 @export var game_scene: PackedScene
 @export var tilemap_scene: PackedScene
 
@@ -25,6 +26,7 @@ var segments_counter := 0
 func start_preload():
 	var export_resources: Dictionary = {
 		"main_menu_scene": main_menu_scene,
+		"settings_menu_scene": settings_menu_scene,
 		"game_scene": game_scene,
 		"tilemap_scene": tilemap_scene,
 		

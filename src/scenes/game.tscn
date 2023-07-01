@@ -21,7 +21,7 @@ b = Vector2(0, 100)
 b = Vector2(0, 100)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
-font_size = 60
+font_size = 30
 
 [node name="GameScene" type="Node2D"]
 metadata/_edit_lock_ = true
