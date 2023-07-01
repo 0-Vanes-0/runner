@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmcwvqoipty50"]
+[gd_scene load_steps=5 format=3 uid="uid://cn3r3nrthn2xv"]
 
-[ext_resource type="Script" path="res://assets/segment_tile_map.gd" id="1_4bvxe"]
-[ext_resource type="Texture2D" uid="uid://b667e4crj2iy" path="res://assets/tile.png" id="1_frxlw"]
+[ext_resource type="Script" path="res://assets/tilemap/segment_tile_map.gd" id="1_n55rt"]
+[ext_resource type="Texture2D" uid="uid://b667e4crj2iy" path="res://assets/tilemap/tile.png" id="2_vt47a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i1ena"]
 resource_name = "platform"
-texture = ExtResource("1_frxlw")
+texture = ExtResource("2_vt47a")
 texture_region_size = Vector2i(4, 4)
 0:0/0 = 0
 1:0/0 = 0
@@ -15,7 +15,7 @@ tile_size = Vector2i(4, 4)
 sources/0 = SubResource("TileSetAtlasSource_i1ena")
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("biome1_tilemap", "biome2_tilemap", "biome3_tilemap", "biome4_tilemap", "biome5_tilemap")]
-script = ExtResource("1_4bvxe")
+script = ExtResource("1_n55rt")
 biome1_tilemap = NodePath("Biome1")
 biome2_tilemap = NodePath("Biome2")
 biome3_tilemap = NodePath("Biome3")
