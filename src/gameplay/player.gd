@@ -56,12 +56,8 @@ func _ready() -> void:
 				elif direction == Vector2.UP:
 					print_debug("Use current ability")
 	)
-	player_sensor.tap_up.connect(
-			state_machine.transition_to.bind(state_jump_up)
-	)
-	player_sensor.tap_down.connect(
-			state_machine.transition_to.bind(state_jump_down)
-	)
+	player_sensor.tap_up.connect(state_machine.transition_to.bind(state_jump_up))
+	player_sensor.tap_down.connect(state_machine.transition_to.bind(state_jump_down))
 	shoot_sensor.shoot_activated.connect(
 			func(target_position: Vector2):
 				if(

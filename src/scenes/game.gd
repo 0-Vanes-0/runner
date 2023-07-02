@@ -1,42 +1,43 @@
-class_name GameLevelHandler
+class_name GameScene
 extends Node2D
 
 var is_level_complete: bool
 var is_enemies_permitted: bool
 @export var bounds: StaticBody2D
+@export var bounds_top: CollisionShape2D
+@export var bounds_right: CollisionShape2D
+@export var bounds_bottom: CollisionShape2D
+@export var bounds_left: CollisionShape2D
 @export var segments: Node2D
 @export var enemies: Node2D
 @export var player_sensor: PlayerSensor
 @export var shoot_sensor: ShootSensor
 @export var info_label: Label
 @export var game_over_menu: GameOverMenu
+@export var pause_menu: PauseMenu
 @export var black_color_rect: ColorRect
 
 
 func _ready() -> void:
-	assert(bounds and segments and enemies and player_sensor and shoot_sensor and info_label and game_over_menu and black_color_rect)
+	assert(bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and player_sensor and shoot_sensor and info_label and game_over_menu and black_color_rect)
 	
-	($Bounds/Top.shape as SegmentShape2D).a = Vector2(0, 0)
-	($Bounds/Top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
-	($Bounds/Right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
-	($Bounds/Right.shape as SegmentShape2D).b = Vector2(Global.screen_width, Global.screen_height)
-	($Bounds/Bottom.shape as SegmentShape2D).a = Vector2(Global.screen_width, Global.screen_height)
-	($Bounds/Bottom.shape as SegmentShape2D).b = Vector2(0, Global.screen_height)
-	($Bounds/Left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
-	($Bounds/Left.shape as SegmentShape2D).b = Vector2(0, 0)
-	Global.clean_layers($Bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
+	(bounds_top.shape as SegmentShape2D).a = Vector2(0, 0)
+	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
+	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
+	(bounds_right.shape as SegmentShape2D).b = Vector2(Global.screen_width, Global.screen_height)
+	(bounds_bottom.shape as SegmentShape2D).a = Vector2(Global.screen_width, Global.screen_height)
+	(bounds_bottom.shape as SegmentShape2D).b = Vector2(0, Global.screen_height)
+	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
+	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
+	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 	
-	black_color_rect.color = Color(0, 0, 0, 1)
+	black_color_rect.color = Color(0, 0, 0, 0)
 	
 	game_over_menu.restart_called.connect(
 			func():
-				GameInfo.kills_count = 0
-				Global.player.queue_free()
-				setup_player()
-				setup_level()
+				init_game()
 	)
-	setup_player()
-	setup_level()
+	init_game()
 
 
 func _physics_process(delta: float) -> void:
@@ -55,13 +56,27 @@ func _physics_process(delta: float) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		Global.switch_to_scene(Preloader.main_menu_scene)
+		pause_game()
 
 
-func setup_player():
-	if Global.player != null and not Global.player.is_queued_for_deletion():
-		Global.player.prepare_to_run()
-	else:
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.keycode == KEY_ESCAPE:
+		pause_game()
+
+
+func init_game():
+	GameInfo.setup_game_info()
+	setup_player(true)
+	setup_level()
+
+
+func pause_game():
+	pause_menu.show()
+	get_tree().paused = true
+
+
+func setup_player(need_create_instance: bool = false):
+	if Global.player == null or need_create_instance:
 		Global.player = Preloader.player.instantiate() as Player
 		var player := Global.player
 		player.player_sensor = player_sensor
@@ -79,7 +94,8 @@ func setup_player():
 		player.stamina_max = 100.0
 		player.run_speed = Platform.SIZE.x * 2
 		player.dodge_time = 1.0
-		player.prepare_to_run()
+	
+	Global.player.prepare_to_run()
 
 
 func setup_level():

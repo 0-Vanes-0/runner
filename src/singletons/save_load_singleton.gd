@@ -7,8 +7,8 @@ var settings_file_path: String = USER_DATA_PREFIX + SETTINGS_FILENAME
 var data_file_path: String = USER_DATA_PREFIX + DATA_FILENAME
 
 
-func _ready() -> void:
-	print_debug(OS.get_user_data_dir())
+#func _ready() -> void:
+#	print_debug(OS.get_user_data_dir())
 
 
 func create_empty_settings_file(file: ConfigFile):

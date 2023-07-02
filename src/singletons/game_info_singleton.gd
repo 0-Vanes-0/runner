@@ -12,7 +12,13 @@ const LEVEL_LENGTH: Array[int] = [20, 60, 90, 120, 150, 180, 210, 240, 270, 300]
 var BIOME_SEGMENT_TYPES_COUNT: Dictionary = {} # int: int
 
 
-func generate_game_info():
+func setup_game_info():
+	kills_count = 0
+	biome_number = 1
+	level_number = 1
+
+
+func generate_game_seed_info():
 	for biome_i in (Preloader.segments.keys() as Array[int]):
 		BIOME_SEGMENT_TYPES_COUNT[biome_i] = (Preloader.segments.get(biome_i) as Array[Segment]).size()
 	

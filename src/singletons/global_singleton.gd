@@ -57,16 +57,6 @@ func _ready() -> void:
 
 # ---------------------- FUNCTIONS ----------------------
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.keycode == KEY_ESCAPE:
-		get_tree().quit()
-
-
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		print("BACK PRESSED")
-
-
 func clean_layers(obj: CollisionObject2D) -> CollisionObject2D:
 	obj.set_collision_layer_value(1, false)
 	obj.set_collision_mask_value(1, false)

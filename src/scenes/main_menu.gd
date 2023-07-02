@@ -17,7 +17,7 @@ func _ready() -> void:
 		Preloader.start_preload()
 	
 	if not GameInfo.is_run_seed_generated:
-		GameInfo.generate_game_info()
+		GameInfo.generate_game_seed_info()
 #		GameInfo.is_run_seed_generated
 
 
