@@ -76,9 +76,9 @@ func enter():
 
 
 func physics_update(delta: float):
-	if not player.is_on_floor():
-		apply_player_gravity(delta)
-		if is_x_right and tween.is_running():
-			tween.pause()
-	elif not tween.is_running() and tween.is_valid():
-		tween.play() # Fix error in debugger
+	apply_player_gravity(delta)
+	if not player.is_on_floor() and is_x_right and tween.is_running():
+		tween.pause()
+	elif player.is_on_floor() and not tween.is_running():
+		if tween.is_valid():
+			tween.play() # Fix error in debugger

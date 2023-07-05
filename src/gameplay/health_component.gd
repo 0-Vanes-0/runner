@@ -2,7 +2,7 @@ class_name HealthComponent
 extends Area2D
 
 signal out_of_health
-#signal took_damage
+signal switched_collision
 
 @export_range(1, 9999) var health: int = 100
 var shape: CollisionShape2D
@@ -43,7 +43,6 @@ func take_damage(damage: int) -> void:
 			0.0
 	)
 	health = maxi(health - damage, 0)
-#	took_damage.emit()
 	if health == 0:
 		out_of_health.emit()
 	
@@ -53,6 +52,7 @@ func switch_collision(time: float):
 	turn_off_collision()
 	await get_tree().create_timer(time).timeout
 	turn_on_collision()
+	switched_collision.emit()
 
 
 func turn_off_collision():

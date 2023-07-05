@@ -1,4 +1,3 @@
-- FIX LEVEL END STATE WHEN DODGE IS ACTIVE!!!!!!!!!!!
 - Add Status class and make composition to PlayerState + EnemyState
 - Add Chest and Portal classes
 - Make custom collection class(es), see game_info.gd
@@ -9,6 +8,7 @@
 -¿Maybe redo shoot entity resources and remove additional classes?
 
 
++ FIX LEVEL END STATE WHEN DODGE IS ACTIVE!!!!!!!!!!!
 + Add State script template
 + Simple enemies (shooting, moving up and down, other states and mb weapons)
 + Add GameOver menu

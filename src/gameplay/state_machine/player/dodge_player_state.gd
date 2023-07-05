@@ -16,8 +16,12 @@ func enter():
 	player.sprite.play("dodge", original_speed / player.dodge_time)
 	player.sprite.set_frame_and_progress(0, 0.0)
 	
-	await player.health_comp.switch_collision(player.dodge_time)
-	state_machine.transition_to(player.state_run)
+	player.health_comp.switched_collision.connect(
+			func():
+				if state_machine.state is DodgePlayerState:
+					state_machine.transition_to(player.state_run)
+	, CONNECT_ONE_SHOT)
+	player.health_comp.switch_collision(player.dodge_time)
 
 
 func exit():
