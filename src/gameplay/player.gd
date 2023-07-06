@@ -82,7 +82,7 @@ func prepare_to_run():
 	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	jump_speed = sqrt(2 * gravity * jump_height)
 	stamina = stamina_max
-	state_machine.transition_to(state_run, true)
+	state_machine.transition_to(state_run)
 
 
 func get_game_size() -> Vector2:

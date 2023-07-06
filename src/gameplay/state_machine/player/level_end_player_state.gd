@@ -10,7 +10,6 @@ var tween: Tween
 
 
 func enter():
-	super.enter()
 	player.sprite.play(ANIM_RUN)
 	set_anim_looped()
 	

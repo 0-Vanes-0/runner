@@ -3,7 +3,6 @@ extends EnemyState
 
 
 func enter():
-	super.enter()
 	enemy.health_comp.turn_off_collision()
 	enemy.sprite.play("default")
 	set_anim_looped()

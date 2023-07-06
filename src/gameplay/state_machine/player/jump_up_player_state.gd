@@ -11,7 +11,6 @@ func can_go_to_state() -> bool:
 
 
 func enter():
-	super.enter()
 	player.sprite.play("jump_up")
 	player.sprite.set_frame_and_progress(0, 0.0)
 	player.velocity.y = Vector2.UP.y * player.jump_speed

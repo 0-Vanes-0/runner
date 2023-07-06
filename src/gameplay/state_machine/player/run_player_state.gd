@@ -5,7 +5,6 @@ var stamina_regen := 15.0 # per second
 
 
 func enter():
-	super.enter()
 	player.sprite.play("run")
 	set_anim_looped()
 

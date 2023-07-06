@@ -9,7 +9,6 @@ func can_go_to_state() -> bool:
 
 
 func enter():
-	super.enter()
 	var anim_frames_count := player.sprite.sprite_frames.get_frame_count("dodge")
 	var anim_fps := player.sprite.sprite_frames.get_animation_speed("dodge")
 	var original_speed: float = anim_frames_count / anim_fps

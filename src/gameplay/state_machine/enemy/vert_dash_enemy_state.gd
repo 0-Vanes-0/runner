@@ -6,7 +6,6 @@ var tween: Tween
 
 
 func enter():
-	super.enter()
 	enemy.sprite.play("default")
 	set_anim_looped()
 	var alt_floors: Array[int] = FLOORS.duplicate()

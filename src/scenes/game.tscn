@@ -22,7 +22,7 @@ b = Vector2(0, 100)
 b = Vector2(0, 100)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
-font_size = 30
+font_size = 24
 
 [node name="GameScene" type="Node2D" node_paths=PackedStringArray("bounds", "bounds_top", "bounds_right", "bounds_bottom", "bounds_left", "segments", "enemies", "player_sensor", "shoot_sensor", "info_label", "game_over_menu", "pause_menu", "black_color_rect")]
 process_mode = 1
@@ -81,6 +81,10 @@ text = "100"
 label_settings = SubResource("LabelSettings_aavuu")
 script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
+
+[node name="ButtonsMenu" type="VBoxContainer" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="GameOverMenu" parent="HUD" instance=ExtResource("5_2syq0")]
 visible = false

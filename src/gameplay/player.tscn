@@ -222,26 +222,26 @@ debug_color = Color(0.992157, 0, 0.266667, 0.419608)
 script = ExtResource("35_vkaae")
 initial_state = NodePath("RunPlayerState")
 
-[node name="RunPlayerState" type="Node" parent="StateMachine"]
+[node name="RunPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("36_fsq51")
-connections_paths = Array[NodePath]([NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
+connections = [NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerState"), NodePath("../DodgePlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")]
 
-[node name="JumpUpPlayerState" type="Node" parent="StateMachine"]
+[node name="JumpUpPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("37_iekko")
-connections_paths = Array[NodePath]([NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
+connections = [NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")]
 
-[node name="JumpDownPlayerState" type="Node" parent="StateMachine"]
+[node name="JumpDownPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("38_dscwl")
-connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
+connections = [NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")]
 
-[node name="DodgePlayerState" type="Node" parent="StateMachine"]
+[node name="DodgePlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("40_inaag")
-connections_paths = Array[NodePath]([NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")])
+connections = [NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")]
 
-[node name="DeadPlayerState" type="Node" parent="StateMachine"]
+[node name="DeadPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("39_n6ckq")
-connections_paths = Array[NodePath]([NodePath("")])
+connections = [null]
 
-[node name="LevelEndPlayerState" type="Node" parent="StateMachine"]
+[node name="LevelEndPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("42_2ob23")
-connections_paths = Array[NodePath]([NodePath("")])
+connections = [NodePath("../RunPlayerState")]

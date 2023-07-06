@@ -5,7 +5,6 @@ const ENTER_TIME := 1.5
 
 
 func enter():
-	super.enter()
 	enemy.current_floor = FLOORS.pick_random()
 	enemy.position.x = Global.screen_width + enemy.get_game_size().x / 2
 	enemy.position.y = Global.ENEMY_Y_SPOTS[enemy.current_floor]

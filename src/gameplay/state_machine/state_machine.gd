@@ -46,7 +46,7 @@ func transition_to(target_state: State, is_transition_forced: bool = false):
 		state.exit()
 		state = target_state
 		state.enter()
-		transitioned.emit(state.name)
+#		transitioned.emit(state.name)
 #		_add_to_history(state)
 
 

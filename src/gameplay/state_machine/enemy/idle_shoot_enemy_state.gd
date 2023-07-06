@@ -6,7 +6,6 @@ var shoot_counter: int
 
 
 func enter():
-	super.enter()
 	enemy.sprite.play("default")
 	set_anim_looped()
 	shoot_counter = 0
