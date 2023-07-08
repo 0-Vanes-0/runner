@@ -4,6 +4,7 @@ extends Node
 
 # ---------------------- VARIABLES ----------------------
 
+signal need_apply_settings
 enum Layers {
 	PLATFORM = 1,
 	PLAYER = 2,
@@ -27,6 +28,7 @@ var DEFAULT_SETTINGS: Dictionary = { # String: String: Variant
 		Text.ACTIVITY_SWIPE: true,
 	}
 }
+var SENSOR_BUTTON_SIZE: Vector2
 
 var player: Player
 var game_res_loaded := false
@@ -42,6 +44,7 @@ func _ready() -> void:
 	ratio = str(screen_width / gcd) + ratio + str(screen_height / gcd)
 	print_debug("\t", "screen_width=", screen_width, ", screen_height=", screen_height, ", ratio=", ratio)
 	
+	SENSOR_BUTTON_SIZE = Vector2.ONE * screen_height * 0.2
 	FLOORS_GAP = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
 	ENEMY_Y_SPOTS.append(0.0)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 3.5)

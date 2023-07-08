@@ -78,7 +78,7 @@ func _ready() -> void:
 
 
 func prepare_to_run():
-	self.position = Vector2(Global.screen_width / 10, Global.screen_height / 2)
+	self.position = Vector2(Global.screen_width * 0.15, Global.screen_height / 2)
 	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	jump_speed = sqrt(2 * gravity * jump_height)
 	stamina = stamina_max
@@ -92,3 +92,7 @@ func get_game_size() -> Vector2:
 
 func get_health_comp_position() -> Vector2:
 	return self.position + health_comp.position
+
+
+func get_current_state() -> PlayerState:
+	return state_machine.state

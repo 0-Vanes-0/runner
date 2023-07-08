@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqqwp7m1spla6"]
+
+[ext_resource type="Script" path="res://src/controls/sensor_button.gd" id="1_ryux0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knfgi"]
+
+[node name="SensorButton" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ryux0")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource("RectangleShape2D_knfgi")
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="released" from="TouchScreenButton" to="." method="_on_touch_screen_button_released"]

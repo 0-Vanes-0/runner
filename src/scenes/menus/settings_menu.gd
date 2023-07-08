@@ -16,6 +16,7 @@ func _ready() -> void:
 
 
 func _on_back_button_pressed() -> void:
+	Global.need_apply_settings.emit()
 	self.hide()
 
 

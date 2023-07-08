@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4vx8yyktgv1x"]
 
-[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/controls/default_theme.tres" id="1_d3ab8"]
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="1_d3ab8"]
 [ext_resource type="Script" path="res://src/scenes/menus/settings_menu.gd" id="2_1b7x5"]
 
 [node name="SettingsMenu" type="ColorRect" node_paths=PackedStringArray("dodge_swipe_button", "reload_swipe_button", "switch_weapon_swipe_button", "activity_swipe_button")]

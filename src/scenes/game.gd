@@ -10,33 +10,28 @@ var is_enemies_permitted: bool
 @export var bounds_left: CollisionShape2D
 @export var segments: Node2D
 @export var enemies: Node2D
+
+@export var info_label: Label
 @export var player_sensor: PlayerSensor
 @export var shoot_sensor: ShootSensor
-@export var info_label: Label
 @export var game_over_menu: GameOverMenu
 @export var pause_menu: PauseMenu
 @export var black_color_rect: ColorRect
 
 
 func _ready() -> void:
-	assert(bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and player_sensor and shoot_sensor and info_label and game_over_menu and black_color_rect)
-	
-	(bounds_top.shape as SegmentShape2D).a = Vector2(0, 0)
-	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
-	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
-	(bounds_right.shape as SegmentShape2D).b = Vector2(Global.screen_width, Global.screen_height)
-	(bounds_bottom.shape as SegmentShape2D).a = Vector2(Global.screen_width, Global.screen_height)
-	(bounds_bottom.shape as SegmentShape2D).b = Vector2(0, Global.screen_height)
-	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
-	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
-	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
-	
+	assert(
+			bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies 
+			and info_label and player_sensor and shoot_sensor and game_over_menu and pause_menu and black_color_rect
+	)
 	black_color_rect.color = Color(0, 0, 0, 0)
-	
 	game_over_menu.restart_called.connect(
 			func():
 				init_game()
 	)
+	
+	Global.need_apply_settings.emit()
+	init_bounds()
 	init_game()
 
 
@@ -195,6 +190,18 @@ func process_level_end_objects():
 				setup_player()
 				setup_level()
 	, CONNECT_ONE_SHOT)
+
+
+func init_bounds():
+	(bounds_top.shape as SegmentShape2D).a = Vector2(0, 0)
+	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
+	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
+	(bounds_right.shape as SegmentShape2D).b = Vector2(Global.screen_width, Global.screen_height)
+	(bounds_bottom.shape as SegmentShape2D).a = Vector2(Global.screen_width, Global.screen_height)
+	(bounds_bottom.shape as SegmentShape2D).b = Vector2(0, Global.screen_height)
+	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
+	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
+	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 
 
 func _on_level_complete():
