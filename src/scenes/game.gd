@@ -1,8 +1,8 @@
 class_name GameScene
 extends Node2D
 
-var is_level_complete: bool
-var is_enemies_permitted: bool
+var is_level_complete: bool ## If [code]true[/code], level stops moving. It becomes false on [method setup_level].
+var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It becomes false if player dies or level is complete.
 @export var bounds: StaticBody2D
 @export var bounds_top: CollisionShape2D
 @export var bounds_right: CollisionShape2D
@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		pause_game()
 
-
+## Called when this scene is ready. The function spawns player and setups level according to [GameInfoSingleton].
 func init_game():
 	GameInfo.setup_game_info()
 	setup_player(true)
@@ -69,7 +69,7 @@ func pause_game():
 	pause_menu.show()
 	get_tree().paused = true
 
-
+## Prepares [member GlobalSingleton.player] to run. If [param need_create_instance] is [code]true[/code], new instance of [Player] will be created.
 func setup_player(need_create_instance: bool = false):
 	if Global.player == null or need_create_instance:
 		Global.player = Preloader.player.instantiate() as Player
@@ -144,7 +144,7 @@ func setup_level():
 			0
 	)
 
-
+## Called after finishing level, when [Player] reachs idle animation.
 func process_level_end_objects():
 	var player := Global.player
 	var chest_sprite := Sprite2D.new() # Chest

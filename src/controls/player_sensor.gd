@@ -17,17 +17,17 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 @export var switch_button: SensorButton
 @export var activity_button: SensorButton
 
-var timer: float = 0.0
-var is_timer_active: bool = false
-var touch_start_position: Vector2
-var size: Vector2
+var _timer: float = 0.0 
+var _is_timer_active: bool = false
+var _touch_start_position: Vector2
+var _size: Vector2
 
 
 func _ready() -> void:
 	assert(control and dodge_button and switch_button and reload_button and activity_button)
 	self.position = Vector2.ZERO
-	size.x = Global.screen_width / 2
-	size.y = Global.screen_height
+	_size.x = Global.screen_width / 2
+	_size.y = Global.screen_height
 	control.custom_minimum_size = Vector2(Global.screen_width, Global.screen_height)
 	dodge_button.init_abstract(
 			func() -> bool:
@@ -67,26 +67,26 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_timer_active:
-		timer += delta
+	if _is_timer_active:
+		_timer += delta
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
-		if self.position < event.position and event.position < self.position + size:
+		if self.position < event.position and event.position < self.position + _size:
 			if event.pressed:
-				is_timer_active = true
-				touch_start_position = event.position
+				_is_timer_active = true
+				_touch_start_position = event.position
 			else:
-				is_timer_active = false
-				var vector: Vector2 = abs(event.position - touch_start_position)
-				if timer <= TAP_MAX_TIME and vector.length_squared() <= TAP_MAX_VECTOR.length_squared():
+				_is_timer_active = false
+				var vector: Vector2 = abs(event.position - _touch_start_position)
+				if _timer <= TAP_MAX_TIME and vector.length_squared() <= TAP_MAX_VECTOR.length_squared():
 					if event.position.y < Global.screen_height / 2:
 						send_jump_up()
 					else:
 						send_jump_down()
-				elif (is_dodge_swipe() or is_reload_swipe() or is_switch_swipe() or is_activity_swipe()) and timer <= SWIPE_MAX_TIME:
-					var direction := Vector2(event.position - touch_start_position).normalized()
+				elif (is_dodge_swipe() or is_reload_swipe() or is_switch_swipe() or is_activity_swipe()) and _timer <= SWIPE_MAX_TIME:
+					var direction := Vector2(event.position - _touch_start_position).normalized()
 					if abs(direction.x) + abs(direction.y) < SWIPE_MAX_DIAGONAL_SLOPE:
 						if abs(direction.x) > abs(direction.y):
 							if direction.x > 0 and is_dodge_swipe():
@@ -98,8 +98,8 @@ func _unhandled_input(event: InputEvent) -> void:
 								send_reload()
 							elif is_activity_swipe():
 								send_activity()
-				timer = 0.0
-				touch_start_position = Vector2.ZERO
+				_timer = 0.0
+				_touch_start_position = Vector2.ZERO
 	
 	elif event is InputEventKey:
 		if event.is_action("jump_up"):

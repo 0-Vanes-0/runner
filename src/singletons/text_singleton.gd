@@ -1,3 +1,4 @@
+class_name TextSingleton
 extends Node
 
 const CONTROLS := "Controls"

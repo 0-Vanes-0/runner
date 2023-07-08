@@ -1,3 +1,4 @@
+class_name SaveLoadSingleton
 extends Node
 
 const SETTINGS_FILENAME := "user_settings.cfg"

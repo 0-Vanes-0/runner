@@ -1,3 +1,4 @@
+class_name GameInfoSingleton
 extends Node
 
 @export_range(1, 5) var biome_number: int = 1
