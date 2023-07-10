@@ -38,7 +38,7 @@ var weapon: Weapon
 func _ready() -> void:
 	assert(player_sensor and shoot_sensor and state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end)
 	
-	# "Global" is singleton script
+	# Setting collision layers listeners
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
 	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
 	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)

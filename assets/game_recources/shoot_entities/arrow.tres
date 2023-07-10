@@ -25,5 +25,4 @@ speed_percent = 100.0
 entity_class = 1
 damage = 10
 sprite_frames = SubResource("SpriteFrames_nso2p")
-shoot_field_path = NodePath("Level/ShootField")
 metadata/_editor_prop_ptr_shoot_field = NodePath("")

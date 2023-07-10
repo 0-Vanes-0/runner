@@ -51,14 +51,16 @@ func shoot(start_position: Vector2, target_position: Vector2):
 
 
 func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
-	assert(res.shoot_field_path != null)
-	var shoot_field := Global.get_current_scene().get_node(res.shoot_field_path) as Node2D
+	var shoot_field: Node2D = Global.get_game_scene().get_shoot_field()
 	assert(shoot_field != null)
-	if weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_LINEAR:
-		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position))
+	if is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_LINEAR):
+		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position), true)
 		return
-	elif weapon_resource.shoot_entity_resource.entity_class == ShootEntityResource.EntityClasses.PROJECTILE_RICO:
-		shoot_field.add_child(ProjectileRico.new(res, owner, start_position, target_position))
+	elif is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_RICO):
+		shoot_field.add_child(ProjectileRico.new(res, owner, start_position, target_position), true)
+		return
+	elif is_entity_class(ShootEntityResource.EntityClasses.HITSCAN):
+		shoot_field.add_child(Hitscan.new(res, owner, start_position, target_position), true)
 		return
 	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
 
@@ -73,3 +75,7 @@ func add_extra_spread_angle(angle: int):
 
 func remove_extra_spread_angle():
 	extra_spread_angle = 0
+
+
+func is_entity_class(entity_class: ShootEntityResource.EntityClasses) -> bool:
+	return weapon_resource.shoot_entity_resource.entity_class == entity_class

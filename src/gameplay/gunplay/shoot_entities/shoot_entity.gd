@@ -20,4 +20,20 @@ func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: V
 	self.target_position = target_position
 
 
-#func do_damage(to: HealthComponent):
+func create_animated_sprite(resource: ShootEntityResource) -> AnimatedSprite2D:
+	var sprite := AnimatedSprite2D.new()
+	sprite.sprite_frames = resource.sprite_frames
+	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.screen_height
+	sprite.scale = Vector2(game_size / resource.get_sprite_size())
+	return sprite
+
+
+func create_collision_object(obj: CollisionObject2D, entity_owner: Owner) -> CollisionObject2D:
+	Global.clean_layers(obj)
+	if entity_owner == Owner.PLAYER:
+		obj.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
+		obj.set_collision_mask_value(Global.Layers.ENEMY, true)
+	elif entity_owner == Owner.ENEMY:
+		obj.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
+		obj.set_collision_mask_value(Global.Layers.PLAYER, true)
+	return obj

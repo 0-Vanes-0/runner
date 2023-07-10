@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://cpi8o3rnhvu8j"]
 
 [ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_fcdqg"]
-[ext_resource type="Resource" uid="uid://bsbauycwrglkt" path="res://assets/game_recources/shoot_entities/arrow.tres" id="2_txmob"]
+[ext_resource type="Resource" uid="uid://cnfdhvwrwlnpj" path="res://assets/game_recources/shoot_entities/bullet.tres" id="2_lx8ua"]
 [ext_resource type="Texture2D" uid="uid://blyo4nx70cbhv" path="res://assets/sprites/weapons/crossbow/crossbow_frame_0.png" id="2_u6nbd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e1352"]
@@ -19,6 +19,6 @@ animations = [{
 script = ExtResource("1_fcdqg")
 sprite_frames = SubResource("SpriteFrames_e1352")
 scale_value = 3
-shoot_entity_resource = ExtResource("2_txmob")
+shoot_entity_resource = ExtResource("2_lx8ua")
 shoot_rate_time = 1.0
 spread_angle = 5

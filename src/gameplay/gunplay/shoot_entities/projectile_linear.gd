@@ -15,35 +15,25 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 	
 	self.speed = resource.get_speed()
 	
-	sprite = AnimatedSprite2D.new()
-	sprite.sprite_frames = resource.sprite_frames
-	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.screen_height
-	sprite.scale = Vector2(game_size / resource.get_sprite_size())
-	self.add_child(sprite)
+	self.add_child( create_animated_sprite(resource) )
 	
-	area = Global.clean_layers(Area2D.new()) as Area2D
-	if entity_owner == Owner.PLAYER:
-		area.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
-		area.set_collision_mask_value(Global.Layers.ENEMY, true)
-	elif entity_owner == Owner.ENEMY:
-		area.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
-		area.set_collision_mask_value(Global.Layers.PLAYER, true)
+	area = create_collision_object(Area2D.new(), entity_owner)
 	var collision := CollisionShape2D.new()
 	collision.shape = resource.get_shape()
 	area.add_child(collision)
 	self.add_child(area)
-	
 	area.area_entered.connect(
-		func(area: Area2D):
-			if area is HealthComponent and not area.shape.disabled:
-				area.take_damage(self.damage)
-				self.queue_free()
+			func(area: Area2D):
+				if area is HealthComponent and not area.shape.disabled:
+					area.take_damage(self.damage)
+					self.queue_free()
 	)
 	
 	visibler = VisibleOnScreenNotifier2D.new()
+	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.screen_height
 	visibler.rect.position = Vector2(- game_size / 2)
 	visibler.rect.size = Vector2(game_size)
-	visibler.screen_exited.connect(_on_screen_exited)
+	visibler.screen_exited.connect(self.queue_free)
 	self.add_child(visibler)
 
 
@@ -55,7 +45,3 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	self.position += _direction * speed * delta
-
-
-func _on_screen_exited():
-	queue_free()

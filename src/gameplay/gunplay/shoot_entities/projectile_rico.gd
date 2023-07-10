@@ -16,24 +16,8 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 	
 	self.speed = resource.get_speed()
 	
-	body = Global.clean_layers(CharacterBody2D.new()) as CharacterBody2D
-	if entity_owner == Owner.PLAYER:
-		body.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
-		body.set_collision_mask_value(Global.Layers.ENEMY, true)
-	elif entity_owner == Owner.ENEMY:
-		body.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
-		body.set_collision_mask_value(Global.Layers.PLAYER, true)
-	body.set_collision_mask_value(Global.Layers.BOUNDS, true)
-	var collision := CollisionShape2D.new()
-	collision.shape = resource.get_shape()
-	body.add_child(collision)
-	
-	sprite = AnimatedSprite2D.new()
-	sprite.sprite_frames = resource.sprite_frames
-	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.screen_height
-	sprite.scale = Vector2(game_size / resource.get_sprite_size())
-	body.add_child(sprite)
-	
+	body = create_collision_object(CharacterBody2D.new(), entity_owner)
+	body.add_child( create_animated_sprite(resource) )
 	self.add_child(body)
 
 

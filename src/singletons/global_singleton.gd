@@ -84,6 +84,14 @@ func get_current_scene() -> Node:
 		return null
 
 
+func get_game_scene() -> GameScene:
+	var scene = get_current_scene()
+	if scene is GameScene:
+		return scene
+	else:
+		return null
+
+
 func parse_error(error: Error) -> String:
 	match error:
 		OK: return "OK"

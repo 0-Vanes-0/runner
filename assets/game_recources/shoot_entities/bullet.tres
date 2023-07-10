@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HitscanSER" load_steps=2 format=3 uid="uid://cnfdhvwrwlnpj"]
+
+[ext_resource type="Script" path="res://src/gameplay/gunplay/shoot_entities/hitscan_ser.gd" id="1_phktw"]
+
+[resource]
+script = ExtResource("1_phktw")
+beam_width = 10.0
+color = Color(1, 1, 1, 1)
+entity_class = 3
+damage = 10

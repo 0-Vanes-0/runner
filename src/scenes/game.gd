@@ -3,6 +3,7 @@ extends Node2D
 
 var is_level_complete: bool ## If [code]true[/code], level stops moving. It becomes false on [method setup_level].
 var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It becomes false if player dies or level is complete.
+@export var level: Node2D
 @export var bounds: StaticBody2D
 @export var bounds_top: CollisionShape2D
 @export var bounds_right: CollisionShape2D
@@ -10,6 +11,7 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 @export var bounds_left: CollisionShape2D
 @export var segments: Node2D
 @export var enemies: Node2D
+@export var shoot_field: Node2D
 
 @export var info_label: Label
 @export var player_sensor: PlayerSensor
@@ -21,7 +23,7 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 
 func _ready() -> void:
 	assert(
-			bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies 
+			level and bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and shoot_field
 			and info_label and player_sensor and shoot_sensor and game_over_menu and pause_menu and black_color_rect
 	)
 	black_color_rect.color = Color(0, 0, 0, 0)
@@ -77,8 +79,8 @@ func setup_player(need_create_instance: bool = false):
 		player.player_sensor = player_sensor
 		player.shoot_sensor = shoot_sensor
 		player.name = "Player"
-		self.add_child(player)
-		self.move_child(player, segments.get_index() + 1)
+		level.add_child(player)
+		level.move_child(player, segments.get_index() + 1)
 		player.state_dead.died.connect(
 				func():
 					game_over_menu.appear()
@@ -202,6 +204,10 @@ func init_bounds():
 	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
 	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
 	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
+
+
+func get_shoot_field() -> Node2D:
+	return shoot_field
 
 
 func _on_level_complete():
