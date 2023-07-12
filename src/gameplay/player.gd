@@ -1,38 +1,39 @@
+## Player object, controled by device and interacting with game.
 class_name Player
 extends CharacterBody2D
 
-signal call_level_end_objects
-signal go_to_portal(portal_position: Vector2)
-signal in_portal
+signal call_level_end_objects ## Called when finishing level.
+signal go_to_portal(portal_position: Vector2) ## Called when a portal is chosen. (WIP: Portal class as argument)
+signal in_portal ## Called when player is inside portal.
 
-# Input objects
-var player_sensor: PlayerSensor
-var shoot_sensor: ShootSensor
-# Children Nodes
+var player_sensor: PlayerSensor ## Input object for actions with player object.
+var shoot_sensor: ShootSensor ## Input object for shooting.
+
 @export_group("Children")
-@export var sprite: AnimatedSprite2D
-@export var body_shape: CollisionShape2D
-@export var health_comp: HealthComponent
-@export var state_machine: StateMachine
-# References to states from StateMachine
+@export var sprite: AnimatedSprite2D ## Sprite of current demon. (WIP: DemonSkin class)
+@export var body_shape: CollisionShape2D ## Body of player, interacting with [Platform].
+@export var health_comp: HealthComponent ## Health of player object. When [member HealthComponent.health] reaches 0, player dies.
+@export var state_machine: StateMachine ## State machine stores behaviour logic of player object.
+
 @export_group("States", "state_")
-@export var state_run: RunPlayerState
-@export var state_jump_up: JumpUpPlayerState
-@export var state_jump_down: JumpDownPlayerState
-@export var state_dodge: DodgePlayerState
-@export var state_dead: DeadPlayerState
-@export var state_level_end: LevelEndPlayerState
+@export var state_run: RunPlayerState ## State when player runs.
+@export var state_jump_up: JumpUpPlayerState ## State when player jumps up.
+@export var state_jump_down: JumpDownPlayerState ## State when player falls or jumps down from platform.
+@export var state_dodge: DodgePlayerState ## State when dodge is active.
+@export var state_dead: DeadPlayerState ## State when [member HealthComponent.health] is 0.
+@export var state_level_end: LevelEndPlayerState ## State when level is finished.
 
-var jump_speed: float
-var run_speed: float
-var dodge_time: float
-var stamina: float
-var stamina_max: float
+var jump_speed: float ## Describes how fast player jumps in pixels. Depends on [member gravity], do not change this value outside [method prepare_to_run]!
+var run_speed: float ## Describes how fast [Segment]s are moving in pixels (player doesn't move horizontally actually :P ).
+var dodge_time: float ## Describes how long is [DodgePlayerState].
+var stamina: float ## This value is spent on jumps and dodges. Restores during [RunPlayerState].
+var stamina_max: float ## Maximum value of [member stamina].
 
-var platforms_left: int
-var weapon: Weapon
+var platforms_left: int ## Simple counter of platforms left to finish a level.
+var weapon: Weapon ## Equipped [Weapon].
 
-@onready var gravity: float = 1000 # ProjectSettings.get_setting("physics/2d/default_gravity")
+## The more it is, the faster player moves vertically. Default value is here: [code]ProjectSettings.get_setting("physics/2d/default_gravity")[/code]
+@onready var gravity: float = 1000
 
 
 func _ready() -> void:
@@ -76,7 +77,7 @@ func _ready() -> void:
 	
 	self.scale = get_game_size() / (sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale)
 
-
+## Inits player without recreating new instance.
 func prepare_to_run():
 	self.position = Vector2(Global.SCREEN_WIDTH * 0.15, Global.SCREEN_HEIGHT / 2)
 	var jump_height: float = (Global.SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y

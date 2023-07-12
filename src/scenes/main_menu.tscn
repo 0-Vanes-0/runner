@@ -10,7 +10,7 @@
 RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/normal_font = ExtResource("3_ebaty")
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button", "settings_menu")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_play_button", "_settings_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,8 +19,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tny1b")
 script = ExtResource("1_noaao")
-play_button = NodePath("MarginContainer/VBoxContainer/QuitPlayHBoxContainer/PlayButton")
-settings_menu = NodePath("SettingsMenu")
+_play_button = NodePath("MarginContainer/VBoxContainer/QuitPlayHBoxContainer/PlayButton")
+_settings_menu = NodePath("SettingsMenu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

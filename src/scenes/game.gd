@@ -98,6 +98,10 @@ func setup_player(need_create_instance: bool = false):
 func setup_level():
 	for child in (segments.get_children() as Array[Segment]):
 		child.queue_free()
+	for child in (enemies.get_children() as Array[Enemy]):
+		child.queue_free()
+	for child in (shoot_field.get_children() as Array[ShootEntity]):
+		child.queue_free()
 	
 	var biome_segments: Array[Segment] = Preloader.get_segments_by_biome(GameInfo.biome_number)
 	var LEVEL_LENGTH: int = GameInfo.get_level_length(GameInfo.level_number)

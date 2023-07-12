@@ -17,6 +17,10 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 	self.speed = resource.get_speed()
 	
 	body = create_collision_object(CharacterBody2D.new(), entity_owner)
+	body.set_collision_mask_value(Global.Layers.BOUNDS, true)
+	var coll_shape := CollisionShape2D.new()
+	coll_shape.shape = resource.get_shape()
+	body.add_child(coll_shape)
 	body.add_child( create_animated_sprite(resource) )
 	self.add_child(body)
 

@@ -209,9 +209,10 @@ offset = Vector2(0, -42)
 position = Vector2(-10, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
-[node name="HealthComponent" type="Area2D" parent="."]
+[node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
 position = Vector2(0, -80)
 script = ExtResource("35_o3t41")
+_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
 position = Vector2(0, 20)

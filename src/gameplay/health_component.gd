@@ -1,18 +1,16 @@
+## This is health. Can be attached to any object. Made for [Player] and [Enemy].
 class_name HealthComponent
 extends Area2D
 
-signal out_of_health
-signal switched_collision
+signal out_of_health ## Called when health is 0.
+signal switched_collision ## Called when stopped shape's disabling.
 
 @export_range(1, 9999) var health: int = 100
-var shape: CollisionShape2D
+@export var _shape: CollisionShape2D
 
 
 func _ready() -> void:
-	var child := self.get_child(0)
-	if child != null and child is CollisionShape2D:
-		shape = child
-	assert(shape != null)
+	assert(_shape)
 	
 	Global.clean_layers(self)
 	var parent = get_parent()
@@ -24,30 +22,30 @@ func _ready() -> void:
 		self.set_collision_layer_value(Global.Layers.ENEMY, true)
 		self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 
-
+## Substracts [member health] by [param damage] and animates sprite of parent, if exists. 
 func take_damage(damage: int) -> void:
-	assert(get_parent().sprite != null)
-	var orig_modulate: Color = get_parent().sprite.modulate
-	var tween := create_tween()
-	tween.tween_property(
-			get_parent().sprite,
-			"modulate",
-			orig_modulate.inverted(), # todo: make better here
-			0.0
-	)
-	tween.tween_interval(0.2)
-	tween.tween_property(
-			get_parent().sprite,
-			"modulate",
-			orig_modulate,
-			0.0
-	)
 	health = maxi(health - damage, 0)
 	if health == 0:
 		out_of_health.emit()
 	
+	if get_parent().sprite != null:
+		var orig_modulate: Color = get_parent().sprite.modulate
+		var tween := create_tween()
+		tween.tween_property(
+				get_parent().sprite,
+				"modulate",
+				orig_modulate.inverted(), # todo: make better here
+				0.0
+		)
+		tween.tween_interval(0.2)
+		tween.tween_property(
+				get_parent().sprite,
+				"modulate",
+				orig_modulate,
+				0.0
+		)
 
-
+## Turns off collision for [param time].
 func switch_collision(time: float):
 	turn_off_collision()
 	await get_tree().create_timer(time).timeout
@@ -56,8 +54,8 @@ func switch_collision(time: float):
 
 
 func turn_off_collision():
-	shape.disabled = true
+	_shape.disabled = true
 
 
 func turn_on_collision():
-	shape.disabled = false
+	_shape.disabled = false

@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="1_d3ab8"]
 [ext_resource type="Script" path="res://src/scenes/menus/settings_menu.gd" id="2_1b7x5"]
 
-[node name="SettingsMenu" type="ColorRect" node_paths=PackedStringArray("dodge_swipe_button", "reload_swipe_button", "switch_weapon_swipe_button", "activity_swipe_button")]
+[node name="SettingsMenu" type="ColorRect" node_paths=PackedStringArray("_dodge_swipe_button", "_reload_swipe_button", "_switch_weapon_swipe_button", "_activity_swipe_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,10 +12,10 @@ grow_vertical = 2
 theme = ExtResource("1_d3ab8")
 color = Color(0, 0, 0, 0.501961)
 script = ExtResource("2_1b7x5")
-dodge_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/DodgeSwipeCheckButton")
-reload_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ReloadSwipeCheckButton")
-switch_weapon_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/SwitchSwipeCheckButton")
-activity_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/CheckButton3")
+_dodge_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/DodgeSwipeCheckButton")
+_reload_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ReloadSwipeCheckButton")
+_switch_weapon_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/SwitchSwipeCheckButton")
+_activity_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ActivitySwipeCheckButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -78,7 +78,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "Swipe left to switch weapon"
 
-[node name="CheckButton3" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
+[node name="ActivitySwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "Swipe up to use activity"
@@ -87,4 +87,4 @@ text = "Swipe up to use activity"
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/DodgeSwipeCheckButton" to="." method="_on_dodge_swipe_toggled"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ReloadSwipeCheckButton" to="." method="_on_reload_swipe_toggled"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/SwitchSwipeCheckButton" to="." method="_on_switch_swipe_toggled"]
-[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/CheckButton3" to="." method="_on_activity_swipe_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/SettingsVBoxContainer/ActivitySwipeCheckButton" to="." method="_on_activity_swipe_toggled"]

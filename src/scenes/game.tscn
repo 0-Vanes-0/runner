@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="PackedScene" uid="uid://bqqwp7m1spla6" path="res://src/controls/sensor_button.tscn" id="4_261ek"]
 [ext_resource type="Script" path="res://src/info_label.gd" id="4_shxdo"]
-[ext_resource type="PackedScene" path="res://src/scenes/menus/game_over_menu.tscn" id="5_2syq0"]
+[ext_resource type="PackedScene" uid="uid://dr5r31lkwfgnn" path="res://src/scenes/menus/game_over_menu.tscn" id="5_2syq0"]
 [ext_resource type="Texture2D" uid="uid://cw4qudofmyuyi" path="res://assets/sprites/interface/dodge_button.jpg" id="5_boxyp"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
 [ext_resource type="Texture2D" uid="uid://y5nx2v8a6a7a" path="res://assets/sprites/interface/dodge_button_pressed.jpg" id="6_2i2l2"]
