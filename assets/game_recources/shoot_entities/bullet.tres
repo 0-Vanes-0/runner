@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_phktw")
-beam_width = 10.0
-color = Color(1, 1, 1, 1)
+beam_width = 1.0
 entity_class = 3
 damage = 10

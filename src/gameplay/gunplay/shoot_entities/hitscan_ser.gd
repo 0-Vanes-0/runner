@@ -2,7 +2,6 @@ class_name HitscanSER
 extends ShootEntityResource
 
 @export_range(0, 25, 0.1) var beam_width: float # percents of screen_height
-@export var color: Color = Color.WHITE
 
 
 func create_hitscan_shape(start_position := Vector2.ZERO, target_position := Vector2.ONE) -> CollisionShape2D:

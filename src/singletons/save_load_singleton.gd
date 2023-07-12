@@ -46,7 +46,7 @@ func load_settings() -> Dictionary:
 
 
 func load_data():
-	var data: Dictionary = {}
+#	var data: Dictionary = {}
 	var file := FileAccess.open(data_file_path, FileAccess.READ)
 	if FileAccess.get_open_error() != OK:
 		create_empty_data_file(file)
