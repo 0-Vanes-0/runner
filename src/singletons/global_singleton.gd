@@ -5,7 +5,11 @@ extends Node
 
 # ---------------------- VARIABLES ----------------------
 
+## This signal is called when settings are changed. Usually it's emitted after pressing "Back" button
+##  of [SettingsMenu] or "Play" button on [MainMenu] (if player avoided pressing "Back" button).
 signal need_apply_settings
+## These are collision layers. Every [CollisionObject2D] must have one of collision layers
+## and several collision masks, depending on it's behaviour.
 enum Layers {
 	PLATFORM = 1,
 	PLAYER = 2,
@@ -14,14 +18,18 @@ enum Layers {
 	SHOOT_ENTITY_ENEMY = 5,
 	BOUNDS = 6,
 }
+## Max amount of floors in game.
 const MAX_FLOORS: int = 4
-const JUMP_DOWN_DISABLE_TIME := 0.1
+## Time in seconds which describes how long [Player] will run in [LevelEndPlayerState].
 const LEVEL_END_TIME := 1.5
-const PLATFORM_W := Platform.SIZE.x
-const PLATFORM_H := Platform.SIZE.y
+## [Platform]s info. (WIP: make constant var, not const!!!)
+const PLATFORM_W := Platform.SIZE.x; const PLATFORM_H := Platform.SIZE.y
+## Const distance between floors.
 var FLOORS_GAP: float
+## Array of 4 spots of spawning enemies.
 var ENEMY_Y_SPOTS: Array[float]
-var DEFAULT_SETTINGS: Dictionary = { # String: String: Variant
+## Structure: [code]{ String: { String: Variant } }[/code].
+var DEFAULT_SETTINGS: Dictionary = {
 	Text.CONTROLS: {
 		Text.DODGE_SWIPE: true,
 		Text.RELOAD_SWIPE: true,
@@ -29,24 +37,28 @@ var DEFAULT_SETTINGS: Dictionary = { # String: String: Variant
 		Text.ACTIVITY_SWIPE: true,
 	}
 }
+## Const size of [SensorButton] in [GameScene].
 var SENSOR_BUTTON_SIZE: Vector2
 
+## For more comfort access the Player is moved here and this field must be updated on every Player creation.
 var player: Player
+## This variable controls if all assets are loaded. (WIP: add progress bar class or smth)
 var game_res_loaded := false
+## This variable stores settings data from file (see [SaveLoadSingleton]).
 var settings: Dictionary = {}
-
-var screen_width: int; var screen_height: int; var ratio := ":"
+## Screen info, calculated at start of project.
+var SCREEN_WIDTH: int; var SCREEN_HEIGHT: int; var RATIO := ":"
 
 
 func _ready() -> void:
-	screen_width = int(get_viewport().get_visible_rect().size.x)
-	screen_height = int(get_viewport().get_visible_rect().size.y)
-	var gcd := _gcd(screen_width, screen_height)
-	ratio = str(screen_width / gcd) + ratio + str(screen_height / gcd)
-	print_debug("\t", "screen_width=", screen_width, ", screen_height=", screen_height, ", ratio=", ratio)
+	SCREEN_WIDTH = int(get_viewport().get_visible_rect().size.x)
+	SCREEN_HEIGHT = int(get_viewport().get_visible_rect().size.y)
+	var gcd := _gcd(SCREEN_WIDTH, SCREEN_HEIGHT)
+	RATIO = str(SCREEN_WIDTH / gcd) + RATIO + str(SCREEN_HEIGHT / gcd)
+	print_debug("\t", "SCREEN_WIDTH=", SCREEN_WIDTH, ", SCREEN_HEIGHT=", SCREEN_HEIGHT, ", RATIO=", RATIO)
 	
-	SENSOR_BUTTON_SIZE = Vector2.ONE * screen_height * 0.2
-	FLOORS_GAP = (screen_height - PLATFORM_H) / Global.MAX_FLOORS
+	SENSOR_BUTTON_SIZE = Vector2.ONE * SCREEN_HEIGHT * 0.2
+	FLOORS_GAP = (SCREEN_HEIGHT - PLATFORM_H) / Global.MAX_FLOORS
 	ENEMY_Y_SPOTS.append(0.0)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 3.5)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 2.5)
@@ -61,12 +73,13 @@ func _ready() -> void:
 
 # ---------------------- FUNCTIONS ----------------------
 
+## Resets collision layers and masks of [param obj] and returns it.
 func clean_layers(obj: CollisionObject2D) -> CollisionObject2D:
 	obj.set_collision_layer_value(1, false)
 	obj.set_collision_mask_value(1, false)
 	return obj
 
-
+## Tells to [SceneHandler] to switch to [PackedScene].
 func switch_to_scene(scene: PackedScene):
 	var scene_handler = get_tree().current_scene
 	if scene_handler is SceneHandler:
@@ -74,7 +87,7 @@ func switch_to_scene(scene: PackedScene):
 	else:
 		print_debug("scene_handler is missing!!!")
 
-
+## Returns current scene of [SceneHandler].
 func get_current_scene() -> Node:
 	var scene_handler = get_tree().current_scene
 	if scene_handler is SceneHandler:
@@ -83,7 +96,7 @@ func get_current_scene() -> Node:
 		print_debug("scene_handler is missing!!!")
 		return null
 
-
+## Returns current scene as [GameScene]. If it's not, returns null.
 func get_game_scene() -> GameScene:
 	var scene = get_current_scene()
 	if scene is GameScene:
@@ -91,7 +104,7 @@ func get_game_scene() -> GameScene:
 	else:
 		return null
 
-
+## Returns [param error] as [String].
 func parse_error(error: Error) -> String:
 	match error:
 		OK: return "OK"

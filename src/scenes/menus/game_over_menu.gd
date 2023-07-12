@@ -11,10 +11,10 @@ signal restart_called
 func _ready() -> void:
 	assert(panel and anim_player and left_label)
 	
-	self.add_theme_constant_override("margin_top", Global.screen_height / 6)
-	self.add_theme_constant_override("margin_right", Global.screen_width / 6)
-	self.add_theme_constant_override("margin_bottom", Global.screen_height / 6)
-	self.add_theme_constant_override("margin_left", Global.screen_width / 6)
+	self.add_theme_constant_override("margin_top", Global.SCREEN_HEIGHT / 6)
+	self.add_theme_constant_override("margin_right", Global.SCREEN_WIDTH / 6)
+	self.add_theme_constant_override("margin_bottom", Global.SCREEN_HEIGHT / 6)
+	self.add_theme_constant_override("margin_left", Global.SCREEN_WIDTH / 6)
 	
 	panel.custom_minimum_size = Vector2.ZERO
 	

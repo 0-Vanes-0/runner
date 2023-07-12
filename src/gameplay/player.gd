@@ -78,8 +78,8 @@ func _ready() -> void:
 
 
 func prepare_to_run():
-	self.position = Vector2(Global.screen_width * 0.15, Global.screen_height / 2)
-	var jump_height: float = (Global.screen_height - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
+	self.position = Vector2(Global.SCREEN_WIDTH * 0.15, Global.SCREEN_HEIGHT / 2)
+	var jump_height: float = (Global.SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	jump_speed = sqrt(2 * gravity * jump_height)
 	stamina = stamina_max
 	state_machine.transition_to(state_run)

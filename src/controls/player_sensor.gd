@@ -26,9 +26,9 @@ var _size: Vector2
 func _ready() -> void:
 	assert(control and dodge_button and switch_button and reload_button and activity_button)
 	self.position = Vector2.ZERO
-	_size.x = Global.screen_width / 2
-	_size.y = Global.screen_height
-	control.custom_minimum_size = Vector2(Global.screen_width, Global.screen_height)
+	_size.x = Global.SCREEN_WIDTH / 2
+	_size.y = Global.SCREEN_HEIGHT
+	control.custom_minimum_size = Vector2(Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT)
 	dodge_button.init_abstract(
 			func() -> bool:
 				return Global.player.stamina >= Global.player.state_dodge.stamina_cost and not Global.player.get_current_state() is LevelEndPlayerState
@@ -81,7 +81,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_is_timer_active = false
 				var vector: Vector2 = abs(event.position - _touch_start_position)
 				if _timer <= TAP_MAX_TIME and vector.length_squared() <= TAP_MAX_VECTOR.length_squared():
-					if event.position.y < Global.screen_height / 2:
+					if event.position.y < Global.SCREEN_HEIGHT / 2:
 						send_jump_up()
 					else:
 						send_jump_down()

@@ -1,6 +1,9 @@
 class_name JumpDownPlayerState
 extends PlayerState
 
+## Time in seconds which describes how long the collision of [Player] with platforms
+## would be turned off during this state.
+const JUMP_DOWN_DISABLE_TIME := 0.1
 var is_passing_platform: bool
 var stamina_cost := 15.0
 
@@ -19,7 +22,7 @@ func enter():
 		player.velocity.y = player.jump_speed / 6
 		is_passing_platform = true
 		player.body_shape.disabled = true
-		await get_tree().create_timer(Global.JUMP_DOWN_DISABLE_TIME).timeout
+		await get_tree().create_timer(JUMP_DOWN_DISABLE_TIME).timeout
 		player.body_shape.disabled = false
 		is_passing_platform = false
 

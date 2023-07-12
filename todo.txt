@@ -4,6 +4,8 @@
 - Make custom collection class(es), see game_info.gd
 - Add shoot entity damage override to weapon
 - Hitscan with Area2D or ShapeCast2D????? Also using Line2D can solve drawing
+- Make Platforms with dynamic size (percents of screen)
+- Make Demon resource class
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 -¿Add Player object to Global?
 -¿Add to ShootEntity functions for inherited children?

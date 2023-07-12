@@ -9,9 +9,9 @@ var _shoot_position: Vector2
 
 
 func _ready() -> void:
-	self.position = Vector2(Global.screen_width / 2, 0)
-	_size.x = Global.screen_width / 2
-	_size.y = Global.screen_height
+	self.position = Vector2(Global.SCREEN_WIDTH / 2, 0)
+	_size.x = Global.SCREEN_WIDTH / 2
+	_size.y = Global.SCREEN_HEIGHT
 
 
 func _physics_process(delta: float) -> void:

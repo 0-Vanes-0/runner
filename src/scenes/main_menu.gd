@@ -1,28 +1,32 @@
+## This is the first scene of [SceneHandler]. It has buttons such as Play, Quit, Settings, City.
+## In center there's scroll container for choosing a demon to play. (WIP: create Demon resource class)
+class_name MainMenu
 extends Control
 
-@export var play_button: Button
+@export var play_button: Button ## This button goes to [GameScene].
 @export var settings_menu: SettingsMenu
 
 
 func _ready() -> void:
 	assert(play_button and settings_menu)
 	settings_menu.hide()
-	update_play_button_visible()
+	update_play_button_disabled()
 	if not Global.game_res_loaded:
 		Preloader.loaded.connect(
 				func():
 					Global.game_res_loaded = true
-					update_play_button_visible()
+					update_play_button_disabled()
 		, CONNECT_ONE_SHOT)
 		Preloader.start_preload()
 	
 	if not GameInfo.is_run_seed_generated:
-		GameInfo.generate_game_seed_info()
+		GameInfo.generate_game_info()
 #		GameInfo.is_run_seed_generated
 
-
-func update_play_button_visible():
-	play_button.visible = Global.game_res_loaded
+## This method updates state of [member play_button].
+func update_play_button_disabled():
+	var is_ok: bool = Global.game_res_loaded and true
+	play_button.disabled = not is_ok
 
 
 func _on_quit_button_pressed() -> void:

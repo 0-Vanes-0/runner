@@ -10,7 +10,7 @@ var is_level_end_emitted := false
 
 
 func _ready() -> void:
-	self.position.y = Global.screen_height
+	self.position.y = Global.SCREEN_HEIGHT
 	var platform_h := Global.PLATFORM_H
 	var gap := Global.FLOORS_GAP
 	
@@ -34,7 +34,7 @@ func clone() -> Segment:
 
 func move(speed: float):
 	self.position.x -= speed
-	if is_last and not is_level_about_to_end_emitted and self.position.x + get_width() < Global.screen_width:
+	if is_last and not is_level_about_to_end_emitted and self.position.x + get_width() < Global.SCREEN_WIDTH:
 		level_about_to_end.emit()
 		is_level_about_to_end_emitted = true
 	if self.position.x + get_width() < 0:

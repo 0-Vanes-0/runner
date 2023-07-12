@@ -158,9 +158,9 @@ func process_level_end_objects():
 	chest_sprite.position = player.position + Vector2.RIGHT * player.get_game_size().x / 2
 	
 	var portal_poses: Array[Vector2] = [
-		player.position + Vector2.RIGHT * Global.screen_width / 4 + Vector2.UP * player.get_game_size() / 2,
-		player.position + Vector2.LEFT * Global.screen_width / 4 + Vector2.UP * player.get_game_size() / 2,
-		player.position + Vector2.UP * Global.screen_height / 2 + Vector2.UP * player.get_game_size() / 2,
+		player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size() / 2,
+		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size() / 2,
+		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size() / 2,
 	]
 	var portal_colors: Array[Color] = [
 		Color.RED,
@@ -196,12 +196,12 @@ func process_level_end_objects():
 
 func init_bounds():
 	(bounds_top.shape as SegmentShape2D).a = Vector2(0, 0)
-	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.screen_width, 0)
-	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.screen_width, 0)
-	(bounds_right.shape as SegmentShape2D).b = Vector2(Global.screen_width, Global.screen_height)
-	(bounds_bottom.shape as SegmentShape2D).a = Vector2(Global.screen_width, Global.screen_height)
-	(bounds_bottom.shape as SegmentShape2D).b = Vector2(0, Global.screen_height)
-	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.screen_height)
+	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.SCREEN_WIDTH, 0)
+	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.SCREEN_WIDTH, 0)
+	(bounds_right.shape as SegmentShape2D).b = Vector2(Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT)
+	(bounds_bottom.shape as SegmentShape2D).a = Vector2(Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT)
+	(bounds_bottom.shape as SegmentShape2D).b = Vector2(0, Global.SCREEN_HEIGHT)
+	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.SCREEN_HEIGHT)
 	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
 	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
 

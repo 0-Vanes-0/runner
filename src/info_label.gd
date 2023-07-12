@@ -2,7 +2,7 @@ extends Label
 
 
 func _ready() -> void:
-	self.label_settings.font_size = Global.screen_height / 25
+	self.label_settings.font_size = Global.SCREEN_HEIGHT / 25
 
 
 func _process(delta: float) -> void:

@@ -30,7 +30,7 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 	)
 	
 	visibler = VisibleOnScreenNotifier2D.new()
-	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.screen_height
+	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.SCREEN_HEIGHT
 	visibler.rect.position = Vector2(- game_size / 2)
 	visibler.rect.size = Vector2(game_size)
 	visibler.screen_exited.connect(self.queue_free)

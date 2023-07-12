@@ -19,7 +19,7 @@ func enter():
 	tween.tween_property(
 			player,
 			"position:x",
-			Global.screen_width / 2,
+			Global.SCREEN_WIDTH / 2,
 			Global.LEVEL_END_TIME
 	)
 	tween.tween_property(

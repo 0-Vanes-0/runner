@@ -28,7 +28,7 @@ func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position
 	sprite.offset = Vector2.DOWN * sprite.texture.get_height() / 2
 	sprite.scale = Vector2(
 			(target_position - start_position).length() / sprite.texture.get_width(),
-			(Global.screen_height * (resource.beam_width + 0.1) / 100) / sprite.texture.get_height()
+			(Global.SCREEN_HEIGHT * (resource.beam_width + 0.1) / 100) / sprite.texture.get_height()
 	)
 	sprite.rotation = (target_position - start_position).angle()
 	sprite.position = start_position

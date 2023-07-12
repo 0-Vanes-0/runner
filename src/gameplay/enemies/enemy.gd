@@ -27,7 +27,7 @@ func _ready() -> void:
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 	
-	var game_y_size := size_y_percent / 100 * Global.screen_height
+	var game_y_size := size_y_percent / 100 * Global.SCREEN_HEIGHT
 	self.scale = Vector2(game_y_size, game_y_size) / get_sprite_size()
 	
 	weapon = Weapon.new(weapon_resource, ShootEntity.Owner.ENEMY)
@@ -53,5 +53,5 @@ func get_sprite_size() -> Vector2:
 
 
 func get_game_size() -> Vector2:
-	var game_y_size := size_y_percent / 100 * Global.screen_height
+	var game_y_size := size_y_percent / 100 * Global.SCREEN_HEIGHT
 	return Vector2(game_y_size, game_y_size)
