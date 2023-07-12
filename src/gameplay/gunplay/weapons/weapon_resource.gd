@@ -7,8 +7,11 @@ const Animations := {
 }
 
 @export var sprite_frames: SpriteFrames
-@export_range(1, 10) var scale_value: int = 1
+@export_range(1, 10) var sprite_scale_value: int = 1
 @export var shoot_entity_resource: ShootEntityResource
+@export_range(1, 1000, 1) var damage: int = 10
+@export_range(1, 1000, 1) var ammo_max: int = 1
+@export_range(0.0, 5.0, 0.1) var reload_time: float = 0.0
 @export_range(0.1, 5.0, 0.1) var shoot_rate_time: float = 1.0
 @export_range(0, 45, 1, "degrees") var spread_angle: int = 0
 

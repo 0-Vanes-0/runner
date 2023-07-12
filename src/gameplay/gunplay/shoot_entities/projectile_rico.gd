@@ -10,8 +10,8 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
-	super(resource, entity_owner, start_position, target_position)
+func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2, damage: int) -> void:
+	super(resource, entity_owner, start_position, target_position, damage)
 	self.name = "ProjectileRico"
 	
 	self.speed = resource.get_speed()

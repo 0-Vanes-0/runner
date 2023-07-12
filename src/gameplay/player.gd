@@ -52,7 +52,7 @@ func _ready() -> void:
 				elif direction == Vector2.LEFT:
 					print_debug("Switch weapon")
 				elif direction == Vector2.DOWN:
-					print_debug("Reload weapon")
+					weapon.reload()
 				elif direction == Vector2.UP:
 					print_debug("Use current ability")
 	)
@@ -69,7 +69,7 @@ func _ready() -> void:
 	)
 	
 	# Adding Weapon:
-	weapon = Weapon.new(preload("res://assets/game_recources/weapons/crossbow.tres"), ShootEntity.Owner.PLAYER)
+	weapon = Weapon.new(preload("res://assets/game_recources/weapons/revolver.tres"), ShootEntity.Owner.PLAYER)
 	weapon.name = "Weapon"
 	self.add_child(weapon)
 	weapon.position = health_comp.position

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://8rfmxyrugmct"]
+
+[ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_v4a1t"]
+[ext_resource type="Resource" uid="uid://cnfdhvwrwlnpj" path="res://assets/game_recources/shoot_entities/bullet.tres" id="2_pjmow"]
+[ext_resource type="Texture2D" uid="uid://blyo4nx70cbhv" path="res://assets/sprites/weapons/crossbow/crossbow_frame_0.png" id="3_y6cdj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1352"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y6cdj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[resource]
+script = ExtResource("1_v4a1t")
+sprite_frames = SubResource("SpriteFrames_e1352")
+sprite_scale_value = 2
+shoot_entity_resource = ExtResource("2_pjmow")
+damage = 10
+ammo_max = 6
+reload_time = 1.5
+shoot_rate_time = 0.5
+spread_angle = 0

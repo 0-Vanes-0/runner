@@ -38,10 +38,14 @@ func _ready() -> void:
 	)
 	reload_button.init_abstract(
 			func() -> bool:
-				return not Global.player.get_current_state() is LevelEndPlayerState
+				return not (
+						Global.player.weapon.ammo == Global.player.weapon.ammo_max 
+						or Global.player.weapon.is_reloading
+						or Global.player.get_current_state() is LevelEndPlayerState
+				)
 	,
 			func():
-				pass
+				Global.player.weapon.reload()
 	)
 	switch_button.init_abstract(
 			func() -> bool:

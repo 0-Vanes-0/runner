@@ -8,7 +8,6 @@ enum EntityClasses {
 	HITSCAN,
 }
 @export var entity_class: EntityClasses = EntityClasses.NONE
-@export_range(1, 1000, 1) var damage: int = 10
 @export var sprite_frames: SpriteFrames
 #@export var shoot_sound: AudioStreamWAV
 

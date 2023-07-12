@@ -12,9 +12,9 @@ var start_position: Vector2
 var target_position: Vector2
 
 
-func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: Vector2, target_position: Vector2) -> void:
+func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: Vector2, target_position: Vector2, damage: int) -> void:
 	self.resource = resource
-	self.damage = resource.damage
+	self.damage = damage
 	self.entity_owner = entity_owner
 	self.start_position = start_position
 	self.target_position = target_position
@@ -23,7 +23,7 @@ func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: V
 func create_animated_sprite(resource: ShootEntityResource) -> AnimatedSprite2D:
 	var sprite := AnimatedSprite2D.new()
 	sprite.sprite_frames = resource.sprite_frames
-	var game_size := Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.SCREEN_HEIGHT
+	var game_size: Vector2 = Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.SCREEN_HEIGHT
 	sprite.scale = Vector2(game_size / resource.get_sprite_size())
 	return sprite
 

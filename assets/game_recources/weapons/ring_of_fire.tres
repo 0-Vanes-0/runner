@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_cq5wt")
-scale_value = 1
+sprite_scale_value = 1
 shoot_entity_resource = ExtResource("2_xc5ra")
+damage = 1
 shoot_rate_time = 0.5
 spread_angle = 10

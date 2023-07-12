@@ -7,8 +7,8 @@ var area: Area2D
 var coll_shape: CollisionShape2D
 
 
-func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
-	super(resource, entity_owner, start_position, target_position)
+func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2, damage: int) -> void:
+	super(resource, entity_owner, start_position, target_position, damage)
 	self.name = "Hitscan"
 	
 	area = create_collision_object(Area2D.new(), entity_owner)
@@ -27,7 +27,7 @@ func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position
 	sprite.centered = false
 	sprite.offset = Vector2.DOWN * sprite.texture.get_height() / 2
 	sprite.scale = Vector2(
-			(target_position - start_position).length() / sprite.texture.get_width(),
+			Global.SCREEN_WIDTH / sprite.texture.get_width(),
 			(Global.SCREEN_HEIGHT * (resource.beam_width + 0.1) / 100) / sprite.texture.get_height()
 	)
 	sprite.rotation = (target_position - start_position).angle()
