@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://dr5r31lkwfgnn"]
 
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="1_e6gxa"]
 [ext_resource type="Script" path="res://src/scenes/menus/game_over_menu.gd" id="1_sr5md"]
@@ -113,7 +113,7 @@ _data = {
 "start": SubResource("Animation_34qoc")
 }
 
-[node name="GameOverMenu" type="MarginContainer" node_paths=PackedStringArray("panel", "anim_player", "left_label")]
+[node name="GameOverMenu" type="MarginContainer" node_paths=PackedStringArray("_panel", "_anim_player", "_left_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -126,9 +126,9 @@ theme_override_constants/margin_top = 180
 theme_override_constants/margin_right = 320
 theme_override_constants/margin_bottom = 180
 script = ExtResource("1_sr5md")
-panel = NodePath("Panel")
-anim_player = NodePath("AnimationPlayer")
-left_label = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RichTextLabel")
+_panel = NodePath("Panel")
+_anim_player = NodePath("AnimationPlayer")
+_left_label = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RichTextLabel")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2

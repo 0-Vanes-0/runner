@@ -1,18 +1,20 @@
+## This menu appears manually. It loads and saves settings.
 class_name SettingsMenu
 extends Control
 
-@export var dodge_swipe_button: CheckButton
-@export var reload_swipe_button: CheckButton
-@export var switch_weapon_swipe_button: CheckButton
-@export var activity_swipe_button: CheckButton
+@export var _dodge_swipe_button: CheckButton
+@export var _reload_swipe_button: CheckButton
+@export var _switch_weapon_swipe_button: CheckButton
+@export var _activity_swipe_button: CheckButton
 
 
 func _ready() -> void:
-	assert(dodge_swipe_button and reload_swipe_button and switch_weapon_swipe_button and activity_swipe_button)
-	dodge_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.DODGE_SWIPE])
-	reload_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.RELOAD_SWIPE])
-	switch_weapon_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.SWITCH_WEAPON_SWIPE])
-	activity_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE])
+	assert(_dodge_swipe_button and _reload_swipe_button and _switch_weapon_swipe_button and _activity_swipe_button)
+	# Set buttons state according to settings:
+	_dodge_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.DODGE_SWIPE])
+	_reload_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.RELOAD_SWIPE])
+	_switch_weapon_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.SWITCH_WEAPON_SWIPE])
+	_activity_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE])
 
 
 func _on_back_button_pressed() -> void:

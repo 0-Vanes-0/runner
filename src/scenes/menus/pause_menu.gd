@@ -1,10 +1,12 @@
+## This menu appears on pause with [kbd]Escape[/kbd] on Desktop or [kbd]Back[/kbd] on Android.
+## [br]It contains buttons: "Resume", "Settings", "Go to menu".
 class_name PauseMenu
 extends Control
 
-@export var settings_menu: SettingsMenu
+@export var _settings_menu: SettingsMenu
 
 func  _ready() -> void:
-	assert(settings_menu)
+	assert(_settings_menu)
 
 
 func _on_resume_button_pressed() -> void:
@@ -13,7 +15,7 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	settings_menu.show()
+	_settings_menu.show()
 
 
 func _on_main_menu_button_pressed() -> void:

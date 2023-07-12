@@ -3,13 +3,13 @@
 class_name MainMenu
 extends Control
 
-@export var play_button: Button ## This button goes to [GameScene].
-@export var settings_menu: SettingsMenu
+@export var _play_button: Button ## This button goes to [GameScene].
+@export var _settings_menu: SettingsMenu
 
 
 func _ready() -> void:
-	assert(play_button and settings_menu)
-	settings_menu.hide()
+	assert(_play_button and _settings_menu)
+	_settings_menu.hide()
 	update_play_button_disabled()
 	if not Global.game_res_loaded:
 		Preloader.loaded.connect(
@@ -23,10 +23,10 @@ func _ready() -> void:
 		GameInfo.generate_game_info()
 #		GameInfo.is_run_seed_generated
 
-## This method updates state of [member play_button].
+## This method updates state of [member _play_button].
 func update_play_button_disabled():
 	var is_ok: bool = Global.game_res_loaded and true
-	play_button.disabled = not is_ok
+	_play_button.disabled = not is_ok
 
 
 func _on_quit_button_pressed() -> void:
@@ -38,7 +38,7 @@ func _on_play_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	settings_menu.show()
+	_settings_menu.show()
 
 
 func _on_city_button_pressed() -> void:
