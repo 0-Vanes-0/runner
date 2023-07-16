@@ -24,7 +24,7 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 	self.add_child(area)
 	area.area_entered.connect(
 			func(area: Area2D):
-				if area is HealthComponent and not area.shape.disabled:
+				if area is HealthComponent and area.is_shape_enabled():
 					area.take_damage(self.damage)
 					self.queue_free()
 	)

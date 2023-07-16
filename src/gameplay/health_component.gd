@@ -59,3 +59,7 @@ func turn_off_collision():
 
 func turn_on_collision():
 	_shape.disabled = false
+
+
+func is_shape_enabled() -> bool:
+	return not _shape.disabled

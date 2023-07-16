@@ -119,9 +119,10 @@ sprite_frames = SubResource("SpriteFrames_y2qj8")
 frame = 8
 flip_h = true
 
-[node name="HealthComponent" type="Area2D" parent="."]
+[node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
 script = ExtResource("21_4vij8")
 health = 75
+_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
 position = Vector2(-5, 0)
