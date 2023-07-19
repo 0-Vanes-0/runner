@@ -1,13 +1,13 @@
+## Generic state machine. Initializes states and delegates engine callbacks (_physics_process, _unhandled_input) to the active state.
+## [br]Nathan Lovato Copyright
 class_name StateMachine
 extends Node
-# Generic state machine. Initializes states and delegates engine callbacks (_physics_process, _unhandled_input) to the active state.
-# Nathan Lovato Copyright
 
-# Emitted when transitioning to a new state.
+## Emitted when transitioning to a new state.
 signal transitioned(state_name: StringName)
-# Path to the initial active state. We export it to be able to pick the initial state in the inspector.
+## Path to the initial active state. We export it to be able to pick the initial state in the inspector.
 @export var initial_state: State
-# The current active state. At the start of the game, we get the `initial_state`.
+## The current active state. At the start of the game, we get the [member initial_state].
 @onready var state: State = get_node(initial_state.get_path())
 #const HISTORY_SIZE := 5
 #var state_history: Array[State] = []
@@ -33,7 +33,10 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
-
+## Changes current [member state] to [param target_state].
+## [br]Transition can be made if [param target_state] exists, has connection to current [member state]
+## and [method State.can_go_to_state] returns [code]true[/code].
+## [br]If [param is_transition_forced] is [code]true[/code], conditions above are ignored.
 func transition_to(target_state: State, is_transition_forced: bool = false):
 	var can_transition: bool = (
 			is_transition_forced

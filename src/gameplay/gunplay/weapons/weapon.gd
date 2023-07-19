@@ -1,21 +1,23 @@
+## This node spawns [ShootEntity] on [method shoot]. Weapon can be obtained by [Player] or [Enemy].
 class_name Weapon
 extends Node2D
 
-@export var weapon_resource: WeaponResource
+@export var weapon_resource: WeaponResource ## Stored info about weapon.
 
-var weapon_owner: ShootEntity.Owner
-var damage_from_player: int
-var damage_from_enemy: int
-var shoot_rate_time: float
-var spread_angle: int
-var extra_spread_angle: int
+var weapon_owner: ShootEntity.Owner ## Current owner of weapon.
+var damage: int ## Damage dealing by [Player] or [Enemy].
+var shoot_rate_time: float ## [member WeaponResource.shoot_rate_time].
+var spread_angle: int ## [member WeaponResource.spread_angle]
+## Additional spread angle affecting [member spread_angle].
+## [br]Manipulate this var only with [method add_extra_spread_angle] and [method remove_extra_spread_angle].
+var extra_spread_angle: int 
 var sprite: AnimatedSprite2D
-var shoot_timer: float
-var ammo: int
-var ammo_max: int
-var reload_time: float
-var is_reloading: bool = false
-var is_active: bool = false
+var shoot_timer: float ## Timer used for [member shoot_rate_time].
+var ammo: int ## Amount of [ShootEntity] left before reloading.
+var ammo_max: int ## [member WeaponResource.ammo_max].
+var reload_time: float ## [member WeaponResource.reload_time]
+var is_reloading: bool = false ## Flag for checking if is [method reload] processing.
+var is_active: bool = false ## Flag for checking if it belongs to [member Player.weapon] currently.
 
 
 func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> void:
@@ -24,8 +26,7 @@ func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> 
 	
 	assert(weapon_resource != null, "weapon_resource is null")
 	self.weapon_resource = weapon_resource
-	self.damage_from_player = weapon_resource.damage_from_player
-	self.damage_from_enemy = weapon_resource.damage_from_enemy
+	self.damage = weapon_resource.damage_from_player if weapon_owner == ShootEntity.Owner.PLAYER else weapon_resource.damage_from_enemy
 	self.ammo_max = weapon_resource.ammo_max
 	self.ammo = self.ammo_max
 	self.reload_time = weapon_resource.reload_time
@@ -51,7 +52,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	shoot_timer = shoot_timer + delta if not can_shoot() else shoot_rate_time
 
-
+## Spawns [ShootEntity].
 func shoot(start_position: Vector2, target_position: Vector2):
 	if ammo > 0:
 		if can_shoot():
@@ -69,7 +70,6 @@ func shoot(start_position: Vector2, target_position: Vector2):
 func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
 	var shoot_field: Node2D = Global.get_game_scene().get_shoot_field()
 	assert(shoot_field != null)
-	var damage: int = damage_from_player if owner == ShootEntity.Owner.PLAYER else damage_from_enemy
 	if _is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_LINEAR):
 		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position, damage), true)
 		return
@@ -81,7 +81,7 @@ func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_pos
 		return
 	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
 
-
+## Waits until [member reload_time] passes and restores [member ammo] to [member ammo_max].
 func reload():
 	if reload_time > 0.0:
 		if not is_reloading:
@@ -95,7 +95,7 @@ func reload():
 	else:
 		ammo = ammo_max
 
-
+## For checking if [member shoot_timer] is more than [member shoot_rate_time].
 func can_shoot() -> bool:
 	return shoot_timer >= shoot_rate_time
 
