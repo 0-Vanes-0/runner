@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4m565kqjx3ba"]
+[gd_scene load_steps=13 format=3 uid="uid://c4m565kqjx3ba"]
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_1x2in"]
 [ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_id4ow"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://assets/game_recources/weapons/crossbow.tres" id="8_wmgsw"]
 [ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="9_0f650"]
 [ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="10_rk607"]
+[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://assets/game_recources/weapons/auto_rifle.tres" id="11_lynkj"]
 
 [node name="ResourcePreloader" type="Node"]
 script = ExtResource("1_1x2in")
@@ -20,5 +21,5 @@ tilemap_scene = ExtResource("4_ua71e")
 player = ExtResource("4_n2ku8")
 platform_scene = ExtResource("2_nw0x7")
 segment_scene = ExtResource("5_q2ntc")
-base_weapon_resources = Array[Resource("res://src/gameplay/gunplay/weapons/weapon_resource.gd")]([ExtResource("8_wmgsw"), ExtResource("9_0f650"), ExtResource("10_rk607")])
+base_weapon_resources = Array[Resource("res://src/gameplay/gunplay/weapons/weapon_resource.gd")]([ExtResource("8_wmgsw"), ExtResource("9_0f650"), ExtResource("10_rk607"), ExtResource("11_lynkj")])
 enemy_test_dragon = ExtResource("8_2k1cc")

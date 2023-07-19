@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://v01lyjgoknbj"]
+
+[ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_mmvrw"]
+[ext_resource type="Texture2D" uid="uid://q2x1dpbutcp2" path="res://assets/sprites/weapons/rifle/rifle.png" id="2_6rqtj"]
+[ext_resource type="Resource" uid="uid://cnfdhvwrwlnpj" path="res://assets/game_recources/shoot_entities/bullet.tres" id="2_61g3g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r1isj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6rqtj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_mmvrw")
+name = "Auto Rifle"
+sprite_frames = SubResource("SpriteFrames_r1isj")
+sprite_scale_value = 3
+shoot_entity_resource = ExtResource("2_61g3g")
+damage_from_player = 2
+damage_from_enemy = 1
+ammo_max = 30
+reload_time = 2.5
+shoot_rate_time = 0.1
+spread_angle = 5

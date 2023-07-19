@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_v4a1t"]
 [ext_resource type="Resource" uid="uid://cnfdhvwrwlnpj" path="res://assets/game_recources/shoot_entities/bullet.tres" id="2_pjmow"]
-[ext_resource type="Texture2D" uid="uid://blyo4nx70cbhv" path="res://assets/sprites/weapons/crossbow/crossbow_frame_0.png" id="3_y6cdj"]
+[ext_resource type="Texture2D" uid="uid://esa73gg20wuh" path="res://assets/sprites/weapons/pp/pp.png" id="3_pcwvn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e1352"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_y6cdj")
+"texture": ExtResource("3_pcwvn")
 }],
 "loop": true,
 "name": &"default",
@@ -19,7 +19,7 @@ animations = [{
 script = ExtResource("1_v4a1t")
 name = "Revolver"
 sprite_frames = SubResource("SpriteFrames_e1352")
-sprite_scale_value = 2
+sprite_scale_value = 3
 shoot_entity_resource = ExtResource("2_pjmow")
 damage_from_player = 10
 damage_from_enemy = 10
