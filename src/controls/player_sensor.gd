@@ -52,7 +52,7 @@ func _ready() -> void:
 				return not Global.player.get_current_state() is LevelEndPlayerState
 	,
 			func():
-				pass
+				send_switch()
 	)
 	activity_button.init_abstract(
 			func() -> bool:

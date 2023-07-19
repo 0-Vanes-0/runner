@@ -1,3 +1,4 @@
+## This is class for enemies which fight with [Player].
 class_name Enemy
 extends Node2D
 

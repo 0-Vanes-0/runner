@@ -2,6 +2,10 @@ class_name GoAwayEnemyState
 extends EnemyState
 
 
+func can_go_to_state() -> bool:
+	return not state_machine.state is DeadEnemyState
+
+
 func enter():
 	enemy.health_comp.turn_off_collision()
 	enemy.sprite.play("default")

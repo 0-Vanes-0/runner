@@ -31,6 +31,8 @@ var stamina_max: float ## Maximum value of [member stamina].
 
 var platforms_left: int ## Simple counter of platforms left to finish a level.
 var weapon: Weapon ## Equipped [Weapon].
+var weapon1: Weapon
+var weapon2: Weapon
 
 ## The more it is, the faster player moves vertically. Default value is here: [code]ProjectSettings.get_setting("physics/2d/default_gravity")[/code]
 @onready var gravity: float = 1000
@@ -51,7 +53,16 @@ func _ready() -> void:
 				if direction == Vector2.RIGHT:
 					state_machine.transition_to(state_dodge)
 				elif direction == Vector2.LEFT:
-					print_debug("Switch weapon")
+					if weapon1.is_active:
+						weapon1.deactivate()
+						weapon2.activate()
+						weapon = weapon2
+						weapon.ammo = weapon.ammo_max
+					elif weapon2.is_active:
+						weapon2.deactivate()
+						weapon1.activate()
+						weapon = weapon1
+						weapon.ammo = weapon.ammo_max
 				elif direction == Vector2.DOWN:
 					weapon.reload()
 				elif direction == Vector2.UP:
@@ -70,10 +81,16 @@ func _ready() -> void:
 	)
 	
 	# Adding Weapon:
-	weapon = Weapon.new(preload("res://assets/game_recources/weapons/revolver.tres"), ShootEntity.Owner.PLAYER)
-	weapon.name = "Weapon"
-	self.add_child(weapon)
-	weapon.position = health_comp.position
+	var arr_copy := Preloader.base_weapon_resources.duplicate() as Array[WeaponResource]
+	var wr: WeaponResource = arr_copy.pick_random()
+	weapon1 = get_weapon(wr, true)
+	self.add_child(weapon1)
+	weapon = weapon1
+	
+	arr_copy.erase(wr)
+	wr = arr_copy.pick_random()
+	weapon2 = get_weapon(wr)
+	self.add_child(weapon2)
 	
 	self.scale = get_game_size() / (sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale)
 
@@ -97,3 +114,14 @@ func get_health_comp_position() -> Vector2:
 
 func get_current_state() -> PlayerState:
 	return state_machine.state
+
+
+func get_weapon(weapon_resource: WeaponResource, need_activate := false) -> Weapon:
+	var weapon := Weapon.new(weapon_resource, ShootEntity.Owner.PLAYER)
+	weapon.name = weapon_resource.name
+	weapon.position = health_comp.position
+	if need_activate:
+		weapon.activate()
+	else:
+		weapon.deactivate()
+	return weapon

@@ -25,6 +25,7 @@ func create_empty_data_file(file: FileAccess):
 	var error: Error = FileAccess.get_open_error()
 	if error != OK:
 		print_debug(Global.parse_error(error))
+	file.flush()
 	return file
 
 ## Writes [param settings] to [param file].
@@ -54,9 +55,10 @@ func load_data():
 #	var data: Dictionary = {}
 	var file := FileAccess.open(_data_file_path, FileAccess.READ)
 	if FileAccess.get_open_error() != OK:
+		file.close()
 		create_empty_data_file(file)
-	
 	# process somehow here
+	file.close()
 
 ## Saves [param settings] to file at user data path. 
 func save_settings(settings: Dictionary):

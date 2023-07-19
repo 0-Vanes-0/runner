@@ -1,3 +1,4 @@
+class_name PreloaderSingleton
 extends Node
 
 signal loaded
@@ -11,6 +12,9 @@ signal loaded
 @export var player: PackedScene
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
+
+@export_group("Weapons")
+@export var base_weapon_resources: Array[WeaponResource]
 
 @export_group("Enemies", "enemy_")
 @export var enemy_test_dragon: PackedScene
@@ -41,6 +45,10 @@ func start_preload():
 		else:
 			print_debug("Failed to load: " + resource)
 	
+	for wr in base_weapon_resources:
+		if wr != null:
+			export_counter += 1
+	
 	var non_empty := Vector2i(1, 0)
 	var segment_tilemap := tilemap_scene.instantiate() as SegmentTileMap
 	for n in segment_tilemap.get_biomes_tilemaps().size():
@@ -69,12 +77,15 @@ func start_preload():
 		segments[n+1] = segment_array
 		segments_counter += 1
 	
+	
+	
 	var load_result: int = (
 			export_counter
 			+ segments_counter
 	)
 	var load_goal: int = (
 			export_resources.size()
+			+ base_weapon_resources.size()
 			+ segment_tilemap.get_biomes_tilemaps().size()
 	)
 	if load_result == load_goal:

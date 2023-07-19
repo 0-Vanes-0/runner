@@ -4,7 +4,8 @@ extends Node2D
 @export var weapon_resource: WeaponResource
 
 var weapon_owner: ShootEntity.Owner
-var damage: int
+var damage_from_player: int
+var damage_from_enemy: int
 var shoot_rate_time: float
 var spread_angle: int
 var extra_spread_angle: int
@@ -14,6 +15,7 @@ var ammo: int
 var ammo_max: int
 var reload_time: float
 var is_reloading: bool = false
+var is_active: bool = false
 
 
 func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> void:
@@ -22,7 +24,8 @@ func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> 
 	
 	assert(weapon_resource != null, "weapon_resource is null")
 	self.weapon_resource = weapon_resource
-	self.damage = weapon_resource.damage
+	self.damage_from_player = weapon_resource.damage_from_player
+	self.damage_from_enemy = weapon_resource.damage_from_enemy
 	self.ammo_max = weapon_resource.ammo_max
 	self.ammo = self.ammo_max
 	self.reload_time = weapon_resource.reload_time
@@ -38,8 +41,8 @@ func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> 
 func _ready() -> void:
 	sprite.centered = false
 	sprite.position = Vector2.ZERO
-	sprite.scale = Vector2(weapon_resource.sprite_scale_value, weapon_resource.sprite_scale_value)
 	sprite.offset.y = -weapon_resource.get_sprite_size().y / 2
+	sprite.scale = Vector2(weapon_resource.sprite_scale_value, weapon_resource.sprite_scale_value)
 	
 	if sprite.sprite_frames.has_animation("default"):
 		sprite.play("default")
@@ -66,6 +69,7 @@ func shoot(start_position: Vector2, target_position: Vector2):
 func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
 	var shoot_field: Node2D = Global.get_game_scene().get_shoot_field()
 	assert(shoot_field != null)
+	var damage: int = damage_from_player if owner == ShootEntity.Owner.PLAYER else damage_from_enemy
 	if _is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_LINEAR):
 		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position, damage), true)
 		return
@@ -106,3 +110,13 @@ func remove_extra_spread_angle():
 
 func _is_entity_class(entity_class: ShootEntityResource.EntityClasses) -> bool:
 	return weapon_resource.shoot_entity_resource.entity_class == entity_class
+
+
+func activate():
+	self.show()
+	self.is_active = true
+
+
+func deactivate():
+	self.hide()
+	self.is_active = false

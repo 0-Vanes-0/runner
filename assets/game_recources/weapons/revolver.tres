@@ -17,10 +17,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_v4a1t")
+name = "Revolver"
 sprite_frames = SubResource("SpriteFrames_e1352")
 sprite_scale_value = 2
 shoot_entity_resource = ExtResource("2_pjmow")
-damage = 10
+damage_from_player = 10
+damage_from_enemy = 10
 ammo_max = 6
 reload_time = 1.5
 shoot_rate_time = 0.5

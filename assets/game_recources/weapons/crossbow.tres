@@ -17,10 +17,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_fcdqg")
+name = "Crossbow"
 sprite_frames = SubResource("SpriteFrames_e1352")
 sprite_scale_value = 3
 shoot_entity_resource = ExtResource("2_xsk47")
-damage = 10
+damage_from_player = 20
+damage_from_enemy = 10
 ammo_max = 1
 reload_time = 0.0
 shoot_rate_time = 1.0
