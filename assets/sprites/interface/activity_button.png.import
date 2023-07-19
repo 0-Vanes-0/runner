@@ -2,15 +2,15 @@
 
 importer="texture_atlas"
 type="Texture2D"
-uid="uid://6v24n444lj4j"
-path="res://.godot/imported/reload_button.jpg-a44a51d68f50bc803ddaf8f2fd0d7d2e.res"
+uid="uid://brsilg77l805r"
+path="res://.godot/imported/activity_button.png-17a58e1772a4585321c93de9fbbb3dce.res"
 group_file="res://assets/sprites/atlases/overall_atlas.png"
 valid=true
 [deps]
 
 
-source_file="res://assets/sprites/interface/reload_button.jpg"
-dest_files=["res://.godot/imported/reload_button.jpg-a44a51d68f50bc803ddaf8f2fd0d7d2e.res"]
+source_file="res://assets/sprites/interface/activity_button.png"
+dest_files=["res://.godot/imported/activity_button.png-17a58e1772a4585321c93de9fbbb3dce.res"]
 
 [params]
 

@@ -16,6 +16,7 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 @export var reload_button: SensorButton
 @export var switch_button: SensorButton
 @export var activity_button: SensorButton
+@export var switch_weapon_disabled_time: float
 
 var _timer: float = 0.0 
 var _is_timer_active: bool = false
@@ -49,11 +50,15 @@ func _ready() -> void:
 	)
 	switch_button.init_abstract(
 			func() -> bool:
-				return not Global.player.get_current_state() is LevelEndPlayerState
+				return not (
+						Global.player.get_current_state() is LevelEndPlayerState 
+						or switch_button.is_progressing
+				)
 	,
 			func():
 				send_switch()
 	)
+	switch_button.progress_time = switch_weapon_disabled_time
 	activity_button.init_abstract(
 			func() -> bool:
 				return not Global.player.get_current_state() is LevelEndPlayerState
@@ -105,7 +110,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_timer = 0.0
 				_touch_start_position = Vector2.ZERO
 	
-	elif event is InputEventKey:
+	elif event is InputEventKey and event.is_pressed():
 		if event.is_action("jump_up"):
 			send_jump_up()
 		
@@ -146,7 +151,9 @@ func send_activity():
 
 
 func send_switch():
-	swipe.emit(Vector2.LEFT)
+	if not switch_button.is_progressing:
+		swipe.emit(Vector2.LEFT)
+		switch_button.progress_enabling()
 
 
 func is_dodge_swipe() -> bool:

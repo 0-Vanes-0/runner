@@ -1,20 +1,20 @@
 [gd_scene load_steps=21 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
+[ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="PackedScene" uid="uid://bqqwp7m1spla6" path="res://src/controls/sensor_button.tscn" id="4_261ek"]
 [ext_resource type="Script" path="res://src/info_label.gd" id="4_shxdo"]
 [ext_resource type="PackedScene" uid="uid://dr5r31lkwfgnn" path="res://src/scenes/menus/game_over_menu.tscn" id="5_2syq0"]
-[ext_resource type="Texture2D" uid="uid://cw4qudofmyuyi" path="res://assets/sprites/interface/dodge_button.jpg" id="5_boxyp"]
+[ext_resource type="Texture2D" uid="uid://et8hwutneabo" path="res://assets/sprites/interface/dodge_button_pressed.png" id="5_5hunf"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
-[ext_resource type="Texture2D" uid="uid://y5nx2v8a6a7a" path="res://assets/sprites/interface/dodge_button_pressed.jpg" id="6_2i2l2"]
+[ext_resource type="Texture2D" uid="uid://bh2jeeb748362" path="res://assets/sprites/interface/reload_button.png" id="6_74d7t"]
 [ext_resource type="PackedScene" uid="uid://cjk1sxt21gprp" path="res://src/scenes/menus/pause_menu.tscn" id="6_d8b13"]
-[ext_resource type="Texture2D" uid="uid://d3dv6twcjq1ju" path="res://assets/sprites/interface/switch_button.jpg" id="7_ux641"]
-[ext_resource type="Texture2D" uid="uid://bn3xw5puaeyxh" path="res://assets/sprites/interface/switch_button_pressed.jpg" id="8_0mrfu"]
-[ext_resource type="Texture2D" uid="uid://6v24n444lj4j" path="res://assets/sprites/interface/reload_button.jpg" id="9_fmhn0"]
-[ext_resource type="Texture2D" uid="uid://dbfr1w7xvvbep" path="res://assets/sprites/interface/reload_button_pressed.jpg" id="10_82qbu"]
-[ext_resource type="Texture2D" uid="uid://dalp81ot4s4s0" path="res://assets/sprites/interface/activity_button.jpg" id="11_awaj6"]
-[ext_resource type="Texture2D" uid="uid://btxvhn56bcfdy" path="res://assets/sprites/interface/activity_button_pressed.jpg" id="12_5o0ct"]
+[ext_resource type="Texture2D" uid="uid://datr5skbkaxbc" path="res://assets/sprites/interface/reload_button_pressed.png" id="7_7jj8h"]
+[ext_resource type="Texture2D" uid="uid://bxwvl8njophpc" path="res://assets/sprites/interface/switch_button.png" id="8_3hswu"]
+[ext_resource type="Texture2D" uid="uid://bxecltnpwwvaj" path="res://assets/sprites/interface/switch_button_pressed.png" id="9_oemju"]
+[ext_resource type="Texture2D" uid="uid://brsilg77l805r" path="res://assets/sprites/interface/activity_button.png" id="10_7kbpd"]
+[ext_resource type="Texture2D" uid="uid://vi2wpwbci4ot" path="res://assets/sprites/interface/activity_button_pressed.png" id="11_qlpqs"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
 b = Vector2(100, 0)
@@ -84,6 +84,7 @@ dodge_button = NodePath("Control/ButtonsMenu/DodgeButton")
 reload_button = NodePath("Control/ButtonsMenu/ReloadButton")
 switch_button = NodePath("Control/ButtonsMenu/SwitchButton")
 activity_button = NodePath("Control/ButtonsMenu/ActivityButton")
+switch_weapon_disabled_time = 3.0
 
 [node name="Control" type="Control" parent="HUD/PlayerSensor"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -102,23 +103,23 @@ alignment = 1
 
 [node name="DodgeButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
 layout_mode = 2
-texture_normal = ExtResource("5_boxyp")
-texture_pressed = ExtResource("6_2i2l2")
+texture_normal = ExtResource("4_5m647")
+texture_pressed = ExtResource("5_5hunf")
 
 [node name="ReloadButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
 layout_mode = 2
-texture_normal = ExtResource("9_fmhn0")
-texture_pressed = ExtResource("10_82qbu")
+texture_normal = ExtResource("6_74d7t")
+texture_pressed = ExtResource("7_7jj8h")
 
 [node name="SwitchButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
 layout_mode = 2
-texture_normal = ExtResource("7_ux641")
-texture_pressed = ExtResource("8_0mrfu")
+texture_normal = ExtResource("8_3hswu")
+texture_pressed = ExtResource("9_oemju")
 
 [node name="ActivityButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
 layout_mode = 2
-texture_normal = ExtResource("11_awaj6")
-texture_pressed = ExtResource("12_5o0ct")
+texture_normal = ExtResource("10_7kbpd")
+texture_pressed = ExtResource("11_qlpqs")
 
 [node name="ShootSensor" type="Marker2D" parent="HUD"]
 position = Vector2(960, 0)

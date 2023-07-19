@@ -2,15 +2,15 @@
 
 importer="texture_atlas"
 type="Texture2D"
-uid="uid://cw4qudofmyuyi"
-path="res://.godot/imported/dodge_button.jpg-0fca975613d32a00c5ce3c51e93e6e66.res"
+uid="uid://bxwvl8njophpc"
+path="res://.godot/imported/switch_button.png-5a8a18d251349217b39dd0c3053be8e0.res"
 group_file="res://assets/sprites/atlases/overall_atlas.png"
 valid=true
 [deps]
 
 
-source_file="res://assets/sprites/interface/dodge_button.jpg"
-dest_files=["res://.godot/imported/dodge_button.jpg-0fca975613d32a00c5ce3c51e93e6e66.res"]
+source_file="res://assets/sprites/interface/switch_button.png"
+dest_files=["res://.godot/imported/switch_button.png-5a8a18d251349217b39dd0c3053be8e0.res"]
 
 [params]
 

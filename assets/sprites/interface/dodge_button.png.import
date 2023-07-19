@@ -2,15 +2,15 @@
 
 importer="texture_atlas"
 type="Texture2D"
-uid="uid://dalp81ot4s4s0"
-path="res://.godot/imported/activity_button.jpg-b4562bcdd485dbb598fa5f654292c363.res"
+uid="uid://bun26r8omijrj"
+path="res://.godot/imported/dodge_button.png-f10ced89fe4496d766038f3c963b71a8.res"
 group_file="res://assets/sprites/atlases/overall_atlas.png"
 valid=true
 [deps]
 
 
-source_file="res://assets/sprites/interface/activity_button.jpg"
-dest_files=["res://.godot/imported/activity_button.jpg-b4562bcdd485dbb598fa5f654292c363.res"]
+source_file="res://assets/sprites/interface/dodge_button.png"
+dest_files=["res://.godot/imported/dodge_button.png-f10ced89fe4496d766038f3c963b71a8.res"]
 
 [params]
 
