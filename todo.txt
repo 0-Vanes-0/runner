@@ -1,4 +1,5 @@
 - MAKE VARIABLES PRIVATE!!!
+- RESOLVE ATLAS COPY ISSUE
 - Add Status class and make composition to PlayerState + EnemyState
 - Add Chest and Portal classes
 - Make custom collection class(es), see game_info.gd
