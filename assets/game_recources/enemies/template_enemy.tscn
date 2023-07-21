@@ -51,12 +51,9 @@ initial_state = NodePath("StartEnemyState")
 
 [node name="StartEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("5_adcol")
-connections_paths = Array[NodePath]([NodePath("../GoAwayEnemyState")])
 
 [node name="GoAwayEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("6_ypg4f")
-connections_paths = Array[NodePath]([NodePath("../DeadEnemyState")])
 
 [node name="DeadEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("7_qpuoh")
-connections_paths = Array[NodePath]([NodePath("")])

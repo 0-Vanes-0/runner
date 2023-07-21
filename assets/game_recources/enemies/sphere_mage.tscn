@@ -116,7 +116,6 @@ state_machine = NodePath("StateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2qj8")
-frame = 8
 flip_h = true
 
 [node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]

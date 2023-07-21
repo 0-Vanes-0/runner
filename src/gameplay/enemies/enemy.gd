@@ -1,12 +1,12 @@
 ## This is class for enemies which fight with [Player].
 class_name Enemy
 extends Node2D
-
+## Emitted when [member HealthComponent.health] is 0.
 signal dead
 
 # enum of types of enemies?
 @export_range(1, 50) var size_y_percent: float = 25.0
-@export var weapon_resource: WeaponResource # todo: Array of Weapons, pick random when spawn
+@export var weapon_resource: WeaponResource ## WIP: Array of Weapons, pick random when spawn.
 #@export var clothes: ClothesResource
 @export_group("Children")
 @export var sprite: AnimatedSprite2D
