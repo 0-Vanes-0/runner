@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://cpi8o3rnhvu8j"]
 
-[ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_fcdqg"]
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_q381x"]
 [ext_resource type="Texture2D" uid="uid://blyo4nx70cbhv" path="res://assets/sprites/weapons/crossbow/crossbow_frame_0.png" id="2_u6nbd"]
 [ext_resource type="Resource" uid="uid://bsbauycwrglkt" path="res://assets/game_recources/shoot_entities/arrow.tres" id="2_xsk47"]
 
@@ -16,7 +16,7 @@ animations = [{
 }]
 
 [resource]
-script = ExtResource("1_fcdqg")
+script = ExtResource("1_q381x")
 name = "Crossbow"
 sprite_frames = SubResource("SpriteFrames_e1352")
 sprite_scale_value = 3

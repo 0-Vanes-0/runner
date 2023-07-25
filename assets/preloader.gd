@@ -13,6 +13,9 @@ signal loaded
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
 
+@export_group("Skins")
+@export var default_skin: SkinResource
+
 @export_group("Weapons")
 @export var base_weapon_resources: Array[WeaponResource]
 

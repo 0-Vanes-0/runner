@@ -1,25 +1,27 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4m565kqjx3ba"]
+[gd_scene load_steps=14 format=3 uid="uid://c4m565kqjx3ba"]
 
-[ext_resource type="Script" path="res://assets/preloader.gd" id="1_1x2in"]
-[ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_id4ow"]
-[ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="2_nw0x7"]
-[ext_resource type="PackedScene" uid="uid://cbhc564a8a6e" path="res://src/scenes/game.tscn" id="3_m0eon"]
-[ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player.tscn" id="4_n2ku8"]
-[ext_resource type="PackedScene" uid="uid://cn3r3nrthn2xv" path="res://assets/tilemap/segment_tile_map.tscn" id="4_ua71e"]
-[ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="5_q2ntc"]
-[ext_resource type="PackedScene" uid="uid://hyemkxy2t4rp" path="res://assets/game_recources/enemies/sphere_mage.tscn" id="8_2k1cc"]
-[ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://assets/game_recources/weapons/crossbow.tres" id="8_wmgsw"]
-[ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="9_0f650"]
-[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="10_rk607"]
-[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://assets/game_recources/weapons/auto_rifle.tres" id="11_lynkj"]
+[ext_resource type="Script" path="res://assets/preloader.gd" id="1_tpd37"]
+[ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_1ntx0"]
+[ext_resource type="PackedScene" uid="uid://cbhc564a8a6e" path="res://src/scenes/game.tscn" id="3_bxsqs"]
+[ext_resource type="PackedScene" uid="uid://cn3r3nrthn2xv" path="res://assets/tilemap/segment_tile_map.tscn" id="4_j1kq3"]
+[ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player.tscn" id="5_pevw1"]
+[ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="6_bgxgq"]
+[ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="7_2kkfe"]
+[ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://assets/game_recources/player_skins/player_skin_biker.tres" id="8_v6vm6"]
+[ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://assets/game_recources/weapons/crossbow.tres" id="9_lwk0o"]
+[ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="10_tagxv"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="11_twvwa"]
+[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://assets/game_recources/weapons/auto_rifle.tres" id="12_ya318"]
+[ext_resource type="PackedScene" uid="uid://hyemkxy2t4rp" path="res://assets/game_recources/enemies/sphere_mage.tscn" id="13_gd8yg"]
 
 [node name="ResourcePreloader" type="Node"]
-script = ExtResource("1_1x2in")
-main_menu_scene = ExtResource("2_id4ow")
-game_scene = ExtResource("3_m0eon")
-tilemap_scene = ExtResource("4_ua71e")
-player = ExtResource("4_n2ku8")
-platform_scene = ExtResource("2_nw0x7")
-segment_scene = ExtResource("5_q2ntc")
-base_weapon_resources = Array[Resource("res://src/gameplay/gunplay/weapons/weapon_resource.gd")]([ExtResource("8_wmgsw"), ExtResource("9_0f650"), ExtResource("10_rk607"), ExtResource("11_lynkj")])
-enemy_test_dragon = ExtResource("8_2k1cc")
+script = ExtResource("1_tpd37")
+main_menu_scene = ExtResource("2_1ntx0")
+game_scene = ExtResource("3_bxsqs")
+tilemap_scene = ExtResource("4_j1kq3")
+player = ExtResource("5_pevw1")
+platform_scene = ExtResource("6_bgxgq")
+segment_scene = ExtResource("7_2kkfe")
+default_skin = ExtResource("8_v6vm6")
+base_weapon_resources = Array[Resource("res://assets/game_recources/resource_classes/weapon_resource.gd")]([ExtResource("9_lwk0o"), ExtResource("10_tagxv"), ExtResource("11_twvwa"), ExtResource("12_ya318")])
+enemy_test_dragon = ExtResource("13_gd8yg")

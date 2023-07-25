@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://v01lyjgoknbj"]
 
-[ext_resource type="Script" path="res://src/gameplay/gunplay/weapons/weapon_resource.gd" id="1_mmvrw"]
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_pmna6"]
 [ext_resource type="Texture2D" uid="uid://q2x1dpbutcp2" path="res://assets/sprites/weapons/rifle/rifle.png" id="2_6rqtj"]
 [ext_resource type="Resource" uid="uid://cnfdhvwrwlnpj" path="res://assets/game_recources/shoot_entities/bullet.tres" id="2_61g3g"]
 
@@ -16,7 +16,7 @@ animations = [{
 }]
 
 [resource]
-script = ExtResource("1_mmvrw")
+script = ExtResource("1_pmna6")
 name = "Auto Rifle"
 sprite_frames = SubResource("SpriteFrames_r1isj")
 sprite_scale_value = 3

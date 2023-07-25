@@ -6,6 +6,7 @@ signal out_of_health ## Called when health is 0.
 signal switched_collision ## Called when stopped shape's disabling.
 
 @export_range(1, 9999) var health: int = 100
+@export var debug_mode := false
 @export var _shape: CollisionShape2D
 var _label: Label
 #var _tween: Tween
@@ -16,7 +17,10 @@ func _ready() -> void:
 	
 	Global.clean_layers(self)
 	var parent = get_parent()
-	assert(parent != null and (parent is Player or parent is Enemy))
+	assert(
+			debug_mode 
+			or parent != null and (parent is Player or parent is Enemy)
+	)
 	if parent is Player:
 		self.set_collision_layer_value(Global.Layers.PLAYER, true)
 		self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)

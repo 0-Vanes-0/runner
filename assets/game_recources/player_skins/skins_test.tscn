@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dub5nnbk2dg4c"]
+
+[ext_resource type="Script" path="res://src/gameplay/health_component.gd" id="1_5u5bj"]
+[ext_resource type="Script" path="res://assets/game_recources/player_skins/skins_test.gd" id="1_nfn1p"]
+[ext_resource type="Resource" uid="uid://bbh24p14aee7n" path="res://assets/game_recources/player_skins/player_skin_white.tres" id="2_2vfsq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8tdl"]
+size = Vector2(140, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxg3a"]
+size = Vector2(20, 80)
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_nfn1p")
+skin_for_test = ExtResource("2_2vfsq")
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+position = Vector2(-10, -5)
+shape = SubResource("RectangleShape2D_n8tdl")
+
+[node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
+position = Vector2(0, -80)
+script = ExtResource("1_5u5bj")
+debug_mode = true
+_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_yxg3a")
+debug_color = Color(0.992157, 0, 0.266667, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="."]

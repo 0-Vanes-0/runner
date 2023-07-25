@@ -78,7 +78,7 @@ func setup_player(need_create_instance: bool = false):
 		var player := Global.player
 		player.player_sensor = player_sensor
 		player.shoot_sensor = shoot_sensor
-		player.name = "Player"
+		player.set_skin(Preloader.default_skin)
 		level.add_child(player)
 		level.move_child(player, segments.get_index() + 1)
 		player.state_dead.died.connect(
@@ -156,15 +156,14 @@ func process_level_end_objects():
 	var chest_sprite := Sprite2D.new() # Chest
 	chest_sprite.name = "Chest"
 	chest_sprite.texture = preload("res://assets/sprites/mothership.png")
-	# WHEN I'LL HAVE BETTER PLAYER SPRITES - REMOVE --> / 2
-	chest_sprite.scale = player.get_game_size() / 2 / chest_sprite.texture.get_size()
+	chest_sprite.scale = (player.get_game_size() / 2) / chest_sprite.texture.get_size()
 	segments.add_child(chest_sprite)
-	chest_sprite.position = player.position + Vector2.RIGHT * player.get_game_size().x / 2
+	chest_sprite.position = player.position + Vector2.RIGHT * player.get_game_size().x
 	
 	var portal_poses: Array[Vector2] = [
-		player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size() / 2,
-		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size() / 2,
-		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size() / 2,
+		player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
+		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
+		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size(),
 	]
 	var portal_colors: Array[Color] = [
 		Color.RED,
@@ -172,9 +171,8 @@ func process_level_end_objects():
 		Color.BLUE,
 	]
 	for i in 3:
-		var portal := Portal.new(player.get_game_size(), portal_colors[i])
+		var portal := Portal.new(player.get_game_size() * 2, portal_colors[i])
 		portal.name = "Portal" + str(i)
-		# WHEN I'LL HAVE BETTER PLAYER SPRITES - MAKE --> * 2
 		segments.add_child(portal)
 		portal.position = portal_poses[i]
 		

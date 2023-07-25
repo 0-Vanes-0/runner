@@ -39,7 +39,12 @@ var platforms_left: int ## Simple counter of platforms left to finish a level.
 
 
 func _ready() -> void:
-	assert(player_sensor and shoot_sensor and state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end)
+	assert(
+			player_sensor and shoot_sensor 
+			and state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end
+			and sprite and body_shape and health_comp and state_machine
+	)
+	self.name = "Player"
 	
 	# Setting collision layers listeners
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
@@ -92,7 +97,7 @@ func _ready() -> void:
 	weapon2 = get_weapon(wr)
 	self.add_child(weapon2)
 	
-	self.scale = get_game_size() / (sprite.sprite_frames.get_frame_texture("default", 0).get_size() * sprite.scale)
+	self.scale = get_game_size() / get_self_size()
 
 ## Inits player without recreating new instance.
 func prepare_to_run():
@@ -103,9 +108,18 @@ func prepare_to_run():
 	state_machine.transition_to(state_run)
 
 
+func set_skin(skin_res: SkinResource):
+	skin_res.apply_to_sprite(sprite)
+	sprite.scale = Vector2.ONE * get_self_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
+	
+
+
 func get_game_size() -> Vector2:
-	# WHEN I'LL HAVE BETTER PLAYER SPRITES - MAKE --> / 2
-	return Vector2.ONE * Global.FLOORS_GAP
+	return Vector2.ONE * Global.FLOORS_GAP / 2
+
+
+func get_self_size() -> Vector2:
+	return (($GameSizeArea/CollisionShape2D as CollisionShape2D).shape as RectangleShape2D).size
 
 
 func get_health_comp_position() -> Vector2:

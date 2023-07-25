@@ -1,0 +1,112 @@
+[gd_resource type="Resource" script_class="SkinResource" load_steps=21 format=3 uid="uid://31fwiev0krwf"]
+
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/skin_resource.gd" id="1_v13ik"]
+[ext_resource type="Texture2D" uid="uid://ica0l22hpti8" path="res://assets/sprites/players/test/test_dead_0.png" id="2_jjfki"]
+[ext_resource type="Texture2D" uid="uid://f0e0gfalldg2" path="res://assets/sprites/players/test/test_dead_1.png" id="3_dd0g6"]
+[ext_resource type="Texture2D" uid="uid://d2c3ipq6evu77" path="res://assets/sprites/players/test/test_dead_2.png" id="4_3f2jj"]
+[ext_resource type="Texture2D" uid="uid://biod6mw0rgm3d" path="res://assets/sprites/players/test/test_dead_3.png" id="5_vxwaw"]
+[ext_resource type="Texture2D" uid="uid://c05sjceihtwkp" path="res://assets/sprites/players/test/test_dead_4.png" id="6_soapp"]
+[ext_resource type="Texture2D" uid="uid://dufjvahvxwbwx" path="res://assets/sprites/players/test_biker/biker_idle_0.png" id="7_8oxd7"]
+[ext_resource type="Texture2D" uid="uid://2mdrlf0xdifk" path="res://assets/sprites/players/test_biker/biker_idle_1.png" id="8_sj5o4"]
+[ext_resource type="Texture2D" uid="uid://dgr0vk4866yb6" path="res://assets/sprites/players/test_biker/biker_idle_2.png" id="9_ch21q"]
+[ext_resource type="Texture2D" uid="uid://dd6y4yb15ymvg" path="res://assets/sprites/players/test_biker/biker_idle_3.png" id="10_d2f1e"]
+[ext_resource type="Texture2D" uid="uid://lq7q1jya0wuj" path="res://assets/sprites/players/test_biker/biker_dodge.png" id="11_l2ylt"]
+[ext_resource type="Texture2D" uid="uid://ctpg6gf0s6bom" path="res://assets/sprites/players/test_biker/biker_jump_down.png" id="12_6qyph"]
+[ext_resource type="Texture2D" uid="uid://bpe8gr10s2xq5" path="res://assets/sprites/players/test_biker/biker_jump_up.png" id="25_dup0r"]
+[ext_resource type="Texture2D" uid="uid://c6jcb74ojt41t" path="res://assets/sprites/players/test_biker/biker_run_0.png" id="26_e76le"]
+[ext_resource type="Texture2D" uid="uid://c2oevych5fcy1" path="res://assets/sprites/players/test_biker/biker_run_1.png" id="27_84h3f"]
+[ext_resource type="Texture2D" uid="uid://43ypstky2d6c" path="res://assets/sprites/players/test_biker/biker_run_2.png" id="28_f7a6w"]
+[ext_resource type="Texture2D" uid="uid://jukrwcwu2aio" path="res://assets/sprites/players/test_biker/biker_run_3.png" id="29_n7itu"]
+[ext_resource type="Texture2D" uid="uid://doq1aon8lapr8" path="res://assets/sprites/players/test_biker/biker_run_4.png" id="30_tpjgy"]
+[ext_resource type="Texture2D" uid="uid://csrueumj348k3" path="res://assets/sprites/players/test_biker/biker_run_5.png" id="31_wri4c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w3s32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jjfki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dd0g6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3f2jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vxwaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_soapp")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8oxd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sj5o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ch21q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d2f1e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_l2ylt")
+}],
+"loop": false,
+"name": &"dodge",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_6qyph")
+}],
+"loop": false,
+"name": &"jump_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_dup0r")
+}],
+"loop": false,
+"name": &"jump_up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_e76le")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_84h3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_f7a6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_n7itu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_tpjgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_wri4c")
+}],
+"loop": false,
+"name": &"run",
+"speed": 10.0
+}]
+
+[resource]
+script = ExtResource("1_v13ik")
+sprite_frames = SubResource("SpriteFrames_w3s32")

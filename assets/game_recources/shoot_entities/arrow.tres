@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ProjectileSER" load_steps=5 format=3 uid="uid://bsbauycwrglkt"]
 
-[ext_resource type="Script" path="res://src/gameplay/gunplay/shoot_entities/projectile_ser.gd" id="1_w5eyq"]
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/projectile_ser.gd" id="1_h2jdo"]
 [ext_resource type="Texture2D" uid="uid://dtqqk5b4ox0m8" path="res://assets/sprites/shoot_entities/arrow.png" id="2_gjdm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xp7gu"]
@@ -17,7 +17,7 @@ animations = [{
 }]
 
 [resource]
-script = ExtResource("1_w5eyq")
+script = ExtResource("1_h2jdo")
 shape = SubResource("RectangleShape2D_xp7gu")
 size_x_percent = 4.0
 size_y_percent = 1.0
