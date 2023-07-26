@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4m565kqjx3ba"]
+[gd_scene load_steps=15 format=3 uid="uid://c4m565kqjx3ba"]
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_tpd37"]
 [ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_1ntx0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="6_bgxgq"]
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="7_2kkfe"]
 [ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://assets/game_recources/player_skins/player_skin_biker.tres" id="8_v6vm6"]
+[ext_resource type="Resource" uid="uid://bbh24p14aee7n" path="res://assets/game_recources/player_skins/player_skin_white.tres" id="9_0nlv3"]
 [ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://assets/game_recources/weapons/crossbow.tres" id="9_lwk0o"]
 [ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="10_tagxv"]
 [ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="11_twvwa"]
@@ -22,6 +23,7 @@ tilemap_scene = ExtResource("4_j1kq3")
 player = ExtResource("5_pevw1")
 platform_scene = ExtResource("6_bgxgq")
 segment_scene = ExtResource("7_2kkfe")
-default_skin = ExtResource("8_v6vm6")
+biker_skin = ExtResource("8_v6vm6")
+white_skin = ExtResource("9_0nlv3")
 base_weapon_resources = Array[Resource("res://assets/game_recources/resource_classes/weapon_resource.gd")]([ExtResource("9_lwk0o"), ExtResource("10_tagxv"), ExtResource("11_twvwa"), ExtResource("12_ya318")])
 enemy_test_dragon = ExtResource("13_gd8yg")

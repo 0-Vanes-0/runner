@@ -13,10 +13,9 @@ signal loaded
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
 
-@export_group("Skins")
-@export var default_skin: SkinResource
-
-@export_group("Weapons")
+@export_group("Resources")
+@export var biker_skin: SkinResource
+@export var white_skin: SkinResource
 @export var base_weapon_resources: Array[WeaponResource]
 
 @export_group("Enemies", "enemy_")
@@ -38,6 +37,9 @@ func start_preload():
 		"player": player,
 		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
+		
+		"biker_skin": biker_skin,
+		"white_skin": white_skin,
 		
 		"enemy_test_dragon": enemy_test_dragon,
 	}

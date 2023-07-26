@@ -46,7 +46,7 @@ func take_damage(damage: int) -> void:
 	_label.text = str(health)
 	
 	if get_parent().sprite != null:
-		var orig_modulate: Color = Color.WHITE
+		var orig_modulate: Color = get_parent().sprite.modulate
 		var tween := create_tween()
 		tween.tween_property(
 				get_parent().sprite,

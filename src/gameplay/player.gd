@@ -97,7 +97,7 @@ func _ready() -> void:
 	weapon2 = get_weapon(wr)
 	self.add_child(weapon2)
 	
-	self.scale = get_game_size() / get_self_size()
+	self.scale = get_game_size() / get_fact_size()
 
 ## Inits player without recreating new instance.
 func prepare_to_run():
@@ -108,18 +108,18 @@ func prepare_to_run():
 	state_machine.transition_to(state_run)
 
 
-func set_skin(skin_res: SkinResource):
-	skin_res.apply_to_sprite(sprite)
-	sprite.scale = Vector2.ONE * get_self_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
-	
+func apply_player_data():
+	Global.player_data.skin.apply_to_sprite(sprite)
+	sprite.scale = Vector2.ONE * get_fact_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
+	sprite.modulate = Global.player_data.color
 
 
 func get_game_size() -> Vector2:
 	return Vector2.ONE * Global.FLOORS_GAP / 2
 
 
-func get_self_size() -> Vector2:
-	return (($GameSizeArea/CollisionShape2D as CollisionShape2D).shape as RectangleShape2D).size
+func get_fact_size() -> Vector2:
+	return (($FactSizeArea/CollisionShape2D as CollisionShape2D).shape as RectangleShape2D).size
 
 
 func get_health_comp_position() -> Vector2:
@@ -139,3 +139,12 @@ func get_weapon(weapon_resource: WeaponResource, need_activate := false) -> Weap
 	else:
 		weapon.deactivate()
 	return weapon
+
+
+class PlayerData:
+	var skin: SkinResource
+	var color: Color
+	
+	func set_skin(skin: SkinResource, color: Color):
+		self.skin = skin
+		self.color = color

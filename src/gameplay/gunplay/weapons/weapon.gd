@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 ## Spawns [ShootEntity].
 func shoot(start_position: Vector2, target_position: Vector2):
-	if ammo > 0:
+	if ammo > 0 and not is_reloading:
 		if can_shoot():
 			var sum_spread_angle: int = spread_angle + extra_spread_angle
 			var angle: float = deg_to_rad(randf_range(-sum_spread_angle / 2, sum_spread_angle / 2))

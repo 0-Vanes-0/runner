@@ -3,8 +3,8 @@ extends Resource
 
 const COLORS := [
 	Color.WHITE,
+	Color.DARK_VIOLET,
 	Color.YELLOW,
-	Color.ORANGE,
 	Color.RED,
 ]
 @export var sprite_frames: SpriteFrames

@@ -5,6 +5,7 @@ extends Control
 
 @export var _play_button: Button ## This button goes to [GameScene].
 @export var _settings_menu: SettingsMenu
+@export var _demons_hboxcontainer: HBoxContainer
 
 
 func _ready() -> void:
@@ -18,6 +19,31 @@ func _ready() -> void:
 					update_play_button_disabled()
 		, CONNECT_ONE_SHOT)
 		Preloader.start_preload()
+	
+	var buttons_array := _demons_hboxcontainer.get_children()
+	for i in buttons_array.size():
+		var skin: SkinResource
+		if randf() > 0.5:
+			skin = Preloader.white_skin
+		else:
+			skin = Preloader.biker_skin
+		var color: Color = SkinResource.COLORS.pick_random()
+		
+		var button: CheckButton = buttons_array[i]
+		var texture_rect := button.get_child(0).get_child(0) as TextureRect
+		texture_rect.texture = skin.sprite_frames.get_frame_texture("default", 0)
+		texture_rect.modulate = color
+		
+		button.toggled.connect(
+				func(button_pressed: bool):
+					if button_pressed:
+						Global.player_data.set_skin(skin, color)
+		)
+		if i == 1:
+			button.button_pressed = true
+		else:
+			button.button_pressed = false
+		
 	
 	if not GameInfo.is_run_seed_generated:
 		GameInfo.generate_game_info()
