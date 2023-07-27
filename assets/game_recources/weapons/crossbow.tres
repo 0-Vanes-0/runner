@@ -17,7 +17,10 @@ animations = [{
 
 [resource]
 script = ExtResource("1_q381x")
-name = "Crossbow"
+name = "Weapon"
+description = "Shoots $1
+DPS = $2
+Ammo = $3"
 sprite_frames = SubResource("SpriteFrames_e1352")
 sprite_scale_value = 3
 shoot_entity_resource = ExtResource("2_xsk47")

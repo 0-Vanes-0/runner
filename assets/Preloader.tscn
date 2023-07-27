@@ -9,12 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="7_2kkfe"]
 [ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://assets/game_recources/player_skins/player_skin_biker.tres" id="8_v6vm6"]
 [ext_resource type="Resource" uid="uid://bbh24p14aee7n" path="res://assets/game_recources/player_skins/player_skin_white.tres" id="9_0nlv3"]
-[ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://assets/game_recources/weapons/crossbow.tres" id="9_lwk0o"]
 [ext_resource type="Resource" uid="uid://l1dqljr8rva6" path="res://assets/game_recources/player_skins/player_skin_cyborg.tres" id="10_dhoxd"]
-[ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="10_tagxv"]
-[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="11_twvwa"]
-[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://assets/game_recources/weapons/auto_rifle.tres" id="12_ya318"]
+[ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://assets/game_recources/weapons/crossbow.tres" id="11_v3j7y"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="12_0o327"]
+[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://assets/game_recources/weapons/auto_rifle.tres" id="12_d1uio"]
 [ext_resource type="PackedScene" uid="uid://hyemkxy2t4rp" path="res://assets/game_recources/enemies/sphere_mage.tscn" id="13_gd8yg"]
+[ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="13_xo7v3"]
 
 [node name="ResourcePreloader" type="Node"]
 script = ExtResource("1_tpd37")
@@ -27,5 +27,8 @@ segment_scene = ExtResource("7_2kkfe")
 biker_skin = ExtResource("8_v6vm6")
 white_skin = ExtResource("9_0nlv3")
 cyborg_skin = ExtResource("10_dhoxd")
-base_weapon_resources = Array[Resource("res://assets/game_recources/resource_classes/weapon_resource.gd")]([ExtResource("9_lwk0o"), ExtResource("10_tagxv"), ExtResource("11_twvwa"), ExtResource("12_ya318")])
+fire_ring_wr = ExtResource("12_0o327")
+crossbow_wr = ExtResource("11_v3j7y")
+revolver_wr = ExtResource("13_xo7v3")
+autorifle_wr = ExtResource("12_d1uio")
 enemy_test_dragon = ExtResource("13_gd8yg")

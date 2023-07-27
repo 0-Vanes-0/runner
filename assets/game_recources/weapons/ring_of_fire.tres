@@ -5,10 +5,13 @@
 
 [resource]
 script = ExtResource("1_cq5wt")
-name = "Ring Of Fire"
+name = "Weapon"
+description = "Shoots $1
+DPS = $2
+Ammo = $3"
 sprite_scale_value = 1
 shoot_entity_resource = ExtResource("2_xc5ra")
-damage_from_player = 10
+damage_from_player = 8
 damage_from_enemy = 1
 ammo_max = 1
 reload_time = 0.0

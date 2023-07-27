@@ -41,7 +41,7 @@ var SENSOR_BUTTON_SIZE: Vector2
 
 ## For more comfort access the Player is moved here and this field must be updated on every Player creation.
 var player: Player
-var player_data: Player.PlayerData
+var player_data: DemonData
 ## This variable controls if all assets are loaded. (WIP: add progress bar class or smth)
 var game_res_loaded := false
 ## This variable stores settings data from file (see [SaveLoadSingleton]).
@@ -68,8 +68,6 @@ func _ready() -> void:
 	settings = SaveLoad.load_settings()
 	
 	RenderingServer.set_default_clear_color(Color(0, 0, 0))
-	
-	player_data = Player.PlayerData.new()
 	
 	randomize()
 

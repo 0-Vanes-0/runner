@@ -12,24 +12,34 @@ signal loaded
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
 
-@export_group("Resources")
+@export_group("Skin Resources")
 @export var biker_skin: SkinResource
 @export var white_skin: SkinResource
 @export var cyborg_skin: SkinResource
-@export var base_weapon_resources: Array[WeaponResource]
+
+@export_group("Weapon Resources")
+@export var fire_ring_wr: WeaponResource
+@export var crossbow_wr: WeaponResource
+@export var revolver_wr: WeaponResource
+@export var autorifle_wr: WeaponResource
 
 @export_group("Enemies", "enemy_")
 @export var enemy_test_dragon: PackedScene
 
+var base_weapon_resources: Array[WeaponResource]
+var skin_resources: Array[SkinResource]
 var segments: Dictionary # { int: Array[Segment] }
 var default_segment: Segment
 
-var export_counter := 0
-var segments_counter := 0
 
 
 func start_preload():
-	var export_resources: Dictionary = {
+	var export_counter := 0
+	var segments_counter := 0
+	
+	var all_res: Array[Dictionary] = []
+	var all_res_size := 0
+	all_res.append({
 		"main_menu_scene": main_menu_scene,
 		"game_scene": game_scene,
 		"tilemap_scene": tilemap_scene,
@@ -38,22 +48,30 @@ func start_preload():
 		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
 		
+		"enemy_test_dragon": enemy_test_dragon,
+	})
+	all_res.append({
+		"fire_ring_wr": fire_ring_wr,
+		"crossbow_wr": crossbow_wr,
+		"revolver_wr": revolver_wr,
+		"autorifle_wr": autorifle_wr,
+	})
+	all_res.append({
 		"biker_skin": biker_skin,
 		"white_skin": white_skin,
 		"cyborg_skin": cyborg_skin,
-		
-		"enemy_test_dragon": enemy_test_dragon,
-	}
+	})
 	
-	for resource in (export_resources.keys() as Array[String]):
-		if export_resources.get(resource) != null:
-			export_counter += 1
-		else:
-			print_debug("Failed to load: " + resource)
+	for dict in all_res:
+		all_res_size += dict.size()
+		for resource in dict.keys():
+			if dict.get(resource) != null:
+				export_counter += 1
+			else:
+				print_debug("Failed to load: " + resource)
 	
-	for wr in base_weapon_resources:
-		if wr != null:
-			export_counter += 1
+	base_weapon_resources.append_array(all_res[1].values())
+	skin_resources.append_array(all_res[2].values())
 	
 	var non_empty := Vector2i(1, 0)
 	var segment_tilemap := tilemap_scene.instantiate() as SegmentTileMap
@@ -90,8 +108,7 @@ func start_preload():
 			+ segments_counter
 	)
 	var load_goal: int = (
-			export_resources.size()
-			+ base_weapon_resources.size()
+			all_res_size
 			+ segment_tilemap.get_biomes_tilemaps().size()
 	)
 	if load_result == load_goal:
@@ -99,7 +116,7 @@ func start_preload():
 	else:
 		print_debug(
 				"Signal 'loaded' condition failed:", "\n",
-				"\t", "export_resources: ", export_counter, "/", export_resources.size(), "\n",
+				"\t", "export_resources: ", export_counter, "/", all_res_size, "\n",
 				"\t", "segments: ", segments_counter, "/", segment_tilemap.get_biomes_tilemaps().size(), "\n",
 		)
 

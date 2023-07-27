@@ -58,16 +58,17 @@ func _ready() -> void:
 				if direction == Vector2.RIGHT:
 					state_machine.transition_to(state_dodge)
 				elif direction == Vector2.LEFT:
-					if weapon1.is_active:
-						weapon1.deactivate()
-						weapon2.activate()
-						weapon = weapon2
-						weapon.ammo = weapon.ammo_max
-					elif weapon2.is_active:
-						weapon2.deactivate()
-						weapon1.activate()
-						weapon = weapon1
-						weapon.ammo = weapon.ammo_max
+					if weapon1 != null and weapon2 != null:
+						if weapon1.is_active:
+							weapon1.deactivate()
+							weapon2.activate()
+							weapon = weapon2
+							weapon.ammo = weapon.ammo_max
+						elif weapon2.is_active:
+							weapon2.deactivate()
+							weapon1.activate()
+							weapon = weapon1
+							weapon.ammo = weapon.ammo_max
 				elif direction == Vector2.DOWN:
 					weapon.reload()
 				elif direction == Vector2.UP:
@@ -85,18 +86,6 @@ func _ready() -> void:
 					weapon.shoot(self.position + weapon.position, target_position)
 	)
 	
-	# Adding Weapon:
-	var arr_copy := Preloader.base_weapon_resources.duplicate() as Array[WeaponResource]
-	var wr: WeaponResource = arr_copy.pick_random()
-	weapon1 = get_weapon(wr, true)
-	self.add_child(weapon1)
-	weapon = weapon1
-	
-	arr_copy.erase(wr)
-	wr = arr_copy.pick_random()
-	weapon2 = get_weapon(wr)
-	self.add_child(weapon2)
-	
 	self.scale = get_game_size() / get_fact_size()
 
 ## Inits player without recreating new instance.
@@ -109,9 +98,16 @@ func prepare_to_run():
 
 
 func apply_player_data():
-	Global.player_data.skin.apply_to_sprite(sprite)
+	Global.player_data.skin_resource.apply_to_sprite(sprite)
 	sprite.scale = Vector2.ONE * get_fact_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
 	sprite.modulate = Global.player_data.color
+	# Adding Weapon:
+	weapon1 = get_weapon(Global.player_data.weapon_resource, true)
+	weapon = weapon1
+	self.add_child(weapon1)
+	
+#	weapon2 = get_weapon(wr)
+#	self.add_child(weapon2)
 
 
 func get_game_size() -> Vector2:
@@ -139,12 +135,3 @@ func get_weapon(weapon_resource: WeaponResource, need_activate := false) -> Weap
 	else:
 		weapon.deactivate()
 	return weapon
-
-
-class PlayerData:
-	var skin: SkinResource
-	var color: Color
-	
-	func set_skin(skin: SkinResource, color: Color):
-		self.skin = skin
-		self.color = color

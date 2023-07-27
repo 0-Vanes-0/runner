@@ -6,10 +6,11 @@ extends Control
 @export var _play_button: Button ## This button goes to [GameScene].
 @export var _settings_menu: SettingsMenu
 @export var _demons_hboxcontainer: HBoxContainer
+@export var _demon_info_label: RichTextLabel
 
 
 func _ready() -> void:
-	assert(_play_button and _settings_menu)
+	assert(_play_button and _settings_menu and _demons_hboxcontainer and _demon_info_label)
 	_settings_menu.hide()
 	update_play_button_disabled()
 	if not Global.game_res_loaded:
@@ -20,37 +21,27 @@ func _ready() -> void:
 		, CONNECT_ONE_SHOT)
 		Preloader.start_preload()
 	
+	if not GameInfo.is_run_seed_generated:
+		GameInfo.generate_game_info()
+		GameInfo.is_run_seed_generated = true
+	
 	var buttons_array := _demons_hboxcontainer.get_children()
 	for i in buttons_array.size():
-		var skin: SkinResource
-		var random_float := randf()
-		if random_float > 0.667:
-			skin = Preloader.white_skin
-		elif random_float > 0.333:
-			skin = Preloader.biker_skin
-		else:
-			skin = Preloader.cyborg_skin
-		var color: Color = SkinResource.COLORS.pick_random()
-		
 		var button: CheckButton = buttons_array[i]
 		var texture_rect := button.get_child(0).get_child(0) as TextureRect
-		texture_rect.texture = skin.sprite_frames.get_frame_texture("default", 0)
-		texture_rect.modulate = color
+		texture_rect.texture = GameInfo.demon_datas[i].skin_resource.sprite_frames.get_frame_texture("default", 0)
+		texture_rect.modulate = GameInfo.demon_datas[i].color
 		
 		button.toggled.connect(
 				func(button_pressed: bool):
 					if button_pressed:
-						Global.player_data.set_skin(skin, color)
+						Global.player_data = GameInfo.demon_datas[i]
+						_demon_info_label.text = GameInfo.demon_datas[i].weapon_resource.get_description()
 		)
 		if i == 1:
 			button.button_pressed = true
 		else:
 			button.button_pressed = false
-		
-	
-	if not GameInfo.is_run_seed_generated:
-		GameInfo.generate_game_info()
-#		GameInfo.is_run_seed_generated
 
 ## This method updates state of [member _play_button].
 func update_play_button_disabled():
