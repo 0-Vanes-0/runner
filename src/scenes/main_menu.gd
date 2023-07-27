@@ -23,10 +23,13 @@ func _ready() -> void:
 	var buttons_array := _demons_hboxcontainer.get_children()
 	for i in buttons_array.size():
 		var skin: SkinResource
-		if randf() > 0.5:
+		var random_float := randf()
+		if random_float > 0.667:
 			skin = Preloader.white_skin
-		else:
+		elif random_float > 0.333:
 			skin = Preloader.biker_skin
+		else:
+			skin = Preloader.cyborg_skin
 		var color: Color = SkinResource.COLORS.pick_random()
 		
 		var button: CheckButton = buttons_array[i]

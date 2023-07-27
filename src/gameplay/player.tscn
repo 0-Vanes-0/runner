@@ -213,12 +213,11 @@ position = Vector2(-10, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
 [node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
-position = Vector2(0, -80)
+position = Vector2(0, -60)
 script = ExtResource("35_o3t41")
 _shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
-position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_cgdn0")
 debug_color = Color(0.992157, 0, 0.266667, 0.419608)
 

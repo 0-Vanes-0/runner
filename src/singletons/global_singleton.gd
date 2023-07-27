@@ -1,6 +1,5 @@
 ## This is global script which stores global variables and helps with some global processes
 ## like pausing game, finding nodes at tree, switching scenes etc.
-class_name GlobalSingleton
 extends Node
 
 # ---------------------- VARIABLES ----------------------

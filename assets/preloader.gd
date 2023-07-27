@@ -1,4 +1,3 @@
-class_name PreloaderSingleton
 extends Node
 
 signal loaded
@@ -16,12 +15,13 @@ signal loaded
 @export_group("Resources")
 @export var biker_skin: SkinResource
 @export var white_skin: SkinResource
+@export var cyborg_skin: SkinResource
 @export var base_weapon_resources: Array[WeaponResource]
 
 @export_group("Enemies", "enemy_")
 @export var enemy_test_dragon: PackedScene
 
-var segments: Dictionary # int: Array[Segment]
+var segments: Dictionary # { int: Array[Segment] }
 var default_segment: Segment
 
 var export_counter := 0
@@ -40,6 +40,7 @@ func start_preload():
 		
 		"biker_skin": biker_skin,
 		"white_skin": white_skin,
+		"cyborg_skin": cyborg_skin,
 		
 		"enemy_test_dragon": enemy_test_dragon,
 	}

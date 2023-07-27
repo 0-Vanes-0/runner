@@ -1,0 +1,112 @@
+[gd_resource type="Resource" script_class="SkinResource" load_steps=21 format=3 uid="uid://l1dqljr8rva6"]
+
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/skin_resource.gd" id="1_obffj"]
+[ext_resource type="Texture2D" uid="uid://ica0l22hpti8" path="res://assets/sprites/players/test/test_dead_0.png" id="2_3ea85"]
+[ext_resource type="Texture2D" uid="uid://f0e0gfalldg2" path="res://assets/sprites/players/test/test_dead_1.png" id="3_ft25h"]
+[ext_resource type="Texture2D" uid="uid://d2c3ipq6evu77" path="res://assets/sprites/players/test/test_dead_2.png" id="4_5it0f"]
+[ext_resource type="Texture2D" uid="uid://biod6mw0rgm3d" path="res://assets/sprites/players/test/test_dead_3.png" id="5_wt46i"]
+[ext_resource type="Texture2D" uid="uid://c05sjceihtwkp" path="res://assets/sprites/players/test/test_dead_4.png" id="6_xugon"]
+[ext_resource type="Texture2D" uid="uid://cx3xnv7yokude" path="res://assets/sprites/players/test_cyborg/cyborg_idle_0.png" id="7_iqrqk"]
+[ext_resource type="Texture2D" uid="uid://btwddx8psj1hn" path="res://assets/sprites/players/test_cyborg/cyborg_idle_1.png" id="8_7gski"]
+[ext_resource type="Texture2D" uid="uid://du1jfjlw47mak" path="res://assets/sprites/players/test_cyborg/cyborg_idle_2.png" id="9_bvyqc"]
+[ext_resource type="Texture2D" uid="uid://dahs6asr3hqpj" path="res://assets/sprites/players/test_cyborg/cyborg_idle_3.png" id="10_emigc"]
+[ext_resource type="Texture2D" uid="uid://c4ha3v4c7otq3" path="res://assets/sprites/players/test_cyborg/cyborg_dodge.png" id="11_hj6th"]
+[ext_resource type="Texture2D" uid="uid://bjlpwql4miah8" path="res://assets/sprites/players/test_cyborg/cyborg_jump_down.png" id="12_r5iy7"]
+[ext_resource type="Texture2D" uid="uid://kswhi8upvxsg" path="res://assets/sprites/players/test_cyborg/cyborg_jump_up.png" id="13_r0frm"]
+[ext_resource type="Texture2D" uid="uid://11dofa5748ox" path="res://assets/sprites/players/test_cyborg/cyborg_run_0.png" id="14_nlt2g"]
+[ext_resource type="Texture2D" uid="uid://rf5ue1hh0i3f" path="res://assets/sprites/players/test_cyborg/cyborg_run_1.png" id="15_vpcaf"]
+[ext_resource type="Texture2D" uid="uid://73hvsmfwr0g7" path="res://assets/sprites/players/test_cyborg/cyborg_run_2.png" id="16_wyjig"]
+[ext_resource type="Texture2D" uid="uid://yjtwqwqgysyw" path="res://assets/sprites/players/test_cyborg/cyborg_run_3.png" id="17_57m1x"]
+[ext_resource type="Texture2D" uid="uid://08cylpqtie75" path="res://assets/sprites/players/test_cyborg/cyborg_run_4.png" id="18_2sq8f"]
+[ext_resource type="Texture2D" uid="uid://dlffgwe8aw4q8" path="res://assets/sprites/players/test_cyborg/cyborg_run_5.png" id="19_jkwaj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dm7c1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3ea85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ft25h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5it0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wt46i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xugon")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_iqrqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7gski")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bvyqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_emigc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_hj6th")
+}],
+"loop": false,
+"name": &"dodge",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_r5iy7")
+}],
+"loop": false,
+"name": &"jump_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_r0frm")
+}],
+"loop": false,
+"name": &"jump_up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_nlt2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vpcaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_wyjig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_57m1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2sq8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_jkwaj")
+}],
+"loop": false,
+"name": &"run",
+"speed": 10.0
+}]
+
+[resource]
+script = ExtResource("1_obffj")
+sprite_frames = SubResource("SpriteFrames_dm7c1")
