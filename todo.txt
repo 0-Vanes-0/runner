@@ -1,4 +1,3 @@
-- MAKE VARIABLES PRIVATE!!!
 - RESOLVE ATLAS COPY ISSUE
 - On went to main menu "Cannot call method 'tween_property' on a null value."
 - Add Status class and make composition to PlayerState + EnemyState

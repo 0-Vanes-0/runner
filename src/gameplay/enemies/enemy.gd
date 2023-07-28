@@ -27,9 +27,9 @@ func _ready() -> void:
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
-	
 	var game_y_size := size_y_percent / 100 * Global.SCREEN_HEIGHT
 	self.scale = Vector2(game_y_size, game_y_size) / get_sprite_size()
+	health_comp.create_hp_label()
 	
 	weapon = Weapon.new(weapon_resource, ShootEntity.Owner.ENEMY)
 	weapon.name = "Weapon"

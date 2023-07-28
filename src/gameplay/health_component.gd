@@ -28,15 +28,24 @@ func _ready() -> void:
 		self.set_collision_layer_value(Global.Layers.ENEMY, true)
 		self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 	
+	
+#	_tween = create_tween()
+
+func create_hp_label():
+	if _label != null:
+		_label.queue_free()
+		_label = null # is this OK?
 	_label = Label.new()
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_label.set_position(self.position)
-	_label.add_theme_font_size_override("font_size", 24)
+	_label.add_theme_font_size_override("font_size", 36)
+	_label.add_theme_font_override("font", preload("res://assets/fonts/vcrosdmonorusbyd.ttf"))
 	self.add_child(_label)
 	_label.text = str(health)
 	
-#	_tween = create_tween()
+	var scale = self.get_parent().scale
+	_label.set_scale(Vector2(1/scale.x, 1/scale.y))
 
 ## Substracts [member health] by [param damage] and animates sprite of parent, if exists. 
 func take_damage(damage: int) -> void:

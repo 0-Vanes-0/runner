@@ -49,8 +49,12 @@ func _ready() -> void:
 	# Setting collision layers listeners
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLAYER, true)
 	self.set_collision_mask_value(Global.Layers.PLATFORM, true)
-	self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
 	self.set_collision_mask_value(Global.Layers.BOUNDS, true)
+	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.PLAYER, true)
+	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
+	
+	self.scale = get_game_size() / get_fact_size()
+	health_comp.create_hp_label()
 	
 	# Connecting input objects' signals:
 	player_sensor.swipe.connect(
@@ -85,8 +89,6 @@ func _ready() -> void:
 				):
 					weapon.shoot(self.position + weapon.position, target_position)
 	)
-	
-	self.scale = get_game_size() / get_fact_size()
 
 ## Inits player without recreating new instance.
 func prepare_to_run():

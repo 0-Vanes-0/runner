@@ -1,12 +1,13 @@
 class_name Platform
 extends StaticBody2D
 
-const SIZE := Vector2(480, 40)
+static var SIZE: Vector2
 var order_number: int = 0
 var floor_number: int = 0
 
 
 func _ready() -> void:
+	assert(SIZE != Vector2.ZERO)
 	self.scale = SIZE / $CollisionShape2D.shape.size
 	
 	Global.clean_layers(self).set_collision_layer_value(Global.Layers.PLATFORM, true)

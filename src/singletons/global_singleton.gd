@@ -21,8 +21,6 @@ enum Layers {
 const MAX_FLOORS: int = 4
 ## Time in seconds which describes how long [Player] will run in [LevelEndPlayerState].
 const LEVEL_END_TIME := 1.5
-## [Platform]s info. (WIP: make constant var, not const!!!)
-const PLATFORM_W := Platform.SIZE.x; const PLATFORM_H := Platform.SIZE.y
 ## Const distance between floors.
 var FLOORS_GAP: float
 ## Array of 4 spots of spawning enemies.
@@ -57,8 +55,10 @@ func _ready() -> void:
 	RATIO = str(SCREEN_WIDTH / gcd) + RATIO + str(SCREEN_HEIGHT / gcd)
 	print_debug("\t", "SCREEN_WIDTH=", SCREEN_WIDTH, ", SCREEN_HEIGHT=", SCREEN_HEIGHT, ", RATIO=", RATIO)
 	
+	Platform.SIZE = Vector2(Global.SCREEN_WIDTH / 4, Global.SCREEN_HEIGHT / 30)
+	
 	SENSOR_BUTTON_SIZE = Vector2.ONE * SCREEN_HEIGHT * 0.2
-	FLOORS_GAP = (SCREEN_HEIGHT - PLATFORM_H) / Global.MAX_FLOORS
+	FLOORS_GAP = (SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS
 	ENEMY_Y_SPOTS.append(0.0)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 3.5)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 2.5)

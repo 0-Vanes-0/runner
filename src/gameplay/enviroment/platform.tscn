@@ -4,22 +4,23 @@
 [ext_resource type="Script" path="res://src/gameplay/enviroment/platform.gd" id="1_mn58j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xnrf"]
-size = Vector2(480, 40.0005)
+size = Vector2(480, 36)
 
 [node name="Platform" type="StaticBody2D"]
 script = ExtResource("1_mn58j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 0.15625)
+scale = Vector2(1.5, 0.14)
 texture = ExtResource("1_le52a")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(240, 19.9998)
+position = Vector2(240, 18)
 shape = SubResource("RectangleShape2D_2xnrf")
 one_way_collision = true
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(1, 0.25)
 rect = Rect2(0, 0, 470, 40)
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visibler_exited"]

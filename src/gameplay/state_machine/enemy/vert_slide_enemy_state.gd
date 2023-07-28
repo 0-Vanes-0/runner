@@ -55,3 +55,4 @@ func physics_update(delta: float):
 
 func exit():
 	tween.kill()
+	tween = null

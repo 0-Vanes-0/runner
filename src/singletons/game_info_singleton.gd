@@ -75,7 +75,7 @@ func generate_game_info():
 
 
 func generate_rarity() -> Rarity:
-	var random_value: int = randi_range(1, 100)
+	var random_value: int = randi_range(1, NORMAL_CHANCE + RARE_CHANCE + EPIC_CHANCE + LEGENDARY_CHANCE)
 	if random_value < NORMAL_CHANCE:
 		return Rarity.NORMAL
 	elif random_value < NORMAL_CHANCE + RARE_CHANCE:

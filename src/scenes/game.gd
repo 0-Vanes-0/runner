@@ -108,7 +108,7 @@ func setup_level():
 	var segments_length: int = 0
 	for segment_i in GameInfo.get_level_segments_numbers(GameInfo.biome_number, GameInfo.level_number):
 		var segment: Segment = biome_segments[segment_i].clone()
-		segment.position.x = segments_length * Global.PLATFORM_W
+		segment.position.x = segments_length * Platform.SIZE.x
 		segments_length += segment.get_length()
 		segments.add_child(segment, true)
 	
@@ -119,7 +119,7 @@ func setup_level():
 	last_segment.level_end.connect(_on_level_complete)
 	var plane: Segment = Preloader.default_segment.duplicate()
 	plane.name = "Plane"
-	plane.position.x = LEVEL_LENGTH * Global.PLATFORM_W
+	plane.position.x = LEVEL_LENGTH * Platform.SIZE.x
 	segments.add_child(plane)
 	
 	Global.player.platforms_left = LEVEL_LENGTH
