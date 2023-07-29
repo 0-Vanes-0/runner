@@ -17,3 +17,4 @@ test_zone/
 *.bkp
 
 .idea/
+/assets/sprites/atlases
