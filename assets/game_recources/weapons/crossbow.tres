@@ -1,8 +1,30 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://cpi8o3rnhvu8j"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=8 format=3 uid="uid://cpi8o3rnhvu8j"]
 
 [ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_q381x"]
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/ser_classes/projectile_ser.gd" id="2_1fx8l"]
 [ext_resource type="Texture2D" uid="uid://blyo4nx70cbhv" path="res://assets/sprites/weapons/crossbow/crossbow_frame_0.png" id="2_u6nbd"]
-[ext_resource type="Resource" uid="uid://bsbauycwrglkt" path="res://assets/game_recources/shoot_entities/arrow.tres" id="2_xsk47"]
+[ext_resource type="Texture2D" uid="uid://dtqqk5b4ox0m8" path="res://assets/sprites/shoot_entities/arrow.png" id="3_82rc3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nso2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_82rc3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Resource" id="Resource_a2ef4"]
+script = ExtResource("2_1fx8l")
+shape = 2
+size_x_percent = 4.0
+size_y_percent = 1.0
+speed_percent = 200.0
+entity_class = 1
+sprite_frames = SubResource("SpriteFrames_nso2p")
+metadata/_editor_prop_ptr_shoot_field = NodePath("")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e1352"]
 animations = [{
@@ -21,12 +43,12 @@ name = "Weapon"
 description = "Shoots $1
 DPS = $2
 Ammo = $3"
-sprite_frames = SubResource("SpriteFrames_e1352")
-sprite_scale_value = 3
-shoot_entity_resource = ExtResource("2_xsk47")
+shoot_entity_resource = SubResource("Resource_a2ef4")
 damage_from_player = 20
 damage_from_enemy = 10
 ammo_max = 1
 reload_time = 0.0
 shoot_rate_time = 1.0
 spread_angle = 5
+sprite_frames = SubResource("SpriteFrames_e1352")
+sprite_scale_value = 3

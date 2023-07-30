@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://v01lyjgoknbj"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=6 format=3 uid="uid://v01lyjgoknbj"]
 
 [ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_pmna6"]
 [ext_resource type="Texture2D" uid="uid://q2x1dpbutcp2" path="res://assets/sprites/weapons/rifle/rifle.png" id="2_6rqtj"]
-[ext_resource type="Resource" uid="uid://cnfdhvwrwlnpj" path="res://assets/game_recources/shoot_entities/bullet.tres" id="2_61g3g"]
+[ext_resource type="Script" path="res://assets/game_recources/resource_classes/ser_classes/hitscan_ser.gd" id="2_rejrw"]
+
+[sub_resource type="Resource" id="Resource_khv65"]
+script = ExtResource("2_rejrw")
+beam_width = 1.0
+entity_class = 3
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r1isj"]
 animations = [{
@@ -21,12 +26,12 @@ name = "Weapon"
 description = "Shoots $1
 DPS = $2
 Ammo = $3"
-sprite_frames = SubResource("SpriteFrames_r1isj")
-sprite_scale_value = 3
-shoot_entity_resource = ExtResource("2_61g3g")
+shoot_entity_resource = SubResource("Resource_khv65")
 damage_from_player = 3
 damage_from_enemy = 1
 ammo_max = 30
 reload_time = 2.5
 shoot_rate_time = 0.1
 spread_angle = 5
+sprite_frames = SubResource("SpriteFrames_r1isj")
+sprite_scale_value = 3

@@ -5,7 +5,6 @@
 - Make custom collection class(es), see game_info.gd
 - Make EntityClasses better
 - Hitscan with Area2D or ShapeCast2D????? Also using Line2D can solve drawing
-- Make Platforms with dynamic size (percents of screen)
 - Make Demon resource class
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 -¿Add Player object to Global?
@@ -13,6 +12,7 @@
 -¿Maybe redo shoot entity resources and remove additional classes?
 
 
++ Make Platforms with dynamic size (percents of screen)
 + Add shoot entity damage override to weapon
 + FIX LEVEL END STATE WHEN DODGE IS ACTIVE!!!!!!!!!!!
 + Add State script template
