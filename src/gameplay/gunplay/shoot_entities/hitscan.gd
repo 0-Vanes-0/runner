@@ -5,20 +5,26 @@ const EXIST_TIME := 0.25
 var timer: float
 var area: Area2D
 var coll_shape: CollisionShape2D
+var has_shot: bool
 
 
-func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2, damage: int) -> void:
-	super(resource, entity_owner, start_position, target_position, damage)
+func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2, damage: int, status_resource: StatusResource = null) -> void:
+	super(resource, entity_owner, start_position, target_position, damage, status_resource)
 	self.name = "Hitscan"
 	
 	area = create_collision_object(Area2D.new(), entity_owner)
 	coll_shape = resource.create_hitscan_shape(start_position, target_position)
 	area.add_child(coll_shape)
 	self.add_child(area)
+	
+	has_shot = false
 	area.area_entered.connect(
 			func(area: Area2D):
-				if area is HealthComponent:
+				if area is HealthComponent and not has_shot:
 					area.take_damage(self.damage)
+					add_status(area.get_parent())
+					if not resource.has_penetration:
+						has_shot = true
 	)
 	
 	# Temporal solution:

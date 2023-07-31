@@ -9,6 +9,7 @@ signal switched_collision ## Called when stopped shape's disabling.
 @export var debug_mode := false
 @export var _shape: CollisionShape2D
 var _label: Label
+var orig_modulate: Color
 #var _tween: Tween
 
 
@@ -28,7 +29,7 @@ func _ready() -> void:
 		self.set_collision_layer_value(Global.Layers.ENEMY, true)
 		self.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
 	
-	
+	orig_modulate = get_parent().sprite.modulate
 #	_tween = create_tween()
 
 func create_hp_label():
@@ -55,7 +56,6 @@ func take_damage(damage: int) -> void:
 	_label.text = str(health)
 	
 	if get_parent().sprite != null:
-		var orig_modulate: Color = get_parent().sprite.modulate
 		var tween := create_tween()
 		tween.tween_property(
 				get_parent().sprite,

@@ -104,7 +104,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
 size = Vector2(30, 40)
 
-[node name="Dragon" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine")]
+[node name="Dragon" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine", "statuses")]
 modulate = Color(0.8, 0.4, 0, 1)
 script = ExtResource("1_b5wxb")
 size_y_percent = 20.0
@@ -113,6 +113,7 @@ sprite = NodePath("AnimatedSprite2D")
 health_comp = NodePath("HealthComponent")
 weapon_marker = NodePath("WeaponMarker")
 state_machine = NodePath("StateMachine")
+statuses = NodePath("Statuses")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2qj8")
@@ -149,3 +150,5 @@ script = ExtResource("25_5kgiy")
 
 [node name="DeadEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("26_gbky4")
+
+[node name="Statuses" type="Node" parent="."]

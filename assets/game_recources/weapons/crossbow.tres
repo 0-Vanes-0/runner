@@ -22,6 +22,7 @@ shape = 2
 size_x_percent = 4.0
 size_y_percent = 1.0
 speed_percent = 200.0
+has_penetration = false
 entity_class = 1
 sprite_frames = SubResource("SpriteFrames_nso2p")
 metadata/_editor_prop_ptr_shoot_field = NodePath("")

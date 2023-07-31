@@ -48,7 +48,7 @@ func transition_to_random_battle_state():
 
 
 func shoot_at_player(shoot_times: int = -1, shoot_counter: int = 0) -> int:
-	if enemy.weapon.can_shoot():
+	if enemy.weapon.is_shoot_time_ok():
 		enemy.weapon.shoot(get_weapon_position(), get_player_position())
 		if shoot_times != -1:
 			shoot_counter += 1

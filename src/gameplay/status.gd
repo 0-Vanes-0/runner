@@ -1,6 +1,8 @@
 class_name Status
 extends Node
 
+var tag: StatusResource.Tags = StatusResource.Tags.EMPTY
+
 var timer := 0.0
 var tick_time: float
 var time_passed := 0.0
@@ -8,17 +10,16 @@ var time_max := 0.0
 var ticks_counter := 0
 var ticks_count_max := 0
 var tick_action: Callable
-var tick_action_counter := 0
-var tick_action_count_max := 0
 
 var parent: Node
 var parent_health_comp: HealthComponent
+#var parent_clothes: Clothes
 
 
 func _init(status_resource: StatusResource) -> void:
+	self.tag = status_resource.tag
 	self.tick_time = status_resource.tick_time
 	self.tick_action = Callable(status_resource.tick_action)
-	self.tick_action_count_max = status_resource.status_count_max
 	match status_resource.off_type:
 		StatusResource.OffType.TICKS_COUNT:
 			self.ticks_count_max = status_resource.ticks_count_max
@@ -27,18 +28,19 @@ func _init(status_resource: StatusResource) -> void:
 
 
 func _ready() -> void:
-	parent = get_parent()
+	parent = get_parent().get_parent()
 	if parent is Player:
 		parent_health_comp = parent.health_comp
+#		parent_clothes = parent.clothes
 	elif parent is Enemy:
 		parent_health_comp = parent.health_comp
+#		parent_clothes = parent.clothes
 
 
 func _physics_process(delta: float) -> void:
 	timer += delta
 	if timer >= tick_time:
-		for i in tick_action_counter:
-			tick_action.call(self)
+		tick_action.call(self)
 		
 		if ticks_count_max > 0:
 			ticks_counter += 1

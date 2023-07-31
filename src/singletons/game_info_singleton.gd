@@ -47,7 +47,7 @@ func setup_game_info():
 
 
 func generate_game_info():
-	for biome_i in (Preloader.segments.keys() as Array[int]):
+	for biome_i in Preloader.segments.keys() as Array[int]:
 		BIOME_SEGMENT_TYPES_COUNT[biome_i] = (Preloader.segments.get(biome_i) as Array[Segment]).size()
 	
 	for biome_i in range(1, BIOMES_COUNT + 1):

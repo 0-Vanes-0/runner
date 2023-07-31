@@ -16,7 +16,7 @@ signal transitioned(state_name: StringName)
 func _ready() -> void:
 	assert(owner != null)
 	await owner.ready
-	for child in (get_children() as Array[State]):
+	for child in get_children() as Array[State]:
 		child.state_machine = self
 	state.enter()
 #	_add_to_history(state)

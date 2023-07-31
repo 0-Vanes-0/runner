@@ -10,7 +10,7 @@ var shoot_rate_time: float ## [member WeaponResource.shoot_rate_time].
 var spread_angle: int ## [member WeaponResource.spread_angle]
 ## Additional spread angle affecting [member spread_angle].
 ## [br]Manipulate this var only with [method add_extra_spread_angle] and [method remove_extra_spread_angle].
-var extra_spread_angle: int 
+var extra_spread_angle: int
 var sprite: AnimatedSprite2D
 var shoot_timer: float ## Timer used for [member shoot_rate_time].
 var ammo: int ## Amount of [ShootEntity] left before reloading.
@@ -50,16 +50,16 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	shoot_timer = shoot_timer + delta if not can_shoot() else shoot_rate_time
+	shoot_timer = shoot_timer + delta if not is_shoot_time_ok() else shoot_rate_time
 
 ## Spawns [ShootEntity].
 func shoot(start_position: Vector2, target_position: Vector2):
 	if ammo > 0 and not is_reloading:
-		if can_shoot():
+		if is_shoot_time_ok():
 			var sum_spread_angle: int = spread_angle + extra_spread_angle
 			var angle: float = deg_to_rad(randf_range(-sum_spread_angle / 2, sum_spread_angle / 2))
 			var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
-			_spawn_entity(weapon_resource.shoot_entity_resource, weapon_owner, start_position, start_position + spreaded_target_position)
+			_spawn_entity(start_position, start_position + spreaded_target_position)
 			self.look_at(target_position)
 			shoot_timer = 0
 			ammo -= 1
@@ -67,17 +67,25 @@ func shoot(start_position: Vector2, target_position: Vector2):
 		reload()
 
 
-func _spawn_entity(res: ShootEntityResource, owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2) -> void:
+func _spawn_entity(start_position: Vector2, target_position: Vector2) -> void:
+	var ser: ShootEntityResource = weapon_resource.shoot_entity_resource
+	var sr: StatusResource = weapon_resource.status_resource
 	var shoot_field: Node2D = Global.get_game_scene().get_shoot_field()
 	assert(shoot_field != null)
 	if _is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_LINEAR):
-		shoot_field.add_child(ProjectileLinear.new(res, owner, start_position, target_position, damage), true)
+		shoot_field.add_child(
+				ProjectileLinear.new(ser, weapon_owner, start_position, target_position, damage, sr)
+		, true)
 		return
 	elif _is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_RICO):
-		shoot_field.add_child(ProjectileRico.new(res, owner, start_position, target_position, damage), true)
+		shoot_field.add_child(
+				ProjectileRico.new(ser, weapon_owner, start_position, target_position, damage, sr)
+		, true)
 		return
 	elif _is_entity_class(ShootEntityResource.EntityClasses.HITSCAN):
-		shoot_field.add_child(Hitscan.new(res, owner, start_position, target_position, damage), true)
+		shoot_field.add_child(
+				Hitscan.new(ser, weapon_owner, start_position, target_position, damage, sr)
+		, true)
 		return
 	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
 
@@ -96,7 +104,7 @@ func reload():
 		ammo = ammo_max
 
 ## For checking if [member shoot_timer] is more than [member shoot_rate_time].
-func can_shoot() -> bool:
+func is_shoot_time_ok() -> bool:
 	return shoot_timer >= shoot_rate_time
 
 

@@ -23,7 +23,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine")]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("sprite", "health_comp", "weapon_marker", "state_machine", "statuses")]
 script = ExtResource("1_jjbrk")
 size_y_percent = 20.0
 weapon_resource = ExtResource("2_8mmxc")
@@ -31,6 +31,7 @@ sprite = NodePath("AnimatedSprite2D")
 health_comp = NodePath("HealthComponent")
 weapon_marker = NodePath("WeaponMarker")
 state_machine = NodePath("StateMachine")
+statuses = NodePath("Statuses")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gvfid")
@@ -57,3 +58,5 @@ script = ExtResource("6_ypg4f")
 
 [node name="DeadEnemyState" type="Node" parent="StateMachine"]
 script = ExtResource("7_qpuoh")
+
+[node name="Statuses" type="Node" parent="."]

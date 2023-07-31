@@ -8,6 +8,7 @@ enum ShapeType {
 @export_range(1, 30) var size_x_percent: float = 5 # percents of screen_height
 @export_range(1, 30) var size_y_percent: float = 5 # percents of screen_height
 @export_range(1, 500) var speed_percent: float = 100 # percents of screen_width per second
+@export var has_penetration: bool = false
 
 
 func get_shape() -> Shape2D:

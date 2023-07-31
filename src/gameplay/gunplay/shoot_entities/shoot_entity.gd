@@ -6,14 +6,16 @@ enum Owner {
 }
 # Init variables
 var resource: ShootEntityResource
-var damage: int
 var entity_owner: Owner
 var start_position: Vector2
 var target_position: Vector2
+var damage: int
+var status_resource: StatusResource
 
 
-func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: Vector2, target_position: Vector2, damage: int) -> void:
+func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: Vector2, target_position: Vector2, damage: int, status_resource: StatusResource = null) -> void:
 	self.resource = resource
+	self.status_resource = status_resource
 	self.damage = damage
 	self.entity_owner = entity_owner
 	self.start_position = start_position
@@ -37,3 +39,14 @@ func create_collision_object(obj: CollisionObject2D, entity_owner: Owner) -> Col
 		obj.set_collision_layer_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
 		obj.set_collision_mask_value(Global.Layers.PLAYER, true)
 	return obj
+
+
+func add_status(target: Node):
+	if status_resource != null:
+		if target is Enemy: # target is Player or
+			var status_count := 0
+			for status in target.get_statuses() as Array[Status]:
+				if status.tag == status_resource.tag:
+					status_count += 1
+			if status_count < status_resource.status_count_max:
+				target.statuses.add_child(Status.new(status_resource))

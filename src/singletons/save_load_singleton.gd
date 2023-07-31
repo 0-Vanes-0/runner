@@ -29,8 +29,8 @@ func create_empty_data_file(file: FileAccess):
 
 ## Writes settings to file.
 func write_settings_to_file(settings: Dictionary, file: ConfigFile):
-	for settings_section in (settings.keys() as Array[String]):
-		for setting_name in (settings.get(settings_section).keys() as Array[String]):
+	for settings_section in settings.keys() as Array[String]:
+		for setting_name in settings.get(settings_section).keys() as Array[String]:
 			var value = settings.get(settings_section).get(setting_name)
 			file.set_value(settings_section, setting_name, value)
 

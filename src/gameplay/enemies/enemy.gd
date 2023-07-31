@@ -13,6 +13,7 @@ signal dead
 @export var health_comp: HealthComponent
 @export var weapon_marker: Marker2D
 @export var state_machine: StateMachine
+@export var statuses: Node ## Parent node of all [Status]es.
 
 var weapon: Weapon
 #var clothes: Clothes
@@ -23,7 +24,7 @@ var current_floor: int
 
 
 func _ready() -> void:
-	assert(size_y_percent and weapon_resource and sprite and health_comp and weapon_marker and state_machine)
+	assert(size_y_percent and weapon_resource and sprite and health_comp and weapon_marker and state_machine and statuses)
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
@@ -36,7 +37,7 @@ func _ready() -> void:
 	weapon_marker.add_child(weapon)
 	weapon.scale.x *= -1.0
 	
-	for state in (state_machine.get_children() as Array[EnemyState]):
+	for state in state_machine.get_children() as Array[EnemyState]:
 		if state is DeadEnemyState:
 			state_dead = state
 		elif state is GoAwayEnemyState:
@@ -56,3 +57,13 @@ func get_sprite_size() -> Vector2:
 func get_game_size() -> Vector2:
 	var game_y_size := size_y_percent / 100 * Global.SCREEN_HEIGHT
 	return Vector2(game_y_size, game_y_size)
+
+
+func get_statuses() -> Array[Node]:
+	return statuses.get_children()
+
+
+func clear_statuses():
+	for status in get_statuses() as Array[Status]:
+		status.queue_free()
+	sprite.modulate = health_comp.orig_modulate

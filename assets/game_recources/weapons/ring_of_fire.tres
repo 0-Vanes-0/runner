@@ -22,13 +22,14 @@ shape = 1
 size_x_percent = 5.0
 size_y_percent = 5.0
 speed_percent = 100.0
+has_penetration = false
 entity_class = 1
 sprite_frames = SubResource("SpriteFrames_qsryl")
 
 [sub_resource type="Resource" id="Resource_cr1tp"]
 script = ExtResource("4_b1ghi")
-base_damage = 0
-tick_time = 0.5
+base_damage = 1
+tick_time = 1.0
 status_count_max = 5
 off_type = 0
 ticks_count_max = 0

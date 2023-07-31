@@ -7,6 +7,7 @@
 [sub_resource type="Resource" id="Resource_khv65"]
 script = ExtResource("2_rejrw")
 beam_width = 1.0
+has_penetration = false
 entity_class = 3
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r1isj"]

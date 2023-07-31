@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_level_complete:
-		for segment in (segments.get_children() as Array[Segment]):
+		for segment in segments.get_children() as Array[Segment]:
 			segment.move(delta * Global.player.run_speed)
 	
 	if is_enemies_permitted and enemies.get_child_count() == 0:
@@ -96,11 +96,11 @@ func setup_player(need_create_instance: bool = false):
 
 
 func setup_level():
-	for child in (segments.get_children() as Array[Segment]):
+	for child in segments.get_children() as Array[Segment]:
 		child.queue_free()
-	for child in (enemies.get_children() as Array[Enemy]):
+	for child in enemies.get_children() as Array[Enemy]:
 		child.queue_free()
-	for child in (shoot_field.get_children() as Array[ShootEntity]):
+	for child in shoot_field.get_children() as Array[ShootEntity]:
 		child.queue_free()
 	
 	var biome_segments: Array[Segment] = Preloader.get_segments_by_biome(GameInfo.biome_number)
@@ -219,5 +219,5 @@ func _on_level_complete():
 
 func _remove_enemies():
 	is_enemies_permitted = false
-	for enemy in (enemies.get_children() as Array[Enemy]):
+	for enemy in enemies.get_children() as Array[Enemy]:
 		enemy.state_machine.transition_to(enemy.state_go_away, true)

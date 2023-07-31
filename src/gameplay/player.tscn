@@ -189,12 +189,13 @@ size = Vector2(20, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfdpb"]
 size = Vector2(120, 120)
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "body_shape", "health_comp", "state_machine", "state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead", "state_level_end")]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "body_shape", "health_comp", "state_machine", "statuses", "state_run", "state_jump_up", "state_jump_down", "state_dodge", "state_dead", "state_level_end")]
 script = ExtResource("1_wg1tk")
 sprite = NodePath("AnimatedSprite2D")
 body_shape = NodePath("BodyShape")
 health_comp = NodePath("HealthComponent")
 state_machine = NodePath("StateMachine")
+statuses = NodePath("Statuses")
 state_run = NodePath("StateMachine/RunPlayerState")
 state_jump_up = NodePath("StateMachine/JumpUpPlayerState")
 state_jump_down = NodePath("StateMachine/JumpDownPlayerState")
@@ -249,9 +250,13 @@ connections = [null]
 script = ExtResource("42_2ob23")
 connections = [NodePath("../RunPlayerState")]
 
+[node name="Statuses" type="Node" parent="."]
+
 [node name="FactSizeArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 0
+monitoring = false
+monitorable = false
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 

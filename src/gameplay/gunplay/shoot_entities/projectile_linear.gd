@@ -9,8 +9,8 @@ var speed: float
 var _direction: Vector2
 
 
-func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2, damage: int) -> void:
-	super(resource, entity_owner, start_position, target_position, damage)
+func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_position: Vector2, target_position: Vector2, damage: int, status_resource: StatusResource = null) -> void:
+	super(resource, entity_owner, start_position, target_position, damage, status_resource)
 	self.name = "ProjectileLinear"
 	
 	self.speed = resource.get_speed()
@@ -26,7 +26,9 @@ func _init(resource: ProjectileSER, entity_owner: ShootEntity.Owner, start_posit
 			func(area: Area2D):
 				if area is HealthComponent and area.is_shape_enabled():
 					area.take_damage(self.damage)
-					self.queue_free()
+					add_status(area.get_parent())
+					if not resource.has_penetration:
+						self.queue_free()
 	)
 	
 	visibler = VisibleOnScreenNotifier2D.new()
