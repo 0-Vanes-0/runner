@@ -2,12 +2,15 @@
 class_name SceneHandler
 extends Node
 
+signal scene_changed(current_scene: Node)
+
 var current_scene: Node ## Current scene on screen. Can be changed by [method switch_to_scene].
 
 
 func _ready() -> void:
 	current_scene = Preloader.main_menu_scene.instantiate()
 	self.add_child(current_scene)
+	scene_changed.emit(current_scene)
 
 ## Firstly removes current scene from tree and queues it for freeing, then instantiates a new [param scene].
 func switch_to_scene(scene: PackedScene):
@@ -18,3 +21,4 @@ func switch_to_scene(scene: PackedScene):
 	self.remove_child(current_scene)
 	current_scene = scene.instantiate()
 	self.add_child(current_scene)
+	scene_changed.emit(current_scene)
