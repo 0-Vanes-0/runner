@@ -34,6 +34,7 @@ status_count_max = 5
 off_type = 0
 ticks_count_max = 0
 time_max = 0.0
+off_on_dead = true
 
 [resource]
 script = ExtResource("1_cq5wt")
