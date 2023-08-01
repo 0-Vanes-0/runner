@@ -21,6 +21,8 @@ func enter():
 	target_floor = alt_floors.pick_random()
 	path_length = absi(enemy.current_floor - target_floor)
 	max_bounces = randi_range(0, max_bounces_amount)
+	if tween:
+		tween.kill()
 	tween = create_tween()
 	for i in (max_bounces + 1):
 		if i % 2 == 0:
@@ -55,4 +57,3 @@ func physics_update(delta: float):
 
 func exit():
 	tween.kill()
-	tween = null

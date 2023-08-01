@@ -26,7 +26,7 @@ signal loaded
 @export_group("Enemies", "enemy_")
 @export var enemy_test_dragon: PackedScene
 
-var base_weapon_resources: Array[WeaponResource]
+var base_weapon_resources: Array[WeaponResource] = [null]
 var skin_resources: Array[SkinResource]
 var segments: Dictionary # { int: Array[Segment] }
 var default_segment: Segment

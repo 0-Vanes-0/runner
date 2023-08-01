@@ -5,6 +5,7 @@ const FADE_OUT_TIME := 1.0
 @export var main_menu_music: AudioStreamMP3
 @export var game_music: AudioStreamMP3
 var volume := -20.0
+var is_music_on: bool
 
 
 func _ready() -> void:
@@ -12,12 +13,15 @@ func _ready() -> void:
 	var scene_handler := get_parent() as SceneHandler
 	scene_handler.scene_changed.connect(_on_scene_changed)
 	self.volume_db = volume
+	is_music_on = Global.settings[Text.AUDIO][Text.MUSIC]
 	
 	Global.need_apply_settings.connect(
 			func():
 				if Global.settings[Text.AUDIO][Text.MUSIC] == true:
+					is_music_on = true
 					self.play()
 				else:
+					is_music_on = false
 					self.stop()
 	)
 
@@ -30,7 +34,7 @@ func _on_scene_changed(current_scene: Node):
 		await get_tree().create_timer(FADE_OUT_TIME).timeout
 		self.stream = game_music
 	
-	if not self.playing:
+	if not self.playing and is_music_on:
 		self.play()
 
 

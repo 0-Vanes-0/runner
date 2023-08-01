@@ -16,6 +16,8 @@ func enter():
 	
 	player.platforms_left = 0
 	var run_speed := player.run_speed
+	if tween:
+		tween.kill()
 	tween = create_tween()
 	tween.tween_property(
 			player,

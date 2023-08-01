@@ -2,16 +2,6 @@
 ## The new generation can be called only after dying of player.
 extends Node
 
-enum Rarity {
-	NORMAL,
-	RARE,
-	EPIC,
-	LEGENDARY,
-}
-const NORMAL_CHANCE := 50
-const RARE_CHANCE := 30
-const EPIC_CHANCE := 15
-const LEGENDARY_CHANCE := 5
 #var seed: String
 ## Current biome. (WIP: create Biome class?)
 @export_range(1, 5) var biome_number: int = 1
@@ -62,9 +52,9 @@ func generate_game_info():
 			segments_in_levels[biome_i][level_i] = segment_order
 	
 	for i in 6:
-		var rarity: Rarity = generate_rarity()
-		var color: Color = SkinResource.COLORS[rarity]
-		var weapon_resource := Preloader.base_weapon_resources[rarity]
+		var rarity := Rarity.generate_rarity()
+		var color: Color = SkinResource.COLORS[rarity.get_type()]
+		var weapon_resource := Preloader.base_weapon_resources[rarity.get_type()]
 		
 		var demon_data := DemonData.new(
 				Preloader.skin_resources.pick_random()
@@ -72,18 +62,6 @@ func generate_game_info():
 				, weapon_resource
 		)
 		demon_datas.append(demon_data)
-
-
-func generate_rarity() -> Rarity:
-	var random_value: int = randi_range(1, NORMAL_CHANCE + RARE_CHANCE + EPIC_CHANCE + LEGENDARY_CHANCE)
-	if random_value < NORMAL_CHANCE:
-		return Rarity.NORMAL
-	elif random_value < NORMAL_CHANCE + RARE_CHANCE:
-		return Rarity.RARE
-	elif random_value < NORMAL_CHANCE + RARE_CHANCE + EPIC_CHANCE:
-		return Rarity.EPIC
-	else:
-		return Rarity.LEGENDARY
 
 
 func get_level_length(level_number: int) -> int:

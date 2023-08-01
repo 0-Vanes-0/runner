@@ -1,12 +1,12 @@
 class_name SkinResource
 extends Resource
 
-const COLORS := [
-	Color.WHITE,
-	Color.DARK_VIOLET,
-	Color.YELLOW,
-	Color.RED,
-]
+const COLORS := {
+	Rarity.NORMAL: Color.WHITE,
+	Rarity.RARE: Color.DARK_VIOLET,
+	Rarity.EPIC: Color.YELLOW,
+	Rarity.LEGENDARY: Color.RED,
+}
 @export var sprite_frames: SpriteFrames
 
 
