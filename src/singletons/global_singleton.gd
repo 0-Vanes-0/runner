@@ -32,6 +32,9 @@ var DEFAULT_SETTINGS: Dictionary = {
 		Text.RELOAD_SWIPE: true,
 		Text.SWITCH_WEAPON_SWIPE: true,
 		Text.ACTIVITY_SWIPE: true,
+	},
+	Text.AUDIO: {
+		Text.MUSIC: true
 	}
 }
 ## Const size of [SensorButton] in [GameScene].

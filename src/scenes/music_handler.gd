@@ -12,6 +12,14 @@ func _ready() -> void:
 	var scene_handler := get_parent() as SceneHandler
 	scene_handler.scene_changed.connect(_on_scene_changed)
 	self.volume_db = volume
+	
+	Global.need_apply_settings.connect(
+			func():
+				if Global.settings[Text.AUDIO][Text.MUSIC] == true:
+					self.play()
+				else:
+					self.stop()
+	)
 
 
 func _on_scene_changed(current_scene: Node):
