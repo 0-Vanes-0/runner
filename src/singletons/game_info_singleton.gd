@@ -53,15 +53,8 @@ func generate_game_info():
 	
 	for i in 6:
 		var rarity := Rarity.generate_rarity()
-		var color: Color = SkinResource.COLORS[rarity.get_type()]
-		var weapon_resource := Preloader.base_weapon_resources[rarity.get_type()]
-		
-		var demon_data := DemonData.new(
-				Preloader.skin_resources.pick_random()
-				, color
-				, weapon_resource
-		)
-		demon_datas.append(demon_data)
+		var skin_res: SkinResource = Preloader.skin_resources.pick_random()
+		demon_datas.append(DemonData.new(rarity, skin_res))
 
 
 func get_level_length(level_number: int) -> int:

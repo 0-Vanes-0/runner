@@ -35,7 +35,7 @@ var DEFAULT_SETTINGS: Dictionary = {
 	},
 	Text.AUDIO: {
 		Text.MUSIC: true
-	}
+	},
 }
 ## Const size of [SensorButton] in [GameScene].
 var SENSOR_BUTTON_SIZE: Vector2
@@ -52,6 +52,10 @@ var SCREEN_WIDTH: int; var SCREEN_HEIGHT: int; var RATIO := ":"
 
 
 func _ready() -> void:
+	setup()
+
+
+func setup():
 	SCREEN_WIDTH = int(get_viewport().get_visible_rect().size.x)
 	SCREEN_HEIGHT = int(get_viewport().get_visible_rect().size.y)
 	var gcd := _gcd(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -59,7 +63,6 @@ func _ready() -> void:
 	print_debug("\t", "SCREEN_WIDTH=", SCREEN_WIDTH, ", SCREEN_HEIGHT=", SCREEN_HEIGHT, ", RATIO=", RATIO)
 	
 	Platform.SIZE = Vector2(Global.SCREEN_WIDTH / 4, Global.SCREEN_HEIGHT / 30)
-	
 	SENSOR_BUTTON_SIZE = Vector2.ONE * SCREEN_HEIGHT * 0.2
 	FLOORS_GAP = (SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS
 	ENEMY_Y_SPOTS.append(0.0)

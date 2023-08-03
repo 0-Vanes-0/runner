@@ -10,7 +10,7 @@ const Animations := {
 
 @export_group("Info")
 @export var name: String = "Weapon" ## Name of weapon.
-@export_multiline var description: String = "Shoots $1\nDPS = $2\nAmmo = $3" ## Description of weapon.
+@export_multiline var description: String = "Shoots $1\nDPS = $2\t\tAmmo = $3" ## Description of weapon.
 @export_group("Resources")
 @export var shoot_entity_resource: ShootEntityResource ## Resources of what weapon will shoot.
 @export var status_resource: StatusResource
@@ -44,7 +44,7 @@ func get_description() -> String:
 	description = description.replace(
 		"$2", 
 		str(damage_from_player / shoot_rate_time).pad_decimals(2) 
-		+ "\n(" + str(damage_from_player * ammo_max / (shoot_rate_time * ammo_max + reload_time)).pad_decimals(2) + " with reload)"
+		+ " (" + str(damage_from_player * ammo_max / (shoot_rate_time * ammo_max + reload_time)).pad_decimals(2) + " with reload)"
 	)
 	description = description.replace(
 		"$3", 

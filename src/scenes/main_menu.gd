@@ -36,7 +36,10 @@ func _ready() -> void:
 				func(button_pressed: bool):
 					if button_pressed:
 						Global.player_data = GameInfo.demon_datas[i]
-						_demon_info_label.text = GameInfo.demon_datas[i].weapon_resource.get_description()
+						_demon_info_label.clear()
+						_demon_info_label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER)
+						_demon_info_label.add_text(GameInfo.demon_datas[i].get_description())
+						_demon_info_label.pop()
 		)
 		if i == 1:
 			button.button_pressed = true

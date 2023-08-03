@@ -25,8 +25,7 @@ animations = [{
 script = ExtResource("1_pmna6")
 name = "Weapon"
 description = "Shoots $1
-DPS = $2
-Ammo = $3"
+DPS = $2    Ammo = $3"
 shoot_entity_resource = SubResource("Resource_khv65")
 damage_from_player = 3
 damage_from_enemy = 1

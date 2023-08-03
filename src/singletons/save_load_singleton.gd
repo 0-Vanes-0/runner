@@ -69,3 +69,11 @@ func save_settings(settings: Dictionary):
 ## WIP.
 func save_data():
 	pass
+
+
+func erase_settings():
+	var file := ConfigFile.new()
+	var error: Error = file.load(_settings_file_path)
+	if error == OK:
+		file.clear()
+		file.save(_settings_file_path)

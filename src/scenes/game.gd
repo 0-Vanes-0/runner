@@ -103,7 +103,7 @@ func setup_level():
 	for child in shoot_field.get_children() as Array[ShootEntity]:
 		child.queue_free()
 	
-	var biome_segments: Array[Segment] = Preloader.get_segments_by_biome(GameInfo.biome_number)
+	var biome_segments: Array[Segment] = Preloader.get_segments(GameInfo.biome_number)
 	var LEVEL_LENGTH: int = GameInfo.get_level_length(GameInfo.level_number)
 	var segments_length: int = 0
 	for segment_i in GameInfo.get_level_segments_numbers(GameInfo.biome_number, GameInfo.level_number):

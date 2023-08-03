@@ -64,6 +64,11 @@ disabled = true
 text = "Apply
 "
 
+[node name="RRButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Reset+restart"
+
 [node name="SectionsVBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -112,6 +117,7 @@ text = "Music"
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RRButton" to="." method="_on_rr_button_pressed"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/DodgeSwipeCheckButton" to="." method="_on_dodge_swipe_toggled"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/ReloadSwipeCheckButton" to="." method="_on_reload_swipe_toggled"]
 [connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/SwitchSwipeCheckButton" to="." method="_on_switch_swipe_toggled"]

@@ -5,6 +5,12 @@ const NORMAL: int = 1
 const RARE: int = 2
 const EPIC: int = 3
 const LEGENDARY: int = 4
+const NAMES := {
+	NORMAL: "Normal",
+	RARE: "Rare",
+	EPIC: "Epic",
+	LEGENDARY: "Legendary",
+}
 
 const NORMAL_CHANCE: int = 50
 const RARE_CHANCE: int = 30
@@ -21,6 +27,10 @@ func _init(type: int) -> void:
 
 func get_type() -> int:
 	return _type
+
+
+func get_name() -> String:
+	return NAMES[_type]
 
 
 static func generate_rarity() -> Rarity:

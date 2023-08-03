@@ -26,7 +26,7 @@ signal loaded
 @export_group("Enemies", "enemy_")
 @export var enemy_test_dragon: PackedScene
 
-var base_weapon_resources: Array[WeaponResource] = [null]
+var base_weapon_resources: Array[WeaponResource]
 var skin_resources: Array[SkinResource]
 var segments: Dictionary # { int: Array[Segment] }
 var default_segment: Segment
@@ -121,5 +121,5 @@ func start_preload():
 		)
 
 
-func get_segments_by_biome(biome_number: int) -> Array[Segment]:
+func get_segments(biome_number: int) -> Array[Segment]:
 	return segments[biome_number] as Array[Segment]

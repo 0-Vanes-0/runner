@@ -60,3 +60,9 @@ func _on_music_toggled(button_pressed: bool) -> void:
 	Global.settings[Text.AUDIO][Text.MUSIC] = button_pressed
 	SaveLoad.save_settings(Global.settings)
 	_apply_button.disabled = false
+
+
+func _on_rr_button_pressed() -> void:
+	SaveLoad.erase_settings()
+	Global.setup()
+	get_tree().reload_current_scene()
