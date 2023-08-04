@@ -32,8 +32,7 @@ func _ready() -> void:
 	self.scale = Vector2(game_y_size, game_y_size) / get_sprite_size()
 	health_comp.create_hp_label()
 	
-	weapon = Weapon.new(weapon_resource, ShootEntity.Owner.ENEMY)
-	weapon.name = "Weapon"
+	weapon = Weapon.new(weapon_resource, Rarity.new(Rarity.NORMAL), ShootEntity.Owner.ENEMY)
 	weapon_marker.add_child(weapon)
 	weapon.scale.x *= -1.0
 	

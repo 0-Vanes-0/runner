@@ -43,6 +43,7 @@ func _ready() -> void:
 						Global.player.weapon.ammo == Global.player.weapon.ammo_max 
 						or Global.player.weapon.is_reloading
 						or Global.player.get_current_state() is LevelEndPlayerState
+						or Global.player.weapon.ammo_max == 1
 				)
 	,
 			func():

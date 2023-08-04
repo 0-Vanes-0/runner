@@ -75,7 +75,7 @@ func get_description() -> String:
 	return (
 			str(base_hp) + " HP" + "\t\t" + str(base_speed) + " SPD" + "\t\t" + str(base_stamina) + " STM" + "\t\t" + str(base_gravity) + " GRV"
 			+ "\n" + "Weapon rarity: " + start_weapon_rarity.get_name()
-			+ "\n" + weapon_resource.get_description()
+			+ "\n" + weapon_resource.get_description(start_weapon_rarity)
 	)
 
 

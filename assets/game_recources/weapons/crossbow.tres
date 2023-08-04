@@ -40,15 +40,35 @@ animations = [{
 
 [resource]
 script = ExtResource("1_q381x")
-name = "Weapon"
+name = "Arbalet"
 description = "Shoots $1
 DPS = $2    Ammo = $3"
 shoot_entity_resource = SubResource("Resource_a2ef4")
-damage_from_player = 20
+damage_from_player = {
+"Epic": 20,
+"Legendary": 20,
+"Normal": 20,
+"Rare": 20
+}
 damage_from_enemy = 10
-ammo_max = 1
-reload_time = 0.0
-shoot_rate_time = 1.0
+ammo_max = {
+"Epic": 1,
+"Legendary": 1,
+"Normal": 1,
+"Rare": 1
+}
+reload_time = {
+"Epic": 0.0,
+"Legendary": 0.0,
+"Normal": 0.0,
+"Rare": 0.0
+}
+shoot_rate_time = {
+"Epic": 1.0,
+"Legendary": 1.0,
+"Normal": 1.0,
+"Rare": 1.0
+}
 spread_angle = 5
 sprite_frames = SubResource("SpriteFrames_e1352")
 sprite_scale_value = 3

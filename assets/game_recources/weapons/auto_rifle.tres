@@ -23,15 +23,35 @@ animations = [{
 
 [resource]
 script = ExtResource("1_pmna6")
-name = "Weapon"
+name = "Auto Rifle"
 description = "Shoots $1
 DPS = $2    Ammo = $3"
 shoot_entity_resource = SubResource("Resource_khv65")
-damage_from_player = 3
+damage_from_player = {
+"Epic": 3,
+"Legendary": 4,
+"Normal": 1,
+"Rare": 2
+}
 damage_from_enemy = 1
-ammo_max = 30
-reload_time = 2.5
-shoot_rate_time = 0.1
+ammo_max = {
+"Epic": 45,
+"Legendary": 60,
+"Normal": 30,
+"Rare": 36
+}
+reload_time = {
+"Epic": 2.0,
+"Legendary": 1.5,
+"Normal": 2.5,
+"Rare": 2.3
+}
+shoot_rate_time = {
+"Epic": 0.1,
+"Legendary": 0.09,
+"Normal": 0.1,
+"Rare": 0.1
+}
 spread_angle = 5
 sprite_frames = SubResource("SpriteFrames_r1isj")
 sprite_scale_value = 3

@@ -105,7 +105,7 @@ func apply_player_data():
 	sprite.scale = Vector2.ONE * get_fact_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
 	sprite.modulate = Global.player_data.color
 	# Adding Weapon:
-	weapon1 = get_weapon(Global.player_data.weapon_resource, true)
+	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
 	weapon = weapon1
 	self.add_child(weapon1)
 	
@@ -129,8 +129,8 @@ func get_current_state() -> PlayerState:
 	return state_machine.state
 
 
-func get_weapon(weapon_resource: WeaponResource, need_activate := false) -> Weapon:
-	var weapon := Weapon.new(weapon_resource, ShootEntity.Owner.PLAYER)
+func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_activate := false) -> Weapon:
+	var weapon := Weapon.new(weapon_resource, weapon_rarity, ShootEntity.Owner.PLAYER)
 	weapon.name = weapon_resource.name
 	weapon.position = health_comp.position
 	if need_activate:

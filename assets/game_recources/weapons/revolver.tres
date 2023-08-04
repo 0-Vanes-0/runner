@@ -23,15 +23,35 @@ animations = [{
 
 [resource]
 script = ExtResource("1_r60fj")
-name = "Weapon"
+name = "Revolver"
 description = "Shoots $1
 DPS = $2    Ammo = $3"
 shoot_entity_resource = SubResource("Resource_n1fqk")
-damage_from_player = 12
+damage_from_player = {
+"Epic": 15,
+"Legendary": 20,
+"Normal": 10,
+"Rare": 12
+}
 damage_from_enemy = 10
-ammo_max = 6
-reload_time = 1.5
-shoot_rate_time = 0.5
+ammo_max = {
+"Epic": 9,
+"Legendary": 12,
+"Normal": 6,
+"Rare": 7
+}
+reload_time = {
+"Epic": 1.25,
+"Legendary": 1.0,
+"Normal": 1.5,
+"Rare": 1.4
+}
+shoot_rate_time = {
+"Epic": 0.4,
+"Legendary": 0.3,
+"Normal": 0.6,
+"Rare": 0.5
+}
 spread_angle = 0
 sprite_frames = SubResource("SpriteFrames_e1352")
 sprite_scale_value = 3

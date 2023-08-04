@@ -4,6 +4,7 @@ extends Node2D
 
 @export var weapon_resource: WeaponResource ## Stored info about weapon.
 
+var weapon_rarity: Rarity
 var weapon_owner: ShootEntity.Owner ## Current owner of weapon.
 var damage: int ## Damage dealing by [Player] or [Enemy].
 var shoot_rate_time: float ## [member WeaponResource.shoot_rate_time].
@@ -20,18 +21,20 @@ var is_reloading: bool = false ## Flag for checking if is [method reload] proces
 var is_active: bool = false ## Flag for checking if it belongs to [member Player.weapon] currently.
 
 
-func _init(weapon_resource: WeaponResource, weapon_owner: ShootEntity.Owner) -> void:
+func _init(weapon_resource: WeaponResource, weapon_rarity: Rarity, weapon_owner: ShootEntity.Owner) -> void:
 	sprite = AnimatedSprite2D.new()
 	self.add_child(sprite)
 	
 	assert(weapon_resource != null, "weapon_resource is null")
 	self.weapon_resource = weapon_resource
-	self.damage = weapon_resource.damage_from_player if weapon_owner == ShootEntity.Owner.PLAYER else weapon_resource.damage_from_enemy
-	self.ammo_max = weapon_resource.ammo_max
+	self.name = weapon_resource.name
+	self.weapon_rarity = weapon_rarity
+	self.damage = weapon_resource.get_damage(weapon_rarity) if weapon_owner == ShootEntity.Owner.PLAYER else weapon_resource.damage_from_enemy
+	self.ammo_max = weapon_resource.get_ammo_max(weapon_rarity)
 	self.ammo = self.ammo_max
-	self.reload_time = weapon_resource.reload_time
-	self.shoot_rate_time = weapon_resource.shoot_rate_time
-	shoot_timer = shoot_rate_time
+	self.reload_time = weapon_resource.get_reload_time(weapon_rarity)
+	self.shoot_rate_time = weapon_resource.get_shoot_rate_time(weapon_rarity)
+	shoot_timer = self.shoot_rate_time
 	self.spread_angle = weapon_resource.spread_angle
 	extra_spread_angle = 0
 	sprite.sprite_frames = weapon_resource.sprite_frames if weapon_resource.sprite_frames != null else SpriteFrames.new()
