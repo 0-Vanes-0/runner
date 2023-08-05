@@ -104,6 +104,12 @@ func apply_player_data():
 	Global.player_data.skin_resource.apply_to_sprite(sprite)
 	sprite.scale = Vector2.ONE * get_fact_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
 	sprite.modulate = Global.player_data.color
+	
+	health_comp.health = Global.player_data.base_hp
+	run_speed = Global.player_data.base_speed
+	stamina_max = Global.player_data.base_stamina
+	gravity = Global.player_data.base_gravity
+	
 	# Adding Weapon:
 	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
 	weapon = weapon1

@@ -41,8 +41,7 @@ animations = [{
 [resource]
 script = ExtResource("1_q381x")
 name = "Arbalet"
-description = "Shoots $1
-DPS = $2    Ammo = $3"
+description = ""
 shoot_entity_resource = SubResource("Resource_a2ef4")
 damage_from_player = {
 "Epic": 20,

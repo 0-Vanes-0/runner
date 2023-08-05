@@ -10,7 +10,7 @@ const Animations := {
 
 @export_group("Info")
 @export var name: String = "Weapon" ## Name of weapon.
-@export_multiline var description: String = "Shoots $1\nDPS = $2\t\tAmmo = $3" ## Description of weapon.
+@export_multiline var description: String = "" ## Description of weapon.
 
 @export_group("Resources")
 @export var shoot_entity_resource: ShootEntityResource ## Resources of what weapon will shoot.
@@ -70,20 +70,23 @@ func get_description(rarity: Rarity) -> String:
 	var reload_time := get_reload_time(rarity)
 	var shoot_rate_time := get_shoot_rate_time(rarity)
 	
-	description = description.replace(
+	var text := "Shoots $1\nDPS = $2\nAmmo = $3\n" + description
+	text = text.replace(
 			"$1", 
 			ShootEntityResource.EntityClasses.keys()[shoot_entity_resource.entity_class]
 	)
-	description = description.replace(
+	text = text.replace(
 			"$2", 
 			str(damage / shoot_rate_time).pad_decimals(2) 
-			+ " (" + str(damage * ammo_max / (shoot_rate_time * ammo_max + reload_time)).pad_decimals(2) + " with reload)"
+			+ " (" 
+			+ str(damage * ammo_max / (shoot_rate_time * ammo_max + reload_time)).pad_decimals(2) 
+			+ " with reload)"
 	)
-	description = description.replace(
+	text = text.replace(
 			"$3", 
 			str(ammo_max if ammo_max > 1 else "endless")
 	)
-	return description
+	return text
 
 
 func get_damage(rarity: Rarity) -> int:

@@ -24,8 +24,7 @@ animations = [{
 [resource]
 script = ExtResource("1_r60fj")
 name = "Revolver"
-description = "Shoots $1
-DPS = $2    Ammo = $3"
+description = ""
 shoot_entity_resource = SubResource("Resource_n1fqk")
 damage_from_player = {
 "Epic": 15,

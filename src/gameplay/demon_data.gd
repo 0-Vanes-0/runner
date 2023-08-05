@@ -44,20 +44,21 @@ var _RARITY_STATS := {
 	Rarity.LEGENDARY: 1,
 }
 
-var rarity: Rarity
+var common_rarity: Rarity
 var skin_resource: SkinResource
-
 var color: Color
+var weapon_resource: WeaponResource
+
+var rarities: Array[int] = [0,0,0,0,0]
 var base_hp: int
 var base_speed: float
 var base_stamina: int
 var base_gravity: int
 var start_weapon_rarity: Rarity
-var weapon_resource: WeaponResource
 
 
 func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
-	self.rarity = rarity
+	self.common_rarity = rarity
 	self.skin_resource = skin_resource
 	
 	self.color = _COLORS.get(rarity.get_type())
@@ -73,13 +74,17 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 
 func get_description() -> String:
 	return (
-			str(base_hp) + " HP" + "\t\t" + str(base_speed) + " SPD" + "\t\t" + str(base_stamina) + " STM" + "\t\t" + str(base_gravity) + " GRV"
-			+ "\n" + "Weapon rarity: " + start_weapon_rarity.get_name()
-			+ "\n" + weapon_resource.get_description(start_weapon_rarity)
+					   "[color=#" + _get_color_hex(rarities[0]) + "]" + str(base_hp) + " HP" + "[/color]"
+			+ "\t\t" + "[color=#" + _get_color_hex(rarities[1]) + "]" + str(base_speed) + " SPD" + "[/color]"
+			+ "\t\t" + "[color=#" + _get_color_hex(rarities[2]) + "]" + str(base_stamina) + " STM" + "[/color]"
+			+ "\t\t" + "[color=#" + _get_color_hex(rarities[3]) + "]" + str(base_gravity) + " GRV" + "[/color]"
+			+ "\n" + "Weapon: " + weapon_resource.name
+			+ "\n" + "[color=#" + _get_color_hex(rarities[4]) + "]" + weapon_resource.get_description(start_weapon_rarity) + "[/color]"
 	)
 
 
 func _assign_with_rarity(i: int, rarity: Rarity):
+	rarities[i] = rarity.get_type()
 	match i:
 		0:
 			base_hp = _BASE_HP.get(rarity.get_type())
@@ -91,3 +96,7 @@ func _assign_with_rarity(i: int, rarity: Rarity):
 			base_gravity = _BASE_GRAVITY.get(rarity.get_type())
 		4:
 			start_weapon_rarity = rarity
+
+
+func _get_color_hex(rarity_type: int) -> String:
+	return (_COLORS[rarity_type] as Color).to_html()

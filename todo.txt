@@ -1,4 +1,4 @@
-- Think of rarity in DemonData
+- Fix LevelEndPlayerState tween
 - On went to main menu "Cannot call method 'tween_property' on a null value."
 - Add Chest and Portal classes
 - Make custom collection class(es), see game_info.gd
@@ -11,6 +11,7 @@
 -¿Maybe redo shoot entity resources and remove additional classes?
 
 
++ Think of rarity in DemonData
 + RESOLVE ATLAS COPY ISSUE
 + Add Status class and make composition to PlayerState + EnemyState
 + Make Platforms with dynamic size (percents of screen)

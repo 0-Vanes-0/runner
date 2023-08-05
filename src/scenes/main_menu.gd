@@ -38,7 +38,7 @@ func _ready() -> void:
 						Global.player_data = GameInfo.demon_datas[i]
 						_demon_info_label.clear()
 						_demon_info_label.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER)
-						_demon_info_label.add_text(GameInfo.demon_datas[i].get_description())
+						_demon_info_label.append_text(GameInfo.demon_datas[i].get_description())
 						_demon_info_label.pop()
 		)
 		if i == 1:

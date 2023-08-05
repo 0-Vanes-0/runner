@@ -87,9 +87,6 @@ func setup_player(need_create_instance: bool = false):
 					is_enemies_permitted = false
 		)
 		player.call_level_end_objects.connect(process_level_end_objects)
-		player.health_comp.health = 100
-		player.stamina_max = 100.0
-		player.run_speed = Platform.SIZE.x * 2
 		player.dodge_time = 1.0
 	
 	Global.player.prepare_to_run()
