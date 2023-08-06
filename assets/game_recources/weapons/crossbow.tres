@@ -45,9 +45,9 @@ description = ""
 shoot_entity_resource = SubResource("Resource_a2ef4")
 damage_from_player = {
 "Epic": 20,
-"Legendary": 20,
-"Normal": 20,
-"Rare": 20
+"Legendary": 30,
+"Normal": 10,
+"Rare": 15
 }
 damage_from_enemy = 10
 ammo_max = {

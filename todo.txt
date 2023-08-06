@@ -1,3 +1,4 @@
+- FIX TAP CODE
 - Fix LevelEndPlayerState tween
 - On went to main menu "Cannot call method 'tween_property' on a null value."
 - Add Chest and Portal classes
