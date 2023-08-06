@@ -80,7 +80,6 @@ func setup_player(need_create_instance: bool = false):
 		player.shoot_sensor = shoot_sensor
 		player.apply_player_data()
 		level.add_child(player)
-		level.move_child(player, segments.get_index() + 1)
 		player.state_dead.died.connect(
 				func():
 					game_over_menu.appear()

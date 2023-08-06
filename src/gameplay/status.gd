@@ -1,6 +1,8 @@
 class_name Status
 extends Node
 
+signal deleted
+
 var tag: StatusResource.Tags = StatusResource.Tags.EMPTY
 
 var timer := 0.0
@@ -28,7 +30,7 @@ func _init(status_resource: StatusResource) -> void:
 
 
 func _ready() -> void:
-	parent = get_parent().get_parent()
+	parent = (get_parent() as StatusHandler).get_parent()
 	if parent is Player:
 		parent_health_comp = parent.health_comp
 #		parent_clothes = parent.clothes
@@ -45,10 +47,15 @@ func _physics_process(delta: float) -> void:
 		if ticks_count_max > 0:
 			ticks_counter += 1
 			if ticks_counter >= ticks_count_max:
-				self.queue_free()
+				delete_status()
 		if time_max > 0.0:
 			time_passed += timer
 			if time_passed > time_max:
-				self.queue_free()
+				delete_status()
 		
 		timer = 0.0
+
+
+func delete_status():
+	deleted.emit()
+	self.queue_free()

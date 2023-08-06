@@ -110,6 +110,15 @@ func get_game_scene() -> GameScene:
 	else:
 		return null
 
+
+func create_ui_label(size: int = 36) -> Label:
+	var label := Label.new()
+	label.add_theme_font_size_override("font_size", size)
+	label.add_theme_font_override("font", preload("res://assets/fonts/vcrosdmonorusbyd.ttf"))
+	label.add_theme_constant_override("outline_size", size/2)
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	return label
+
 ## Returns [param error] as [String].
 func parse_error(error: Error) -> String:
 	match error:

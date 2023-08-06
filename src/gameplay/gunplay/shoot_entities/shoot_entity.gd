@@ -44,9 +44,4 @@ func create_collision_object(obj: CollisionObject2D, entity_owner: Owner) -> Col
 func add_status(target: Node):
 	if status_resource != null:
 		if target is Enemy: # target is Player or
-			var status_count := 0
-			for status in target.get_statuses() as Array[Status]:
-				if status.tag == status_resource.tag:
-					status_count += 1
-			if status_count < status_resource.status_count_max:
-				target.statuses.add_child(Status.new(status_resource))
+			target.status_handler.add_status(status_resource)

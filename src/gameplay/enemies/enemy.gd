@@ -9,11 +9,12 @@ signal dead
 @export var weapon_resource: WeaponResource ## WIP: Array of Weapons, pick random when spawn.
 #@export var clothes: ClothesResource
 @export_group("Children")
+@export var fact_size_area: Area2D
 @export var sprite: AnimatedSprite2D
 @export var health_comp: HealthComponent
 @export var weapon_marker: Marker2D
 @export var state_machine: StateMachine
-@export var statuses: Node ## Parent node of all [Status]es.
+@export var status_handler: StatusHandler ## Parent node of all [Status]es.
 
 var weapon: Weapon
 #var clothes: Clothes
@@ -24,13 +25,11 @@ var current_floor: int
 
 
 func _ready() -> void:
-	assert(size_y_percent and weapon_resource and sprite and health_comp and weapon_marker and state_machine and statuses)
+	assert(size_y_percent and weapon_resource and sprite and health_comp and weapon_marker and state_machine and status_handler)
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
-	var game_y_size := size_y_percent / 100 * Global.SCREEN_HEIGHT
-	self.scale = Vector2(game_y_size, game_y_size) / get_sprite_size()
-	health_comp.create_hp_label()
+	self.scale = get_adjust_scale()
 	
 	weapon = Weapon.new(weapon_resource, Rarity.new(Rarity.NORMAL), ShootEntity.Owner.ENEMY)
 	weapon_marker.add_child(weapon)
@@ -45,12 +44,8 @@ func _ready() -> void:
 			battle_states.append(state as EnemyState)
 
 
-func get_sprite_size() -> Vector2:
-	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation("default"):
-		var texture := sprite.sprite_frames.get_frame_texture("default", 0)
-		assert(texture != null, "texture of 'default' is null")
-		return texture.get_size()
-	return Vector2.ZERO
+func get_fact_size() -> Vector2:
+	return ((fact_size_area.get_child(0) as CollisionShape2D).shape as RectangleShape2D).size
 
 
 func get_game_size() -> Vector2:
@@ -58,11 +53,5 @@ func get_game_size() -> Vector2:
 	return Vector2(game_y_size, game_y_size)
 
 
-func get_statuses() -> Array[Node]:
-	return statuses.get_children()
-
-
-func clear_statuses():
-	for status in get_statuses() as Array[Status]:
-		status.queue_free()
-	sprite.modulate = health_comp.orig_modulate
+func get_adjust_scale() -> Vector2:
+	return get_game_size() / get_fact_size()

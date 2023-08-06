@@ -8,7 +8,8 @@ func can_go_to_state() -> bool:
 
 func enter():
 	enemy.health_comp.turn_off_collision()
-	enemy.clear_statuses()
+	enemy.status_handler.clear_statuses()
+	enemy.sprite.modulate = enemy.health_comp.orig_modulate
 	enemy.sprite.play("default")
 	set_anim_looped()
 	var tween := create_tween()

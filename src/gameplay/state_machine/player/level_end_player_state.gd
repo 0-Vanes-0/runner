@@ -10,7 +10,8 @@ var tween: Tween
 
 
 func enter():
-	player.clear_statuses()
+	player.status_handler.clear_statuses()
+	player.sprite.modulate = player.health_comp.orig_modulate
 	player.sprite.play(ANIM_RUN)
 	set_anim_looped()
 	

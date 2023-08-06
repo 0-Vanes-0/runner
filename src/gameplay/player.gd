@@ -10,11 +10,13 @@ var player_sensor: PlayerSensor ## Input object for actions with player object.
 var shoot_sensor: ShootSensor ## Input object for shooting.
 
 @export_group("Children")
+@export var fact_size_area: Area2D
 @export var sprite: AnimatedSprite2D ## Sprite of current demon. (WIP: DemonSkin class)
 @export var body_shape: CollisionShape2D ## Body of player, interacting with [Platform].
+@export var weapon_marker: Marker2D
 @export var health_comp: HealthComponent ## Health of player object. When [member HealthComponent.health] reaches 0, player dies.
 @export var state_machine: StateMachine ## State machine stores behaviour logic of player object.
-@export var statuses: Node ## Parent node of all [Status]es.
+@export var status_handler: StatusHandler ## Parent node of all [Status]es.
 
 @export_group("States", "state_")
 @export var state_run: RunPlayerState ## State when player runs.
@@ -43,7 +45,7 @@ func _ready() -> void:
 	assert(
 			player_sensor and shoot_sensor 
 			and state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end
-			and sprite and body_shape and health_comp and state_machine and statuses
+			and sprite and body_shape and health_comp and state_machine and status_handler
 	)
 	self.name = "Player"
 	
@@ -54,8 +56,7 @@ func _ready() -> void:
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.PLAYER, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_ENEMY, true)
 	
-	self.scale = get_game_size() / get_fact_size()
-	health_comp.create_hp_label()
+	self.scale = get_adjust_scale()
 	
 	# Connecting input objects' signals:
 	player_sensor.swipe.connect(
@@ -113,7 +114,7 @@ func apply_player_data():
 	# Adding Weapon:
 	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
 	weapon = weapon1
-	self.add_child(weapon1)
+	weapon_marker.add_child(weapon1)
 	
 #	weapon2 = get_weapon(wr)
 #	self.add_child(weapon2)
@@ -124,7 +125,11 @@ func get_game_size() -> Vector2:
 
 
 func get_fact_size() -> Vector2:
-	return (($FactSizeArea/CollisionShape2D as CollisionShape2D).shape as RectangleShape2D).size
+	return ((fact_size_area.get_child(0) as CollisionShape2D).shape as RectangleShape2D).size
+
+
+func get_adjust_scale() -> Vector2:
+	return get_game_size() / get_fact_size()
 
 
 func get_health_comp_position() -> Vector2:
@@ -144,13 +149,3 @@ func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_act
 	else:
 		weapon.deactivate()
 	return weapon
-
-
-func get_statuses() -> Array[Node]:
-	return statuses.get_children()
-
-
-func clear_statuses():
-	for status in get_statuses() as Array[Status]:
-		status.queue_free()
-	sprite.modulate = health_comp.orig_modulate
