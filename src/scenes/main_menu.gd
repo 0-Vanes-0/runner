@@ -25,9 +25,12 @@ func _ready() -> void:
 		GameInfo.generate_game_info()
 		GameInfo.is_run_seed_generated = true
 	
-	var buttons_array := _demons_hboxcontainer.get_children()
-	for i in buttons_array.size():
-		var button: CheckButton = buttons_array[i]
+	# Remove this loop later
+	for child in _demons_hboxcontainer.get_children():
+		child.queue_free()
+	
+	for i in GameInfo.demon_datas.size():
+		var button: CheckButton = Preloader.choose_demon_button.instantiate() as CheckButton
 		var texture_rect := button.get_child(0).get_child(0) as TextureRect
 		texture_rect.texture = GameInfo.demon_datas[i].skin_resource.sprite_frames.get_frame_texture("default", 0)
 		texture_rect.modulate = GameInfo.demon_datas[i].color
@@ -45,6 +48,8 @@ func _ready() -> void:
 			button.button_pressed = true
 		else:
 			button.button_pressed = false
+		
+		_demons_hboxcontainer.add_child(button)
 
 ## This method updates state of [member _play_button].
 func update_play_button_disabled():

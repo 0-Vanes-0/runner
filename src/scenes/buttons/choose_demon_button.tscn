@@ -1,0 +1,90 @@
+[gd_scene load_steps=17 format=3 uid="uid://d3f5us1v4x1jj"]
+
+[ext_resource type="ButtonGroup" uid="uid://dsu7rjtc4x6el" path="res://assets/themes_styles/main_menu_button_group.tres" id="1_813ka"]
+[ext_resource type="Texture2D" uid="uid://c1elmwh1wwaun" path="res://assets/sprites/players/test/test_default_0.png" id="2_6i2nb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0b4e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7po3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op3g0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cqet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j7si"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qly4t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7q8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ux8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35lc5"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.054902, 0.203922, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4bgkj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p678q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qo0d"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1pxa"]
+
+[node name="ChooseDemonButton" type="CheckButton"]
+custom_minimum_size = Vector2(300, 360)
+offset_right = 300.0
+offset_bottom = 360.0
+theme_override_icons/checked = SubResource("AtlasTexture_u0b4e")
+theme_override_icons/checked_disabled = SubResource("AtlasTexture_m7po3")
+theme_override_icons/unchecked = SubResource("AtlasTexture_op3g0")
+theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_1cqet")
+theme_override_icons/checked_mirrored = SubResource("AtlasTexture_4j7si")
+theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_shoee")
+theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qly4t")
+theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_i7q8e")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
+action_mode = 0
+button_group = ExtResource("1_813ka")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_6i2nb")
+stretch_mode = 5

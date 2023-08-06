@@ -12,6 +12,12 @@ signal loaded
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
 
+@export_group("UIs")
+@export var choose_demon_button: PackedScene
+
+@export_group("Enemies", "enemy_")
+@export var enemy_test_dragon: PackedScene
+
 @export_group("Skin Resources")
 @export var biker_skin: SkinResource
 @export var white_skin: SkinResource
@@ -22,9 +28,6 @@ signal loaded
 @export var crossbow_wr: WeaponResource
 @export var revolver_wr: WeaponResource
 @export var autorifle_wr: WeaponResource
-
-@export_group("Enemies", "enemy_")
-@export var enemy_test_dragon: PackedScene
 
 var base_weapon_resources: Array[WeaponResource]
 var skin_resources: Array[SkinResource]
@@ -47,6 +50,8 @@ func start_preload():
 		"player": player,
 		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
+		
+		"choose_demon_button": choose_demon_button,
 		
 		"enemy_test_dragon": enemy_test_dragon,
 	})

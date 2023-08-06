@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4m565kqjx3ba"]
+[gd_scene load_steps=17 format=3 uid="uid://c4m565kqjx3ba"]
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_tpd37"]
 [ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_1ntx0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player.tscn" id="5_pevw1"]
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="6_bgxgq"]
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="7_2kkfe"]
+[ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="8_i5st8"]
 [ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://assets/game_recources/player_skins/player_skin_biker.tres" id="8_v6vm6"]
 [ext_resource type="Resource" uid="uid://bbh24p14aee7n" path="res://assets/game_recources/player_skins/player_skin_white.tres" id="9_0nlv3"]
 [ext_resource type="Resource" uid="uid://l1dqljr8rva6" path="res://assets/game_recources/player_skins/player_skin_cyborg.tres" id="10_dhoxd"]
@@ -24,6 +25,8 @@ tilemap_scene = ExtResource("4_j1kq3")
 player = ExtResource("5_pevw1")
 platform_scene = ExtResource("6_bgxgq")
 segment_scene = ExtResource("7_2kkfe")
+choose_demon_button = ExtResource("8_i5st8")
+enemy_test_dragon = ExtResource("13_gd8yg")
 biker_skin = ExtResource("8_v6vm6")
 white_skin = ExtResource("9_0nlv3")
 cyborg_skin = ExtResource("10_dhoxd")
@@ -31,4 +34,3 @@ fire_ring_wr = ExtResource("12_0o327")
 crossbow_wr = ExtResource("11_v3j7y")
 revolver_wr = ExtResource("13_xo7v3")
 autorifle_wr = ExtResource("12_d1uio")
-enemy_test_dragon = ExtResource("13_gd8yg")

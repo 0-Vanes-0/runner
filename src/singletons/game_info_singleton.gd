@@ -51,7 +51,7 @@ func generate_game_info():
 				level_length += (Preloader.segments.get(biome_i) as Array[Segment])[segment_number].get_length()
 			segments_in_levels[biome_i][level_i] = segment_order
 	
-	for i in 6:
+	for i in 20:
 		var rarity := Rarity.generate_rarity()
 		var skin_res: SkinResource = Preloader.skin_resources.pick_random()
 		demon_datas.append(DemonData.new(rarity, skin_res))
