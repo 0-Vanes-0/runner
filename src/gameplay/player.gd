@@ -31,6 +31,7 @@ var run_speed: float ## Describes how fast [Segment]s are moving in pixels (play
 var dodge_time: float ## Describes how long is [DodgePlayerState].
 var stamina: float ## This value is spent on jumps and dodges. Restores during [RunPlayerState].
 var stamina_max: float ## Maximum value of [member stamina].
+var gravity: float
 var weapon: Weapon ## Equipped [Weapon].
 var weapon1: Weapon
 var weapon2: Weapon
@@ -38,7 +39,6 @@ var weapon2: Weapon
 var platforms_left: int ## Simple counter of platforms left to finish a level.
 
 ## The more it is, the faster player moves vertically. Default value is here: [code]ProjectSettings.get_setting("physics/2d/default_gravity")[/code]
-@onready var gravity: float = 1000
 
 
 func _ready() -> void:
