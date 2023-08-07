@@ -14,6 +14,7 @@ signal loaded
 
 @export_group("UIs")
 @export var choose_demon_button: PackedScene
+@export var main_menu_button_group: ButtonGroup
 
 @export_group("Enemies", "enemy_")
 @export var enemy_test_dragon: PackedScene
@@ -52,6 +53,7 @@ func start_preload():
 		"segment_scene": segment_scene,
 		
 		"choose_demon_button": choose_demon_button,
+		"main_menu_button_group": main_menu_button_group,
 		
 		"enemy_test_dragon": enemy_test_dragon,
 	})

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dnp3x14mc2hay"]
+[gd_scene load_steps=23 format=3 uid="uid://dnp3x14mc2hay"]
 
 [ext_resource type="Script" path="res://src/scenes/main_menu.gd" id="1_noaao"]
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="1_tny1b"]
@@ -10,13 +10,6 @@
 [sub_resource type="Theme" id="Theme_38a2o"]
 RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/normal_font = ExtResource("3_ebaty")
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_txu06"]
-color = Color(0.337255, 0.113725, 0, 1)
-thickness = 50
-
-[sub_resource type="Theme" id="Theme_fdpyf"]
-HScrollBar/styles/scroll = SubResource("StyleBoxLine_txu06")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enl27"]
 
@@ -151,8 +144,8 @@ fit_content = true
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
-theme = SubResource("Theme_fdpyf")
 follow_focus = true
+horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 
 [node name="DemonsHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer"]

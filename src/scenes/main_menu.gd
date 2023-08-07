@@ -30,10 +30,13 @@ func _ready() -> void:
 		child.queue_free()
 	
 	for i in GameInfo.demon_datas.size():
-		var button: CheckButton = Preloader.choose_demon_button.instantiate() as CheckButton
+		var button: DemonButton = Preloader.choose_demon_button.instantiate() as DemonButton
 		var texture_rect := button.get_child(0).get_child(0) as TextureRect
 		texture_rect.texture = GameInfo.demon_datas[i].skin_resource.sprite_frames.get_frame_texture("default", 0)
 		texture_rect.modulate = GameInfo.demon_datas[i].color
+		button.button_group = Preloader.main_menu_button_group
+		_demons_hboxcontainer.add_child(button)
+		button.label.text = str(i + 1)
 		
 		button.toggled.connect(
 				func(button_pressed: bool):
@@ -48,8 +51,6 @@ func _ready() -> void:
 			button.button_pressed = true
 		else:
 			button.button_pressed = false
-		
-		_demons_hboxcontainer.add_child(button)
 
 ## This method updates state of [member _play_button].
 func update_play_button_disabled():

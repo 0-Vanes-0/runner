@@ -2,6 +2,7 @@
 
 [ext_resource type="ButtonGroup" uid="uid://dsu7rjtc4x6el" path="res://assets/themes_styles/main_menu_button_group.tres" id="1_813ka"]
 [ext_resource type="Texture2D" uid="uid://c1elmwh1wwaun" path="res://assets/sprites/players/test/test_default_0.png" id="2_6i2nb"]
+[ext_resource type="Script" path="res://src/scenes/buttons/choose_demon_button.gd" id="2_tsbyr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0b4e"]
 
@@ -37,24 +38,13 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p678q"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qo0d"]
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1pxa"]
 
 [node name="ChooseDemonButton" type="CheckButton"]
 custom_minimum_size = Vector2(300, 360)
 offset_right = 300.0
 offset_bottom = 360.0
+mouse_filter = 1
 theme_override_icons/checked = SubResource("AtlasTexture_u0b4e")
 theme_override_icons/checked_disabled = SubResource("AtlasTexture_m7po3")
 theme_override_icons/unchecked = SubResource("AtlasTexture_op3g0")
@@ -67,10 +57,11 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_35lc5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
 action_mode = 0
 button_group = ExtResource("1_813ka")
+script = ExtResource("2_tsbyr")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
