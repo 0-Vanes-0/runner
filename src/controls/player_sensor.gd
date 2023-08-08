@@ -7,8 +7,6 @@ signal tap_up ## Signal for tapping at top half of screen.
 signal tap_down ## Signal for tapping at bottom half of screen.
 
 const SWIPE_MAX_DIAGONAL_SLOPE := 1.35 ## This constant is a limit of diagonal swipe. Totally diagonal swipe has value 1.44 as sqrt(2). This constant can be changed but 1.35 is best as tested.
-const SWIPE_MAX_TIME := 0.25 ## If time is more than that, it's drag gesture.
-const TAP_MAX_TIME := 0.1 ## If time is more than that, it's drag or longpress gesture.
 const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than Vector2(0, 0), and for that reason this constant exists.
 
 @export var control: Control
@@ -18,8 +16,6 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 @export var activity_button: SensorButton
 @export var switch_weapon_disabled_time: float
 
-var _timer: float = 0.0 
-var _is_timer_active: bool = false
 var _touch_start_position: Vector2
 var _size: Vector2
 
@@ -69,46 +65,38 @@ func _ready() -> void:
 	)
 	Global.need_apply_settings.connect(
 			func():
-				dodge_button.visible = not is_dodge_swipe()
-				reload_button.visible = not is_reload_swipe()
-				switch_button.visible = not is_switch_swipe()
-				activity_button.visible = not is_activity_swipe()
+				dodge_button.visible = not _is_dodge_swipe_active()
+				reload_button.visible = not _is_reload_swipe_active()
+				switch_button.visible = not _is_switch_swipe_active()
+				activity_button.visible = not _is_activity_swipe_active()
 	)
-
-
-func _process(delta: float) -> void:
-	if _is_timer_active:
-		_timer += delta
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		if self.position < event.position and event.position < self.position + _size:
 			if event.pressed:
-				_is_timer_active = true
 				_touch_start_position = event.position
 			else:
-				_is_timer_active = false
 				var vector: Vector2 = abs(event.position - _touch_start_position)
-				if _timer <= TAP_MAX_TIME and vector.length_squared() <= TAP_MAX_VECTOR.length_squared():
+				if vector.length_squared() <= TAP_MAX_VECTOR.length_squared():
 					if event.position.y < Global.SCREEN_HEIGHT / 2:
 						send_jump_up()
 					else:
 						send_jump_down()
-				elif (is_dodge_swipe() or is_reload_swipe() or is_switch_swipe() or is_activity_swipe()) and _timer <= SWIPE_MAX_TIME:
+				elif (_is_dodge_swipe_active() or _is_reload_swipe_active() or _is_switch_swipe_active() or _is_activity_swipe_active()):
 					var direction := Vector2(event.position - _touch_start_position).normalized()
 					if abs(direction.x) + abs(direction.y) < SWIPE_MAX_DIAGONAL_SLOPE:
 						if abs(direction.x) > abs(direction.y):
-							if direction.x > 0 and is_dodge_swipe():
+							if direction.x > 0 and _is_dodge_swipe_active():
 								send_dodge()
-							elif is_switch_swipe():
+							elif _is_switch_swipe_active():
 								send_switch()
 						else:
-							if direction.y > 0 and is_reload_swipe():
+							if direction.y > 0 and _is_reload_swipe_active():
 								send_reload()
-							elif is_activity_swipe():
+							elif _is_activity_swipe_active():
 								send_activity()
-				_timer = 0.0
 				_touch_start_position = Vector2.ZERO
 	
 	elif event is InputEventKey and event.is_pressed():
@@ -157,17 +145,17 @@ func send_switch():
 		switch_button.progress_enabling()
 
 
-func is_dodge_swipe() -> bool:
+func _is_dodge_swipe_active() -> bool:
 	return Global.settings[Text.CONTROLS][Text.DODGE_SWIPE]
 
 
-func is_switch_swipe() -> bool:
+func _is_switch_swipe_active() -> bool:
 	return Global.settings[Text.CONTROLS][Text.SWITCH_WEAPON_SWIPE]
 
 
-func is_reload_swipe() -> bool:
+func _is_reload_swipe_active() -> bool:
 	return Global.settings[Text.CONTROLS][Text.RELOAD_SWIPE]
 
 
-func is_activity_swipe() -> bool:
+func _is_activity_swipe_active() -> bool:
 	return Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE]
