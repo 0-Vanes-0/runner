@@ -5,11 +5,18 @@ const NORMAL: int = 1
 const RARE: int = 2
 const EPIC: int = 3
 const LEGENDARY: int = 4
+
 const NAMES := {
 	NORMAL: "Normal",
 	RARE: "Rare",
 	EPIC: "Epic",
 	LEGENDARY: "Legendary",
+}
+const COLORS := {
+	NORMAL: Color.WHITE,
+	RARE: Color.CHOCOLATE,
+	EPIC: Color.YELLOW,
+	LEGENDARY: Color.RED,
 }
 
 const NORMAL_CHANCE: int = 50
@@ -43,3 +50,7 @@ static func generate_rarity() -> Rarity:
 		return Rarity.new(EPIC)
 	else:
 		return Rarity.new(LEGENDARY)
+
+
+static func get_color_hex(rarity: Rarity) -> String:
+	return (COLORS[rarity.get_type()] as Color).to_html()

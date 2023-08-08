@@ -1,13 +1,6 @@
 class_name DemonData
 extends Object
 
-# { Rarity: Color }
-var _COLORS := {
-	Rarity.NORMAL: Color.WHITE,
-	Rarity.RARE: Color.DARK_VIOLET,
-	Rarity.EPIC: Color.YELLOW,
-	Rarity.LEGENDARY: Color.RED,
-}
 # { Rarity: int }
 var _BASE_HP := {
 	Rarity.NORMAL: 50,
@@ -49,7 +42,7 @@ var skin_resource: SkinResource
 var color: Color
 var weapon_resource: WeaponResource
 
-var rarities: Array[int] = [0,0,0,0,0]
+var rarities: Array[Rarity] = []
 var base_hp: int
 var base_speed: float
 var base_stamina: int
@@ -61,8 +54,9 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 	self.common_rarity = rarity
 	self.skin_resource = skin_resource
 	
-	self.color = _COLORS.get(rarity.get_type())
+	self.color = Rarity.COLORS.get(rarity.get_type())
 	var order := range(5); order.shuffle()
+	rarities.resize(5)
 	for i in _RARITY_STATS[rarity.get_type()]:
 		var number: int = order.pop_back()
 		_assign_with_rarity(number, rarity)
@@ -74,17 +68,17 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 
 func get_description() -> String:
 	return (
-					   "[color=#" + _get_color_hex(rarities[0]) + "]" + str(base_hp) + " HP" + "[/color]"
-			+ "\t\t" + "[color=#" + _get_color_hex(rarities[1]) + "]" + str(base_speed) + " SPD" + "[/color]"
-			+ "\t\t" + "[color=#" + _get_color_hex(rarities[2]) + "]" + str(base_stamina) + " STM" + "[/color]"
-			+ "\t\t" + "[color=#" + _get_color_hex(rarities[3]) + "]" + str(base_gravity) + " GRV" + "[/color]"
+					   "[color=#" + Rarity.get_color_hex(rarities[0]) + "]" + str(base_hp) + " HP" + "[/color]"
+			+ "\t\t" + "[color=#" + Rarity.get_color_hex(rarities[1]) + "]" + str(base_speed) + " SPD" + "[/color]"
+			+ "\t\t" + "[color=#" + Rarity.get_color_hex(rarities[2]) + "]" + str(base_stamina) + " STM" + "[/color]"
+			+ "\t\t" + "[color=#" + Rarity.get_color_hex(rarities[3]) + "]" + str(base_gravity) + " GRV" + "[/color]"
 			+ "\n" + "Weapon: " + weapon_resource.name
-			+ "\n" + "[color=#" + _get_color_hex(rarities[4]) + "]" + weapon_resource.get_description(start_weapon_rarity) + "[/color]"
+			+ "\n" + "[color=#" + Rarity.get_color_hex(rarities[4]) + "]" + weapon_resource.get_description(start_weapon_rarity) + "[/color]"
 	)
 
 
 func _assign_with_rarity(i: int, rarity: Rarity):
-	rarities[i] = rarity.get_type()
+	rarities[i] = rarity
 	match i:
 		0:
 			base_hp = _BASE_HP.get(rarity.get_type())
@@ -96,7 +90,3 @@ func _assign_with_rarity(i: int, rarity: Rarity):
 			base_gravity = _BASE_GRAVITY.get(rarity.get_type())
 		4:
 			start_weapon_rarity = rarity
-
-
-func _get_color_hex(rarity_type: int) -> String:
-	return (_COLORS[rarity_type] as Color).to_html()
