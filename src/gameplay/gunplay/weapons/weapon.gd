@@ -19,6 +19,7 @@ var ammo_max: int ## [member WeaponResource.ammo_max].
 var reload_time: float ## [member WeaponResource.reload_time]
 var is_reloading: bool = false ## Flag for checking if is [method reload] processing.
 var is_active: bool = false ## Flag for checking if it belongs to [member Player.weapon] currently.
+var existing_shoot_entity: ShootEntity
 
 
 func _init(weapon_resource: WeaponResource, weapon_rarity: Rarity, weapon_owner: ShootEntity.Owner) -> void:
@@ -28,7 +29,6 @@ func _init(weapon_resource: WeaponResource, weapon_rarity: Rarity, weapon_owner:
 	assert(weapon_resource != null, "weapon_resource is null")
 	self.weapon_resource = weapon_resource
 	self.name = weapon_resource.name
-	self.weapon_rarity = weapon_rarity
 	self.damage = weapon_resource.get_damage(weapon_rarity) if weapon_owner == ShootEntity.Owner.PLAYER else weapon_resource.damage_from_enemy
 	self.ammo_max = weapon_resource.get_ammo_max(weapon_rarity)
 	self.ammo = self.ammo_max
@@ -39,6 +39,7 @@ func _init(weapon_resource: WeaponResource, weapon_rarity: Rarity, weapon_owner:
 	extra_spread_angle = 0
 	sprite.sprite_frames = weapon_resource.sprite_frames if weapon_resource.sprite_frames != null else SpriteFrames.new()
 	
+	self.weapon_rarity = weapon_rarity
 	self.weapon_owner = weapon_owner
 
 
@@ -50,6 +51,12 @@ func _ready() -> void:
 	
 	if sprite.sprite_frames.has_animation("default"):
 		sprite.play("default")
+	
+	if weapon_resource.shoot_entity_resource.exist_from_start:
+		if _is_entity_class(ShootEntityResource.EntityClasses.LASER):
+			self.existing_shoot_entity = Laser.new(weapon_resource.shoot_entity_resource, weapon_owner, get_real_position(), get_real_position(), damage, weapon_resource.status_resource)
+			self.add_child(existing_shoot_entity)
+			self.existing_shoot_entity.toggle_shoot_entity(false)
 
 
 func _physics_process(delta: float) -> void:
@@ -58,7 +65,9 @@ func _physics_process(delta: float) -> void:
 ## Spawns [ShootEntity].
 func shoot(start_position: Vector2, target_position: Vector2):
 	if ammo > 0 and not is_reloading:
-		if is_shoot_time_ok():
+		if existing_shoot_entity != null:
+			existing_shoot_entity.toggle_shoot_entity(true)
+		elif is_shoot_time_ok():
 			var sum_spread_angle: int = spread_angle + extra_spread_angle
 			var angle: float = deg_to_rad(randf_range(-sum_spread_angle / 2, sum_spread_angle / 2))
 			var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
@@ -131,3 +140,9 @@ func activate():
 func deactivate():
 	self.hide()
 	self.is_active = false
+
+
+func get_real_position() -> Vector2:
+	var parent = (get_parent() as Marker2D).get_parent()
+	assert(parent is Player or parent is Enemy)
+	return parent.position

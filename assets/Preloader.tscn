@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4m565kqjx3ba"]
+[gd_scene load_steps=19 format=3 uid="uid://c4m565kqjx3ba"]
 
 [ext_resource type="Script" path="res://assets/preloader.gd" id="1_tpd37"]
 [ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="2_1ntx0"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://assets/game_recources/weapons/auto_rifle.tres" id="12_d1uio"]
 [ext_resource type="PackedScene" uid="uid://hyemkxy2t4rp" path="res://assets/game_recources/enemies/sphere_mage.tscn" id="13_gd8yg"]
 [ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://assets/game_recources/weapons/revolver.tres" id="13_xo7v3"]
+[ext_resource type="Resource" uid="uid://ck0ena0kktg35" path="res://assets/game_recources/weapons/test_laser.tres" id="18_t1ggn"]
 
 [node name="ResourcePreloader" type="Node"]
 script = ExtResource("1_tpd37")
@@ -36,3 +37,4 @@ fire_ring_wr = ExtResource("12_0o327")
 crossbow_wr = ExtResource("11_v3j7y")
 revolver_wr = ExtResource("13_xo7v3")
 autorifle_wr = ExtResource("12_d1uio")
+test_laser = ExtResource("18_t1ggn")
