@@ -231,6 +231,7 @@ position = Vector2(-10, -5)
 shape = SubResource("RectangleShape2D_ogtel")
 
 [node name="WeaponMarker2D" type="Marker2D" parent="."]
+position = Vector2(0, -60)
 
 [node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
 position = Vector2(0, -60)

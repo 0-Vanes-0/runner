@@ -11,10 +11,12 @@ var start_position: Vector2
 var target_position: Vector2
 var damage: int
 var status_resource: StatusResource
+var exist_from_start: bool
 
 
 func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: Vector2, target_position: Vector2, damage: int, status_resource: StatusResource = null) -> void:
 	self.resource = resource
+	self.exist_from_start = resource.exist_from_start
 	self.status_resource = status_resource
 	self.damage = damage
 	self.entity_owner = entity_owner
@@ -45,3 +47,7 @@ func add_status(target: Node):
 	if status_resource != null:
 		if target is Enemy: # target is Player or
 			target.status_handler.add_status(status_resource)
+
+
+func toggle_shoot_entity(is_active: bool, target_position := Vector2.ZERO): # virtual
+	pass

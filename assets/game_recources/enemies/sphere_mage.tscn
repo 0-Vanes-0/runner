@@ -106,7 +106,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
-size = Vector2(30, 40)
+size = Vector2(29.641, 44.641)
 
 [node name="Dragon" type="Node2D" node_paths=PackedStringArray("fact_size_area", "sprite", "health_comp", "weapon_marker", "state_machine", "status_handler")]
 modulate = Color(0.8, 0.4, 0, 1)
@@ -146,7 +146,8 @@ health = 75
 _shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
-position = Vector2(-5, 0)
+position = Vector2(3.99519, 1.91989)
+rotation = -0.523598
 shape = SubResource("RectangleShape2D_7anvf")
 
 [node name="WeaponMarker" type="Marker2D" parent="."]

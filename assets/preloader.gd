@@ -29,6 +29,7 @@ signal loaded
 @export var crossbow_wr: WeaponResource
 @export var revolver_wr: WeaponResource
 @export var autorifle_wr: WeaponResource
+@export var test_laser: WeaponResource
 
 var base_weapon_resources: Array[WeaponResource]
 var skin_resources: Array[SkinResource]
@@ -62,6 +63,7 @@ func start_preload():
 		"crossbow_wr": crossbow_wr,
 		"revolver_wr": revolver_wr,
 		"autorifle_wr": autorifle_wr,
+		"test_laser": test_laser,
 	})
 	all_res.append({
 		"biker_skin": biker_skin,
