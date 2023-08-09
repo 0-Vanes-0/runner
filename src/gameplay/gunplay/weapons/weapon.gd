@@ -54,7 +54,19 @@ func _ready() -> void:
 	
 	if weapon_resource.shoot_entity_resource.exist_from_start:
 		if _is_entity_class(ShootEntityResource.EntityClasses.LASER):
-			self.existing_shoot_entity = Laser.new(weapon_resource.shoot_entity_resource, weapon_owner, get_real_position(), get_real_position(), damage, weapon_resource.status_resource)
+			self.existing_shoot_entity = Laser.new(
+					weapon_resource.shoot_entity_resource, 
+					weapon_owner, 
+					get_start_shoot_position(), 
+					get_start_shoot_position(), 
+					damage,
+					shoot_rate_time,
+					weapon_resource.status_resource
+			)
+			(self.existing_shoot_entity as Laser).shooted.connect(
+					func():
+						self.ammo -= 1
+			)
 			self.add_child(existing_shoot_entity)
 			self.existing_shoot_entity.toggle_shoot_entity(false)
 
@@ -64,19 +76,27 @@ func _physics_process(delta: float) -> void:
 
 ## Spawns [ShootEntity].
 func shoot(start_position: Vector2, target_position: Vector2):
-	if ammo > 0 and not is_reloading:
-		if existing_shoot_entity != null:
-			existing_shoot_entity.toggle_shoot_entity(true)
-		elif is_shoot_time_ok():
-			var sum_spread_angle: int = spread_angle + extra_spread_angle
-			var angle: float = deg_to_rad(randf_range(-sum_spread_angle / 2, sum_spread_angle / 2))
-			var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
-			_spawn_entity(start_position, start_position + spreaded_target_position)
-			self.look_at(target_position)
-			shoot_timer = 0
-			ammo -= 1
-	else:
-		reload()
+	if not is_reloading:
+		if ammo > 0:
+			if existing_shoot_entity != null:
+				existing_shoot_entity.toggle_shoot_entity(true, target_position)
+			elif is_shoot_time_ok():
+				var sum_spread_angle: int = spread_angle + extra_spread_angle
+				var angle: float = deg_to_rad(randf_range(-sum_spread_angle / 2, sum_spread_angle / 2))
+				var spreaded_target_position: Vector2 = (target_position - start_position).rotated(angle)
+				_spawn_entity(start_position, start_position + spreaded_target_position)
+				self.look_at(target_position)
+				shoot_timer = 0
+				ammo -= 1
+		else:
+			reload()
+			if existing_shoot_entity != null:
+				existing_shoot_entity.toggle_shoot_entity(false)
+
+
+func stop_shoot():
+	assert(existing_shoot_entity)
+	existing_shoot_entity.toggle_shoot_entity(false)
 
 
 func _spawn_entity(start_position: Vector2, target_position: Vector2) -> void:
@@ -142,7 +162,7 @@ func deactivate():
 	self.is_active = false
 
 
-func get_real_position() -> Vector2:
-	var parent = (get_parent() as Marker2D).get_parent()
-	assert(parent is Player or parent is Enemy)
-	return parent.position
+func get_start_shoot_position() -> Vector2:
+	var grandpa = (get_parent() as Marker2D).get_parent()
+	assert(grandpa is Player or grandpa is Enemy)
+	return grandpa.position + get_parent().position

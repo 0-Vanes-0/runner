@@ -2,6 +2,9 @@
 class_name Text
 extends Node
 
+static var COMPATIBILITY := "gl_compatibility"
+static var MOBILE := "mobile"
+
 static var CONTROLS := "Controls"
 static var DODGE_SWIPE := "dodge_swipe"
 static var RELOAD_SWIPE := "reload_swipe"

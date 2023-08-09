@@ -2,6 +2,7 @@ class_name ShootSensor
 extends Marker2D
 
 signal shoot_activated(target_position: Vector2)
+signal shoot_disabled()
 
 var _size: Vector2
 var _is_shooting: bool
@@ -27,6 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_is_shooting = true
 			else:
 				_is_shooting = false
+				shoot_disabled.emit()
 	elif event is InputEventScreenDrag:
 		if _is_position_within(event.position) and _is_shooting:
 			_shoot_position = event.position
