@@ -90,6 +90,9 @@ func _ready() -> void:
 						and not state_machine.state is LevelEndPlayerState
 				):
 					weapon.shoot(weapon.get_start_shoot_position(), target_position)
+				
+				elif weapon.existing_shoot_entity != null:
+					weapon.stop_shoot()
 	)
 	shoot_sensor.shoot_disabled.connect(
 			func():

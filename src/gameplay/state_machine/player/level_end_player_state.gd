@@ -4,9 +4,7 @@ extends PlayerState
 const ANIM_RUN := "run"
 const ANIM_DEFAULT := "default"
 const ANIM_FLY := "jump_down"
-var is_gravity_needed: bool = true
 var is_x_right: bool = false
-var tween: Tween
 
 
 func enter():
@@ -16,21 +14,22 @@ func enter():
 	set_anim_looped()
 	
 	player.platforms_left = 0
-	var run_speed := player.run_speed
-	if tween:
-		tween.kill()
-	tween = create_tween()
-	tween.tween_property(
-			player,
-			"position:x",
-			Global.SCREEN_WIDTH / 2,
-			Global.LEVEL_END_TIME
-	)
+	var run_speed := float(player.run_speed)
+	var x_destination := Global.SCREEN_WIDTH / 2
+	var current_x := float(player.position.x)
+	
+	var tween := create_tween()
 	tween.tween_property(
 			player,
 			"run_speed",
 			0,
 			0.0
+	)
+	tween.tween_property(
+			player,
+			"position:x",
+			x_destination,
+			(x_destination - current_x) / run_speed
 	)
 	tween.tween_property(
 			self,
@@ -39,15 +38,10 @@ func enter():
 			0.0
 	)
 	tween.tween_property(
-			self,
-			"is_gravity_needed",
-			false,
+			player,
+			"run_speed",
+			run_speed,
 			0.0
-	)
-	tween.tween_callback(player.sprite.play.bind(ANIM_DEFAULT))
-	tween.tween_callback(
-			func():
-				player.call_level_end_objects.emit()
 	)
 	
 	player.go_to_portal.connect(
@@ -80,8 +74,8 @@ func enter():
 
 func physics_update(delta: float):
 	apply_player_gravity(delta)
-	if not player.is_on_floor() and is_x_right and tween.is_running():
-		tween.pause()
-	elif player.is_on_floor() and not tween.is_running():
-		if tween.is_valid():
-			tween.play() # Fix error in debugger
+	if player.is_on_floor() and is_x_right:
+		is_x_right = false
+		player.run_speed = 0.0
+		player.sprite.play(ANIM_DEFAULT)
+		player.call_level_end_objects.emit()
