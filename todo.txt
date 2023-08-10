@@ -1,13 +1,11 @@
-- Fix LevelEndPlayerState tween
-- On went to main menu "Cannot call method 'tween_property' on a null value."
 - Add Chest and Portal classes
-- Make EntityClasses better
 - Hitscan with Area2D or ShapeCast2D????? Also using Line2D can solve drawing
-- Make Demon resource class
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
--¿Maybe redo shoot entity resources and remove additional classes?
 
 
++ Make Demon resource class
++ On went to main menu "Cannot call method 'tween_property' on a null value."
++ Fix LevelEndPlayerState tween
 + FIX TAP CODE
 + Think of rarity in DemonData
 + RESOLVE ATLAS COPY ISSUE
