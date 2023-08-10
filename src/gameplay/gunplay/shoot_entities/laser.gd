@@ -97,8 +97,7 @@ func appear():
 	line2d.width = 10.0
 #	var tween := create_tween()
 #	tween.tween_property(
-#			line2d,
-#			"width",
+#			line2d, "width",
 #			10.0,
 #			0.2
 #	)
@@ -107,8 +106,7 @@ func appear():
 func disappear():
 	var tween := create_tween()
 	tween.tween_property(
-			line2d,
-			"width",
+			line2d, "width",
 			0.0,
 			0.1
 	)

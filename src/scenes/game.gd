@@ -122,26 +122,22 @@ func setup_level():
 	
 	var tween := create_tween()
 	tween.tween_property(
-			black_color_rect,
-			"color:a",
+			black_color_rect, "color:a",
 			1.0,
 			0
 	)
 	tween.tween_property(
-			black_color_rect,
-			"color:a",
+			black_color_rect, "color:a",
 			0.0,
 			Global.LEVEL_END_TIME * 0.5
 	)
 	tween.tween_property(
-			self,
-			"is_level_complete",
+			self, "is_level_complete",
 			false,
 			0
 	)
 	tween.tween_property(
-			self,
-			"is_enemies_permitted",
+			self, "is_enemies_permitted",
 			true,
 			0
 	)
@@ -177,8 +173,7 @@ func process_level_end_objects():
 					player.go_to_portal.emit(portal_poses[i])
 					var anon_tween := create_tween()
 					anon_tween.tween_property(
-							black_color_rect,
-							"color:a",
+							black_color_rect, "color:a",
 							1.0,
 							Global.LEVEL_END_TIME
 					)

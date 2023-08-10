@@ -49,15 +49,13 @@ func take_damage(damage: int) -> void:
 	if get_parent().sprite != null:
 		var tween := create_tween()
 		tween.tween_property(
-				get_parent().sprite,
-				"modulate",
+				get_parent().sprite, "modulate",
 				orig_modulate.inverted(), # todo: make better here
 				0.0
 		)
 		tween.tween_interval(0.2)
 		tween.tween_property(
-				get_parent().sprite,
-				"modulate",
+				get_parent().sprite, "modulate",
 				orig_modulate,
 				0.0
 		)

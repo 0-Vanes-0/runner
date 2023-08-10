@@ -13,8 +13,7 @@ func enter():
 	enemy.current_floor = alt_floors.pick_random()
 	tween = create_tween()
 	tween.tween_property(
-			enemy,
-			"position:y",
+			enemy, "position:y",
 			Global.ENEMY_Y_SPOTS[enemy.current_floor],
 			DASH_TIME
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)

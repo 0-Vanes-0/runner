@@ -41,14 +41,12 @@ func _on_scene_changed(current_scene: Node):
 func _transition_current_volume():
 	var tween := create_tween()
 	tween.tween_property(
-			self,
-			"volume_db",
+			self, "volume_db",
 			-80,
 			FADE_OUT_TIME
 	)
 	tween.tween_property(
-			self,
-			"volume_db",
+			self, "volume_db",
 			volume,
 			0.0
 	)

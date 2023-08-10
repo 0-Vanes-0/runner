@@ -20,26 +20,22 @@ func enter():
 	
 	var tween := create_tween()
 	tween.tween_property(
-			player,
-			"run_speed",
+			player, "run_speed",
 			0,
 			0.0
 	)
 	tween.tween_property(
-			player,
-			"position:x",
+			player, "position:x",
 			x_destination,
 			(x_destination - current_x) / run_speed
 	)
 	tween.tween_property(
-			self,
-			"is_x_right",
+			self, "is_x_right",
 			true,
 			0.0
 	)
 	tween.tween_property(
-			player,
-			"run_speed",
+			player, "run_speed",
 			run_speed,
 			0.0
 	)
@@ -56,8 +52,7 @@ func enter():
 				)
 			anon_tween.tween_callback(player.sprite.play.bind(ANIM_FLY))
 			anon_tween.tween_property(
-					player,
-					"position",
+					player, "position",
 					portal_position,
 					Global.LEVEL_END_TIME
 			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

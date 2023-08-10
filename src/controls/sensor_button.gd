@@ -55,8 +55,7 @@ func progress_enabling():
 	progress_bar.value = progress_bar.min_value
 	var tween := create_tween()
 	tween.tween_property(
-			progress_bar,
-			"value",
+			progress_bar, "value",
 			progress_bar.max_value,
 			progress_time
 	)

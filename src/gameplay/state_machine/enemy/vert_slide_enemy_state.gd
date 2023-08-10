@@ -26,15 +26,13 @@ func enter():
 	for i in (max_bounces + 1):
 		if i % 2 == 0:
 			tween.tween_property(
-					enemy,
-					"position:y",
+					enemy, "position:y",
 					Global.ENEMY_Y_SPOTS[target_floor],
 					one_floor_time * path_length
 			)
 		else:
 			tween.tween_property(
-					enemy,
-					"position:y",
+					enemy, "position:y",
 					Global.ENEMY_Y_SPOTS[enemy.current_floor],
 					one_floor_time * path_length
 			)

@@ -13,8 +13,7 @@ func enter():
 	
 	var tween := get_tree().create_tween()
 	tween.tween_property(
-			enemy, 
-			"position:x", 
+			enemy, "position:x", 
 			Global.SCREEN_WIDTH * 0.8,
 			ENTER_TIME
 	)
