@@ -12,6 +12,8 @@ var max_bounces: int
 
 
 func enter():
+	enemy.dead.connect(self.queue_free)
+	
 	enemy.sprite.play("default")
 	set_anim_looped()
 	
@@ -55,3 +57,4 @@ func physics_update(delta: float):
 
 func exit():
 	need_kill_tween.emit()
+	enemy.dead.disconnect(self.queue_free)

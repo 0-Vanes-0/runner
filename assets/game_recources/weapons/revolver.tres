@@ -6,7 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_n1fqk"]
 script = ExtResource("2_dxsqj")
-beam_width = 1.0
+color = Color(1, 1, 1, 0.843137)
+beam_width = 2.0
 has_penetration = false
 entity_class = 3
 

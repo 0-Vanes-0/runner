@@ -1,6 +1,7 @@
 class_name HitscanSER
 extends ShootEntityResource
 
+@export var color: Color = Color.WHITE
 @export_range(0, 25, 0.1) var beam_width: float # percents of SCREEN_HEIGHT
 @export var has_penetration: bool = false
 
@@ -23,3 +24,7 @@ func create_hitscan_shape(start_position := Vector2.ZERO, target_position := Vec
 		hitscan_shape.rotation = direction_vector.angle()
 		
 	return hitscan_shape
+
+
+func get_beam_width() -> float:
+	return Global.SCREEN_HEIGHT * (beam_width / 100.0)

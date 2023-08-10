@@ -5,6 +5,7 @@ const EXIST_TIME := 0.25
 var timer: float
 var area: Area2D
 var coll_shape: CollisionShape2D
+var line2d: Line2D
 var has_shot: bool
 
 
@@ -27,23 +28,29 @@ func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position
 						has_shot = true
 	)
 	
-	# Temporal solution:
-	var sprite := Sprite2D.new()
-	sprite.texture = preload("res://assets/sprites/shoot_entities/arrow.png")
-	sprite.centered = false
-	sprite.offset = Vector2.DOWN * sprite.texture.get_height() / 2
-	sprite.scale = Vector2(
-			Global.SCREEN_WIDTH / sprite.texture.get_width(),
-			(Global.SCREEN_HEIGHT * (resource.beam_width + 0.1) / 100) / sprite.texture.get_height()
-	)
-	sprite.rotation = (target_position - start_position).angle()
-	sprite.position = start_position
-	self.add_child(sprite)
-	# Create a better later!!!
+	line2d = Line2D.new()
+	line2d.default_color = resource.color
+	line2d.width = resource.get_beam_width() if resource.beam_width > 0 else 10
+	line2d.add_point(start_position)
+	var direction_vector := Vector2(target_position - start_position)
+	direction_vector = direction_vector * (Global.SCREEN_WIDTH / direction_vector.length())
+	line2d.add_point(start_position + direction_vector)
+	self.add_child(line2d)
 
 
 func _ready() -> void:
 	timer = 0.0
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(
+			line2d, "modulate:a",
+			0.0,
+			EXIST_TIME
+	)
+	tween.tween_property(
+			line2d, "width",
+			0.0,
+			EXIST_TIME
+	)
 
 
 func _physics_process(delta: float) -> void:
