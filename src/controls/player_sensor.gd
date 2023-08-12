@@ -26,6 +26,7 @@ func _ready() -> void:
 	_size.x = Global.SCREEN_WIDTH / 2
 	_size.y = Global.SCREEN_HEIGHT
 	control.custom_minimum_size = Vector2(Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT)
+	control.show()
 	dodge_button.init_abstract(
 			func() -> bool:
 				return Global.player.stamina >= Global.player.state_dodge.stamina_cost and not Global.player.get_current_state() is LevelEndPlayerState

@@ -87,6 +87,7 @@ activity_button = NodePath("Control/ButtonsMenu/ActivityButton")
 switch_weapon_disabled_time = 3.0
 
 [node name="Control" type="Control" parent="HUD/PlayerSensor"]
+visible = false
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
