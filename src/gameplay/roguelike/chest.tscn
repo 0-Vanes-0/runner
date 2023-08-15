@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqls351hv05l7"]
+
+[ext_resource type="Script" path="res://src/gameplay/roguelike/chest.gd" id="1_amjrh"]
+[ext_resource type="Texture2D" uid="uid://cl3llrr8hy6nx" path="res://assets/sprites/chests/chest_01.png" id="2_aijbn"]
+[ext_resource type="Texture2D" uid="uid://dq10pm0ik4bbw" path="res://assets/sprites/chests/chest_02.png" id="3_sb55j"]
+[ext_resource type="Texture2D" uid="uid://bjr8mntq0wqx2" path="res://assets/sprites/chests/chest_03.png" id="4_7p35i"]
+[ext_resource type="Texture2D" uid="uid://cectbsdr82jod" path="res://assets/sprites/chests/chest_04.png" id="5_koekg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04x2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aijbn")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aijbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sb55j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7p35i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_koekg")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[node name="Chest" type="Node2D"]
+script = ExtResource("1_amjrh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_04x2n")
+offset = Vector2(0, -16)

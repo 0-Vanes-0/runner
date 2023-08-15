@@ -5,8 +5,8 @@
 [ext_resource type="Resource" uid="uid://c606puj4jaulc" path="res://assets/game_recources/reward_resource.tres" id="2_qandk"]
 [ext_resource type="PackedScene" uid="uid://cbhc564a8a6e" path="res://src/scenes/game.tscn" id="3_bxsqs"]
 [ext_resource type="PackedScene" uid="uid://cn3r3nrthn2xv" path="res://assets/tilemap/segment_tile_map.tscn" id="4_j1kq3"]
-[ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player.tscn" id="5_pevw1"]
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="6_bgxgq"]
+[ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player_stuff/player.tscn" id="6_o1jny"]
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="7_2kkfe"]
 [ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="8_i5st8"]
 [ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://assets/game_recources/player_skins/player_skin_biker.tres" id="8_v6vm6"]
@@ -26,7 +26,7 @@ reward_resource = ExtResource("2_qandk")
 main_menu_scene = ExtResource("2_1ntx0")
 game_scene = ExtResource("3_bxsqs")
 tilemap_scene = ExtResource("4_j1kq3")
-player = ExtResource("5_pevw1")
+player = ExtResource("6_o1jny")
 platform_scene = ExtResource("6_bgxgq")
 segment_scene = ExtResource("7_2kkfe")
 choose_demon_button = ExtResource("8_i5st8")
