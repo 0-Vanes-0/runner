@@ -118,6 +118,7 @@ func apply_player_data():
 	run_speed = Global.player_data.base_speed
 	stamina_max = Global.player_data.base_stamina
 	gravity = Global.player_data.base_gravity
+	dodge_time = 1.0
 	
 	# Adding Weapon:
 	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)

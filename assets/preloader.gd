@@ -2,6 +2,8 @@ extends Node
 
 signal loaded
 
+@export var reward_resource: RewardResource
+
 @export_group("Game Screens")
 @export var main_menu_scene: PackedScene
 @export var game_scene: PackedScene

@@ -1,16 +1,16 @@
 ## This class contains Strings for auto-completion.
 class_name Text
-extends Node
+extends Object
 
-static var COMPATIBILITY := "gl_compatibility"
-static var MOBILE := "mobile"
+const COMPATIBILITY := "gl_compatibility"
+const MOBILE := "mobile"
 
-static var CONTROLS := "Controls"
-static var DODGE_SWIPE := "dodge_swipe"
-static var RELOAD_SWIPE := "reload_swipe"
-static var SWITCH_WEAPON_SWIPE := "switch_weapon_swipe"
-static var ACTIVITY_SWIPE := "activity_swipe"
-static var AUDIO := "Audio"
-static var MUSIC := "music"
-static var GRAPHICS := "Graphics"
-static var ALWAYS_ON_TOP := "always_on_top"
+const CONTROLS := "Controls"
+const DODGE_SWIPE := "dodge_swipe"
+const RELOAD_SWIPE := "reload_swipe"
+const SWITCH_WEAPON_SWIPE := "switch_weapon_swipe"
+const ACTIVITY_SWIPE := "activity_swipe"
+const AUDIO := "Audio"
+const MUSIC := "music"
+const GRAPHICS := "Graphics"
+const ALWAYS_ON_TOP := "always_on_top"

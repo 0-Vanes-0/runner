@@ -15,24 +15,24 @@ const ACTIVITY_CHANCE: int = 10
 static var CHANCES_SUM: int = DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE + SHOOT_ENTITY_STATUS_CHANCE + WEAPON_CHANCE + ACTIVITY_CHANCE
 
 var _type: int = 0
+var _value: Resource
 
 
 func _init(type: int, rarity: Rarity) -> void:
 	_type = type
-	match _type:
+	match type:
 		DEMON_PASSIVITY:
-			pass
+			_value = Preloader.reward_resource.get_demon_passivity(rarity)
 		WEAPON_PASSIVITY:
-			pass
+			_value = Preloader.reward_resource.get_weapon_passivity(rarity)
 		SHOOT_ENTITY_STATUS:
-			pass
+			_value = Preloader.reward_resource.get_status(rarity)
 		WEAPON:
-			pass
+			_value = Preloader.reward_resource.get_weapon(rarity)
 		ACTIVITY:
-			pass
+			_value = Preloader.reward_resource.get_activity(rarity)
 		_:
-			assert(false, "WRONG TYPE OF REWARD")
-	#rarity here
+			assert(false, "WRONG TYPE OF REWARD: " + str(type))
 
 
 static func generate_reward() -> Reward:
