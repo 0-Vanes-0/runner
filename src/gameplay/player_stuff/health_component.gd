@@ -15,6 +15,7 @@ var _shape: CollisionShape2D
 
 func _ready() -> void:
 	_shape = self.get_child(0)
+	assert(_shape != null)
 	
 	Global.clean_layers(self)
 	var parent = get_parent()
