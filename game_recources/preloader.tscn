@@ -1,0 +1,42 @@
+[gd_scene load_steps=20 format=3 uid="uid://lx587a088gd7"]
+
+[ext_resource type="Script" path="res://game_recources/preloader.gd" id="1_n2y2j"]
+[ext_resource type="Resource" uid="uid://bflurtgmvyqs2" path="res://game_recources/reward_resource.tres" id="2_py63j"]
+[ext_resource type="PackedScene" uid="uid://dnp3x14mc2hay" path="res://src/scenes/main_menu.tscn" id="3_pygxa"]
+[ext_resource type="PackedScene" uid="uid://cbhc564a8a6e" path="res://src/scenes/game.tscn" id="4_hc7ic"]
+[ext_resource type="PackedScene" uid="uid://cn3r3nrthn2xv" path="res://assets/tilemap/segment_tile_map.tscn" id="5_agqe2"]
+[ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player_stuff/player.tscn" id="6_6xeq5"]
+[ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="7_i1os7"]
+[ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="8_w1kjr"]
+[ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="9_juvbq"]
+[ext_resource type="ButtonGroup" uid="uid://dsu7rjtc4x6el" path="res://assets/themes_styles/main_menu_button_group.tres" id="10_w7mfh"]
+[ext_resource type="PackedScene" uid="uid://ccxbiicdhmjue" path="res://game_recources/enemies/sphere_mage.tscn" id="11_5mkps"]
+[ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://game_recources/player_skins/player_skin_biker.tres" id="11_eak1y"]
+[ext_resource type="Resource" uid="uid://bbh24p14aee7n" path="res://game_recources/player_skins/player_skin_white.tres" id="12_t0vc3"]
+[ext_resource type="Resource" uid="uid://l1dqljr8rva6" path="res://game_recources/player_skins/player_skin_cyborg.tres" id="13_3mo7r"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://game_recources/weapons/ring_of_fire.tres" id="14_55j8d"]
+[ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://game_recources/weapons/crossbow.tres" id="15_o5jcn"]
+[ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://game_recources/weapons/revolver.tres" id="16_ccdt4"]
+[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://game_recources/weapons/auto_rifle.tres" id="17_e01q1"]
+[ext_resource type="Resource" uid="uid://ck0ena0kktg35" path="res://game_recources/weapons/test_laser.tres" id="18_auwv1"]
+
+[node name="preloader" type="Node"]
+script = ExtResource("1_n2y2j")
+reward_resource = ExtResource("2_py63j")
+main_menu_scene = ExtResource("3_pygxa")
+game_scene = ExtResource("4_hc7ic")
+segment_tilemap_scene = ExtResource("5_agqe2")
+player = ExtResource("6_6xeq5")
+platform_scene = ExtResource("7_i1os7")
+segment_scene = ExtResource("8_w1kjr")
+choose_demon_button = ExtResource("9_juvbq")
+main_menu_button_group = ExtResource("10_w7mfh")
+enemy_sphere_mage = ExtResource("11_5mkps")
+biker_skin = ExtResource("11_eak1y")
+cyborg_skin = ExtResource("13_3mo7r")
+white_skin = ExtResource("12_t0vc3")
+autorifle_wr = ExtResource("17_e01q1")
+crossbow_wr = ExtResource("15_o5jcn")
+revolver_wr = ExtResource("16_ccdt4")
+fire_ring_wr = ExtResource("14_55j8d")
+test_laser = ExtResource("18_auwv1")

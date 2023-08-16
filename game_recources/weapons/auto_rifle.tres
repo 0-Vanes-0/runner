@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=6 format=3 uid="uid://v01lyjgoknbj"]
 
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_pmna6"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="1_pmna6"]
 [ext_resource type="Texture2D" uid="uid://q2x1dpbutcp2" path="res://assets/sprites/weapons/rifle/rifle.png" id="2_6rqtj"]
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/ser_classes/hitscan_ser.gd" id="2_rejrw"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/ser_classes/hitscan_ser.gd" id="2_rejrw"]
 
 [sub_resource type="Resource" id="Resource_khv65"]
 script = ExtResource("2_rejrw")

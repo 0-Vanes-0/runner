@@ -7,7 +7,7 @@ signal loaded
 @export_group("Game Screens")
 @export var main_menu_scene: PackedScene
 @export var game_scene: PackedScene
-@export var tilemap_scene: PackedScene
+@export var segment_tilemap_scene: PackedScene
 
 @export_group("Game Objects")
 @export var player: PackedScene
@@ -19,18 +19,18 @@ signal loaded
 @export var main_menu_button_group: ButtonGroup
 
 @export_group("Enemies", "enemy_")
-@export var enemy_test_dragon: PackedScene
+@export var enemy_sphere_mage: PackedScene
 
 @export_group("Skin Resources")
 @export var biker_skin: SkinResource
-@export var white_skin: SkinResource
 @export var cyborg_skin: SkinResource
+@export var white_skin: SkinResource
 
 @export_group("Weapon Resources")
-@export var fire_ring_wr: WeaponResource
+@export var autorifle_wr: WeaponResource
 @export var crossbow_wr: WeaponResource
 @export var revolver_wr: WeaponResource
-@export var autorifle_wr: WeaponResource
+@export var fire_ring_wr: WeaponResource
 @export var test_laser: WeaponResource
 
 var base_weapon_resources: Array[WeaponResource]
@@ -49,7 +49,7 @@ func start_preload():
 	all_res.append({
 		"main_menu_scene": main_menu_scene,
 		"game_scene": game_scene,
-		"tilemap_scene": tilemap_scene,
+		"segment_tilemap_scene": segment_tilemap_scene,
 		
 		"player": player,
 		"platform_scene": platform_scene,
@@ -58,7 +58,7 @@ func start_preload():
 		"choose_demon_button": choose_demon_button,
 		"main_menu_button_group": main_menu_button_group,
 		
-		"enemy_test_dragon": enemy_test_dragon,
+		"enemy_sphere_mage": enemy_sphere_mage,
 	})
 	all_res.append({
 		"fire_ring_wr": fire_ring_wr,
@@ -67,11 +67,13 @@ func start_preload():
 		"autorifle_wr": autorifle_wr,
 		"test_laser": test_laser,
 	})
+	base_weapon_resources.append_array(all_res[1].values())
 	all_res.append({
 		"biker_skin": biker_skin,
 		"white_skin": white_skin,
 		"cyborg_skin": cyborg_skin,
 	})
+	skin_resources.append_array(all_res[2].values())
 	
 	for dict in all_res:
 		all_res_size += dict.size()
@@ -81,11 +83,8 @@ func start_preload():
 			else:
 				print_debug("Failed to load: " + resource)
 	
-	base_weapon_resources.append_array(all_res[1].values())
-	skin_resources.append_array(all_res[2].values())
-	
 	var non_empty := Vector2i(1, 0)
-	var segment_tilemap := tilemap_scene.instantiate() as SegmentTileMap
+	var segment_tilemap := segment_tilemap_scene.instantiate() as SegmentTileMap
 	for n in segment_tilemap.get_biomes_tilemaps().size():
 		var biome_tilemap := segment_tilemap.get_biomes_tilemaps()[n]
 		var segment_array: Array[Segment] = []
@@ -96,7 +95,7 @@ func start_preload():
 			
 			for v in segment_data:
 				var floor_number: int = 4 - v.y
-				var platfrom := Preloader.platform_scene.instantiate() as Platform
+				var platfrom := platform_scene.instantiate() as Platform
 				platfrom.position.x = v.x * width
 				platfrom.order_number = v.x
 				platfrom.floor_number = floor_number

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SkinResource" load_steps=3 format=3 uid="uid://bbh24p14aee7n"]
+
+[ext_resource type="Script" path="res://game_recources/resource_classes/skin_resource.gd" id="1_keayq"]
+[ext_resource type="SpriteFrames" uid="uid://ctplhi8emfa12" path="res://game_recources/player_skins/example_sprite_frames.tres" id="2_nhghs"]
+
+[resource]
+script = ExtResource("1_keayq")
+sprite_frames = ExtResource("2_nhghs")

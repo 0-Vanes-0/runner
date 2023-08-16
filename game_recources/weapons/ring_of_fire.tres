@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=8 format=3 uid="uid://cr7xqdjn4hvxu"]
 
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_cq5wt"]
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/ser_classes/projectile_ser.gd" id="2_6m5ux"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="1_cq5wt"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/ser_classes/projectile_ser.gd" id="2_6m5ux"]
 [ext_resource type="Texture2D" uid="uid://b4xeskgs3768s" path="res://assets/sprites/shoot_entities/fire_orb.png" id="3_vm7xq"]
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/status_resource_classes/burning_status_resource.gd" id="4_b1ghi"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/status_resource_classes/burning_status_resource.gd" id="4_b1ghi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qsryl"]
 animations = [{

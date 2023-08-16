@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 SaveLoad="*res://src/singletons/save_load_singleton.gd"
 GameInfo="*res://src/singletons/game_info_singleton.tscn"
+Preloader="*res://game_recources/preloader.tscn"
 Global="*res://src/singletons/global_singleton.gd"
 
 [debug]

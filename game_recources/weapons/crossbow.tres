@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=8 format=3 uid="uid://cpi8o3rnhvu8j"]
 
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/weapon_resource.gd" id="1_q381x"]
-[ext_resource type="Script" path="res://assets/game_recources/resource_classes/ser_classes/projectile_ser.gd" id="2_1fx8l"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="1_q381x"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/ser_classes/projectile_ser.gd" id="2_1fx8l"]
 [ext_resource type="Texture2D" uid="uid://blyo4nx70cbhv" path="res://assets/sprites/weapons/crossbow/crossbow_frame_0.png" id="2_u6nbd"]
 [ext_resource type="Texture2D" uid="uid://dtqqk5b4ox0m8" path="res://assets/sprites/shoot_entities/arrow.png" id="3_82rc3"]
 

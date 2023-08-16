@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RewardResource" load_steps=2 format=3 uid="uid://bflurtgmvyqs2"]
+
+[ext_resource type="Script" path="res://game_recources/reward_resource.gd" id="1_aab76"]
+
+[resource]
+script = ExtResource("1_aab76")
+demon_passivity_normal = Array[Resource("res://game_recources/resource_classes/demon_passivity_resource.gd")]([])
+demon_passivity_rare = Array[Resource("res://game_recources/resource_classes/demon_passivity_resource.gd")]([])
+demon_passivity_epic = Array[Resource("res://game_recources/resource_classes/demon_passivity_resource.gd")]([])
+demon_passivity_legendary = Array[Resource("res://game_recources/resource_classes/demon_passivity_resource.gd")]([])
+weapon_passivity_normal = Array[Resource("res://game_recources/resource_classes/weapon_passivity_resource.gd")]([])
+weapon_passivity_rare = Array[Resource("res://game_recources/resource_classes/weapon_passivity_resource.gd")]([])
+weapon_passivity_epic = Array[Resource("res://game_recources/resource_classes/weapon_passivity_resource.gd")]([])
+weapon_passivity_legendary = Array[Resource("res://game_recources/resource_classes/weapon_passivity_resource.gd")]([])
+status_normal = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
+status_rare = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
+status_epic = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
+status_legendary = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
+weapon_normal = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([])
+weapon_rare = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([])
+weapon_epic = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([])
+weapon_legendary = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([])
+activity_normal = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
+activity_rare = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
+activity_epic = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
+activity_legendary = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])

@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			segment.move(delta * Global.player.run_speed)
 	
 	if is_enemies_permitted and enemies.get_child_count() == 0:
-		var enemy: Enemy = Preloader.enemy_test_dragon.instantiate()
+		var enemy: Enemy = Preloader.enemy_sphere_mage.instantiate()
 		enemy.dead.connect(
 				func():
 					GameInfo.kills_count += 1

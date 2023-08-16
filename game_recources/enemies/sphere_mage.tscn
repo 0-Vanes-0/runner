@@ -1,11 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://hyemkxy2t4rp"]
+[gd_scene load_steps=32 format=3 uid="uid://ccxbiicdhmjue"]
 
 [ext_resource type="Script" path="res://src/gameplay/enemies/enemy.gd" id="1_b5wxb"]
-[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://assets/game_recources/weapons/ring_of_fire.tres" id="2_4vt26"]
+[ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://game_recources/weapons/ring_of_fire.tres" id="2_4vt26"]
+[ext_resource type="Script" path="res://src/gameplay/player_stuff/health_component.gd" id="2_6h6yr"]
 [ext_resource type="Texture2D" uid="uid://by8hyullh546b" path="res://assets/sprites/enemies/test/dragon_dead_0.png" id="3_47uja"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="3_o0h73"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/start_enemy_state.gd" id="4_83wcp"]
 [ext_resource type="Texture2D" uid="uid://bjbvjhk2m6ppq" path="res://assets/sprites/enemies/test/dragon_dead_1.png" id="4_xgbl8"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/go_away_enemy_state.gd" id="5_86g4d"]
 [ext_resource type="Texture2D" uid="uid://p87wvb0afkk1" path="res://assets/sprites/enemies/test/dragon_dead_2.png" id="5_ii7ub"]
 [ext_resource type="Texture2D" uid="uid://bkgt5yjpuydyc" path="res://assets/sprites/enemies/test/dragon_dead_3.png" id="6_ajcpu"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/dead_enemy_state.gd" id="6_nyr6k"]
+[ext_resource type="Script" path="res://src/gameplay/player_stuff/status_handler.gd" id="7_adiwf"]
 [ext_resource type="Texture2D" uid="uid://ctco5i3gdbao1" path="res://assets/sprites/enemies/test/dragon_dead_4.png" id="7_fl5w7"]
 [ext_resource type="Texture2D" uid="uid://cmgys0gfteioj" path="res://assets/sprites/enemies/test/dragon_dead_5.png" id="8_wmnoa"]
 [ext_resource type="Texture2D" uid="uid://c5443ecjuyr4v" path="res://assets/sprites/enemies/test/dragon_dead_6.png" id="9_k3jfk"]
@@ -20,19 +26,13 @@
 [ext_resource type="Texture2D" uid="uid://dlcou77ev6807" path="res://assets/sprites/enemies/test/dragon_default_6.png" id="18_04n43"]
 [ext_resource type="Texture2D" uid="uid://dgn3mmxqrn5ng" path="res://assets/sprites/enemies/test/dragon_default_7.png" id="19_m0ubg"]
 [ext_resource type="Texture2D" uid="uid://3lkwmp0qdyki" path="res://assets/sprites/enemies/test/dragon_default_8.png" id="20_wk2mf"]
-[ext_resource type="Script" path="res://src/gameplay/health_component.gd" id="21_4vij8"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/state_machine.gd" id="22_431if"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/start_enemy_state.gd" id="23_niexa"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/idle_shoot_enemy_state.gd" id="24_8amow"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/go_away_enemy_state.gd" id="25_5kgiy"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/vert_slide_enemy_state.gd" id="25_f2wpk"]
-[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/dead_enemy_state.gd" id="26_gbky4"]
-[ext_resource type="Script" path="res://src/gameplay/status_handler.gd" id="28_vukvl"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/idle_shoot_enemy_state.gd" id="24_cn0lu"]
+[ext_resource type="Script" path="res://src/gameplay/state_machine/enemy/vert_slide_enemy_state.gd" id="25_bai6g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7oo4"]
-size = Vector2(50, 60)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxgi2"]
+size = Vector2(60, 60)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_y2qj8"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gvfid"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -106,10 +106,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7anvf"]
-size = Vector2(29.641, 44.641)
+size = Vector2(21.2132, 35.3553)
 
-[node name="Dragon" type="Node2D" node_paths=PackedStringArray("fact_size_area", "sprite", "health_comp", "weapon_marker", "state_machine", "status_handler")]
-modulate = Color(0.8, 0.4, 0, 1)
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("fact_size_area", "sprite", "health_comp", "weapon_marker", "state_machine", "status_handler")]
 script = ExtResource("1_b5wxb")
 size_y_percent = 20.0
 weapon_resource = ExtResource("2_4vt26")
@@ -130,49 +129,43 @@ metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FactSizeArea"]
-position = Vector2(5, 0)
-shape = SubResource("RectangleShape2D_m7oo4")
+shape = SubResource("RectangleShape2D_xxgi2")
 debug_color = Color(0.392157, 0.611765, 0, 0.152941)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_y2qj8")
-frame = 8
-frame_progress = 1.0
+sprite_frames = SubResource("SpriteFrames_gvfid")
 flip_h = true
 
-[node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
-script = ExtResource("21_4vij8")
-health = 75
-_shape = NodePath("CollisionShape2D")
+[node name="HealthComponent" type="Area2D" parent="."]
+script = ExtResource("2_6h6yr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
-position = Vector2(3.99519, 1.91989)
-rotation = -0.523598
+position = Vector2(1.19209e-07, 5.00001)
+rotation = -0.785397
 shape = SubResource("RectangleShape2D_7anvf")
 
 [node name="WeaponMarker" type="Marker2D" parent="."]
-position = Vector2(-20, -10)
+position = Vector2(-20, 0)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("22_431if")
+script = ExtResource("3_o0h73")
 initial_state = NodePath("StartEnemyState")
 
 [node name="StartEnemyState" type="Node" parent="StateMachine"]
-script = ExtResource("23_niexa")
-
-[node name="IdleShootEnemyState" type="Node" parent="StateMachine"]
-script = ExtResource("24_8amow")
-
-[node name="VertSlideEnemyState" type="Node" parent="StateMachine"]
-script = ExtResource("25_f2wpk")
-extra_spread_angle = 20
+script = ExtResource("4_83wcp")
 
 [node name="GoAwayEnemyState" type="Node" parent="StateMachine"]
-script = ExtResource("25_5kgiy")
+script = ExtResource("5_86g4d")
+
+[node name="IdleShootEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("24_cn0lu")
+
+[node name="VertSlideEnemyState" type="Node" parent="StateMachine"]
+script = ExtResource("25_bai6g")
 
 [node name="DeadEnemyState" type="Node" parent="StateMachine"]
-script = ExtResource("26_gbky4")
+script = ExtResource("6_nyr6k")
 
 [node name="StatusHandler" type="Node2D" parent="."]
-position = Vector2(5, -30)
-script = ExtResource("28_vukvl")
+position = Vector2(0, -30)
+script = ExtResource("7_adiwf")

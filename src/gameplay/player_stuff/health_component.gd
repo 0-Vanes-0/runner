@@ -7,14 +7,14 @@ signal switched_collision ## Called when stopped shape's disabling.
 
 @export_range(1, 9999) var health: int = 100
 @export var debug_mode := false
-@export var _shape: CollisionShape2D
 var _label: Label
 var orig_modulate: Color
+var _shape: CollisionShape2D
 #var _tween: Tween
 
 
 func _ready() -> void:
-	assert(_shape)
+	_shape = self.get_child(0)
 	
 	Global.clean_layers(self)
 	var parent = get_parent()
