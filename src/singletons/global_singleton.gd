@@ -115,6 +115,7 @@ func create_ui_label(size: int = 36) -> Label:
 	label.add_theme_font_override("font", preload("res://assets/fonts/vcrosdmonorusbyd.ttf"))
 	label.add_theme_constant_override("outline_size", size/2)
 	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	return label
 
 ## Returns [param error] as [String].

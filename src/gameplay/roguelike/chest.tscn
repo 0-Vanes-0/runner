@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqls351hv05l7"]
+[gd_scene load_steps=8 format=3 uid="uid://dqls351hv05l7"]
 
 [ext_resource type="Script" path="res://src/gameplay/roguelike/chest.gd" id="1_amjrh"]
 [ext_resource type="Texture2D" uid="uid://cl3llrr8hy6nx" path="res://assets/sprites/chests/chest_01.png" id="2_aijbn"]
 [ext_resource type="Texture2D" uid="uid://dq10pm0ik4bbw" path="res://assets/sprites/chests/chest_02.png" id="3_sb55j"]
 [ext_resource type="Texture2D" uid="uid://bjr8mntq0wqx2" path="res://assets/sprites/chests/chest_03.png" id="4_7p35i"]
 [ext_resource type="Texture2D" uid="uid://cectbsdr82jod" path="res://assets/sprites/chests/chest_04.png" id="5_koekg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_av47a"]
+size = Vector2(40, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_04x2n"]
 animations = [{
@@ -34,10 +37,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Chest" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="Chest" type="Area2D" node_paths=PackedStringArray("sprite", "coll_chape")]
 script = ExtResource("1_amjrh")
 sprite = NodePath("AnimatedSprite2D")
+coll_chape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_av47a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_04x2n")
 offset = Vector2(0, -16)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

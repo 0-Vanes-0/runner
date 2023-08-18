@@ -14,6 +14,7 @@ signal loaded
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
 @export var chest: PackedScene
+@export var portal: PackedScene
 
 @export_group("UIs")
 @export var choose_demon_button: PackedScene

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbhc564a8a6e"]
+[gd_scene load_steps=22 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
 [ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bxecltnpwwvaj" path="res://assets/sprites/interface/switch_button_pressed.png" id="9_oemju"]
 [ext_resource type="Texture2D" uid="uid://brsilg77l805r" path="res://assets/sprites/interface/activity_button.png" id="10_7kbpd"]
 [ext_resource type="Texture2D" uid="uid://vi2wpwbci4ot" path="res://assets/sprites/interface/activity_button_pressed.png" id="11_qlpqs"]
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="12_ln7id"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
 b = Vector2(100, 0)
@@ -87,7 +88,6 @@ activity_button = NodePath("Control/ButtonsMenu/ActivityButton")
 switch_weapon_disabled_time = 3.0
 
 [node name="Control" type="Control" parent="HUD/PlayerSensor"]
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
@@ -101,6 +101,13 @@ anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
 alignment = 1
+
+[node name="PauseButton" type="Button" parent="HUD/PlayerSensor/Control/ButtonsMenu"]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("12_ln7id")
+theme_override_font_sizes/font_size = 100
+text = "||"
 
 [node name="DodgeButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
 layout_mode = 2
@@ -144,9 +151,16 @@ color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
 
 [node name="InfoLabel" type="Label" parent="HUD"]
-offset_right = 42.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -42.0
 offset_bottom = 37.0
+grow_horizontal = 0
 text = "100"
 label_settings = SubResource("LabelSettings_aavuu")
+horizontal_alignment = 2
 script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="HUD/PlayerSensor/Control/ButtonsMenu/PauseButton" to="." method="pause_game"]

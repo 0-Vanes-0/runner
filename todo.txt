@@ -1,10 +1,11 @@
 - Write obtained rewards in pause
-- Add Portal scene
+- Text of reward resources
 - Fix Laser behaviour (particles)
-- Hitscan with Area2D or ShapeCast2D????? Also using Line2D can solve drawing
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 
 
++- Hitscan with Area2D or ShapeCast2D????? Also using Line2D can solve drawing
++ Add Portal scene
 + Add Chest and Portal classes
 + Make Demon resource class
 + On went to main menu "Cannot call method 'tween_property' on a null value."

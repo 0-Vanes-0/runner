@@ -7,14 +7,6 @@ const SHOOT_ENTITY_STATUS: int = 3
 const WEAPON: int = 4
 const ACTIVITY: int = 5
 
-const PORTAL_COLORS := {
-	DEMON_PASSIVITY: Color.DARK_SLATE_BLUE,
-	WEAPON_PASSIVITY: Color.INDIAN_RED,
-	SHOOT_ENTITY_STATUS: Color.DARK_CYAN,
-	WEAPON: Color.DARK_RED,
-	ACTIVITY: Color.DARK_ORCHID,
-}
-
 const DEMON_PASSIVITY_CHANCE: int = 40
 const WEAPON_PASSIVITY_CHANCE: int = 20
 const SHOOT_ENTITY_STATUS_CHANCE: int = 20
@@ -45,6 +37,10 @@ func _init(type: int, rarity: Rarity) -> void:
 
 func get_type() -> int:
 	return _type
+
+
+func get_as_resource() -> Resource:
+	return _value
 
 
 func get_as_demon_passivity_res() -> DemonPassivityResource:

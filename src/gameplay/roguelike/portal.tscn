@@ -1,0 +1,70 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8hhfqcwo7dqj"]
+
+[ext_resource type="Script" path="res://src/gameplay/roguelike/portal.gd" id="1_bhb6c"]
+[ext_resource type="Texture2D" uid="uid://b2pgofl2dxi18" path="res://assets/sprites/portals/spiral_thin/spiral7.png" id="2_078um"]
+[ext_resource type="Texture2D" uid="uid://c61g8hgkajv5t" path="res://assets/sprites/portals/spiral_thin/spiral8.png" id="3_2t6vr"]
+[ext_resource type="Texture2D" uid="uid://ecwdpcqcu7px" path="res://assets/sprites/portals/spiral_thin/spiral9.png" id="4_ukwpp"]
+[ext_resource type="Texture2D" uid="uid://dfdoygduej3sj" path="res://assets/sprites/portals/spiral_thin/spiral10.png" id="5_5cni8"]
+[ext_resource type="Texture2D" uid="uid://c3b21koioma2j" path="res://assets/sprites/portals/spiral_thin/spiral11.png" id="6_ioge2"]
+[ext_resource type="Texture2D" uid="uid://dimhjf12vxpir" path="res://assets/sprites/portals/spiral_thin/spiral12.png" id="7_lan1a"]
+[ext_resource type="Texture2D" uid="uid://dtosjxsgr011f" path="res://assets/sprites/portals/spiral_thick/Spiral1.png" id="8_xrhn4"]
+[ext_resource type="Texture2D" uid="uid://clatg2krw55id" path="res://assets/sprites/portals/spiral_thick/Spiral2.png" id="9_t807w"]
+[ext_resource type="Texture2D" uid="uid://bxgukipmeaaj1" path="res://assets/sprites/portals/spiral_thick/Spiral3.png" id="10_e1c0v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y44lf"]
+size = Vector2(140, 140)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvird"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_078um")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2t6vr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ukwpp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5cni8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ioge2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lan1a")
+}],
+"loop": true,
+"name": &"passivity",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_xrhn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t807w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_e1c0v")
+}],
+"loop": true,
+"name": &"weactivity",
+"speed": 8.0
+}]
+
+[node name="Portal" type="Area2D" node_paths=PackedStringArray("sprite", "coll_shape")]
+script = ExtResource("1_bhb6c")
+sprite = NodePath("AnimatedSprite2D")
+coll_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y44lf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pvird")
+animation = &"weactivity"
+frame_progress = 0.480993
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

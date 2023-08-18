@@ -148,43 +148,46 @@ func process_level_end_objects():
 	var chest := Preloader.chest.instantiate() as Chest
 	chest.reward = GameInfo.current_reward
 	chest.scale = (player.get_game_size() / 2) / chest.sprite.sprite_frames.get_frame_texture("default", 0).get_size()
+	chest.position = player.position + Vector2.RIGHT * player.get_game_size().x * 1.5
 	segments.add_child(chest)
-	chest.position = player.position + Vector2.RIGHT * player.get_game_size().x
-	chest.open()
-	player.apply_reward(chest.reward)
-	GameInfo.current_reward = null
-	
-	var portal_poses: Array[Vector2] = [
-		player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
-		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
-		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size(),
-	]
-	var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
-	for i in rewards.size():
-		var portal := Portal.new(rewards[i])
-		portal.name = "Portal" + str(i)
-		segments.add_child(portal)
-		portal.position = portal_poses[i]
-		
-		portal.portal_chosen.connect(
-				func(reward: Reward):
-					if GameInfo.current_reward == null:
-						GameInfo.current_reward = reward
-						player.go_to_portal.emit(portal_poses[i])
-						var anon_tween := create_tween()
-						anon_tween.tween_property(
-								black_color_rect, "color:a",
-								1.0,
-								1.0
-						)
-		, CONNECT_ONE_SHOT)
-	
-	player.in_portal.connect(
+	chest.clicked.connect(
 			func():
-				GameInfo.level_number = min(GameInfo.level_number + 1, GameInfo.LEVELS_COUNT)
-				setup_player()
-				setup_level()
-	, CONNECT_ONE_SHOT)
+				player.apply_reward(chest.reward)
+				GameInfo.current_reward = null
+				
+				var portal_poses: Array[Vector2] = [
+					player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
+					player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
+					player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size(),
+				]
+				var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
+				for i in rewards.size():
+					var portal := Preloader.portal.instantiate() as Portal
+					portal.set_reward(rewards[i])
+					portal.name = "Portal" + str(i)
+					portal.position = portal_poses[i]
+					portal.portal_chosen.connect(
+							func(reward: Reward):
+								if GameInfo.current_reward == null:
+									GameInfo.current_reward = reward
+									player.go_to_portal.emit(portal_poses[i])
+									var anon_tween := create_tween()
+									anon_tween.tween_property(
+											black_color_rect, "color:a",
+											1.0,
+											1.0
+									)
+					, CONNECT_ONE_SHOT)
+					
+					segments.add_child(portal)
+				
+				player.in_portal.connect(
+						func():
+							GameInfo.level_number = min(GameInfo.level_number + 1, GameInfo.LEVELS_COUNT)
+							setup_player()
+							setup_level()
+				, CONNECT_ONE_SHOT)
+	)
 
 
 func init_bounds():
