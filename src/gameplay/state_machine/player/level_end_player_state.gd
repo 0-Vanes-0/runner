@@ -14,7 +14,6 @@ func enter():
 	set_anim_looped()
 	
 	player.platforms_left = 0
-	var run_speed := float(player.run_speed)
 	var x_destination := Global.SCREEN_WIDTH / 2
 	var current_x := float(player.position.x)
 	
@@ -27,7 +26,7 @@ func enter():
 	tween.tween_property(
 			player, "position:x",
 			x_destination,
-			(x_destination - current_x) / run_speed
+			(x_destination - current_x) / player.current_run_speed
 	)
 	tween.tween_property(
 			self, "is_x_right",
@@ -36,7 +35,7 @@ func enter():
 	)
 	tween.tween_property(
 			player, "run_speed",
-			run_speed,
+			player.current_run_speed,
 			0.0
 	)
 	
@@ -54,7 +53,7 @@ func enter():
 			anon_tween.tween_property(
 					player, "position",
 					portal_position,
-					Global.LEVEL_END_TIME
+					1.0
 			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 			anon_tween.tween_callback(
 					func():
@@ -62,7 +61,7 @@ func enter():
 						player.scale.y = abs(player.scale.y)
 						player.rotation_degrees = 0
 						player.in_portal.emit()
-						player.run_speed = run_speed
+						player.current_run_speed = player.run_speed
 			)
 	, CONNECT_ONE_SHOT)
 
@@ -71,6 +70,6 @@ func physics_update(delta: float):
 	apply_player_gravity(delta)
 	if player.is_on_floor() and is_x_right:
 		is_x_right = false
-		player.run_speed = 0.0
+		player.current_run_speed = 0.0
 		player.sprite.play(ANIM_DEFAULT)
 		player.call_level_end_objects.emit()

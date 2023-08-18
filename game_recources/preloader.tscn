@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lx587a088gd7"]
+[gd_scene load_steps=21 format=3 uid="uid://lx587a088gd7"]
 
 [ext_resource type="Script" path="res://game_recources/preloader.gd" id="1_n2y2j"]
 [ext_resource type="Resource" uid="uid://bflurtgmvyqs2" path="res://game_recources/reward_resource.tres" id="2_py63j"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player_stuff/player.tscn" id="6_6xeq5"]
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="7_i1os7"]
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="8_w1kjr"]
+[ext_resource type="PackedScene" uid="uid://dqls351hv05l7" path="res://src/gameplay/roguelike/chest.tscn" id="9_hffe5"]
 [ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="9_juvbq"]
 [ext_resource type="ButtonGroup" uid="uid://dsu7rjtc4x6el" path="res://assets/themes_styles/main_menu_button_group.tres" id="10_w7mfh"]
 [ext_resource type="PackedScene" uid="uid://ccxbiicdhmjue" path="res://game_recources/enemies/sphere_mage.tscn" id="11_5mkps"]
@@ -29,6 +30,7 @@ segment_tilemap_scene = ExtResource("5_agqe2")
 player = ExtResource("6_6xeq5")
 platform_scene = ExtResource("7_i1os7")
 segment_scene = ExtResource("8_w1kjr")
+chest = ExtResource("9_hffe5")
 choose_demon_button = ExtResource("9_juvbq")
 main_menu_button_group = ExtResource("10_w7mfh")
 enemy_sphere_mage = ExtResource("11_5mkps")

@@ -19,8 +19,6 @@ enum Layers {
 }
 ## Max amount of floors in game.
 const MAX_FLOORS: int = 4
-## Time in seconds which describes how long [Player] will run in [LevelEndPlayerState].
-const LEVEL_END_TIME := 1.5
 ## Const distance between floors.
 var FLOORS_GAP: float
 ## Array of 4 spots of spawning enemies.

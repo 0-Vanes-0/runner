@@ -1,11 +1,9 @@
 class_name DodgePlayerState
 extends PlayerState
 
-var stamina_cost := 25.0
-
 
 func can_go_to_state() -> bool:
-	return eat_stamina(stamina_cost)
+	return eat_stamina(player.dodge_stamina_cost)
 
 
 func enter():

@@ -25,7 +25,8 @@ var current_floor: int
 
 
 func _ready() -> void:
-	assert(size_y_percent and weapon_resource and sprite and health_comp and weapon_marker and state_machine and status_handler)
+	assert(weapon_resource)
+	assert(sprite and health_comp and weapon_marker and state_machine and status_handler)
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)

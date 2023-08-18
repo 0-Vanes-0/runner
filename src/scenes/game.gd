@@ -40,7 +40,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_level_complete:
 		for segment in segments.get_children() as Array[Segment]:
-			segment.move(delta * Global.player.run_speed)
+			segment.move(delta * Global.player.current_run_speed)
 	
 	if is_enemies_permitted and enemies.get_child_count() == 0:
 		var enemy: Enemy = Preloader.enemy_sphere_mage.instantiate()
@@ -128,7 +128,7 @@ func setup_level():
 	tween.tween_property(
 			black_color_rect, "color:a",
 			0.0,
-			Global.LEVEL_END_TIME * 0.5
+			1.0
 	)
 	tween.tween_property(
 			self, "is_level_complete",
@@ -144,38 +144,39 @@ func setup_level():
 ## Called after finishing level, when [Player] reachs idle animation.
 func process_level_end_objects():
 	var player := Global.player
-	var chest_sprite := Sprite2D.new() # Chest
-	chest_sprite.name = "Chest"
-	chest_sprite.texture = preload("res://assets/sprites/mothership.png")
-	chest_sprite.scale = (player.get_game_size() / 2) / chest_sprite.texture.get_size()
-	segments.add_child(chest_sprite)
-	chest_sprite.position = player.position + Vector2.RIGHT * player.get_game_size().x
+	
+	var chest := Preloader.chest.instantiate() as Chest
+	chest.reward = GameInfo.current_reward
+	chest.scale = (player.get_game_size() / 2) / chest.sprite.sprite_frames.get_frame_texture("default", 0).get_size()
+	segments.add_child(chest)
+	chest.position = player.position + Vector2.RIGHT * player.get_game_size().x
+	chest.open()
+	player.apply_reward(chest.reward)
+	GameInfo.current_reward = null
 	
 	var portal_poses: Array[Vector2] = [
 		player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
 		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
 		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size(),
 	]
-	var portal_colors: Array[Color] = [
-		Color.RED,
-		Color.GREEN,
-		Color.BLUE,
-	]
-	for i in 3:
-		var portal := Portal.new(player.get_game_size() * 2, portal_colors[i])
+	var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
+	for i in rewards.size():
+		var portal := Portal.new(rewards[i])
 		portal.name = "Portal" + str(i)
 		segments.add_child(portal)
 		portal.position = portal_poses[i]
 		
 		portal.portal_chosen.connect(
-				func():
-					player.go_to_portal.emit(portal_poses[i])
-					var anon_tween := create_tween()
-					anon_tween.tween_property(
-							black_color_rect, "color:a",
-							1.0,
-							Global.LEVEL_END_TIME
-					)
+				func(reward: Reward):
+					if GameInfo.current_reward == null:
+						GameInfo.current_reward = reward
+						player.go_to_portal.emit(portal_poses[i])
+						var anon_tween := create_tween()
+						anon_tween.tween_property(
+								black_color_rect, "color:a",
+								1.0,
+								1.0
+						)
 		, CONNECT_ONE_SHOT)
 	
 	player.in_portal.connect(

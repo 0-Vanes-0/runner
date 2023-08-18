@@ -7,6 +7,14 @@ const SHOOT_ENTITY_STATUS: int = 3
 const WEAPON: int = 4
 const ACTIVITY: int = 5
 
+const PORTAL_COLORS := {
+	DEMON_PASSIVITY: Color.DARK_SLATE_BLUE,
+	WEAPON_PASSIVITY: Color.INDIAN_RED,
+	SHOOT_ENTITY_STATUS: Color.DARK_CYAN,
+	WEAPON: Color.DARK_RED,
+	ACTIVITY: Color.DARK_ORCHID,
+}
+
 const DEMON_PASSIVITY_CHANCE: int = 40
 const WEAPON_PASSIVITY_CHANCE: int = 20
 const SHOOT_ENTITY_STATUS_CHANCE: int = 20
@@ -35,15 +43,39 @@ func _init(type: int, rarity: Rarity) -> void:
 			assert(false, "WRONG TYPE OF REWARD: " + str(type))
 
 
-static func generate_reward() -> Reward:
+func get_type() -> int:
+	return _type
+
+
+func get_as_demon_passivity_res() -> DemonPassivityResource:
+	return _value as DemonPassivityResource
+
+
+func get_as_weapon_passivity_res() -> WeaponPassivityResource:
+	return _value as WeaponPassivityResource
+
+
+func get_as_status_res() -> StatusResource:
+	return _value as StatusResource
+
+
+func get_as_weapon_res() -> WeaponResource:
+	return _value as WeaponResource
+
+
+func get_as_activity_res() -> ActivityResource:
+	return _value as ActivityResource
+
+
+static func generate_reward(reward_type: int = 0) -> Reward:
 	var random_type := randi_range(1, CHANCES_SUM)
-	if random_type <= DEMON_PASSIVITY_CHANCE:
+	if reward_type == DEMON_PASSIVITY or reward_type == 0 and random_type <= DEMON_PASSIVITY_CHANCE:
 		return Reward.new(DEMON_PASSIVITY, Rarity.generate_rarity())
-	elif random_type <= DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE:
+	elif reward_type == WEAPON_PASSIVITY or reward_type == 0 and random_type <= DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE:
 		return Reward.new(WEAPON_PASSIVITY, Rarity.generate_rarity())
-	elif random_type <= DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE + SHOOT_ENTITY_STATUS_CHANCE:
+	elif reward_type == SHOOT_ENTITY_STATUS or reward_type == 0 and random_type <= DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE + SHOOT_ENTITY_STATUS_CHANCE:
 		return Reward.new(SHOOT_ENTITY_STATUS, Rarity.generate_rarity())
-	elif random_type <= DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE + SHOOT_ENTITY_STATUS_CHANCE + WEAPON_CHANCE:
+	elif reward_type == WEAPON or reward_type == 0 and random_type <= DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE + SHOOT_ENTITY_STATUS_CHANCE + WEAPON_CHANCE:
 		return Reward.new(WEAPON, Rarity.generate_rarity())
 	else:
 		return Reward.new(ACTIVITY, Rarity.generate_rarity())

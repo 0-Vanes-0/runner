@@ -7,6 +7,7 @@ extends Node
 @export_range(1, 5) var biome_number: int = 1
 ## Current level.
 @export_range(1, 9) var level_number: int = 1
+var current_reward: Reward
 ## Amount of kills of Enemy by Player.
 var kills_count: int = 0
 
@@ -16,6 +17,8 @@ var is_run_seed_generated: bool = false
 ## The first int is biome number, the second int is level number,
 ## Array[int] is array with numbers of segments.
 var segments_in_levels: Dictionary = {}
+## Structure: { int: { int: Array[Reward] } }
+var rewards_in_levels: Dictionary = {}
 ## Max biomes in game. (WIP: create Biome class?)
 const BIOMES_COUNT := 1 #5
 ## Max levels in each biome. (WIP: create Biome class?)
@@ -34,6 +37,7 @@ func setup_game_info():
 	kills_count = 0
 	biome_number = 1
 	level_number = 1
+	current_reward = Reward.generate_reward(Reward.DEMON_PASSIVITY)
 
 
 func generate_game_info():
@@ -42,6 +46,7 @@ func generate_game_info():
 	
 	for biome_i in range(1, BIOMES_COUNT + 1):
 		segments_in_levels[biome_i] = {}
+		rewards_in_levels[biome_i] = {}
 		for level_i in range(1, LEVELS_COUNT + 1):
 			var segment_order: Array[int] = []
 			var level_length: int = 0
@@ -50,6 +55,11 @@ func generate_game_info():
 				segment_order.append(segment_number)
 				level_length += (Preloader.segments.get(biome_i) as Array[Segment])[segment_number].get_length()
 			segments_in_levels[biome_i][level_i] = segment_order
+			
+			var choice_array: Array[Reward] = []
+			for i in randi_range(2, 3):
+				choice_array.append(Reward.generate_reward(Reward.DEMON_PASSIVITY))
+			rewards_in_levels[biome_i][level_i] = choice_array
 	
 	for i in 20:
 		var rarity := Rarity.generate_rarity()
@@ -63,3 +73,7 @@ func get_level_length(level_number: int) -> int:
 
 func get_level_segments_numbers(biome_i: int, level_i: int) -> Array[int]:
 	return segments_in_levels.get(biome_i).get(level_i)
+
+
+func get_rewards_array(biome_i: int, level_i: int) -> Array[Reward]:
+	return rewards_in_levels.get(biome_i).get(level_i)

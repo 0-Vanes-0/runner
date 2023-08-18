@@ -29,7 +29,7 @@ func _ready() -> void:
 	control.show()
 	dodge_button.init_abstract(
 			func() -> bool:
-				return Global.player.stamina >= Global.player.state_dodge.stamina_cost and not Global.player.get_current_state() is LevelEndPlayerState
+				return Global.player.stamina >= Global.player.dodge_stamina_cost and not Global.player.get_current_state() is LevelEndPlayerState
 	,
 			func():
 				send_dodge()

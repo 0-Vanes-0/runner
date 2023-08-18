@@ -34,8 +34,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Chest" type="Node2D"]
+[node name="Chest" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_amjrh")
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_04x2n")

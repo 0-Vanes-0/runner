@@ -28,25 +28,27 @@ var shoot_sensor: ShootSensor ## Input object for shooting.
 
 var jump_speed: float ## Describes how fast player jumps in pixels. Depends on [member gravity], do not change this value outside [method prepare_to_run]!
 var run_speed: float ## Describes how fast [Segment]s are moving in pixels (player doesn't move horizontally actually :P ).
+var current_run_speed: float
 var dodge_time: float ## Describes how long is [DodgePlayerState].
 var stamina: float ## This value is spent on jumps and dodges. Restores during [RunPlayerState].
-var stamina_max: float ## Maximum value of [member stamina].
-var gravity: float
+var stamina_max: float = 100 ## Maximum value of [member stamina].
+var stamina_regen: float 
+var gravity: float ## The more it is, the faster player moves vertically.
+var jumps_stamina_cost: float
+var dodge_stamina_cost: float
+
 var weapon: Weapon ## Equipped [Weapon].
 var weapon1: Weapon
 var weapon2: Weapon
+var passivities: Array[DemonPassivity]
 
 var platforms_left: int ## Simple counter of platforms left to finish a level.
 
-## The more it is, the faster player moves vertically. Default value is here: [code]ProjectSettings.get_setting("physics/2d/default_gravity")[/code]
-
 
 func _ready() -> void:
-	assert(
-			player_sensor and shoot_sensor 
-			and state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end
-			and sprite and body_shape and health_comp and state_machine and status_handler
-	)
+	assert(player_sensor and shoot_sensor)
+	assert(state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end)
+	assert(fact_size_area and sprite and body_shape and weapon_marker and health_comp and state_machine and status_handler)
 	self.name = "Player"
 	
 	# Setting collision layers listeners
@@ -114,11 +116,14 @@ func apply_player_data():
 	sprite.scale = Vector2.ONE * get_fact_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
 	sprite.modulate = Global.player_data.color
 	
-	health_comp.health = Global.player_data.base_hp
+	health_comp.health_max = Global.player_data.base_hp
 	run_speed = Global.player_data.base_speed
-	stamina_max = Global.player_data.base_stamina
+	current_run_speed = run_speed
+	stamina_regen = Global.player_data.base_stamina_regen
 	gravity = Global.player_data.base_gravity
 	dodge_time = 1.0
+	jumps_stamina_cost = 15
+	dodge_stamina_cost = 25
 	
 	# Adding Weapon:
 	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
@@ -127,6 +132,50 @@ func apply_player_data():
 	
 #	weapon2 = get_weapon(wr)
 #	self.add_child(weapon2)
+
+
+func apply_reward(reward: Reward):
+	match reward.get_type():
+		Reward.DEMON_PASSIVITY:
+			apply_passivity(reward.get_as_demon_passivity_res())
+#		Reward.WEAPON_PASSIVITY:
+#			apply_(reward.get_as_weapon_passivity_res())
+#		Reward.SHOOT_ENTITY_STATUS:
+#			apply_(reward.get_as_status_res())
+#		Reward.WEAPON:
+#			apply_(reward.get_as_weapon_res())
+#		Reward.ACTIVITY:
+#			apply_(reward.get_as_activity_res())
+
+
+func apply_passivity(resource: DemonPassivityResource):
+	var passivity := DemonPassivity.new(resource)
+	match passivity.get_type():
+		DemonPassivityResource.Types.HP_BUFF:
+			var buff: int = roundi(Global.player_data.base_hp * passivity.get_value_as_percent())
+			health_comp.health_max += buff
+			health_comp.health += buff
+		DemonPassivityResource.Types.STAMINA_REGEN:
+			var buff: int = roundi(Global.player_data.base_stamina_regen * passivity.get_value_as_percent())
+			stamina_regen += buff
+		DemonPassivityResource.Types.GRAVITY_BUFF:
+			var buff: int = roundi(Global.player_data.base_gravity * passivity.get_value_as_percent())
+			gravity += buff
+		DemonPassivityResource.Types.JUMPS_STAMINA_COST_REDUCE:
+			pass
+			# WIP
+		DemonPassivityResource.Types.DODGE_STAMINA_COST_REDUCE:
+			pass
+			# WIP
+		DemonPassivityResource.Types.SPEED_BUFF:
+			var buff: int = roundi(Global.player_data.base_speed * passivity.get_value_as_percent())
+			run_speed += buff
+		DemonPassivityResource.Types.SPEED_ACC_BUFF:
+			pass
+			# WIP
+		_:
+			assert(false, "Unknown type of passivity: " + DemonPassivityResource.Types.keys()[passivity.get_type()])
+	passivities.append(passivity)
 
 
 func get_game_size() -> Vector2:

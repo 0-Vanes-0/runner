@@ -13,6 +13,7 @@ signal loaded
 @export var player: PackedScene
 @export var platform_scene: PackedScene
 @export var segment_scene: PackedScene
+@export var chest: PackedScene
 
 @export_group("UIs")
 @export var choose_demon_button: PackedScene
@@ -54,6 +55,7 @@ func start_preload():
 		"player": player,
 		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
+		"chest": chest,
 		
 		"choose_demon_button": choose_demon_button,
 		"main_menu_button_group": main_menu_button_group,
@@ -81,7 +83,7 @@ func start_preload():
 			if dict.get(resource) != null:
 				export_counter += 1
 			else:
-				print_debug("Failed to load: " + resource)
+				assert(false, "Failed to load: " + resource)
 	
 	var non_empty := Vector2i(1, 0)
 	var segment_tilemap := segment_tilemap_scene.instantiate() as SegmentTileMap

@@ -5,12 +5,11 @@ extends PlayerState
 ## would be turned off during this state.
 const JUMP_DOWN_DISABLE_TIME := 0.1
 var is_passing_platform: bool
-var stamina_cost := 15.0
 
 
 func can_go_to_state() -> bool:
 	var platform := get_colliding_platform()
-	return platform == null or platform.floor_number > 1 and eat_stamina(stamina_cost)
+	return platform == null or platform.floor_number > 1 and eat_stamina(player.jumps_stamina_cost)
 
 
 func enter():

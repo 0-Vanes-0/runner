@@ -11,7 +11,7 @@ func enter():
 	player.sprite.modulate = player.health_comp.orig_modulate
 	player.sprite.play("dead")
 	player.sprite.set_frame_and_progress(0, 0.0)
-	player.run_speed = 0.0
+	player.current_run_speed = 0.0
 	
 	player.weapon.look_at(player.position + player.weapon.position + Vector2.RIGHT)
 	var tween := get_tree().create_tween()

@@ -5,10 +5,12 @@ extends Area2D
 signal out_of_health ## Called when health is 0.
 signal switched_collision ## Called when stopped shape's disabling.
 
-@export_range(1, 9999) var health: int = 100
+@export_range(1, 9999) var health_max: int = 100
 @export var debug_mode := false
-var _label: Label
+var health: int :
+	set = set_health
 var orig_modulate: Color
+var _label: Label
 var _shape: CollisionShape2D
 #var _tween: Tween
 
@@ -32,12 +34,17 @@ func _ready() -> void:
 	
 	orig_modulate = get_parent().sprite.modulate
 #	_tween = create_tween()
-
+	
 	_label = Global.create_ui_label()
 	self.add_child(_label)
 	var scale = parent.get_adjust_scale()
 	_label.set_scale(Vector2(1/scale.y, 1/scale.y))
 	
+	health = int(health_max)
+
+
+func set_health(value: int):
+	health = value
 	_label.text = str(health)
 
 ## Substracts [member health] by [param damage] and animates sprite of parent, if exists. 
@@ -45,7 +52,6 @@ func take_damage(damage: int) -> void:
 	health = maxi(health - damage, 0)
 	if health == 0:
 		out_of_health.emit()
-	_label.text = str(health)
 	
 	if get_parent().sprite != null:
 		var tween := create_tween()
