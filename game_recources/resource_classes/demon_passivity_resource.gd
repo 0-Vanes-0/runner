@@ -9,3 +9,19 @@ enum Types {
 }
 @export var type: Types = Types.NONE
 @export_range(0, 100, 0.1) var value: float
+
+const _NAMES := {
+	Types.HP_BUFF: "HP +_%",
+	Types.STAMINA_REGEN: "STM RGN +_%",
+	Types.GRAVITY_BUFF: "VRT SPD +_%",
+	Types.JUMPS_STAMINA_COST_REDUCE: "JMP COST -_",
+	Types.DODGE_STAMINA_COST_REDUCE: "DDG COST -_",
+	Types.SPEED_BUFF: "RUN SPD +_%",
+	Types.SPEED_ACC_BUFF: "RUN ACC +_%",
+}
+
+
+static func get_text(type: Types, value: float) -> String:
+	var text: String = _NAMES.get(type)
+	text = text.replace("_", str(value))
+	return text

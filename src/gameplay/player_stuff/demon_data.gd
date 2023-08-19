@@ -19,17 +19,17 @@ var _BASE_STAMINA_REGEN := {
 	Rarity.EPIC: 23,
 	Rarity.LEGENDARY: 30,
 }
-var _BASE_JUMPS_STAMINA_COST := { # ???
-	Rarity.NORMAL: 20,
-	Rarity.RARE: 15,
-	Rarity.EPIC: 12,
+var _BASE_DODGES_IN_STAMINA := {
+	Rarity.NORMAL: 4,
+	Rarity.RARE: 5,
+	Rarity.EPIC: 7,
 	Rarity.LEGENDARY: 10,
 }
-var _BASE_DODGE_STAMINA_COST := { # ???
-	Rarity.NORMAL: 30,
-	Rarity.RARE: 25,
-	Rarity.EPIC: 20,
-	Rarity.LEGENDARY: 16,
+var _BASE_JUMPS_IN_STAMINA := {
+	Rarity.NORMAL: 6,
+	Rarity.RARE: 7,
+	Rarity.EPIC: 9,
+	Rarity.LEGENDARY: 12,
 }
 var _BASE_GRAVITY := {
 	Rarity.NORMAL: 1000,
@@ -55,6 +55,10 @@ var base_speed: float
 var base_stamina_regen: int
 var base_gravity: int
 var start_weapon_rarity: Rarity
+const STATS_AMOUNT := 5
+
+var base_dodges_in_stamina: int
+var base_jumps_in_stamina: int
 
 
 func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
@@ -62,26 +66,34 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 	self.skin_resource = skin_resource
 	
 	self.color = Rarity.COLORS.get(rarity.get_type())
-	var order := range(5); order.shuffle()
-	rarities.resize(5)
+	var order := range(STATS_AMOUNT); order.shuffle()
+	rarities.resize(STATS_AMOUNT)
 	for i in _RARITY_STATS[rarity.get_type()]:
 		var number: int = order.pop_back()
 		_assign_with_rarity(number, rarity)
 	for i in order:
 		_assign_with_rarity(i, Rarity.new(Rarity.NORMAL))
 	
+	base_dodges_in_stamina = _BASE_DODGES_IN_STAMINA.get(Rarity.NORMAL)
+	base_jumps_in_stamina = _BASE_JUMPS_IN_STAMINA.get(Rarity.NORMAL)
+	
 	self.weapon_resource = Preloader.base_weapon_resources.pick_random()
 
 
 func get_description() -> String:
-	return (
-					   "[color=#" + Rarity.get_color_hex(rarities[0]) + "]" + str(base_hp) + " HP" + "[/color]"
-			+ "\t\t" + "[color=#" + Rarity.get_color_hex(rarities[1]) + "]" + str(base_speed) + " SPD" + "[/color]"
-			+ "\t\t" + "[color=#" + Rarity.get_color_hex(rarities[2]) + "]" + str(base_stamina_regen) + " STM/s" + "[/color]"
-			+ "\t\t" + "[color=#" + Rarity.get_color_hex(rarities[3]) + "]" + str(base_gravity) + " GRV" + "[/color]"
-			+ "\n" + "Weapon: " + weapon_resource.name
-			+ "\n" + "[color=#" + Rarity.get_color_hex(rarities[4]) + "]" + weapon_resource.get_description(start_weapon_rarity) + "[/color]"
-	)
+	var text := ""
+	text += "[color=#" + Rarity.get_color_hex(rarities[0]) + "]" + str(base_hp) + " HP" + "[/color]"
+	text += "\t\t"
+	text += "[color=#" + Rarity.get_color_hex(rarities[1]) + "]" + str(base_speed) + " SPD" + "[/color]"
+	text += "\t\t"
+	text += "[color=#" + Rarity.get_color_hex(rarities[2]) + "]" + str(base_stamina_regen) + " STM/s" + "[/color]"
+	text += "\t\t"
+	text += "[color=#" + Rarity.get_color_hex(rarities[3]) + "]" + str(base_gravity) + " GRV" + "[/color]"
+	text += "\n"
+	text += "Weapon: " + weapon_resource.name
+	text += "\n"
+	text += "[color=#" + Rarity.get_color_hex(rarities[4]) + "]" + weapon_resource.get_description(start_weapon_rarity) + "[/color]"
+	return text
 
 
 func _assign_with_rarity(i: int, rarity: Rarity):
@@ -97,3 +109,5 @@ func _assign_with_rarity(i: int, rarity: Rarity):
 			base_gravity = _BASE_GRAVITY.get(rarity.get_type())
 		4:
 			start_weapon_rarity = rarity
+		_:
+			assert(false, "rarities.size()=" + str(rarities.size()) + " <---> STATS_AMOUNT=" + str(STATS_AMOUNT))

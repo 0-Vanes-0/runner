@@ -32,7 +32,7 @@ var current_run_speed: float
 var dodge_time: float ## Describes how long is [DodgePlayerState].
 var stamina: float ## This value is spent on jumps and dodges. Restores during [RunPlayerState].
 var stamina_max: float = 100 ## Maximum value of [member stamina].
-var stamina_regen: float 
+var stamina_regen: float
 var gravity: float ## The more it is, the faster player moves vertically.
 var jumps_stamina_cost: float
 var dodge_stamina_cost: float
@@ -122,8 +122,8 @@ func apply_player_data():
 	stamina_regen = Global.player_data.base_stamina_regen
 	gravity = Global.player_data.base_gravity
 	dodge_time = 1.0
-	jumps_stamina_cost = 15
-	dodge_stamina_cost = 25
+	dodge_stamina_cost = Global.player_data.base_dodges_in_stamina
+	jumps_stamina_cost = Global.player_data.base_jumps_in_stamina
 	
 	# Adding Weapon:
 	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
@@ -198,6 +198,10 @@ func get_current_state() -> PlayerState:
 	return state_machine.state
 
 
+func get_stamina_cost(amount_in_100: int) -> int:
+	return ceili(100.0 / amount_in_100)
+
+
 func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_activate := false) -> Weapon:
 	var weapon := Weapon.new(weapon_resource, weapon_rarity, ShootEntity.Owner.PLAYER)
 	weapon.name = weapon_resource.name
@@ -206,3 +210,16 @@ func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_act
 	else:
 		weapon.deactivate()
 	return weapon
+
+
+func get_current_stats() -> String:
+	var text := ""
+	var stats := {}
+	for passivity in passivities:
+		if not stats.keys().has(passivity.get_type()):
+			stats[passivity.get_type()] = 0.0
+		stats[passivity.get_type()] += passivity.get_value()
+	
+	for p in stats.keys():
+		text += DemonPassivityResource.get_text(p, stats.get(p)) + "\n"
+	return text

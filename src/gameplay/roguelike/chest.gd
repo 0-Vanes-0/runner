@@ -47,8 +47,8 @@ func open():
 	)
 	tween.tween_property(
 			_label, "position:y",
-			- Global.player.get_game_size().y / 2,
-			1.5
+			- Global.player.get_game_size().y / 4,
+			1.0
 	)
 	tween.tween_property(
 			_label, "modulate:a",

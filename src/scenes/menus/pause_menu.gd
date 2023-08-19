@@ -4,9 +4,11 @@ class_name PauseMenu
 extends Control
 
 @export var _settings_menu: SettingsMenu
+@export var _label: RichTextLabel
+
 
 func  _ready() -> void:
-	assert(_settings_menu)
+	assert(_settings_menu and _label)
 
 
 func _on_resume_button_pressed() -> void:
@@ -21,3 +23,11 @@ func _on_settings_button_pressed() -> void:
 func _on_main_menu_button_pressed() -> void:
 	get_tree().paused = false
 	Global.switch_to_scene(Preloader.main_menu_scene)
+
+
+func _on_visibility_changed() -> void:
+	if self.visible:
+		var text := Global.player.get_current_stats()
+		_label.clear()
+		_label.append_text("Passivities:\n")
+		_label.append_text(text if not text.is_empty() else "No stats.")

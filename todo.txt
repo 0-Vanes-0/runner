@@ -1,9 +1,9 @@
-- Write obtained rewards in pause
-- Text of reward resources
+-... Text of reward resources
 - Fix Laser behaviour (particles)
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 
 
++ Write obtained rewards in pause
 +- Hitscan with Area2D or ShapeCast2D????? Also using Line2D can solve drawing
 + Add Portal scene
 + Add Chest and Portal classes
