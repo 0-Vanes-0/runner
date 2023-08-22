@@ -1,10 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbhc564a8a6e"]
+[gd_scene load_steps=30 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
 [ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
 [ext_resource type="Script" path="res://src/controls/player_sensor.gd" id="4_8ttyi"]
 [ext_resource type="PackedScene" uid="uid://bqqwp7m1spla6" path="res://src/controls/sensor_button.tscn" id="4_261ek"]
+[ext_resource type="PackedScene" uid="uid://b07cft04duti4" path="res://src/gameplay/enviroment/snapped_progress_bar.tscn" id="4_i804r"]
 [ext_resource type="Script" path="res://src/info_label.gd" id="4_shxdo"]
+[ext_resource type="Script" path="res://src/scenes/menus/left_menu.gd" id="4_u4atb"]
 [ext_resource type="PackedScene" uid="uid://dr5r31lkwfgnn" path="res://src/scenes/menus/game_over_menu.tscn" id="5_2syq0"]
 [ext_resource type="Texture2D" uid="uid://et8hwutneabo" path="res://assets/sprites/interface/dodge_button_pressed.png" id="5_5hunf"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
@@ -31,10 +33,25 @@ b = Vector2(0, 100)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_q0vek"]
 b = Vector2(0, 100)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jnf7q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idl52"]
+bg_color = Color(0.811765, 0.160784, 0.172549, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uek4u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bj1op"]
+bg_color = Color(0.0588235, 0.729412, 0.0705882, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q50yw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_punxy"]
+bg_color = Color(0.737255, 0.760784, 0.0980392, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
 font_size = 24
 
-[node name="GameScene" type="Node2D" node_paths=PackedStringArray("level", "bounds", "bounds_top", "bounds_right", "bounds_bottom", "bounds_left", "segments", "enemies", "shoot_field", "info_label", "player_sensor", "shoot_sensor", "game_over_menu", "pause_menu", "black_color_rect")]
+[node name="GameScene" type="Node2D" node_paths=PackedStringArray("level", "bounds", "bounds_top", "bounds_right", "bounds_bottom", "bounds_left", "segments", "enemies", "shoot_field", "info_label", "player_sensor", "left_menu", "shoot_sensor", "game_over_menu", "pause_menu", "black_color_rect")]
 process_mode = 1
 script = ExtResource("1_njila")
 level = NodePath("Level")
@@ -48,6 +65,7 @@ enemies = NodePath("Level/Enemies")
 shoot_field = NodePath("Level/ShootField")
 info_label = NodePath("HUD/InfoLabel")
 player_sensor = NodePath("HUD/PlayerSensor")
+left_menu = NodePath("HUD/PlayerSensor/Control/MainHBox/LeftMenu")
 shoot_sensor = NodePath("HUD/ShootSensor")
 game_over_menu = NodePath("HUD/GameOverMenu")
 pause_menu = NodePath("HUD/PauseMenu")
@@ -81,10 +99,10 @@ shape = SubResource("SegmentShape2D_q0vek")
 gizmo_extents = 100.0
 script = ExtResource("4_8ttyi")
 control = NodePath("Control")
-dodge_button = NodePath("Control/ButtonsMenu/DodgeButton")
-reload_button = NodePath("Control/ButtonsMenu/ReloadButton")
-switch_button = NodePath("Control/ButtonsMenu/SwitchButton")
-activity_button = NodePath("Control/ButtonsMenu/ActivityButton")
+dodge_button = NodePath("Control/MainHBox/ButtonsVBox/DodgeButton")
+reload_button = NodePath("Control/MainHBox/ButtonsVBox/ReloadButton")
+switch_button = NodePath("Control/MainHBox/ButtonsVBox/SwitchButton")
+activity_button = NodePath("Control/MainHBox/ButtonsVBox/ActivityButton")
 switch_weapon_disabled_time = 3.0
 
 [node name="Control" type="Control" parent="HUD/PlayerSensor"]
@@ -94,37 +112,88 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
+theme = ExtResource("12_ln7id")
 
-[node name="ButtonsMenu" type="VBoxContainer" parent="HUD/PlayerSensor/Control"]
+[node name="MainHBox" type="HBoxContainer" parent="HUD/PlayerSensor/Control"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
+offset_right = 144.0
 grow_vertical = 2
-alignment = 1
 
-[node name="PauseButton" type="Button" parent="HUD/PlayerSensor/Control/ButtonsMenu"]
+[node name="LeftMenu" type="VBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox" node_paths=PackedStringArray("meter_label", "hp_bar", "stamina_bar", "ammo_bar")]
 layout_mode = 2
-size_flags_vertical = 2
-theme = ExtResource("12_ln7id")
+script = ExtResource("4_u4atb")
+meter_label = NodePath("PanelContainer/MeterLabel")
+hp_bar = NodePath("PanelContainer2/BarsHBox/HPBar")
+stamina_bar = NodePath("PanelContainer2/BarsHBox/StaminaBar")
+ammo_bar = NodePath("PanelContainer2/BarsHBox/AmmoBar")
+
+[node name="PauseButton" type="Button" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "||"
 
-[node name="DodgeButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
+[node name="PanelContainer" type="PanelContainer" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu"]
+layout_mode = 2
+
+[node name="MeterLabel" type="Label" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "100 m"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BarsHBox" type="HBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2"]
+layout_mode = 2
+
+[node name="HPBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_jnf7q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_idl52")
+value = 85.0
+
+[node name="StaminaBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_uek4u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bj1op")
+value = 39.0
+snap_step = 25
+
+[node name="AmmoBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_q50yw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_punxy")
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="DodgeButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
 texture_normal = ExtResource("4_5m647")
 texture_pressed = ExtResource("5_5hunf")
 
-[node name="ReloadButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
+[node name="ReloadButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
 texture_normal = ExtResource("6_74d7t")
 texture_pressed = ExtResource("7_7jj8h")
 
-[node name="SwitchButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
+[node name="SwitchButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
 texture_normal = ExtResource("8_3hswu")
 texture_pressed = ExtResource("9_oemju")
 
-[node name="ActivityButton" parent="HUD/PlayerSensor/Control/ButtonsMenu" instance=ExtResource("4_261ek")]
+[node name="ActivityButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
 texture_normal = ExtResource("10_7kbpd")
 texture_pressed = ExtResource("11_qlpqs")
@@ -162,5 +231,3 @@ label_settings = SubResource("LabelSettings_aavuu")
 horizontal_alignment = 2
 script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
-
-[connection signal="pressed" from="HUD/PlayerSensor/Control/ButtonsMenu/PauseButton" to="." method="pause_game"]

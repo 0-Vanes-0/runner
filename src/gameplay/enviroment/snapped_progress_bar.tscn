@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://b07cft04duti4"]
+
+[ext_resource type="Script" path="res://src/gameplay/enviroment/snapped_progress_bar.gd" id="1_jvi6i"]
+
+[node name="SnappedProgressBar" type="ProgressBar"]
+offset_right = 60.0
+offset_bottom = 1080.0
+step = 1.0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("1_jvi6i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+alignment = 2
+
+[node name="EmptyColorRect" type="ColorRect" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[connection signal="resized" from="." to="." method="_on_resized"]

@@ -15,6 +15,7 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 
 @export var info_label: Label
 @export var player_sensor: PlayerSensor
+@export var left_menu: LeftMenu
 @export var shoot_sensor: ShootSensor
 @export var game_over_menu: GameOverMenu
 @export var pause_menu: PauseMenu
@@ -24,7 +25,7 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 func _ready() -> void:
 	assert(
 			level and bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and shoot_field
-			and info_label and player_sensor and shoot_sensor and game_over_menu and pause_menu and black_color_rect
+			and info_label and player_sensor and left_menu and shoot_sensor and game_over_menu and pause_menu and black_color_rect
 	)
 	black_color_rect.color = Color(0, 0, 0, 0)
 	game_over_menu.restart_called.connect(
@@ -75,17 +76,18 @@ func pause_game():
 func setup_player(need_create_instance: bool = false):
 	if Global.player == null or need_create_instance:
 		Global.player = Preloader.player.instantiate() as Player
-		var player := Global.player
+		var player := Global.player as Player
 		player.player_sensor = player_sensor
 		player.shoot_sensor = shoot_sensor
 		player.apply_player_data()
-		level.add_child(player)
 		player.state_dead.died.connect(
 				func():
 					game_over_menu.appear()
 					is_enemies_permitted = false
 		)
 		player.call_level_end_objects.connect(process_level_end_objects)
+		level.add_child(player)
+		left_menu.init_connections()
 	
 	Global.player.prepare_to_run()
 
@@ -156,9 +158,9 @@ func process_level_end_objects():
 				GameInfo.current_reward = null
 				
 				var portal_poses: Array[Vector2] = [
-					player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
-					player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 4 + Vector2.UP * player.get_game_size(),
-					player.position + Vector2.UP * Global.SCREEN_HEIGHT / 2 + Vector2.UP * player.get_game_size(),
+					player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
+					player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
+					player.position + Vector2.UP * Global.SCREEN_HEIGHT / 3 + Vector2.UP * player.get_game_size(),
 				]
 				var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
 				for i in rewards.size():

@@ -27,7 +27,7 @@ func _ready() -> void:
 	tween.tween_property(
 			sprite, "modulate:a",
 			1.0,
-			1.0
+			0.5
 	).from(0.0)
 	tween.tween_property(
 			self, "is_shown",

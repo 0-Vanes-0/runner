@@ -26,6 +26,7 @@ ammo_max = {
 "Normal": 100,
 "Rare": 100
 }
+ammo_snap_step = 10
 reload_time = {
 "Epic": 1.5,
 "Legendary": 1.0,

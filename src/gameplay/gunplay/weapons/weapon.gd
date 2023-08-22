@@ -2,7 +2,7 @@
 class_name Weapon
 extends Node2D
 
-@export var weapon_resource: WeaponResource ## Stored info about weapon.
+@export var _weapon_resource: WeaponResource ## Stored info about weapon.
 
 var weapon_rarity: Rarity
 var weapon_owner: ShootEntity.Owner ## Current owner of weapon.
@@ -27,7 +27,7 @@ func _init(weapon_resource: WeaponResource, weapon_rarity: Rarity, weapon_owner:
 	self.add_child(sprite)
 	
 	assert(weapon_resource != null, "weapon_resource is null")
-	self.weapon_resource = weapon_resource
+	_weapon_resource = weapon_resource
 	self.name = weapon_resource.name
 	self.damage = weapon_resource.get_damage(weapon_rarity) if weapon_owner == ShootEntity.Owner.PLAYER else weapon_resource.damage_from_enemy
 	self.ammo_max = weapon_resource.get_ammo_max(weapon_rarity)
@@ -46,22 +46,22 @@ func _init(weapon_resource: WeaponResource, weapon_rarity: Rarity, weapon_owner:
 func _ready() -> void:
 	sprite.centered = false
 	sprite.position = Vector2.ZERO
-	sprite.offset.y = -weapon_resource.get_sprite_size().y / 2
-	sprite.scale = Vector2(weapon_resource.sprite_scale_value, weapon_resource.sprite_scale_value)
+	sprite.offset.y = -_weapon_resource.get_sprite_size().y / 2
+	sprite.scale = Vector2(_weapon_resource.sprite_scale_value, _weapon_resource.sprite_scale_value)
 	
 	if sprite.sprite_frames.has_animation("default"):
 		sprite.play("default")
 	
-	if weapon_resource.shoot_entity_resource.exist_from_start:
+	if _weapon_resource.shoot_entity_resource.exist_from_start:
 		if _is_entity_class(ShootEntityResource.EntityClasses.LASER):
 			self.existing_shoot_entity = Laser.new(
-					weapon_resource.shoot_entity_resource, 
+					_weapon_resource.shoot_entity_resource, 
 					weapon_owner, 
 					get_start_shoot_position(), 
 					get_start_shoot_position(), 
 					damage,
 					shoot_rate_time,
-					weapon_resource.status_resource
+					_weapon_resource.status_resource
 			)
 			(self.existing_shoot_entity as Laser).shooted.connect(
 					func():
@@ -100,8 +100,8 @@ func stop_shoot():
 
 
 func _spawn_entity(start_position: Vector2, target_position: Vector2) -> void:
-	var ser: ShootEntityResource = weapon_resource.shoot_entity_resource
-	var sr: StatusResource = weapon_resource.status_resource
+	var ser: ShootEntityResource = _weapon_resource.shoot_entity_resource
+	var sr: StatusResource = _weapon_resource.status_resource
 	var shoot_field: Node2D = Global.get_game_scene().get_shoot_field()
 	assert(shoot_field != null)
 	if _is_entity_class(ShootEntityResource.EntityClasses.PROJECTILE_LINEAR):
@@ -119,7 +119,7 @@ func _spawn_entity(start_position: Vector2, target_position: Vector2) -> void:
 				Hitscan.new(ser, weapon_owner, start_position, target_position, damage, sr)
 		, true)
 		return
-	print_debug("Unknown shoot_entity_resource class, ", weapon_resource.shoot_entity_resource.entity_class)
+	print_debug("Unknown shoot_entity_resource class, ", _weapon_resource.shoot_entity_resource.entity_class)
 
 ## Waits until [member reload_time] passes and restores [member ammo] to [member ammo_max].
 func reload():
@@ -149,7 +149,7 @@ func remove_extra_spread_angle():
 
 
 func _is_entity_class(entity_class: ShootEntityResource.EntityClasses) -> bool:
-	return weapon_resource.shoot_entity_resource.entity_class == entity_class
+	return _weapon_resource.shoot_entity_resource.entity_class == entity_class
 
 
 func activate():
@@ -166,3 +166,7 @@ func get_start_shoot_position() -> Vector2:
 	var grandpa = (get_parent() as Marker2D).get_parent()
 	assert(grandpa is Player or grandpa is Enemy)
 	return grandpa.position + get_parent().position
+
+
+func get_ammo_snap_step() -> int:
+	return _weapon_resource.ammo_snap_step

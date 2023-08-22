@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/scenes/menus/pause_menu.gd" id="2_unpyo"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="3_rbksi"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_label")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_info_label", "_build_label")]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -15,7 +15,8 @@ grow_vertical = 2
 theme = ExtResource("1_tqsak")
 script = ExtResource("2_unpyo")
 _settings_menu = NodePath("SettingsMenu")
-_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/RichTextLabel")
+_info_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/InfoLabel")
+_build_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/BuildLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -41,7 +42,7 @@ theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(960, 0)
+custom_minimum_size = Vector2(1080, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
@@ -51,8 +52,21 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_bottom = 50
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="InfoLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 48
+text = "cggghg"
+fit_content = true
+scroll_active = false
+
+[node name="BuildLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 48
 text = "Info info
 Info!!!

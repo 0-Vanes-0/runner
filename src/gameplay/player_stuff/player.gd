@@ -5,6 +5,9 @@ extends CharacterBody2D
 signal call_level_end_objects ## Called when finishing level.
 signal go_to_portal(portal_position: Vector2) ## Called when a portal is chosen. (WIP: Portal class as argument)
 signal in_portal ## Called when player is inside portal.
+signal hp_max_changed(value: int)
+signal stamina_max_changed(value: int)
+signal ammo_max_changed(value: int)
 
 var player_sensor: PlayerSensor ## Input object for actions with player object.
 var shoot_sensor: ShootSensor ## Input object for shooting.
@@ -77,6 +80,7 @@ func _ready() -> void:
 							weapon1.activate()
 							weapon = weapon1
 							weapon.ammo = weapon.ammo_max
+						ammo_max_changed.emit()
 				elif direction == Vector2.DOWN:
 					weapon.reload()
 				elif direction == Vector2.UP:
@@ -104,7 +108,7 @@ func _ready() -> void:
 
 ## Inits player without recreating new instance.
 func prepare_to_run():
-	self.position = Vector2(Global.SCREEN_WIDTH * 0.15, Global.SCREEN_HEIGHT / 2)
+	self.position = Vector2(Global.SCREEN_WIDTH * 0.25, Global.SCREEN_HEIGHT / 2)
 	var jump_height: float = (Global.SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
 	jump_speed = sqrt(2 * gravity * jump_height)
 	stamina = stamina_max
@@ -128,6 +132,7 @@ func apply_player_data():
 	# Adding Weapon:
 	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
 	weapon = weapon1
+	ammo_max_changed.emit()
 	weapon_marker.add_child(weapon1)
 	
 #	weapon2 = get_weapon(wr)
@@ -155,9 +160,12 @@ func apply_passivity(resource: DemonPassivityResource):
 			var buff: int = roundi(Global.player_data.base_hp * passivity.get_value_as_percent())
 			health_comp.health_max += buff
 			health_comp.health += buff
+			hp_max_changed.emit(health_comp.health_max)
 		DemonPassivityResource.Types.STAMINA_REGEN:
 			var buff: int = roundi(Global.player_data.base_stamina_regen * passivity.get_value_as_percent())
 			stamina_regen += buff
+			# WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			stamina_max_changed.emit(stamina_max)
 		DemonPassivityResource.Types.GRAVITY_BUFF:
 			var buff: int = roundi(Global.player_data.base_gravity * passivity.get_value_as_percent())
 			gravity += buff

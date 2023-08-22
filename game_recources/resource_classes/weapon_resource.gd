@@ -33,6 +33,7 @@ const Animations := {
 	Rarity.NAMES[Rarity.EPIC]: 1,
 	Rarity.NAMES[Rarity.LEGENDARY]: 1,
 }
+@export_range(1, 100) var ammo_snap_step: int = 1
 ## Time in seconds for [method Weapon.reload].
 @export var reload_time := {
 	Rarity.NAMES[Rarity.NORMAL]: 0.0,
