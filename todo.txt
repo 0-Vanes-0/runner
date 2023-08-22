@@ -1,3 +1,5 @@
+- Return stamina buffs
+- Add more info to pause menu + update FAQ
 -... Text of reward resources
 - Fix Laser behaviour (particles)
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
