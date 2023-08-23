@@ -165,7 +165,7 @@ size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_uek4u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bj1op")
 value = 39.0
-snap_step = 25
+snap_step = 20
 
 [node name="AmmoBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2

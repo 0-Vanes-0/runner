@@ -67,6 +67,10 @@ func enter():
 
 
 func physics_update(delta: float):
+	if player.stamina < player.stamina_max:
+		player.stamina += player.stamina_regen * delta
+	else:
+		player.stamina = player.stamina_max
 	apply_player_gravity(delta)
 	if player.is_on_floor() and is_x_right:
 		is_x_right = false

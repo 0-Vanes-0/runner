@@ -21,7 +21,7 @@ value = 20.0
 [sub_resource type="Resource" id="Resource_1og48"]
 script = ExtResource("1_mcjol")
 type = 21
-value = 50.0
+value = 20.0
 
 [resource]
 script = ExtResource("1_aab76")

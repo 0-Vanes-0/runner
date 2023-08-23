@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjk1sxt21gprp"]
+[gd_scene load_steps=5 format=3 uid="uid://cjk1sxt21gprp"]
 
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="1_tqsak"]
 [ext_resource type="Script" path="res://src/scenes/menus/pause_menu.gd" id="2_unpyo"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="3_rbksi"]
+[ext_resource type="ButtonGroup" uid="uid://cgb16fnt4hph0" path="res://assets/themes_styles/pause_tabs_group.tres" id="3_sbel4"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_info_label", "_build_label")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_info_label", "_build_label", "_tab_container")]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -15,8 +16,9 @@ grow_vertical = 2
 theme = ExtResource("1_tqsak")
 script = ExtResource("2_unpyo")
 _settings_menu = NodePath("SettingsMenu")
-_info_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/InfoLabel")
-_build_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/BuildLabel")
+_info_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer/InfoLabel")
+_build_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer/BuildLabel")
+_tab_container = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -47,16 +49,57 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_bottom = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="InfoLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="StatsTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_sbel4")
+text = "Stats"
+
+[node name="WeaponsTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+button_group = ExtResource("3_sbel4")
+text = "Weapons"
+
+[node name="ActivityTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+toggle_mode = true
+button_group = ExtResource("3_sbel4")
+text = "Activity"
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tabs_visible = false
+
+[node name="Stats" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="InfoLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 48
@@ -64,7 +107,7 @@ text = "cggghg"
 fit_content = true
 scroll_active = false
 
-[node name="BuildLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="BuildLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 48
@@ -74,6 +117,19 @@ And info
 more info and info and info and info and info and info and info and info"
 fit_content = true
 scroll_active = false
+
+[node name="Weapons" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Activity" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -95,6 +151,9 @@ visible = false
 layout_mode = 1
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/StatsTabButton" to="." method="_on_stats_tab_button_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/WeaponsTabButton" to="." method="_on_weapons_tab_button_toggled"]
+[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/ActivityTabButton" to="." method="_on_activity_tab_button_toggled"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

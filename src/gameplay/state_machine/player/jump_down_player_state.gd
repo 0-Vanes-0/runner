@@ -4,12 +4,13 @@ extends PlayerState
 ## Time in seconds which describes how long the collision of [Player] with platforms
 ## would be turned off during this state.
 const JUMP_DOWN_DISABLE_TIME := 0.1
+const STAMINA_COST: int = 10
 var is_passing_platform: bool
 
 
 func can_go_to_state() -> bool:
 	var platform := get_colliding_platform()
-	return platform == null or platform.floor_number > 1 and eat_stamina(player.jumps_stamina_cost)
+	return platform == null or platform.floor_number > 1 and eat_stamina(STAMINA_COST)
 
 
 func enter():

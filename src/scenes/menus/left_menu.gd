@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 		
 		hp_bar.value = player.health_comp.health
 		stamina_bar.value = player.stamina
-		ammo_bar.value = player.weapon.ammo
+		ammo_bar.value = player.weapon.ammo if player.weapon.ammo_max > 1 else 1
 
 
 func init_connections():

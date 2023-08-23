@@ -6,10 +6,11 @@ extends Control
 @export var _settings_menu: SettingsMenu
 @export var _info_label: RichTextLabel
 @export var _build_label: RichTextLabel
+@export var _tab_container: TabContainer
 
 
 func  _ready() -> void:
-	assert(_settings_menu and _info_label and _build_label)
+	assert(_settings_menu and _info_label and _build_label and _tab_container)
 
 
 func _on_resume_button_pressed() -> void:
@@ -32,16 +33,26 @@ func _on_visibility_changed() -> void:
 		var data := Global.player_data as DemonData
 		
 		_info_label.clear()
+		_info_label.append_text("Your stats:")
+		_info_label.append_text("\n")
 		_info_label.append_text(
 				"HP: " + str(player.health_comp.health) + "/" + str(player.health_comp.health_max) + " (" + str(data.base_hp) + ")"
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
-				"STM: " + str( roundi(player.stamina) ) + "/" + str(player.stamina_max) #+ " (" + str(data.base_stamina) + ")"
+				"STM: " + str( roundi(player.stamina) ) + "/" + str(player.stamina_max) + " (" + str(data.base_stamina) + ")"
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
-				"STM RGN: " + str(player.stamina_regen) + "/s (" + str(data.base_stamina_regen) + ")"
+				"STM RGN: " + str(player.stamina_regen) + "/s (" + str(data.base_stamina) + ")"
+		)
+		_info_label.append_text("\n")
+		_info_label.append_text(
+				"SPD: " + player.get_meters_per_sec() + " m/s"
+		)
+		_info_label.append_text("\n")
+		_info_label.append_text(
+				"VRT SPD: " + player.get_gravity_percent() + "%"
 		)
 		_info_label.append_text("\n")
 		
@@ -49,3 +60,18 @@ func _on_visibility_changed() -> void:
 		_build_label.clear()
 		_build_label.append_text("Passivities:\n")
 		_build_label.append_text(text if not text.is_empty() else "No stats.")
+
+
+func _on_stats_tab_button_toggled(button_pressed: bool) -> void:
+	if button_pressed == true:
+		_tab_container.current_tab = 0
+
+
+func _on_weapons_tab_button_toggled(button_pressed: bool) -> void:
+	if button_pressed == true:
+		_tab_container.current_tab = 1
+
+
+func _on_activity_tab_button_toggled(button_pressed: bool) -> void:
+	if button_pressed == true:
+		_tab_container.current_tab = 2

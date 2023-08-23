@@ -37,8 +37,6 @@ var stamina: float ## This value is spent on jumps and dodges. Restores during [
 var stamina_max: float = 100 ## Maximum value of [member stamina].
 var stamina_regen: float
 var gravity: float ## The more it is, the faster player moves vertically.
-var jumps_stamina_cost: float
-var dodge_stamina_cost: float
 
 var weapon: Weapon ## Equipped [Weapon].
 var weapon1: Weapon
@@ -116,21 +114,21 @@ func prepare_to_run():
 
 
 func apply_player_data():
-	Global.player_data.skin_resource.apply_to_sprite(sprite)
+	var data := Global.player_data as DemonData
+	data.skin_resource.apply_to_sprite(sprite)
 	sprite.scale = Vector2.ONE * get_fact_size().y / sprite.sprite_frames.get_frame_texture("default", 0).get_size().y
-	sprite.modulate = Global.player_data.color
+	sprite.modulate = data.color
 	
-	health_comp.health_max = Global.player_data.base_hp
-	run_speed = Global.player_data.base_speed
+	health_comp.health_max = data.base_hp
+	run_speed = data.base_speed
 	current_run_speed = run_speed
-	stamina_regen = Global.player_data.base_stamina_regen
-	gravity = Global.player_data.base_gravity
-	dodge_time = 1.0
-	dodge_stamina_cost = Global.player_data.base_dodges_in_stamina
-	jumps_stamina_cost = Global.player_data.base_jumps_in_stamina
+	stamina_max = data.base_stamina
+	gravity = data.base_gravity
+	dodge_time = data.dodge_time
+	stamina_regen = data.base_stamina_regen
 	
 	# Adding Weapon:
-	weapon1 = get_weapon(Global.player_data.weapon_resource, Global.player_data.start_weapon_rarity, true)
+	weapon1 = get_weapon(data.weapon_resource, data.start_weapon_rarity, true)
 	weapon = weapon1
 	ammo_max_changed.emit()
 	weapon_marker.add_child(weapon1)
@@ -161,20 +159,13 @@ func apply_passivity(resource: DemonPassivityResource):
 			health_comp.health_max += buff
 			health_comp.health += buff
 			hp_max_changed.emit(health_comp.health_max)
-		DemonPassivityResource.Types.STAMINA_REGEN:
-			var buff: int = roundi(Global.player_data.base_stamina_regen * passivity.get_value_as_percent())
-			stamina_regen += buff
-			# WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		DemonPassivityResource.Types.STAMINA_BUFF:
+			var buff: int = roundi(Global.player_data.base_stamina * passivity.get_value_as_percent())
+			stamina_max += buff
 			stamina_max_changed.emit(stamina_max)
 		DemonPassivityResource.Types.GRAVITY_BUFF:
 			var buff: int = roundi(Global.player_data.base_gravity * passivity.get_value_as_percent())
 			gravity += buff
-		DemonPassivityResource.Types.JUMPS_STAMINA_COST_REDUCE:
-			pass
-			# WIP
-		DemonPassivityResource.Types.DODGE_STAMINA_COST_REDUCE:
-			pass
-			# WIP
 		DemonPassivityResource.Types.SPEED_BUFF:
 			var buff: int = roundi(Global.player_data.base_speed * passivity.get_value_as_percent())
 			run_speed += buff
@@ -206,8 +197,12 @@ func get_current_state() -> PlayerState:
 	return state_machine.state
 
 
-func get_stamina_cost(amount_in_100: int) -> int:
-	return ceili(100.0 / amount_in_100)
+func get_meters_per_sec() -> String:
+	return String.num(run_speed / Platform.SIZE.x, 2)
+
+
+func get_gravity_percent() -> String:
+	return String.num(gravity / 10.0, 0)
 
 
 func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_activate := false) -> Weapon:
