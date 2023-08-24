@@ -76,7 +76,7 @@ func get_description() -> String:
 	text += "\t\t"
 	text += "[color=#" + Rarity.get_color_hex(rarities[2]) + "]" + str(base_stamina) + " STM" + "[/color]"
 	text += "\t\t"
-	text += "[color=#" + Rarity.get_color_hex(rarities[3]) + "]" + str(base_gravity) + " GRV" + "[/color]"
+	text += "[color=#" + Rarity.get_color_hex(rarities[3]) + "]" + String.num(base_gravity / 10.0, 0) + "% VRT SPD" + "[/color]"
 	text += "\n"
 	text += "Weapon: " + weapon_resource.name
 	text += "\n"

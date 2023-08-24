@@ -174,3 +174,7 @@ func get_ammo_snap_step() -> int:
 
 func get_description() -> String:
 	return _weapon_resource.get_description(weapon_rarity)
+
+
+func get_preview() -> Texture:
+	return sprite.sprite_frames.get_frame_texture("default", 0)

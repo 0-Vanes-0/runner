@@ -69,15 +69,9 @@ func _ready() -> void:
 				elif direction == Vector2.LEFT:
 					if weapon1 != null and weapon2 != null:
 						if weapon1.is_active:
-							weapon1.deactivate()
-							weapon2.activate()
-							weapon = weapon2
-							weapon.ammo = weapon.ammo_max
+							activate_weapon2()
 						elif weapon2.is_active:
-							weapon2.deactivate()
-							weapon1.activate()
-							weapon = weapon1
-							weapon.ammo = weapon.ammo_max
+							activate_weapon1()
 						ammo_max_changed.emit()
 				elif direction == Vector2.DOWN:
 					weapon.reload()
@@ -145,8 +139,8 @@ func apply_reward(reward: Reward):
 #			apply_(reward.get_as_weapon_passivity_res())
 #		Reward.SHOOT_ENTITY_STATUS:
 #			apply_(reward.get_as_status_res())
-#		Reward.WEAPON:
-#			apply_(reward.get_as_weapon_res())
+		Reward.WEAPON:
+			apply_weapon(reward.get_as_weapon_res(), reward.get_rarity())
 #		Reward.ACTIVITY:
 #			apply_(reward.get_as_activity_res())
 
@@ -175,6 +169,10 @@ func apply_passivity(resource: DemonPassivityResource):
 		_:
 			assert(false, "Unknown type of passivity: " + DemonPassivityResource.Types.keys()[passivity.get_type()])
 	passivities.append(passivity)
+
+
+func apply_weapon(weapon_resource: WeaponResource, rarity: Rarity):
+	var weapon := Weapon.new(weapon_resource, rarity, ShootEntity.Owner.PLAYER)
 
 
 func get_game_size() -> Vector2:
@@ -207,7 +205,6 @@ func get_gravity_percent() -> String:
 
 func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_activate := false) -> Weapon:
 	var weapon := Weapon.new(weapon_resource, weapon_rarity, ShootEntity.Owner.PLAYER)
-	weapon.name = weapon_resource.name
 	if need_activate:
 		weapon.activate()
 	else:
@@ -226,3 +223,18 @@ func get_current_stats() -> String:
 	for p in stats.keys():
 		text += DemonPassivityResource.get_text(p, stats.get(p)) + "\n"
 	return text
+
+
+func activate_weapon1():
+	weapon2.deactivate()
+	weapon1.activate()
+	weapon = weapon1
+	weapon.ammo = weapon.ammo_max
+
+
+func activate_weapon2():
+	weapon1.deactivate()
+	weapon2.activate()
+	weapon = weapon2
+	weapon.ammo = weapon.ammo_max
+

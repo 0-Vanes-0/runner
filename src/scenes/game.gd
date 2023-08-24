@@ -34,7 +34,7 @@ func _ready() -> void:
 	)
 	
 	Global.need_apply_settings.emit()
-	init_bounds()
+	_init_bounds()
 	init_game()
 
 
@@ -145,7 +145,7 @@ func setup_level():
 
 ## Called after finishing level, when [Player] reachs idle animation.
 func process_level_end_objects():
-	var player := Global.player
+	var player := Global.player as Player
 	
 	var chest := Preloader.chest.instantiate() as Chest
 	chest.reward = GameInfo.current_reward
@@ -154,45 +154,62 @@ func process_level_end_objects():
 	segments.add_child(chest)
 	chest.clicked.connect(
 			func():
-				player.apply_reward(chest.reward)
-				GameInfo.current_reward = null
-				
-				var portal_poses: Array[Vector2] = [
-					player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
-					player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
-					player.position + Vector2.UP * Global.SCREEN_HEIGHT / 3 + Vector2.UP * player.get_game_size(),
-				]
-				var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
-				for i in rewards.size():
-					var portal := Preloader.portal.instantiate() as Portal
-					portal.set_reward(rewards[i])
-					portal.name = "Portal" + str(i)
-					portal.position = portal_poses[i]
-					portal.portal_chosen.connect(
-							func(reward: Reward):
-								if GameInfo.current_reward == null:
-									GameInfo.current_reward = reward
-									player.go_to_portal.emit(portal_poses[i])
-									var anon_tween := create_tween()
-									anon_tween.tween_property(
-											black_color_rect, "color:a",
-											1.0,
-											1.0
-									)
-					, CONNECT_ONE_SHOT)
-					
-					segments.add_child(portal)
+				match chest.reward.get_type():
+#					Reward.WEAPON:
+#						reward_menu.show_weapons(chest.reward)
+#						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
+#					Reward.ACTIVITY:
+#						reward_menu.show_activities(chest.reward)
+#						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
+					_:
+						player.apply_reward(chest.reward)
+						GameInfo.current_reward = null
+						_spawn_portals()
 				
 				player.in_portal.connect(
 						func():
-							GameInfo.level_number = min(GameInfo.level_number + 1, GameInfo.LEVELS_COUNT)
+							GameInfo.level_number = clampi(GameInfo.level_number + 1, 1, GameInfo.LEVELS_COUNT)
 							setup_player()
 							setup_level()
 				, CONNECT_ONE_SHOT)
 	)
 
 
-func init_bounds():
+func get_shoot_field() -> Node2D:
+	return shoot_field
+
+
+func _spawn_portals():
+	var player := Global.player as Player
+	
+	var portal_poses: Array[Vector2] = [
+		player.position + Vector2.RIGHT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
+		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
+		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 3 + Vector2.UP * player.get_game_size(),
+	]
+	var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
+	for i in rewards.size():
+		var portal := Preloader.portal.instantiate() as Portal
+		portal.set_reward(rewards[i])
+		portal.name = "Portal" + str(i)
+		portal.position = portal_poses[i]
+		portal.portal_chosen.connect(
+				func(reward: Reward):
+					if GameInfo.current_reward == null:
+						GameInfo.current_reward = reward
+						player.go_to_portal.emit(portal_poses[i])
+						var anon_tween := create_tween()
+						anon_tween.tween_property(
+								black_color_rect, "color:a",
+								1.0,
+								1.0
+						)
+		, CONNECT_ONE_SHOT)
+		
+		segments.add_child(portal)
+
+
+func _init_bounds():
 	(bounds_top.shape as SegmentShape2D).a = Vector2(0, 0)
 	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.SCREEN_WIDTH, 0)
 	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.SCREEN_WIDTH, 0)
@@ -202,10 +219,6 @@ func init_bounds():
 	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.SCREEN_HEIGHT)
 	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
 	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
-
-
-func get_shoot_field() -> Node2D:
-	return shoot_field
 
 
 func _on_level_complete():

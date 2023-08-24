@@ -233,10 +233,9 @@ shape = SubResource("RectangleShape2D_ogtel")
 [node name="WeaponMarker2D" type="Marker2D" parent="."]
 position = Vector2(0, -60)
 
-[node name="HealthComponent" type="Area2D" parent="." node_paths=PackedStringArray("_shape")]
+[node name="HealthComponent" type="Area2D" parent="."]
 position = Vector2(0, -60)
 script = ExtResource("35_1jswb")
-_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
 shape = SubResource("RectangleShape2D_cgdn0")
@@ -252,11 +251,11 @@ connections = [NodePath("../JumpUpPlayerState"), NodePath("../JumpDownPlayerStat
 
 [node name="JumpUpPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("38_qr8nv")
-connections = [NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")]
+connections = [NodePath("../JumpDownPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState"), NodePath("../DodgePlayerState")]
 
 [node name="JumpDownPlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("39_k8eym")
-connections = [NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState")]
+connections = [NodePath("../RunPlayerState"), NodePath("../DeadPlayerState"), NodePath("../LevelEndPlayerState"), NodePath("../DodgePlayerState")]
 
 [node name="DodgePlayerState" type="Node" parent="StateMachine" node_paths=PackedStringArray("connections")]
 script = ExtResource("40_q6mq2")

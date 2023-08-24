@@ -19,11 +19,8 @@ extends Resource
 @export var status_epic: Array[StatusResource]
 @export var status_legendary: Array[StatusResource]
 
-@export_group("Weapon", "weapon_")
-@export var weapon_normal: Array[WeaponResource]
-@export var weapon_rare: Array[WeaponResource]
-@export var weapon_epic: Array[WeaponResource]
-@export var weapon_legendary: Array[WeaponResource]
+@export_group("Weapon")
+@export var weapon: Array[WeaponResource]
 
 @export_group("Activity", "activity_")
 @export var activity_normal: Array[ActivityResource]
@@ -78,18 +75,8 @@ func get_status(rarity: Rarity) -> StatusResource:
 
 
 func get_weapon(rarity: Rarity) -> WeaponResource:
-	match rarity.get_type():
-		Rarity.NORMAL:
-			return weapon_normal.pick_random()
-		Rarity.RARE:
-			return weapon_rare.pick_random()
-		Rarity.EPIC:
-			return weapon_epic.pick_random()
-		Rarity.LEGENDARY:
-			return weapon_legendary.pick_random()
-		_:
-			print_debug("Wrong rarity type: ", rarity.get_type())
-			return null
+	var wr := weapon.pick_random() as WeaponResource
+	return null # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 func get_activity(rarity: Rarity) -> ActivityResource:

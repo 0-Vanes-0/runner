@@ -16,6 +16,7 @@ static var CHANCES_SUM: int = DEMON_PASSIVITY_CHANCE + WEAPON_PASSIVITY_CHANCE +
 
 var _type: int = 0
 var _value: Resource
+var _rarity: Rarity
 
 
 func _init(type: int, rarity: Rarity) -> void:
@@ -33,6 +34,7 @@ func _init(type: int, rarity: Rarity) -> void:
 			_value = Preloader.reward_resource.get_activity(rarity)
 		_:
 			assert(false, "WRONG TYPE OF REWARD: " + str(type))
+	_rarity = rarity
 
 
 func get_type() -> int:
@@ -57,6 +59,10 @@ func get_as_status_res() -> StatusResource:
 
 func get_as_weapon_res() -> WeaponResource:
 	return _value as WeaponResource
+
+
+func get_rarity() -> Rarity:
+	return _rarity
 
 
 func get_as_activity_res() -> ActivityResource:

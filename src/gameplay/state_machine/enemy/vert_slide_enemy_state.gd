@@ -12,8 +12,6 @@ var max_bounces: int
 
 
 func enter():
-	enemy.dead.connect(self.queue_free, CONNECT_ONE_SHOT)
-	
 	enemy.sprite.play("default")
 	set_anim_looped()
 	

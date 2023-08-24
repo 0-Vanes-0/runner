@@ -72,7 +72,7 @@ func _on_visibility_changed() -> void:
 		_build_label.append_text(text if not text.is_empty() else "No stats.")
 		
 		var weapon1 := player.weapon1
-		_weapon1_texture_rect.texture = weapon1.sprite.sprite_frames.get_frame_texture("default", 0)
+		_weapon1_texture_rect.texture = weapon1.get_preview()
 		_weapon1_label.clear()
 		_weapon1_label.append_text(
 				weapon1.get_description()
@@ -80,7 +80,7 @@ func _on_visibility_changed() -> void:
 		
 		if player.weapon2 != null:
 			var weapon2 := player.weapon2
-			_weapon2_texture_rect.texture = weapon2.sprite.sprite_frames.get_frame_texture("default", 0)
+			_weapon2_texture_rect.texture = weapon2.get_preview()
 
 
 func _on_stats_tab_button_toggled(button_pressed: bool) -> void:

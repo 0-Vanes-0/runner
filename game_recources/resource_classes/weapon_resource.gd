@@ -104,3 +104,7 @@ func get_reload_time(rarity: Rarity) -> float:
 
 func get_shoot_rate_time(rarity: Rarity) -> float:
 	return shoot_rate_time[rarity.get_name()]
+
+
+func get_preview() -> Texture:
+	return sprite_frames.sprite_frames.get_frame_texture("default", 0)

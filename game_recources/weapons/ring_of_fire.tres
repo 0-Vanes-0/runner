@@ -39,7 +39,7 @@ off_on_dead = true
 [resource]
 script = ExtResource("1_cq5wt")
 name = "Ring of Fire"
-description = "Adds Burning status (1 dmg/sec, max stack = 5)"
+description = "Burning status: 1 DMG/s, max units = 5"
 shoot_entity_resource = SubResource("Resource_hj43l")
 status_resource = SubResource("Resource_cr1tp")
 damage_from_player = {
