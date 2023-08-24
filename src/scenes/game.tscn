@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bxecltnpwwvaj" path="res://assets/sprites/interface/switch_button_pressed.png" id="9_oemju"]
 [ext_resource type="Texture2D" uid="uid://brsilg77l805r" path="res://assets/sprites/interface/activity_button.png" id="10_7kbpd"]
 [ext_resource type="Texture2D" uid="uid://vi2wpwbci4ot" path="res://assets/sprites/interface/activity_button_pressed.png" id="11_qlpqs"]
-[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="12_ln7id"]
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="12_ln7id"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
 b = Vector2(100, 0)
@@ -206,9 +206,6 @@ script = ExtResource("5_ysdi3")
 [node name="GameOverMenu" parent="HUD" instance=ExtResource("5_2syq0")]
 visible = false
 
-[node name="PauseMenu" parent="HUD" instance=ExtResource("6_d8b13")]
-visible = false
-
 [node name="BlackColorRect" type="ColorRect" parent="HUD"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,6 +215,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("6_d8b13")]
+visible = false
 
 [node name="InfoLabel" type="Label" parent="HUD"]
 anchors_preset = 1

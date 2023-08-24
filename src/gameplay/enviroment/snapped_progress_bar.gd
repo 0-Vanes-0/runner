@@ -3,7 +3,7 @@ extends ProgressBar
 
 @export_range(0, 999) var snap_step: int = 10
 @export var snap_color: Color = Color.BLACK
-var snap_width: int = roundi(Global.SCREEN_HEIGHT * 0.005)
+var snap_width: int = roundi(Global.SCREEN_HEIGHT * 0.004)
 
 @onready var v_box := $VBoxContainer as VBoxContainer
 @onready var empty_color_rect := $VBoxContainer/EmptyColorRect as ColorRect

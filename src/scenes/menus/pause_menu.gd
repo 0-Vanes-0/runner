@@ -3,14 +3,24 @@
 class_name PauseMenu
 extends Control
 
+const FONT_SIZE: int = 36
+
 @export var _settings_menu: SettingsMenu
+@export var _tab_container: TabContainer
 @export var _info_label: RichTextLabel
 @export var _build_label: RichTextLabel
-@export var _tab_container: TabContainer
+@export var _weapon1_texture_rect: TextureRect
+@export var _weapon1_label: RichTextLabel
+@export var _weapon2_texture_rect: TextureRect
+@export var _weapon2_label: RichTextLabel
 
 
 func  _ready() -> void:
-	assert(_settings_menu and _info_label and _build_label and _tab_container)
+	assert(_settings_menu and _tab_container and _info_label and _build_label and _weapon1_label and _weapon1_texture_rect and _weapon2_label and _weapon2_texture_rect)
+	_info_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
+	_build_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
+	_weapon1_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
+	_weapon2_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
 
 
 func _on_resume_button_pressed() -> void:
@@ -44,11 +54,11 @@ func _on_visibility_changed() -> void:
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
-				"STM RGN: " + str(player.stamina_regen) + "/s (" + str(data.base_stamina) + ")"
+				"STM RGN: " + str(player.stamina_regen) + "/s (" + str(data.base_stamina_regen) + ")"
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
-				"SPD: " + player.get_meters_per_sec() + " m/s"
+				"SPD: " + player.get_meters_per_sec() + " m/s (" + String.num(data.base_speed / Platform.SIZE.x, 2) + " m/s)"
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
@@ -60,6 +70,17 @@ func _on_visibility_changed() -> void:
 		_build_label.clear()
 		_build_label.append_text("Passivities:\n")
 		_build_label.append_text(text if not text.is_empty() else "No stats.")
+		
+		var weapon1 := player.weapon1
+		_weapon1_texture_rect.texture = weapon1.sprite.sprite_frames.get_frame_texture("default", 0)
+		_weapon1_label.clear()
+		_weapon1_label.append_text(
+				weapon1.get_description()
+		)
+		
+		if player.weapon2 != null:
+			var weapon2 := player.weapon2
+			_weapon2_texture_rect.texture = weapon2.sprite.sprite_frames.get_frame_texture("default", 0)
 
 
 func _on_stats_tab_button_toggled(button_pressed: bool) -> void:

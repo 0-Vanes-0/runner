@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjk1sxt21gprp"]
 
-[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles/default_theme.tres" id="1_tqsak"]
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_vrlws"]
 [ext_resource type="Script" path="res://src/scenes/menus/pause_menu.gd" id="2_unpyo"]
+[ext_resource type="ButtonGroup" uid="uid://cgb16fnt4hph0" path="res://assets/themes_styles_groups/pause_tabs_group.tres" id="3_5djap"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="3_rbksi"]
-[ext_resource type="ButtonGroup" uid="uid://cgb16fnt4hph0" path="res://assets/themes_styles/pause_tabs_group.tres" id="3_sbel4"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_info_label", "_build_label", "_tab_container")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_tab_container", "_info_label", "_build_label", "_weapon1_texture_rect", "_weapon1_label", "_weapon2_texture_rect", "_weapon2_label")]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -13,12 +13,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_tqsak")
+theme = ExtResource("1_vrlws")
 script = ExtResource("2_unpyo")
 _settings_menu = NodePath("SettingsMenu")
+_tab_container = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer")
 _info_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer/InfoLabel")
 _build_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer/BuildLabel")
-_tab_container = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer")
+_weapon1_texture_rect = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon1VBox/Weapon1TextureRect")
+_weapon1_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon1VBox/Weapon1Label")
+_weapon2_texture_rect = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox/Weapon2TextureRect")
+_weapon2_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox/Weapon2Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -63,7 +67,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
 button_pressed = true
-button_group = ExtResource("3_sbel4")
+button_group = ExtResource("3_5djap")
 text = "Stats"
 
 [node name="WeaponsTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
@@ -71,7 +75,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
-button_group = ExtResource("3_sbel4")
+button_group = ExtResource("3_5djap")
 text = "Weapons"
 
 [node name="ActivityTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
@@ -79,7 +83,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 toggle_mode = true
-button_group = ExtResource("3_sbel4")
+button_group = ExtResource("3_5djap")
 text = "Activity"
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
@@ -123,9 +127,48 @@ visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapon1VBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Weapon1TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon1VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Weapon1Label" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon1VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+
+[node name="Weapon2VBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Weapon2TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Weapon2Label" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
 
 [node name="Activity" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
 visible = false

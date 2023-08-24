@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://cua1s23yijxy2"]
 
 [ext_resource type="FontFile" uid="uid://dv1loa1pu1eml" path="res://assets/fonts/Fairfax.ttf" id="1_rnkhf"]
-[ext_resource type="StyleBox" uid="uid://ciaa4e4ky1v3g" path="res://assets/themes_styles/button_style_box_flat.tres" id="1_sl4go"]
+[ext_resource type="StyleBox" uid="uid://ciaa4e4ky1v3g" path="res://assets/themes_styles_groups/button_style_box_flat.tres" id="1_sl4go"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xiv67"]
 content_margin_left = 20.0

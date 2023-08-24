@@ -170,3 +170,7 @@ func get_start_shoot_position() -> Vector2:
 
 func get_ammo_snap_step() -> int:
 	return _weapon_resource.ammo_snap_step
+
+
+func get_description() -> String:
+	return _weapon_resource.get_description(weapon_rarity)
