@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=4 format=3 uid="uid://ck0ena0kktg35"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://ck0ena0kktg35"]
 
 [ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="1_5i1oy"]
 [ext_resource type="Script" path="res://game_recources/resource_classes/ser_classes/laser_ser.gd" id="2_4kuow"]
@@ -7,6 +7,8 @@
 script = ExtResource("2_4kuow")
 has_penetration = false
 entity_class = 4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wj3ea"]
 
 [resource]
 script = ExtResource("1_5i1oy")
@@ -40,4 +42,5 @@ shoot_rate_time = {
 "Rare": 0.1
 }
 spread_angle = 0
+sprite_frames = SubResource("SpriteFrames_wj3ea")
 sprite_scale_value = 1

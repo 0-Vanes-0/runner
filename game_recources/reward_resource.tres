@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="RewardResource" load_steps=7 format=3 uid="uid://bflurtgmvyqs2"]
+[gd_resource type="Resource" script_class="RewardResource" load_steps=9 format=3 uid="uid://bflurtgmvyqs2"]
 
 [ext_resource type="Script" path="res://game_recources/reward_resource.gd" id="1_aab76"]
 [ext_resource type="Script" path="res://game_recources/resource_classes/demon_passivity_resource.gd" id="1_mcjol"]
+[ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://game_recources/weapons/auto_rifle.tres" id="3_xvdu2"]
+[ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://game_recources/weapons/revolver.tres" id="4_ug7rv"]
 
 [sub_resource type="Resource" id="Resource_e4nlv"]
 script = ExtResource("1_mcjol")
@@ -37,7 +39,7 @@ status_normal = Array[Resource("res://game_recources/resource_classes/status_res
 status_rare = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
 status_epic = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
 status_legendary = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
-weapon = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([])
+weapon = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([ExtResource("3_xvdu2"), ExtResource("4_ug7rv")])
 activity_normal = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
 activity_rare = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
 activity_epic = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])

@@ -13,19 +13,20 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 @export var enemies: Node2D
 @export var shoot_field: Node2D
 
-@export var info_label: Label
 @export var player_sensor: PlayerSensor
 @export var left_menu: LeftMenu
 @export var shoot_sensor: ShootSensor
 @export var game_over_menu: GameOverMenu
-@export var pause_menu: PauseMenu
+@export var reward_menu: RewardMenu
 @export var black_color_rect: ColorRect
+@export var pause_menu: PauseMenu
+@export var info_label: Label
 
 
 func _ready() -> void:
 	assert(
 			level and bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and shoot_field
-			and info_label and player_sensor and left_menu and shoot_sensor and game_over_menu and pause_menu and black_color_rect
+			and info_label and player_sensor and left_menu and shoot_sensor and game_over_menu and reward_menu and pause_menu and black_color_rect
 	)
 	black_color_rect.color = Color(0, 0, 0, 0)
 	game_over_menu.restart_called.connect(
@@ -60,6 +61,10 @@ func _notification(what: int) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		pause_game()
+
+
+func _on_pause_button_pressed():
+	pause_game()
 
 ## Called when this scene is ready. The function spawns player and setups level according to [GameInfoSingleton].
 func init_game():
@@ -155,9 +160,9 @@ func process_level_end_objects():
 	chest.clicked.connect(
 			func():
 				match chest.reward.get_type():
-#					Reward.WEAPON:
-#						reward_menu.show_weapons(chest.reward)
-#						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
+					Reward.WEAPON:
+						reward_menu.show_weapons(chest.reward)
+						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
 #					Reward.ACTIVITY:
 #						reward_menu.show_activities(chest.reward)
 #						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)

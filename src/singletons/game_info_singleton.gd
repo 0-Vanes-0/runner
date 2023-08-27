@@ -37,7 +37,7 @@ func setup_game_info():
 	kills_count = 0
 	biome_number = 1
 	level_number = 1
-	current_reward = Reward.generate_reward(Reward.DEMON_PASSIVITY)
+	current_reward = Reward.generate_reward(Reward.WEAPON)
 
 
 func generate_game_info():

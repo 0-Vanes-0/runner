@@ -2,6 +2,7 @@ class_name RewardMenu
 extends Control
 
 signal choosed
+signal need_kill_tween
 
 @export var _card1: PanelContainer
 @export var _card2: PanelContainer
@@ -33,10 +34,13 @@ func show_weapons(with_reward: Reward):
 	_label1.text = player.weapon1.get_description()
 	_button1.pressed.connect(
 			func():
+				choosed.emit()
 				player.weapon1 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
 				player.activate_weapon1()
+				GameInfo.current_reward = null
 				hide_all()
 	)
+	_button1.text = "Replace"
 	_card1.show()
 	
 	if player.weapon2 != null:
@@ -44,22 +48,41 @@ func show_weapons(with_reward: Reward):
 		_label2.text = player.weapon2.get_description()
 		_button2.pressed.connect(
 				func():
+					choosed.emit()
 					player.weapon2 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
 					player.activate_weapon2()
+					GameInfo.current_reward = null
 					hide_all()
 		)
+		_button2.text = "Replace"
 		_card2.show()
+		
+		_button3.pressed.connect(
+				func():
+					choosed.emit()
+					# Add exp?
+					GameInfo.current_reward = null
+					hide_all()
+		)
+		_button3.text = "Consume"
+	
+	else:
+		_button3.pressed.connect(
+				func():
+					choosed.emit()
+					player.weapon2 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
+					player.weapon_marker.add_child(player.weapon2)
+					player.activate_weapon2()
+					GameInfo.current_reward = null
+					hide_all()
+		)
+		_button3.text = "Take"
 	
 	_texture_rect3.texture = with_reward.get_as_weapon_res().get_preview()
 	_label3.text = with_reward.get_as_weapon_res().get_description(with_reward.get_rarity())
-	_button3.pressed.connect(
-			func():
-				# Add exp?
-				hide_all()
-	)
 	_card3.show()
 	
-	self.show()
+	play_intro()
 
 
 func show_activities(with_reward: Reward):
@@ -69,14 +92,42 @@ func show_activities(with_reward: Reward):
 	self.show()
 
 
+func play_intro():
+	self.position.y = Global.SCREEN_HEIGHT
+	self.show()
+	var tween := create_tween()
+	tween.tween_property(
+			self, "position:y",
+			0,
+			1.0
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	need_kill_tween.connect(
+			func():
+				tween.kill()
+	)
+
+
 func hide_all():
-	for dict in _button1.pressed.get_connections() as Array[Dictionary]:
-		_button1.pressed.disconnect(dict["callable"])
-	for dict in _button2.pressed.get_connections() as Array[Dictionary]:
-		_button2.pressed.disconnect(dict["callable"])
-	for dict in _button3.pressed.get_connections() as Array[Dictionary]:
-		_button3.pressed.disconnect(dict["callable"])
-	
-	_card1.hide()
-	_card2.hide()
-	_card3.hide()
+	need_kill_tween.emit()
+	var tween := create_tween()
+	tween.tween_property(
+			self, "position:y",
+			- Global.SCREEN_HEIGHT,
+			1.0
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_callback(
+			func():
+				for dict in _button1.pressed.get_connections() as Array[Dictionary]:
+					_button1.pressed.disconnect(dict["callable"])
+				for dict in _button2.pressed.get_connections() as Array[Dictionary]:
+					_button2.pressed.disconnect(dict["callable"])
+				for dict in _button3.pressed.get_connections() as Array[Dictionary]:
+					_button3.pressed.disconnect(dict["callable"])
+				
+				_card1.hide()
+				_card2.hide()
+				_card3.hide()
+				
+				self.hide()
+	)
+	tween.finished.connect(tween.kill, CONNECT_ONE_SHOT)

@@ -40,21 +40,22 @@ func open():
 	sprite.play("open")
 	await sprite.animation_finished
 	var tween := create_tween()
-	tween.tween_property(
-			_label, "modulate:a",
-			1.0,
-			0.0
-	)
-	tween.tween_property(
-			_label, "position:y",
-			- Global.player.get_game_size().y / 4,
-			1.0
-	)
-	tween.tween_property(
-			_label, "modulate:a",
-			0.0,
-			1.0
-	)
+	if not _label.text.is_empty():
+		tween.tween_property(
+				_label, "modulate:a",
+				1.0,
+				0.0
+		)
+		tween.tween_property(
+				_label, "position:y",
+				- Global.player.get_game_size().y / 4,
+				1.0
+		)
+		tween.tween_property(
+				_label, "modulate:a",
+				0.0,
+				1.0
+		)
 	tween.tween_callback(
 			func():
 				clicked.emit()

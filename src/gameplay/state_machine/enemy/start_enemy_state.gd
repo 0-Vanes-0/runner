@@ -1,6 +1,8 @@
 class_name StartEnemyState
 extends EnemyState
 
+signal need_kill_tween
+
 const ENTER_TIME := 1.5
 
 
@@ -18,3 +20,11 @@ func enter():
 			ENTER_TIME
 	)
 	tween.tween_callback(transition_to_random_battle_state)
+	need_kill_tween.connect(
+			func():
+				tween.kill()
+	, CONNECT_ONE_SHOT)
+
+
+func exit():
+	need_kill_tween.emit()

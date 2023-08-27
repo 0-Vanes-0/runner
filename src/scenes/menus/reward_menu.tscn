@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_4iour"]
 [ext_resource type="Script" path="res://src/scenes/menus/reward_menu.gd" id="1_6jrm0"]
 
-[node name="RewardMenu" type="Control" node_paths=PackedStringArray("_card1", "_texture_rect1", "_label1")]
+[node name="RewardMenu" type="Control" node_paths=PackedStringArray("_card1", "_card2", "_card3", "_texture_rect1", "_texture_rect2", "_texture_rect3", "_label1", "_label2", "_label3", "_button1", "_button2", "_button3")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,8 +13,17 @@ grow_vertical = 2
 theme = ExtResource("1_4iour")
 script = ExtResource("1_6jrm0")
 _card1 = NodePath("MarginContainer/CardsHBox/Card1")
+_card2 = NodePath("MarginContainer/CardsHBox/Card2")
+_card3 = NodePath("MarginContainer/CardsHBox/Card3")
 _texture_rect1 = NodePath("MarginContainer/CardsHBox/Card1/MarginContainer/DescriptionVBox/TextureRect")
+_texture_rect2 = NodePath("MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox/TextureRect")
+_texture_rect3 = NodePath("MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox/TextureRect")
 _label1 = NodePath("MarginContainer/CardsHBox/Card1/MarginContainer/DescriptionVBox/RichTextLabel")
+_label2 = NodePath("MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox/RichTextLabel")
+_label3 = NodePath("MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox/RichTextLabel")
+_button1 = NodePath("MarginContainer/CardsHBox/Card1/MarginContainer/DescriptionVBox/Button")
+_button2 = NodePath("MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox/Button")
+_button3 = NodePath("MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox/Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -56,8 +65,69 @@ stretch_mode = 5
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CardsHBox/Card1/MarginContainer/DescriptionVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 36
 
 [node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card1/MarginContainer/DescriptionVBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "Text"
+text = "Replace"
+
+[node name="Card2" type="PanelContainer" parent="MarginContainer/CardsHBox"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CardsHBox/Card2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DescriptionVBox" type="VBoxContainer" parent="MarginContainer/CardsHBox/Card2/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 36
+
+[node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Replace"
+
+[node name="Card3" type="PanelContainer" parent="MarginContainer/CardsHBox"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CardsHBox/Card3"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="DescriptionVBox" type="VBoxContainer" parent="MarginContainer/CardsHBox/Card3/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 36
+
+[node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Melt"

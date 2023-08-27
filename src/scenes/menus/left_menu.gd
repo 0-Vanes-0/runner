@@ -34,7 +34,7 @@ func init_connections():
 	)
 	player.ammo_max_changed.connect(
 			func(value: int):
-				ammo_bar.set_max_value(value)
+				ammo_bar.set_max_value(value, player.weapon.get_ammo_snap_step())
 	)
 	has_connects = true
 	

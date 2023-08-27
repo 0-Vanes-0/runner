@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=8 format=3 uid="uid://cr7xqdjn4hvxu"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=9 format=3 uid="uid://cr7xqdjn4hvxu"]
 
 [ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="1_cq5wt"]
 [ext_resource type="Script" path="res://game_recources/resource_classes/ser_classes/projectile_ser.gd" id="2_6m5ux"]
@@ -25,6 +25,8 @@ speed_percent = 100.0
 has_penetration = false
 entity_class = 1
 sprite_frames = SubResource("SpriteFrames_qsryl")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_18546"]
 
 [sub_resource type="Resource" id="Resource_cr1tp"]
 script = ExtResource("4_b1ghi")
@@ -69,4 +71,5 @@ shoot_rate_time = {
 "Rare": 0.9
 }
 spread_angle = 10
+sprite_frames = SubResource("SpriteFrames_18546")
 sprite_scale_value = 1

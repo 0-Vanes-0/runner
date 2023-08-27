@@ -72,7 +72,6 @@ func _ready() -> void:
 							activate_weapon2()
 						elif weapon2.is_active:
 							activate_weapon1()
-						ammo_max_changed.emit()
 				elif direction == Vector2.DOWN:
 					weapon.reload()
 				elif direction == Vector2.UP:
@@ -230,6 +229,7 @@ func activate_weapon1():
 	weapon1.activate()
 	weapon = weapon1
 	weapon.ammo = weapon.ammo_max
+	ammo_max_changed.emit(weapon1.ammo_max)
 
 
 func activate_weapon2():
@@ -237,4 +237,5 @@ func activate_weapon2():
 	weapon2.activate()
 	weapon = weapon2
 	weapon.ammo = weapon.ammo_max
+	ammo_max_changed.emit(weapon2.ammo_max)
 

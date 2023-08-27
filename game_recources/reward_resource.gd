@@ -74,9 +74,8 @@ func get_status(rarity: Rarity) -> StatusResource:
 			return null
 
 
-func get_weapon(rarity: Rarity) -> WeaponResource:
-	var wr := weapon.pick_random() as WeaponResource
-	return null # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+func get_weapon() -> WeaponResource:
+	return weapon.pick_random() as WeaponResource
 
 
 func get_activity(rarity: Rarity) -> ActivityResource:

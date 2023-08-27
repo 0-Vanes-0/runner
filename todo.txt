@@ -1,6 +1,6 @@
 - Make richtextlabel hints???
 - Add more info to pause menu + update FAQ
-- Fix Laser behaviour (particles)
+- Fix Laser behaviour (particles) AND NOT DISAPPEAR WHEN SWITCHING WEAPON
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 
 
