@@ -225,6 +225,8 @@ func get_current_stats() -> String:
 
 
 func activate_weapon1():
+	if weapon.existing_shoot_entity != null:
+		weapon.stop_shoot()
 	if weapon2 != null:
 		weapon2.deactivate()
 	weapon1.activate()
@@ -234,6 +236,8 @@ func activate_weapon1():
 
 
 func activate_weapon2():
+	if weapon.existing_shoot_entity != null:
+		weapon.stop_shoot()
 	weapon1.deactivate()
 	weapon2.activate()
 	weapon = weapon2

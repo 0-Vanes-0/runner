@@ -10,6 +10,7 @@ var weapon: Weapon
 var tick_time: float
 var timer := 0.0
 var is_casting := false
+var is_activated := false
 
 
 func _init(resource: LaserSER, entity_owner: Owner, start_position: Vector2, target_position: Vector2, damage: int, tick_time: float, status_resource: StatusResource = null) -> void:
@@ -34,73 +35,64 @@ func _init(resource: LaserSER, entity_owner: Owner, start_position: Vector2, tar
 	line2d.add_point(Vector2.RIGHT * 100)
 	line2d.default_color = Color.CRIMSON
 	
-	collision_particle = CPUParticles2D.new()
+	collision_particle = Preloader.laser_particles.instantiate() as CPUParticles2D
 	raycast.add_child(collision_particle)
-	collision_particle.texture = preload("res://assets/sprites/shoot_entities/fire_orb.png")
-	collision_particle.lifetime = 0.3
-	collision_particle.gravity = Vector2.ZERO
-	collision_particle.initial_velocity_min = 100
-	collision_particle.spread = 45
-	# Scale curve
-	# Gradient color
-	collision_particle.emitting = false
 
 
 func _ready() -> void:
-	set_physics_process(false)
 	line2d.points[1] = Vector2.ZERO
 	weapon = get_parent() as Weapon
 	assert(weapon)
 
 
 func _physics_process(delta: float) -> void:
-	var cast_point = raycast.target_position
-	raycast.force_raycast_update()
-	
-	collision_particle.emitting = raycast.is_colliding()
-	timer += delta
-	if raycast.is_colliding():
-		if timer >= tick_time:
-			var health_comp: HealthComponent = raycast.get_collider() as HealthComponent
-			if health_comp != null:
-				health_comp.take_damage(self.damage)
-		cast_point = to_local(raycast.get_collision_point())
-		collision_particle.global_rotation = raycast.get_collision_normal().angle()
+	if is_activated:
+		var cast_point = raycast.target_position
+		raycast.force_raycast_update()
+		
+		timer += delta
+		if raycast.is_colliding():
+			if timer >= tick_time:
+				var health_comp: HealthComponent = raycast.get_collider() as HealthComponent
+				if health_comp != null:
+					health_comp.take_damage(self.damage)
+			cast_point = to_local(raycast.get_collision_point())
+		
+		collision_particle.direction = raycast.get_collision_normal().normalized()
 		collision_particle.position = cast_point
-	
-	line2d.points[1] = cast_point
-	
-	if timer >= tick_time:
-		timer = 0.0
-		shooted.emit()
+		line2d.points[1] = cast_point
+		
+		if timer >= tick_time:
+			timer = 0.0
+			shooted.emit()
 
 
 func toggle_shoot_entity(is_active: bool, target_position := Vector2.ZERO):
 	self.is_casting = is_active
 	
 	if is_casting:
-		appear()
 		if target_position != Vector2.ZERO:
 			raycast.target_position = raycast.target_position.rotated( (target_position - weapon.get_start_shoot_position()).angle() - raycast.target_position.angle() )
 		
-		if not self.visible:
-			self.show()
+		if not is_activated:
+			appear()
 			timer = 0.0
+			collision_particle.emitting = true
+			is_activated = true
+		
 	else:
 		collision_particle.emitting = false
 		disappear()
-		self.hide()
-	set_physics_process(is_casting)
+		is_activated = false
 
 
 func appear():
-	line2d.width = 10.0
-#	var tween := create_tween()
-#	tween.tween_property(
-#			line2d, "width",
-#			10.0,
-#			0.2
-#	)
+	var tween := create_tween()
+	tween.tween_property(
+			line2d, "width",
+			10.0,
+			0.2
+	)
 
 
 func disappear():

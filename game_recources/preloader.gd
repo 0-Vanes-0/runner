@@ -15,6 +15,7 @@ signal loaded
 @export var segment_scene: PackedScene
 @export var chest: PackedScene
 @export var portal: PackedScene
+@export var laser_particles: PackedScene
 
 @export_group("UIs")
 @export var choose_demon_button: PackedScene
@@ -57,6 +58,8 @@ func start_preload():
 		"platform_scene": platform_scene,
 		"segment_scene": segment_scene,
 		"chest": chest,
+		"portal": portal,
+		"laser_particles": laser_particles,
 		
 		"choose_demon_button": choose_demon_button,
 		"main_menu_button_group": main_menu_button_group,

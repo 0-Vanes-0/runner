@@ -448,6 +448,7 @@ size_flags_vertical = 3
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
 text = "Версия от 27.08.2023
 
 9 уровней увеличивающейся длины.
@@ -464,7 +465,7 @@ SPD = горизонт. скорость
 VRT SPD = верт. скорость
 
 Баги:
-Replace оружия не работает, лазер аквен после свитча оружия, у лазера странные партиклы, враги могут двигаться мёртвыми, activity пока не создан и кнопка со звездой бесполезна"
+Replace оружия не работает, у лазера странные партиклы, враги могут двигаться мёртвыми, activity пока не создан и кнопка со звездой бесполезна."
 autowrap_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CitySettingsHBoxContainer/CityButton" to="." method="_on_city_button_pressed"]
