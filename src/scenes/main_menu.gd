@@ -78,6 +78,5 @@ func _on_faq_button_pressed() -> void:
 	$FAQPanel.show()
 
 
-func _on_faq_panel_gui_input(event: InputEvent) -> void:
-	if event.is_pressed():
-		$FAQPanel.hide()
+func _on_x_button_pressed() -> void:
+	$FAQPanel.hide()

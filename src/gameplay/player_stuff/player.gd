@@ -225,7 +225,8 @@ func get_current_stats() -> String:
 
 
 func activate_weapon1():
-	weapon2.deactivate()
+	if weapon2 != null:
+		weapon2.deactivate()
 	weapon1.activate()
 	weapon = weapon1
 	weapon.ammo = weapon.ammo_max

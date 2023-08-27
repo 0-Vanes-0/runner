@@ -26,10 +26,10 @@ var ENEMY_Y_SPOTS: Array[float]
 ## Structure: [code]{ String: { String: Variant } }[/code].
 var DEFAULT_SETTINGS: Dictionary = {
 	Text.CONTROLS: {
-		Text.DODGE_SWIPE: true,
-		Text.RELOAD_SWIPE: true,
-		Text.SWITCH_WEAPON_SWIPE: true,
-		Text.ACTIVITY_SWIPE: true,
+		Text.DODGE_SWIPE: false,
+		Text.RELOAD_SWIPE: false,
+		Text.SWITCH_WEAPON_SWIPE: false,
+		Text.ACTIVITY_SWIPE: false,
 	},
 	Text.AUDIO: {
 		Text.MUSIC: true
