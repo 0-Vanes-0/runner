@@ -173,7 +173,7 @@ func get_ammo_snap_step() -> int:
 
 
 func get_description() -> String:
-	return _weapon_resource.get_description(weapon_rarity)
+	return _weapon_resource.get_description(weapon_rarity, true)
 
 
 func get_preview() -> Texture:

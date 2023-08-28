@@ -81,6 +81,10 @@ func _on_visibility_changed() -> void:
 		if player.weapon2 != null:
 			var weapon2 := player.weapon2
 			_weapon2_texture_rect.texture = weapon2.get_preview()
+			_weapon2_label.clear()
+			_weapon2_label.append_text(
+				weapon2.get_description()
+			)
 
 
 func _on_stats_tab_button_toggled(button_pressed: bool) -> void:

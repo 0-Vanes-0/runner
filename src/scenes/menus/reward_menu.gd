@@ -35,8 +35,10 @@ func show_weapons(with_reward: Reward):
 	_button1.pressed.connect(
 			func():
 				choosed.emit()
+				player.weapon1.queue_free()
 				player.weapon1 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
 				player.activate_weapon1()
+				player.weapon_marker.add_child(player.weapon1)
 				GameInfo.current_reward = null
 				hide_all()
 	)
@@ -49,8 +51,10 @@ func show_weapons(with_reward: Reward):
 		_button2.pressed.connect(
 				func():
 					choosed.emit()
+					player.weapon2.queue_free()
 					player.weapon2 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
 					player.activate_weapon2()
+					player.weapon_marker.add_child(player.weapon2)
 					GameInfo.current_reward = null
 					hide_all()
 		)
@@ -71,15 +75,15 @@ func show_weapons(with_reward: Reward):
 				func():
 					choosed.emit()
 					player.weapon2 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
-					player.weapon_marker.add_child(player.weapon2)
 					player.activate_weapon2()
+					player.weapon_marker.add_child(player.weapon2)
 					GameInfo.current_reward = null
 					hide_all()
 		)
 		_button3.text = "Take"
 	
 	_texture_rect3.texture = with_reward.get_as_weapon_res().get_preview()
-	_label3.text = with_reward.get_as_weapon_res().get_description(with_reward.get_rarity())
+	_label3.text = with_reward.get_as_weapon_res().get_description(with_reward.get_rarity(), true)
 	_card3.show()
 	
 	play_intro()

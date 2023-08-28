@@ -40,6 +40,8 @@ func _ready() -> void:
 	if reward.get_type() == Reward.DEMON_PASSIVITY:
 		var res := reward.get_as_demon_passivity_res()
 		label.text = res.Types.keys()[ res.Types.values().find(res.type) ] + " +" + str(res.value) + "%"
+	elif reward.get_type() == Reward.WEAPON:
+		label.text = "WEAPON"
 	self.add_child(label)
 	
 	sprite.modulate = PORTAL_COLORS[reward.get_type()]

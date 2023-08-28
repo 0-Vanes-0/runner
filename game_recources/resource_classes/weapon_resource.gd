@@ -65,7 +65,7 @@ func get_sprite_size() -> Vector2:
 	return Vector2.ZERO
 
 
-func get_description(rarity: Rarity) -> String:
+func get_description(rarity: Rarity, bbcode := false) -> String:
 	var damage := get_damage(rarity)
 	var ammo_max := get_ammo_max(rarity)
 	var reload_time := get_reload_time(rarity)
@@ -87,7 +87,7 @@ func get_description(rarity: Rarity) -> String:
 			"$3", 
 			str(ammo_max if ammo_max > 1 else "endless")
 	)
-	return text
+	return text if not bbcode else ("[color=#" + Rarity.get_color_hex(rarity) + "]" + text + "[/color]")
 
 
 func get_damage(rarity: Rarity) -> int:

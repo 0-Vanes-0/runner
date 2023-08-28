@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr5r31lkwfgnn"]
+[gd_scene load_steps=6 format=3 uid="uid://dr5r31lkwfgnn"]
 
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_e6gxa"]
 [ext_resource type="Script" path="res://src/scenes/menus/game_over_menu.gd" id="1_sr5md"]
@@ -15,45 +15,6 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="Animation" id="Animation_4g4w1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/RestartButton:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/QuitButton:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_34qoc"]
 resource_name = "start"
@@ -73,7 +34,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/RestartButton:disabled")
+tracks/1/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/QuitButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -85,22 +46,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/QuitButton:disabled")
+tracks/2/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Panel/MarginContainer/VBoxContainer/MarginContainer:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(1, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -109,7 +58,6 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n8cjl"]
 _data = {
-"RESET": SubResource("Animation_4g4w1"),
 "start": SubResource("Animation_34qoc")
 }
 
@@ -193,18 +141,9 @@ size_flags_vertical = 3
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="RestartButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 48
-disabled = true
-text = "Новый забег
-(test)"
-
 [node name="QuitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-disabled = true
 text = "Quit to menu"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -212,5 +151,4 @@ libraries = {
 "": SubResource("AnimationLibrary_n8cjl")
 }
 
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -464,8 +464,8 @@ AMM = боезапас оружия
 SPD = горизонт. скорость
 VRT SPD = верт. скорость
 
-Баги:
-Replace оружия не работает, у лазера странные партиклы, враги могут двигаться мёртвыми, activity пока не создан и кнопка со звездой бесполезна."
+Известные баги:
+У лазера странные партиклы, враги могут двигаться мёртвыми, activity пока не создан и кнопка со звездой бесполезна."
 autowrap_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CitySettingsHBoxContainer/CityButton" to="." method="_on_city_button_pressed"]

@@ -5,7 +5,6 @@ signal died
 
 
 func enter():
-	died.emit()
 	player.health_comp.call_deferred("turn_off_collision") # Fix???
 	player.status_handler.clear_statuses()
 	player.sprite.modulate = player.health_comp.orig_modulate
@@ -20,6 +19,10 @@ func enter():
 			Vector2(player.weapon.position.x, player.body_shape.position.y),
 			0.5
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tween.tween_callback(
+			func():
+				died.emit()
+	)
 
 
 func physics_update(delta: float):

@@ -33,10 +33,5 @@ func appear():
 	)
 
 
-func _on_restart_button_pressed() -> void:
-	self.visible = false
-	restart_called.emit()
-
-
 func _on_quit_button_pressed() -> void:
 	get_tree().change_scene_to_packed(Preloader.main_menu_scene)

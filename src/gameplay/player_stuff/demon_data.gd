@@ -80,7 +80,7 @@ func get_description() -> String:
 	text += "\n"
 	text += "Weapon: " + weapon_resource.name
 	text += "\n"
-	text += "[color=#" + Rarity.get_color_hex(rarities[4]) + "]" + weapon_resource.get_description(start_weapon_rarity) + "[/color]"
+	text += weapon_resource.get_description(start_weapon_rarity, true)
 	return text
 
 
