@@ -40,6 +40,10 @@ func open():
 	sprite.play("open")
 	await sprite.animation_finished
 	var tween := create_tween()
+	tween.tween_callback(
+			func():
+				clicked.emit()
+	)
 	if not _label.text.is_empty():
 		tween.tween_property(
 				_label, "modulate:a",
@@ -56,10 +60,6 @@ func open():
 				0.0,
 				1.0
 		)
-	tween.tween_callback(
-			func():
-				clicked.emit()
-	)
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

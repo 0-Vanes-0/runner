@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=5 format=3 uid="uid://ck0ena0kktg35"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=6 format=3 uid="uid://ck0ena0kktg35"]
 
 [ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="1_5i1oy"]
 [ext_resource type="Script" path="res://game_recources/resource_classes/ser_classes/laser_ser.gd" id="2_4kuow"]
+[ext_resource type="Texture2D" uid="uid://b667e4crj2iy" path="res://assets/tilemap/tile.png" id="3_ychli"]
 
 [sub_resource type="Resource" id="Resource_j82y1"]
 script = ExtResource("2_4kuow")
@@ -9,6 +10,15 @@ has_penetration = false
 entity_class = 4
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wj3ea"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ychli")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_5i1oy")

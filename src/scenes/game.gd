@@ -166,8 +166,8 @@ func process_level_end_objects():
 #					Reward.ACTIVITY:
 #						reward_menu.show_activities(chest.reward)
 #						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
-					_:
-						player.apply_reward(chest.reward)
+					Reward.DEMON_PASSIVITY:
+						player.apply_passivity(chest.reward.get_as_demon_passivity_res())
 						GameInfo.current_reward = null
 						_spawn_portals()
 				

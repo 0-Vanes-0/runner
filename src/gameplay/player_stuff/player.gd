@@ -130,20 +130,6 @@ func apply_player_data():
 #	self.add_child(weapon2)
 
 
-func apply_reward(reward: Reward):
-	match reward.get_type():
-		Reward.DEMON_PASSIVITY:
-			apply_passivity(reward.get_as_demon_passivity_res())
-#		Reward.WEAPON_PASSIVITY:
-#			apply_(reward.get_as_weapon_passivity_res())
-#		Reward.SHOOT_ENTITY_STATUS:
-#			apply_(reward.get_as_status_res())
-		Reward.WEAPON:
-			apply_weapon(reward.get_as_weapon_res(), reward.get_rarity())
-#		Reward.ACTIVITY:
-#			apply_(reward.get_as_activity_res())
-
-
 func apply_passivity(resource: DemonPassivityResource):
 	var passivity := DemonPassivity.new(resource)
 	match passivity.get_type():
@@ -168,10 +154,6 @@ func apply_passivity(resource: DemonPassivityResource):
 		_:
 			assert(false, "Unknown type of passivity: " + DemonPassivityResource.Types.keys()[passivity.get_type()])
 	passivities.append(passivity)
-
-
-func apply_weapon(weapon_resource: WeaponResource, rarity: Rarity):
-	var weapon := Weapon.new(weapon_resource, rarity, ShootEntity.Owner.PLAYER)
 
 
 func get_game_size() -> Vector2:
