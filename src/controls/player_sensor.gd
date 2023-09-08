@@ -141,7 +141,7 @@ func send_activity():
 
 
 func send_switch():
-	if not switch_button.is_progressing:
+	if _is_switch_possible() and not switch_button.is_progressing:
 		swipe.emit(Vector2.LEFT)
 		switch_button.progress_enabling()
 
@@ -160,3 +160,8 @@ func _is_reload_swipe_active() -> bool:
 
 func _is_activity_swipe_active() -> bool:
 	return Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE]
+
+
+func _is_switch_possible() -> bool:
+	var player := Global.player as Player
+	return player.weapon1 != null and player.weapon2 != null
