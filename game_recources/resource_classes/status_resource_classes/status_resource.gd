@@ -14,5 +14,19 @@ enum Tags {
 @export_range(0.0, 30.0, 0.1) var time_max: float = 0.0
 @export var off_on_dead: bool = true
 
-var tick_action: Callable = func(status: Status): pass
-var tag: Tags = Tags.EMPTY
+var tag: Tags = Tags.EMPTY :
+	get:
+		assert(tag != Tags.EMPTY)
+		return tag
+
+
+func status_enter(): # virtual
+	assert(false)
+
+
+func tick_action(status: Status): # virtual
+	assert(false)
+
+
+func status_exit(): # virtual
+	assert(false)
