@@ -43,6 +43,8 @@ func _ready() -> void:
 			state_go_away = state
 		elif not state is StartEnemyState:
 			battle_states.append(state as EnemyState)
+	
+	self.add_to_group(Text.ENEMY_GROUP)
 
 
 func get_fact_size() -> Vector2:

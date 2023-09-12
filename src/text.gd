@@ -14,3 +14,5 @@ const AUDIO := "Audio"
 const MUSIC := "music"
 const GRAPHICS := "Graphics"
 const ALWAYS_ON_TOP := "always_on_top"
+
+const ENEMY_GROUP := "enemy_group"

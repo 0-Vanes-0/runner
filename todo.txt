@@ -1,3 +1,5 @@
+- Add proper reload progress time to Activity
+- Add Activity view on pause menu
 - Make richtextlabel hints???
 - Make new attacks from enemies with pretrajectory
 - Add more info to pause menu + update FAQ

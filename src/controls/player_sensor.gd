@@ -29,40 +29,48 @@ func _ready() -> void:
 	control.show()
 	dodge_button.init_abstract(
 			func() -> bool:
-				return Global.player.stamina >= DodgePlayerState.STAMINA_COST and not Global.player.get_current_state() is LevelEndPlayerState
+				var player := Global.player as Player
+				return player.stamina >= DodgePlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
 	,
 			func():
 				send_dodge()
 	)
 	reload_button.init_abstract(
 			func() -> bool:
+				var player := Global.player as Player
 				return not (
-						Global.player.weapon.ammo == Global.player.weapon.ammo_max 
-						or Global.player.weapon.is_reloading
-						or Global.player.get_current_state() is LevelEndPlayerState
-						or Global.player.weapon.ammo_max == 1
+						player.weapon.ammo == player.weapon.ammo_max 
+						or player.weapon.is_reloading
+						or player.get_current_state() is LevelEndPlayerState
+						or player.weapon.ammo_max == 1
 				)
 	,
 			func():
-				Global.player.weapon.reload()
+				var player := Global.player as Player
+				player.weapon.reload()
 	)
+	switch_button.progress_time = switch_weapon_disabled_time
 	switch_button.init_abstract(
 			func() -> bool:
+				var player := Global.player as Player
 				return not (
-						Global.player.get_current_state() is LevelEndPlayerState 
+						player.get_current_state() is LevelEndPlayerState 
 						or switch_button.is_progressing
 				)
 	,
 			func():
 				send_switch()
 	)
-	switch_button.progress_time = switch_weapon_disabled_time
 	activity_button.init_abstract(
 			func() -> bool:
-				return not Global.player.get_current_state() is LevelEndPlayerState
+				var player := Global.player as Player
+				return not (
+						player.get_current_state() is LevelEndPlayerState 
+						or player.activity.is_reloading()
+				)
 	,
 			func():
-				pass
+				send_activity()
 	)
 	Global.need_apply_settings.connect(
 			func():
@@ -118,6 +126,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		elif event.is_action("switch_weapon"):
 			send_switch()
+
+
+func update_activity_button_progress_time():
+	var player := Global.player as Player
+	activity_button.progress_time = player.activity.reload_time
 
 
 func send_jump_up():

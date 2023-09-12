@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b8hhfqcwo7dqj" path="res://src/gameplay/roguelike/portal.tscn" id="10_4p6ub"]
 [ext_resource type="PackedScene" uid="uid://ccxbiicdhmjue" path="res://game_recources/enemies/sphere_mage.tscn" id="11_5mkps"]
 [ext_resource type="Resource" uid="uid://31fwiev0krwf" path="res://game_recources/player_skins/player_skin_biker.tres" id="11_eak1y"]
-[ext_resource type="PackedScene" uid="uid://bf74roolvnvcy" path="res://game_recources/laser_particles.tscn" id="11_rbiw0"]
+[ext_resource type="PackedScene" uid="uid://bf74roolvnvcy" path="res://game_recources/shoot_entity_related/laser_particles.tscn" id="11_rbiw0"]
 [ext_resource type="ButtonGroup" uid="uid://dsu7rjtc4x6el" path="res://assets/themes_styles_groups/main_menu_button_group.tres" id="12_3ijjy"]
 [ext_resource type="Resource" uid="uid://bbh24p14aee7n" path="res://game_recources/player_skins/player_skin_white.tres" id="12_t0vc3"]
 [ext_resource type="Resource" uid="uid://l1dqljr8rva6" path="res://game_recources/player_skins/player_skin_cyborg.tres" id="13_3mo7r"]

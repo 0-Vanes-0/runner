@@ -42,6 +42,7 @@ var weapon: Weapon ## Equipped [Weapon].
 var weapon1: Weapon
 var weapon2: Weapon
 var passivities: Array[DemonPassivity]
+var activity: Activity
 
 var platforms_left: int ## Simple counter of platforms left to finish a level.
 
@@ -75,7 +76,7 @@ func _ready() -> void:
 				elif direction == Vector2.DOWN:
 					weapon.reload()
 				elif direction == Vector2.UP:
-					print_debug("Use current ability")
+					activity.activate()
 	)
 	player_sensor.tap_up.connect(state_machine.transition_to.bind(state_jump_up))
 	player_sensor.tap_down.connect(state_machine.transition_to.bind(state_jump_down))
@@ -126,8 +127,9 @@ func apply_player_data():
 	ammo_max_changed.emit()
 	weapon_marker.add_child(weapon1)
 	
-#	weapon2 = get_weapon(wr)
-#	self.add_child(weapon2)
+	# Test: adding activity (remove this later)
+	activity = Activity.new(data.activity_resource)
+	self.add_child(activity)
 
 
 func apply_passivity(resource: DemonPassivityResource):

@@ -1,12 +1,22 @@
-[gd_resource type="Resource" script_class="RewardResource" load_steps=12 format=3 uid="uid://bflurtgmvyqs2"]
+[gd_resource type="Resource" script_class="RewardResource" load_steps=14 format=3 uid="uid://bflurtgmvyqs2"]
 
 [ext_resource type="Script" path="res://game_recources/reward_resource.gd" id="1_aab76"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/activity_resource_classes/wave_obscurer_ar.gd" id="1_fgwuq"]
 [ext_resource type="Script" path="res://game_recources/resource_classes/demon_passivity_resource.gd" id="1_mcjol"]
 [ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://game_recources/weapons/auto_rifle.tres" id="3_xvdu2"]
 [ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://game_recources/weapons/crossbow.tres" id="4_apube"]
 [ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://game_recources/weapons/revolver.tres" id="4_ug7rv"]
 [ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://game_recources/weapons/ring_of_fire.tres" id="6_5efb2"]
 [ext_resource type="Resource" uid="uid://ck0ena0kktg35" path="res://game_recources/weapons/test_laser.tres" id="7_lafuw"]
+
+[sub_resource type="Resource" id="Resource_atyhq"]
+script = ExtResource("1_fgwuq")
+value_normal = 50
+value_rare = 60
+value_epic = 75
+value_legendary = 100
+reload_time = 10.0
+duration_time = 0.0
 
 [sub_resource type="Resource" id="Resource_e4nlv"]
 script = ExtResource("1_mcjol")
@@ -43,7 +53,7 @@ status_rare = Array[Resource("res://game_recources/resource_classes/status_resou
 status_epic = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
 status_legendary = Array[Resource("res://game_recources/resource_classes/status_resource_classes/status_resource.gd")]([])
 weapon = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([ExtResource("3_xvdu2"), ExtResource("4_apube"), ExtResource("4_ug7rv"), ExtResource("6_5efb2"), ExtResource("7_lafuw")])
-activity_normal = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
-activity_rare = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
-activity_epic = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
-activity_legendary = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([])
+activity_normal = Array[Resource("res://game_recources/resource_classes/activity_resource_classes/activity_resource.gd")]([SubResource("Resource_atyhq")])
+activity_rare = Array[Resource("res://game_recources/resource_classes/activity_resource_classes/activity_resource.gd")]([])
+activity_epic = Array[Resource("res://game_recources/resource_classes/activity_resource_classes/activity_resource.gd")]([])
+activity_legendary = Array[Resource("res://game_recources/resource_classes/activity_resource_classes/activity_resource.gd")]([])

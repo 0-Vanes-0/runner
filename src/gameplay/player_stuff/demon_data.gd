@@ -48,6 +48,8 @@ const STATS_AMOUNT := 5
 var base_stamina_regen: float
 var dodge_time: float
 
+var activity_resource: ActivityResource
+
 
 func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 	self.common_rarity = rarity
@@ -66,6 +68,8 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 	
 	base_stamina_regen = 10.0
 	dodge_time = 0.5
+	
+	self.activity_resource = Preloader.reward_resource.activity_normal[0]
 
 
 func get_description() -> String:

@@ -95,6 +95,7 @@ func setup_player(need_create_instance: bool = false):
 		left_menu.init_connections()
 	
 	Global.player.prepare_to_run()
+	player_sensor.update_activity_button_progress_time()
 
 
 func setup_level():
