@@ -102,12 +102,12 @@ func _unhandled_input(event: InputEvent) -> void:
 						if abs(direction.x) > abs(direction.y):
 							if direction.x > 0 and _is_dodge_swipe_active():
 								send_dodge() # swipe right
-							elif _is_switch_swipe_active():
+							elif direction.x < 0 and _is_switch_swipe_active():
 								send_switch() # swipe left
 						else:
 							if direction.y > 0 and _is_reload_swipe_active():
 								send_reload() # swipe down
-							elif _is_activity_swipe_active():
+							elif direction.y < 0 and _is_activity_swipe_active():
 								send_activity() # swipe up
 				_touch_start_position = Vector2.ZERO
 	
