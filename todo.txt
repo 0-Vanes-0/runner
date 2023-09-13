@@ -1,3 +1,4 @@
+- Check reload bug!!!
 - Add proper reload progress time to Activity
 - Add Activity view on pause menu
 - Make richtextlabel hints???

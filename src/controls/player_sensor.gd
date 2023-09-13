@@ -2,7 +2,10 @@
 class_name PlayerSensor
 extends Marker2D
 
-signal swipe(direction: Vector2) ## Signal for swipe. Argument is Vector2(x, y) where x = 0 or 1 and y = 0 or 1.
+signal dodge
+signal reload
+signal activity
+signal switch
 signal tap_up ## Signal for tapping at top half of screen.
 signal tap_down ## Signal for tapping at bottom half of screen.
 
@@ -98,14 +101,14 @@ func _unhandled_input(event: InputEvent) -> void:
 					if abs(direction.x) + abs(direction.y) < SWIPE_MAX_DIAGONAL_SLOPE:
 						if abs(direction.x) > abs(direction.y):
 							if direction.x > 0 and _is_dodge_swipe_active():
-								send_dodge()
+								send_dodge() # swipe right
 							elif _is_switch_swipe_active():
-								send_switch()
+								send_switch() # swipe left
 						else:
 							if direction.y > 0 and _is_reload_swipe_active():
-								send_reload()
+								send_reload() # swipe down
 							elif _is_activity_swipe_active():
-								send_activity()
+								send_activity() # swipe up
 				_touch_start_position = Vector2.ZERO
 	
 	elif event is InputEventKey and event.is_pressed():
@@ -142,20 +145,20 @@ func send_jump_down():
 
 
 func send_dodge():
-	swipe.emit(Vector2.RIGHT)
+	dodge.emit()
 
 
 func send_reload():
-	swipe.emit(Vector2.DOWN)
+	reload.emit()
 
 
 func send_activity():
-	swipe.emit(Vector2.UP)
+	activity.emit()
 
 
 func send_switch():
-	if _is_switch_possible() and not switch_button.is_progressing:
-		swipe.emit(Vector2.LEFT)
+	if not switch_button.is_progressing:
+		switch.emit()
 		switch_button.progress_enabling()
 
 
@@ -173,8 +176,3 @@ func _is_reload_swipe_active() -> bool:
 
 func _is_activity_swipe_active() -> bool:
 	return Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE]
-
-
-func _is_switch_possible() -> bool:
-	var player := Global.player as Player
-	return player.weapon1 != null and player.weapon2 != null
