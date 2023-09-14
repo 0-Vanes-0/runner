@@ -74,18 +74,24 @@ func get_description(rarity: Rarity, bbcode := false) -> String:
 	var text := "Shoots $1\nDPS = $2\nAmmo = $3\n" + description
 	text = text.replace(
 			"$1", 
-			ShootEntityResource.EntityClasses.keys()[shoot_entity_resource.entity_class]
+			"[color=#" + Rarity.get_color_hex(rarity) + "]" 
+			+ ShootEntityResource.EntityClasses.keys()[shoot_entity_resource.entity_class] 
+			+ "[/color]"
 	)
 	text = text.replace(
-			"$2", 
-			str(damage / shoot_rate_time).pad_decimals(2) 
+			"$2",
+			"[color=#" + Rarity.get_color_hex(rarity) + "]"
+			+ str(damage / shoot_rate_time).pad_decimals(2) 
 			+ " (" 
 			+ str(damage * ammo_max / (shoot_rate_time * ammo_max + reload_time)).pad_decimals(2) 
 			+ " with reload)"
+			+ "[/color]"
 	)
 	text = text.replace(
 			"$3", 
-			str(ammo_max if ammo_max > 1 else "endless")
+			"[color=#" + Rarity.get_color_hex(rarity) + "]" 
+			+ str(ammo_max if ammo_max > 1 else "endless")
+			+ "[/color]"
 	)
 	return text if not bbcode else ("[color=#" + Rarity.get_color_hex(rarity) + "]" + text + "[/color]")
 

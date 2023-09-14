@@ -176,5 +176,5 @@ func get_description() -> String:
 	return _weapon_resource.get_description(weapon_rarity, true)
 
 
-func get_preview() -> Texture:
+func get_preview() -> Texture2D:
 	return sprite.sprite_frames.get_frame_texture("default", 0)

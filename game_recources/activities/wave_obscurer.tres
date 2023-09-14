@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WaveObcurerAR" load_steps=3 format=3 uid="uid://dfg67knvc7cpy"]
+
+[ext_resource type="Script" path="res://game_recources/resource_classes/activity_resource_classes/wave_obscurer_ar.gd" id="1_vebky"]
+[ext_resource type="Texture2D" uid="uid://b667e4crj2iy" path="res://assets/tilemap/tile.png" id="2_ruk5h"]
+
+[resource]
+script = ExtResource("1_vebky")
+name = "Wave Obscurer"
+description = "Deals $1 damage to all enemies.
+Reload: $3 s."
+texture = ExtResource("2_ruk5h")
+value_normal = 50
+value_rare = 60
+value_epic = 75
+value_legendary = 100
+reload_time = 10.0
+duration_time = 0.0

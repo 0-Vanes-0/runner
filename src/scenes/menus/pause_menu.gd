@@ -13,10 +13,12 @@ const FONT_SIZE: int = 36
 @export var _weapon1_label: RichTextLabel
 @export var _weapon2_texture_rect: TextureRect
 @export var _weapon2_label: RichTextLabel
+@export var _activity_texture_rect: TextureRect
+@export var _activity_label: RichTextLabel
 
 
 func  _ready() -> void:
-	assert(_settings_menu and _tab_container and _info_label and _build_label and _weapon1_label and _weapon1_texture_rect and _weapon2_label and _weapon2_texture_rect)
+	assert(_settings_menu and _tab_container and _info_label and _build_label and _weapon1_label and _weapon1_texture_rect and _weapon2_label and _weapon2_texture_rect and _activity_texture_rect and _activity_label)
 	_info_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
 	_build_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
 	_weapon1_label.add_theme_font_size_override("normal_font_size", FONT_SIZE)
@@ -58,7 +60,7 @@ func _on_visibility_changed() -> void:
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
-				"SPD: " + player.get_meters_per_sec() + " m/s (" + String.num(data.base_speed / Platform.SIZE.x, 2) + " m/s)"
+				"SPD: " + player.get_meters_per_sec() + " m/s (" + str(data.base_speed / Platform.SIZE.x).pad_decimals(2) + " m/s)"
 		)
 		_info_label.append_text("\n")
 		_info_label.append_text(
@@ -83,7 +85,15 @@ func _on_visibility_changed() -> void:
 			_weapon2_texture_rect.texture = weapon2.get_preview()
 			_weapon2_label.clear()
 			_weapon2_label.append_text(
-				weapon2.get_description()
+					weapon2.get_description()
+			)
+		
+		if player.activity != null:
+			var activity := player.activity
+			_activity_texture_rect.texture = activity.get_texture()
+			_activity_label.clear()
+			_activity_label.append_text(
+					activity.get_description()
 			)
 
 

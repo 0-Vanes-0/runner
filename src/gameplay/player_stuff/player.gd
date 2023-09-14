@@ -125,7 +125,7 @@ func apply_player_data():
 	weapon_marker.add_child(weapon1)
 	
 	# Test: adding activity (remove this later)
-	activity = Activity.new(data.activity_resource)
+	activity = Activity.new(data.activity_resource, Rarity.new(Rarity.NORMAL))
 	self.add_child(activity)
 
 
@@ -176,11 +176,11 @@ func get_current_state() -> PlayerState:
 
 
 func get_meters_per_sec() -> String:
-	return String.num(run_speed / Platform.SIZE.x, 2)
+	return str(run_speed / Platform.SIZE.x).pad_decimals(2)
 
 
 func get_gravity_percent() -> String:
-	return String.num(gravity / 10.0, 0)
+	return str(gravity / 10.0).pad_decimals(0)
 
 
 func get_weapon(weapon_resource: WeaponResource, weapon_rarity: Rarity, need_activate := false) -> Weapon:

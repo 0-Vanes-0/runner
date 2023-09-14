@@ -1,5 +1,4 @@
 - Add proper reload progress time to Activity
-- Add Activity view on pause menu
 - Make richtextlabel hints???
 - Make new attacks from enemies with pretrajectory
 - Add status box for actions above sensor buttons
@@ -8,6 +7,7 @@
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 
 
++ Add Activity view on pause menu
 + Check reload bug!!!
 +... Text of reward resources
 + Return stamina buffs

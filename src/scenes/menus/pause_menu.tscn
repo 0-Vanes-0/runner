@@ -5,12 +5,16 @@
 [ext_resource type="ButtonGroup" uid="uid://cgb16fnt4hph0" path="res://assets/themes_styles_groups/pause_tabs_group.tres" id="3_5djap"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="3_rbksi"]
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_tab_container", "_info_label", "_build_label", "_weapon1_texture_rect", "_weapon1_label", "_weapon2_texture_rect", "_weapon2_label")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_tab_container", "_info_label", "_build_label", "_weapon1_texture_rect", "_weapon1_label", "_weapon2_texture_rect", "_weapon2_label", "_activity_texture_rect", "_activity_label")]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_vrlws")
@@ -23,6 +27,8 @@ _weapon1_texture_rect = NodePath("MarginContainer/PanelContainer/MarginContainer
 _weapon1_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon1VBox/Weapon1Label")
 _weapon2_texture_rect = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox/Weapon2TextureRect")
 _weapon2_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox/Weapon2Label")
+_activity_texture_rect = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity/ActivityVBox/ActivityTextureRect")
+_activity_label = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity/ActivityVBox/ActivityLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -173,6 +179,31 @@ bbcode_enabled = true
 [node name="Activity" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="ActivityVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActivityTextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity/ActivityVBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ActivityLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity/ActivityVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "sdjghjdfhgdfhgdfjghjdfhgjdfhjgdfjgdfjjhgdfg
+fgfgfgfg
+fgf"
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

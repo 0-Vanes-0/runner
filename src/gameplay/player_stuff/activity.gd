@@ -1,13 +1,15 @@
 class_name Activity
 extends Node2D
 
+var rarity: Rarity
 var activity_resource: ActivityResource
 var reload_time: float
 var reload_timer: float
 var duration_time: float
 
 
-func _init(activity_resource: ActivityResource) -> void:
+func _init(activity_resource: ActivityResource, rarity: Rarity) -> void:
+	self.rarity = rarity
 	self.activity_resource = activity_resource
 	self.reload_time = activity_resource.reload_time
 	reload_timer = reload_time
@@ -28,6 +30,14 @@ func activate():
 
 func is_reloading() -> bool:
 	return reload_timer < reload_time
+
+
+func get_description() -> String:
+	return activity_resource.get_description(rarity)
+
+
+func get_texture() -> Texture2D:
+	return activity_resource.texture
 
 
 func _get_player() -> Player:
