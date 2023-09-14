@@ -180,6 +180,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_punxy")
 layout_mode = 2
 alignment = 1
 
+[node name="StatusesHBox" type="HBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox"]
+layout_mode = 2
+size_flags_vertical = 2
+
 [node name="DodgeButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
 texture_normal = ExtResource("4_5m647")
@@ -199,6 +203,10 @@ texture_pressed = ExtResource("9_oemju")
 layout_mode = 2
 texture_normal = ExtResource("10_7kbpd")
 texture_pressed = ExtResource("11_qlpqs")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox"]
+layout_mode = 2
+size_flags_vertical = 10
 
 [node name="ShootSensor" type="Marker2D" parent="HUD"]
 position = Vector2(960, 0)

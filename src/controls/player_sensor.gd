@@ -69,6 +69,7 @@ func _ready() -> void:
 				var player := Global.player as Player
 				return not (
 						player.get_current_state() is LevelEndPlayerState 
+						or switch_button.is_progressing
 						or player.activity.is_reloading()
 				)
 	,
@@ -153,11 +154,15 @@ func send_reload():
 
 
 func send_activity():
-	activity.emit()
+	var player := Global.player as Player
+	if not activity_button.is_progressing and player.activity != null:
+		activity.emit()
+		activity_button.progress_enabling()
 
 
 func send_switch():
-	if not switch_button.is_progressing:
+	var player := Global.player as Player
+	if not switch_button.is_progressing and player.weapon1 != null and player.weapon2 != null:
 		switch.emit()
 		switch_button.progress_enabling()
 
