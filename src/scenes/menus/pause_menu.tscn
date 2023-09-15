@@ -99,7 +99,6 @@ size_flags_vertical = 3
 tabs_visible = false
 
 [node name="Stats" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats"]
@@ -181,6 +180,7 @@ theme = ExtResource("4_kid2x")
 bbcode_enabled = true
 
 [node name="Activity" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ActivityVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity"]

@@ -24,15 +24,15 @@ func _init(type: int, rarity: Rarity) -> void:
 	var reward_res := Preloader.reward_resource as RewardResource
 	match type:
 		DEMON_PASSIVITY:
-			_value = reward_res.get_demon_passivity(rarity)
+			_value = reward_res.get_demon_passivity()
 		WEAPON_PASSIVITY:
-			_value = reward_res.get_weapon_passivity(rarity)
+			_value = reward_res.get_weapon_passivity()
 		SHOOT_ENTITY_STATUS:
-			_value = reward_res.get_status(rarity)
+			_value = reward_res.get_status()
 		WEAPON:
 			_value = reward_res.get_weapon()
 		ACTIVITY:
-			_value = reward_res.get_activity(rarity) # WIP: remove rarity param?
+			_value = reward_res.get_activity()
 		_:
 			assert(false, "WRONG TYPE OF REWARD: " + str(type))
 	_rarity = rarity

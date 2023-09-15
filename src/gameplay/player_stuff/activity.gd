@@ -23,9 +23,9 @@ func _physics_process(delta: float) -> void:
 func activate():
 	if not is_reloading():
 		reload_timer = 0.0
-		activity_resource.action()
+		activity_resource.action(rarity)
 		await get_tree().create_timer(duration_time)
-		activity_resource.action_end()
+		activity_resource.action_end(rarity)
 
 
 func is_reloading() -> bool:

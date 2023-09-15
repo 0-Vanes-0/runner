@@ -129,8 +129,8 @@ func apply_player_data():
 	self.add_child(activity)
 
 
-func apply_passivity(resource: DemonPassivityResource):
-	var passivity := DemonPassivity.new(resource)
+func apply_passivity(resource: DemonPassivityResource, rarity: Rarity):
+	var passivity := DemonPassivity.new(resource, rarity)
 	match passivity.get_type():
 		DemonPassivityResource.Types.HP_BUFF:
 			var buff: int = roundi(Global.player_data.base_hp * passivity.get_value_as_percent())

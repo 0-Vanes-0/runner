@@ -3,6 +3,7 @@ extends StatusResource
 
 @export_range(1, 100) var base_damage: int = 1
 
+
 func _init() -> void:
 	tag = Tags.BURNING
 

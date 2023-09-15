@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WaveObcurerAR" load_steps=3 format=3 uid="uid://dfg67knvc7cpy"]
 
-[ext_resource type="Script" path="res://game_recources/resource_classes/activity_resource_classes/wave_obscurer_ar.gd" id="1_vebky"]
+[ext_resource type="Script" path="res://game_recources/activities/wave_obscurer_ar.gd" id="1_vebky"]
 [ext_resource type="Texture2D" uid="uid://b667e4crj2iy" path="res://assets/tilemap/tile.png" id="2_ruk5h"]
 
 [resource]

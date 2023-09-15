@@ -8,7 +8,11 @@ enum Types {
 	SPEED_BUFF = 31, SPEED_ACC_BUFF = 32,
 }
 @export var type: Types = Types.NONE
-@export_range(0, 100, 0.1) var value: float
+@export_group("Values", "value_")
+@export_range(0, 100, 0.1) var value_normal: float
+@export_range(0, 100, 0.1) var value_rare: float
+@export_range(0, 100, 0.1) var value_epic: float
+@export_range(0, 100, 0.1) var value_legendary: float
 
 const _NAMES := {
 	Types.HP_BUFF: "HP +_%",
@@ -17,6 +21,21 @@ const _NAMES := {
 	Types.SPEED_BUFF: "RUN SPD +_%",
 	Types.SPEED_ACC_BUFF: "RUN ACC +_%",
 }
+
+
+func get_value(rarity: Rarity) -> float:
+	match rarity.get_type():
+		Rarity.NORMAL:
+			return value_normal
+		Rarity.RARE:
+			return value_rare
+		Rarity.EPIC:
+			return value_epic
+		Rarity.LEGENDARY:
+			return value_legendary
+		_:
+			print_debug("Wrong rarity type: ", rarity.get_type())
+			return 0.0
 
 
 static func get_text(type: Types, value: float) -> String:

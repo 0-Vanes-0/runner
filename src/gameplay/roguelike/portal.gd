@@ -39,7 +39,7 @@ func _ready() -> void:
 	label.modulate.a = 0.0
 	if reward.get_type() == Reward.DEMON_PASSIVITY:
 		var res := reward.get_as_demon_passivity_res()
-		label.text = res.Types.keys()[ res.Types.values().find(res.type) ] + " +" + str(res.value) + "%"
+		label.text = res.Types.keys()[ res.Types.values().find(res.type) ] + " +" + str(res.get_value(reward.get_rarity())) + "%"
 	elif reward.get_type() == Reward.WEAPON:
 		label.text = "WEAPON"
 	self.add_child(label)

@@ -69,7 +69,7 @@ func _ready() -> void:
 				var player := Global.player as Player
 				return not (
 						player.get_current_state() is LevelEndPlayerState 
-						or switch_button.is_progressing
+						or activity_button.is_progressing
 						or player.activity.is_reloading()
 				)
 	,

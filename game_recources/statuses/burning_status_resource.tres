@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BurningStatusResource" load_steps=2 format=3 uid="uid://ca5fp7vjwwth4"]
+
+[ext_resource type="Script" path="res://game_recources/statuses/burning_status_resource.gd" id="1_ayxc6"]
+
+[resource]
+script = ExtResource("1_ayxc6")
+base_damage = 1
+tick_time = 1.0
+status_count_max = 5
+off_type = 0
+ticks_count_max = 0
+time_max = 0.0
+off_on_dead = true

@@ -14,11 +14,11 @@ extends Resource
 @export_range(0.0, 30.0, 0.1) var duration_time: float = 0.0
 
 
-func action(): # virtual
+func action(rarity: Rarity): # virtual
 	assert(false)
 
 
-func action_end(): # virtual
+func action_end(rarity: Rarity): # virtual
 	assert(false)
 
 
