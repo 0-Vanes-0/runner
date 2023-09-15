@@ -39,9 +39,20 @@ func _ready() -> void:
 	label.modulate.a = 0.0
 	if reward.get_type() == Reward.DEMON_PASSIVITY:
 		var res := reward.get_as_demon_passivity_res()
-		label.text = res.Types.keys()[ res.Types.values().find(res.type) ] + " +" + str(res.get_value(reward.get_rarity())) + "%"
+		label.text = (
+				res.Types.keys()[ res.Types.values().find(res.type) ]
+				+ ("+" if reward.get_rarity().get_type() >= Rarity.EPIC else "")
+		)
 	elif reward.get_type() == Reward.WEAPON:
-		label.text = "WEAPON"
+		label.text = (
+				"WEAPON"
+				+ ("+" if reward.get_rarity().get_type() >= Rarity.EPIC else "")
+		)
+	elif reward.get_type() == Reward.ACTIVITY:
+		label.text = (
+				"ACTIVITY"
+				+ ("+" if reward.get_rarity().get_type() >= Rarity.EPIC else "")
+		)
 	self.add_child(label)
 	
 	sprite.modulate = PORTAL_COLORS[reward.get_type()]

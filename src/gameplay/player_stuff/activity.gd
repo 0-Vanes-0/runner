@@ -36,8 +36,8 @@ func get_description() -> String:
 	return activity_resource.get_description(rarity)
 
 
-func get_texture() -> Texture2D:
-	return activity_resource.texture
+func get_preview() -> Texture2D:
+	return activity_resource.get_preview()
 
 
 func _get_player() -> Player:

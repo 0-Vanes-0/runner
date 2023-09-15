@@ -70,6 +70,7 @@ func _ready() -> void:
 				return not (
 						player.get_current_state() is LevelEndPlayerState 
 						or activity_button.is_progressing
+						or player.activity == null
 						or player.activity.is_reloading()
 				)
 	,
@@ -154,6 +155,7 @@ func send_reload():
 
 
 func send_activity():
+	update_activity_button_progress_time()
 	var player := Global.player as Player
 	if not activity_button.is_progressing and player.activity != null:
 		activity.emit()

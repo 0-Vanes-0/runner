@@ -90,7 +90,7 @@ func _on_visibility_changed() -> void:
 		
 		if player.activity != null:
 			var activity := player.activity
-			_activity_texture_rect.texture = activity.get_texture()
+			_activity_texture_rect.texture = activity.get_preview()
 			_activity_label.clear()
 			_activity_label.append_text(
 					activity.get_description()

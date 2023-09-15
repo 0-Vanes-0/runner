@@ -73,7 +73,11 @@ func _ready() -> void:
 	)
 	player_sensor.dodge.connect(state_machine.transition_to.bind(state_dodge))
 	player_sensor.reload.connect(weapon.reload)
-	player_sensor.activity.connect(activity.activate)
+	player_sensor.activity.connect(
+			func():
+				if activity != null:
+					activity.activate()
+	)
 	player_sensor.tap_up.connect(state_machine.transition_to.bind(state_jump_up))
 	player_sensor.tap_down.connect(state_machine.transition_to.bind(state_jump_down))
 	
@@ -123,10 +127,6 @@ func apply_player_data():
 	weapon = weapon1
 	ammo_max_changed.emit()
 	weapon_marker.add_child(weapon1)
-	
-	# Test: adding activity (remove this later)
-	activity = Activity.new(data.activity_resource, Rarity.new(Rarity.NORMAL))
-	self.add_child(activity)
 
 
 func apply_passivity(resource: DemonPassivityResource, rarity: Rarity):

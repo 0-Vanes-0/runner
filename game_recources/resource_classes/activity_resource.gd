@@ -50,3 +50,7 @@ func get_description(rarity: Rarity) -> String:
 	)
 	text = text.replace("$3", str(reload_time).pad_decimals(2))
 	return text
+
+
+func get_preview() -> Texture2D:
+	return texture

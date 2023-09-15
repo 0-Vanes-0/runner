@@ -37,7 +37,7 @@ func setup_game_info():
 	kills_count = 0
 	biome_number = 1
 	level_number = 1
-	current_reward = Reward.generate_reward(Reward.WEAPON)
+	current_reward = Reward.generate_reward(Reward.ACTIVITY)
 
 
 func generate_game_info():
@@ -58,7 +58,7 @@ func generate_game_info():
 			
 			var choice_array: Array[Reward] = []
 			for i in randi_range(2, 3):
-				var test_rewards: Array[int] = [ Reward.DEMON_PASSIVITY, Reward.WEAPON ]
+				var test_rewards: Array[int] = [ Reward.DEMON_PASSIVITY, Reward.WEAPON, Reward.ACTIVITY ] # WIP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				choice_array.append(Reward.generate_reward(test_rewards.pick_random()))
 			rewards_in_levels[biome_i][level_i] = choice_array
 	

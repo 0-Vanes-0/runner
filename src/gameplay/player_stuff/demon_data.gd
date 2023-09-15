@@ -68,8 +68,6 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 	
 	base_stamina_regen = 10.0
 	dodge_time = 0.5
-	
-	self.activity_resource = Preloader.reward_resource.activities[0]
 
 
 func get_description() -> String:

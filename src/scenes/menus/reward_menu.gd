@@ -93,7 +93,46 @@ func show_activities(with_reward: Reward):
 	assert(with_reward.get_type() == Reward.ACTIVITY)
 	var player := Global.player as Player
 	
-	self.show()
+	if player.activity != null:
+		_texture_rect1.texture = player.activity.get_preview()
+		_label1.text = player.activity.get_description()
+		_button1.pressed.connect(
+				func():
+					choosed.emit()
+					player.activity.queue_free()
+					player.activity = Activity.new(with_reward.get_as_activity_res(), with_reward.get_rarity())
+					player.add_child(player.activity)
+					GameInfo.current_reward = null
+					hide_all()
+		)
+		_button1.text = "Replace"
+		_card1.show()
+		
+		_button3.pressed.connect(
+				func():
+					choosed.emit()
+					# Add exp?
+					GameInfo.current_reward = null
+					hide_all()
+		)
+		_button3.text = "Consume"
+	
+	else:
+		_button3.pressed.connect(
+				func():
+					choosed.emit()
+					player.activity = Activity.new(with_reward.get_as_activity_res(), with_reward.get_rarity())
+					player.add_child(player.activity)
+					GameInfo.current_reward = null
+					hide_all()
+		)
+		_button3.text = "Take"
+		
+	_texture_rect3.texture = with_reward.get_as_activity_res().get_preview()
+	_label3.text = with_reward.get_as_activity_res().get_description(with_reward.get_rarity())
+	_card3.show()
+	
+	play_intro()
 
 
 func play_intro():
