@@ -17,11 +17,11 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bcld"]
 content_margin_left = 20.0
-content_margin_top = 5.0
+content_margin_top = 20.0
 content_margin_right = 20.0
 bg_color = Color(0.839216, 0.501961, 0.305882, 1)
-border_width_top = 5
-border_color = Color(0.6, 0.3568, 0.216, 1)
+border_width_top = 10
+border_color = Color(0.6, 0.356863, 0.215686, 0)
 expand_margin_bottom = 5.0
 anti_aliasing = false
 

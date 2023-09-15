@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjk1sxt21gprp"]
+[gd_scene load_steps=6 format=3 uid="uid://cjk1sxt21gprp"]
 
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_vrlws"]
 [ext_resource type="Script" path="res://src/scenes/menus/pause_menu.gd" id="2_unpyo"]
 [ext_resource type="ButtonGroup" uid="uid://cgb16fnt4hph0" path="res://assets/themes_styles_groups/pause_tabs_group.tres" id="3_5djap"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="3_rbksi"]
+[ext_resource type="Theme" uid="uid://du78ff7f68edr" path="res://assets/themes_styles_groups/rich_label_default_theme.tres" id="4_kid2x"]
 
 [node name="PauseMenu" type="Control" node_paths=PackedStringArray("_settings_menu", "_tab_container", "_info_label", "_build_label", "_weapon1_texture_rect", "_weapon1_label", "_weapon2_texture_rect", "_weapon2_label", "_activity_texture_rect", "_activity_label")]
 process_mode = 2
@@ -98,6 +99,7 @@ size_flags_vertical = 3
 tabs_visible = false
 
 [node name="Stats" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats"]
@@ -112,7 +114,8 @@ theme_override_constants/separation = 20
 [node name="InfoLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 48
+theme = ExtResource("4_kid2x")
+bbcode_enabled = true
 text = "cggghg"
 fit_content = true
 scroll_active = false
@@ -120,7 +123,8 @@ scroll_active = false
 [node name="BuildLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Stats/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 48
+theme = ExtResource("4_kid2x")
+bbcode_enabled = true
 text = "Info info
 Info!!!
 And info
@@ -155,7 +159,7 @@ stretch_mode = 5
 [node name="Weapon1Label" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon1VBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 48
+theme = ExtResource("4_kid2x")
 bbcode_enabled = true
 
 [node name="Weapon2VBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer"]
@@ -173,11 +177,10 @@ stretch_mode = 5
 [node name="Weapon2Label" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer/Weapon2VBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 48
+theme = ExtResource("4_kid2x")
 bbcode_enabled = true
 
 [node name="Activity" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="ActivityVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity"]
@@ -199,7 +202,7 @@ stretch_mode = 5
 [node name="ActivityLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Activity/ActivityVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 48
+theme = ExtResource("4_kid2x")
 bbcode_enabled = true
 text = "sdjghjdfhgdfhgdfjghjdfhgjdfhjgdfjgdfjjhgdfg
 fgfgfgfg

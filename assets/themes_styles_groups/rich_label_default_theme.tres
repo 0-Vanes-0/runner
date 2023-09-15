@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://du78ff7f68edr"]
+
+[ext_resource type="FontFile" uid="uid://dv1loa1pu1eml" path="res://assets/fonts/Fairfax.ttf" id="1_cbkeo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqnuw"]
+
+[resource]
+RichTextLabel/font_sizes/normal_font_size = 36
+RichTextLabel/fonts/normal_font = ExtResource("1_cbkeo")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_nqnuw")
