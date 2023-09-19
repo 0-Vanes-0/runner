@@ -13,13 +13,6 @@ func _ready() -> void:
 	assert(_play_button and _settings_menu and _demons_hboxcontainer and _demon_info_label)
 	_settings_menu.hide()
 	update_play_button_disabled()
-	if not Global.game_res_loaded:
-		Preloader.loaded.connect(
-				func():
-					Global.game_res_loaded = true
-					update_play_button_disabled()
-		, CONNECT_ONE_SHOT)
-		Preloader.start_preload()
 	
 	if not GameInfo.is_run_seed_generated:
 		GameInfo.generate_game_info()
@@ -29,6 +22,7 @@ func _ready() -> void:
 	for child in _demons_hboxcontainer.get_children():
 		child.queue_free()
 	
+	_demon_info_label.hint_underlined
 	for i in GameInfo.demon_datas.size():
 		var button: DemonButton = Preloader.choose_demon_button.instantiate() as DemonButton
 		var texture_rect := button.get_child(0).get_child(0) as TextureRect
@@ -80,3 +74,7 @@ func _on_faq_button_pressed() -> void:
 
 func _on_x_button_pressed() -> void:
 	$FAQPanel.hide()
+
+
+func _on_demon_info_label_meta_clicked(meta) -> void:
+	print_debug(meta)

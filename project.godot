@@ -15,6 +15,8 @@ run/main_scene="res://src/scenes/scene_handler.tscn"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.1", "GL Compatibility")
 run/max_fps=60
+boot_splash/image="res://assets/sprites/boot_splash.png"
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]

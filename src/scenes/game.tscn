@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cbhc564a8a6e"]
+[gd_scene load_steps=32 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
 [ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://vi2wpwbci4ot" path="res://assets/sprites/interface/activity_button_pressed.png" id="11_qlpqs"]
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="12_ln7id"]
 [ext_resource type="PackedScene" uid="uid://b7icnfn8n355f" path="res://src/scenes/menus/reward_menu.tscn" id="17_f8b0e"]
+[ext_resource type="Script" path="res://src/scenes/tips.gd" id="20_o3jrt"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
 b = Vector2(100, 0)
@@ -247,5 +248,14 @@ label_settings = SubResource("LabelSettings_aavuu")
 horizontal_alignment = 2
 script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
+
+[node name="Tips" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_o3jrt")
 
 [connection signal="pressed" from="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PauseButton" to="." method="_on_pause_button_pressed"]

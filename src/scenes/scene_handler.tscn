@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b73djagfvmun5"]
+[gd_scene load_steps=6 format=3 uid="uid://b73djagfvmun5"]
 
 [ext_resource type="Script" path="res://src/scenes/scene_handler.gd" id="1_2rp62"]
 [ext_resource type="Script" path="res://src/scenes/music_handler.gd" id="2_wlmox"]
 [ext_resource type="AudioStream" uid="uid://dmaoisbqlv87j" path="res://assets/audio/music/blind_i_drink.mp3" id="3_bppn7"]
 [ext_resource type="AudioStream" uid="uid://byv337256suvu" path="res://assets/audio/music/8bit.mp3" id="4_o37pl"]
+[ext_resource type="Texture2D" uid="uid://bywt6lon1fc0t" path="res://assets/sprites/mothership.png" id="5_k2nx8"]
 
 [node name="SceneHandler" type="Node"]
 process_mode = 3
@@ -13,3 +14,23 @@ script = ExtResource("1_2rp62")
 script = ExtResource("2_wlmox")
 main_menu_music = ExtResource("3_bppn7")
 game_music = ExtResource("4_o37pl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("5_k2nx8")

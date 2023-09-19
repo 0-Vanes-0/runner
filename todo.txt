@@ -1,5 +1,10 @@
+- ADD ANY ICON AND REMOVE GODOT ENGINE HI
+- MAKE BUTTONS MORE FOR FINGERS
+- RESOLVE SHOOT SENSOR DILEMMA (AND PLAYER)
+- One weapon?
+
 - Add proper reload progress time to Activity
-- Make richtextlabel hints???
+- Make richtextlabel hints (using push_meta() and calling custom scene on it)
 - Make new attacks from enemies with pretrajectory
 - Add status box for actions above sensor buttons
 - Add more info to pause menu + update FAQ
