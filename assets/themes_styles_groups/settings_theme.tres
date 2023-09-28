@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://d1kp6b00fn1hj"]
+
+[ext_resource type="StyleBox" uid="uid://ciaa4e4ky1v3g" path="res://assets/themes_styles_groups/button_style_box_flat.tres" id="1_j75s3"]
+[ext_resource type="StyleBox" uid="uid://ctkcbim14c7tb" path="res://assets/themes_styles_groups/button_pressed_style_box_flat.tres" id="2_83al6"]
+[ext_resource type="FontFile" uid="uid://dv1loa1pu1eml" path="res://assets/fonts/Fairfax.ttf" id="3_gt37m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk57u"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+bg_color = Color(0.670588, 0.4, 0.243137, 1)
+border_width_bottom = 10
+border_color = Color(0.6, 0.3568, 0.216, 1)
+expand_margin_bottom = 5.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s8bvo"]
+
+[resource]
+default_font = ExtResource("3_gt37m")
+default_font_size = 36
+Button/colors/font_color = Color(0.5, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.5, 0, 0, 1)
+Button/colors/font_focus_color = Color(0.5, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.5, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.5, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.5, 0, 0, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_mk57u")
+Button/styles/focus = SubResource("StyleBoxEmpty_s8bvo")
+Button/styles/hover = ExtResource("1_j75s3")
+Button/styles/normal = ExtResource("1_j75s3")
+Button/styles/pressed = ExtResource("2_83al6")
+CheckButton/font_sizes/font_size = 60
+Label/font_sizes/font_size = 100
+VBoxContainer/constants/separation = 20

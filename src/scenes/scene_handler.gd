@@ -14,12 +14,17 @@ func _ready() -> void:
 		Preloader.loaded.connect(
 				func():
 					Global.game_res_loaded = true
-					current_scene = Preloader.main_menu_scene.instantiate()
-					self.add_child(current_scene)
-					scene_changed.emit(current_scene)
-					load_control.queue_free()
+					_on_ready()
 		, CONNECT_ONE_SHOT)
 		Preloader.start_preload()
+	else:
+		_on_ready()
+
+func _on_ready():
+	current_scene = Preloader.main_menu_scene.instantiate()
+	self.add_child(current_scene)
+	scene_changed.emit(current_scene)
+	load_control.queue_free()
 
 ## Firstly removes current scene from tree and queues it for freeing, then instantiates a new [param scene].
 func switch_to_scene(scene: PackedScene):

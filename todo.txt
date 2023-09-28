@@ -1,4 +1,4 @@
-- ADD ANY ICON AND REMOVE GODOT ENGINE HI
+- ERROR ON ANDROID
 - MAKE BUTTONS MORE FOR FINGERS
 - RESOLVE SHOOT SENSOR DILEMMA (AND PLAYER)
 - One weapon?
@@ -12,6 +12,7 @@
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 
 
++ ADD ANY ICON AND REMOVE GODOT ENGINE HI
 + Add Activity view on pause menu
 + Check reload bug!!!
 +... Text of reward resources

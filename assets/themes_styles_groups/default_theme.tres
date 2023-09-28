@@ -2,6 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dv1loa1pu1eml" path="res://assets/fonts/Fairfax.ttf" id="1_rnkhf"]
 [ext_resource type="StyleBox" uid="uid://ciaa4e4ky1v3g" path="res://assets/themes_styles_groups/button_style_box_flat.tres" id="1_sl4go"]
+[ext_resource type="StyleBox" uid="uid://ctkcbim14c7tb" path="res://assets/themes_styles_groups/button_pressed_style_box_flat.tres" id="2_psifc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xiv67"]
 content_margin_left = 20.0
@@ -13,17 +14,7 @@ border_color = Color(0.4, 0.237867, 0.144, 1)
 expand_margin_bottom = 5.0
 anti_aliasing = false
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ip1bg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bcld"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-bg_color = Color(0.839216, 0.501961, 0.305882, 1)
-border_width_top = 10
-border_color = Color(0.6, 0.356863, 0.215686, 0)
-expand_margin_bottom = 5.0
-anti_aliasing = false
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amqcv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn2kh"]
 bg_color = Color(0.188235, 0.188235, 0.188235, 1)
@@ -32,15 +23,15 @@ anti_aliasing = false
 [resource]
 default_font = ExtResource("1_rnkhf")
 default_font_size = 24
-Button/colors/font_color = Color(0.5, 0, 0, 1)
+Button/colors/font_color = Color(0.501961, 0, 0, 1)
 Button/colors/font_disabled_color = Color(0.5, 0, 0, 1)
 Button/colors/font_focus_color = Color(0.5, 0, 0, 1)
 Button/colors/font_hover_color = Color(0.5, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0.5, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0.5, 0, 0, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_xiv67")
-Button/styles/focus = SubResource("StyleBoxEmpty_ip1bg")
+Button/styles/focus = SubResource("StyleBoxEmpty_amqcv")
 Button/styles/hover = ExtResource("1_sl4go")
 Button/styles/normal = ExtResource("1_sl4go")
-Button/styles/pressed = SubResource("StyleBoxFlat_4bcld")
+Button/styles/pressed = ExtResource("2_psifc")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_bn2kh")

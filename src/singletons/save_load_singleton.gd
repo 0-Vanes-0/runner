@@ -59,7 +59,7 @@ func load_data():
 	file.close()
 
 ## Saves settings to file at user data path. 
-func save_settings(settings: Dictionary):
+func save_settings(settings: Dictionary = Global.settings):
 	var file := ConfigFile.new()
 	var error: Error = file.load(_settings_file_path)
 	assert(error == OK)

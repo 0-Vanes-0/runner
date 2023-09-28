@@ -1,59 +1,20 @@
-[gd_scene load_steps=22 format=3 uid="uid://dnp3x14mc2hay"]
+[gd_scene load_steps=12 format=3 uid="uid://dnp3x14mc2hay"]
 
 [ext_resource type="Script" path="res://src/scenes/main_menu.gd" id="1_noaao"]
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_tny1b"]
 [ext_resource type="Theme" uid="uid://du78ff7f68edr" path="res://assets/themes_styles_groups/rich_label_default_theme.tres" id="3_ales8"]
-[ext_resource type="Texture2D" uid="uid://c1elmwh1wwaun" path="res://assets/sprites/players/test/test_default_0.png" id="3_ipheb"]
-[ext_resource type="ButtonGroup" uid="uid://dsu7rjtc4x6el" path="res://assets/themes_styles_groups/main_menu_button_group.tres" id="4_oluv8"]
+[ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="4_bauan"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="5_ihvey"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_enl27"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_ui5u3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1smik"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_n2ugp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkgku"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_oq7lm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5umd"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_7q8sc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xpp5n"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3bptk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qw6w0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7pjlf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ux8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35lc5"]
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 0.054902, 0.203922, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4bgkj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p678q"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qo0d"]
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1pxa"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_gqlqf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fss2q"]
 bg_color = Color(0, 0, 0, 0.894118)
@@ -117,7 +78,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="DemonInfoPanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1080, 240)
+custom_minimum_size = Vector2(1280, 180)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -146,233 +107,30 @@ vertical_scroll_mode = 0
 [node name="DemonsHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer"]
-custom_minimum_size = Vector2(300, 360)
+[node name="ChooseDemonButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-theme_override_icons/checked = SubResource("AtlasTexture_enl27")
-theme_override_icons/checked_disabled = SubResource("AtlasTexture_1smik")
-theme_override_icons/unchecked = SubResource("AtlasTexture_fkgku")
-theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_g5umd")
-theme_override_icons/checked_mirrored = SubResource("AtlasTexture_xpp5n")
-theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_3bptk")
-theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qw6w0")
-theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_7pjlf")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
-button_pressed = true
-action_mode = 0
-button_group = ExtResource("4_oluv8")
+button_group = SubResource("ButtonGroup_ui5u3")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton/MarginContainer"]
+[node name="ChooseDemonButton2" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-texture = ExtResource("3_ipheb")
-stretch_mode = 5
+button_group = SubResource("ButtonGroup_n2ugp")
 
-[node name="CheckButton2" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer"]
-custom_minimum_size = Vector2(300, 360)
+[node name="ChooseDemonButton3" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-theme_override_icons/checked = SubResource("AtlasTexture_enl27")
-theme_override_icons/checked_disabled = SubResource("AtlasTexture_1smik")
-theme_override_icons/unchecked = SubResource("AtlasTexture_fkgku")
-theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_g5umd")
-theme_override_icons/checked_mirrored = SubResource("AtlasTexture_xpp5n")
-theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_3bptk")
-theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qw6w0")
-theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_7pjlf")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
-action_mode = 0
-button_group = ExtResource("4_oluv8")
+button_group = SubResource("ButtonGroup_oq7lm")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton2/MarginContainer"]
+[node name="ChooseDemonButton4" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-texture = ExtResource("3_ipheb")
-stretch_mode = 5
+button_group = SubResource("ButtonGroup_7q8sc")
 
-[node name="CheckButton3" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer"]
-custom_minimum_size = Vector2(300, 360)
+[node name="ChooseDemonButton5" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-theme_override_icons/checked = SubResource("AtlasTexture_enl27")
-theme_override_icons/checked_disabled = SubResource("AtlasTexture_1smik")
-theme_override_icons/unchecked = SubResource("AtlasTexture_fkgku")
-theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_g5umd")
-theme_override_icons/checked_mirrored = SubResource("AtlasTexture_xpp5n")
-theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_3bptk")
-theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qw6w0")
-theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_7pjlf")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
-action_mode = 0
-button_group = ExtResource("4_oluv8")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton3/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("3_ipheb")
-stretch_mode = 5
-
-[node name="CheckButton4" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer"]
-custom_minimum_size = Vector2(300, 360)
-layout_mode = 2
-theme_override_icons/checked = SubResource("AtlasTexture_enl27")
-theme_override_icons/checked_disabled = SubResource("AtlasTexture_1smik")
-theme_override_icons/unchecked = SubResource("AtlasTexture_fkgku")
-theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_g5umd")
-theme_override_icons/checked_mirrored = SubResource("AtlasTexture_xpp5n")
-theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_3bptk")
-theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qw6w0")
-theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_7pjlf")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
-action_mode = 0
-button_group = ExtResource("4_oluv8")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton4/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("3_ipheb")
-stretch_mode = 5
-
-[node name="CheckButton5" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer"]
-custom_minimum_size = Vector2(300, 360)
-layout_mode = 2
-theme_override_icons/checked = SubResource("AtlasTexture_enl27")
-theme_override_icons/checked_disabled = SubResource("AtlasTexture_1smik")
-theme_override_icons/unchecked = SubResource("AtlasTexture_fkgku")
-theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_g5umd")
-theme_override_icons/checked_mirrored = SubResource("AtlasTexture_xpp5n")
-theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_3bptk")
-theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qw6w0")
-theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_7pjlf")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
-action_mode = 0
-button_group = ExtResource("4_oluv8")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton5/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("3_ipheb")
-stretch_mode = 5
-
-[node name="CheckButton6" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer"]
-custom_minimum_size = Vector2(300, 360)
-layout_mode = 2
-theme_override_icons/checked = SubResource("AtlasTexture_enl27")
-theme_override_icons/checked_disabled = SubResource("AtlasTexture_1smik")
-theme_override_icons/unchecked = SubResource("AtlasTexture_fkgku")
-theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_g5umd")
-theme_override_icons/checked_mirrored = SubResource("AtlasTexture_xpp5n")
-theme_override_icons/checked_disabled_mirrored = SubResource("AtlasTexture_3bptk")
-theme_override_icons/unchecked_mirrored = SubResource("AtlasTexture_qw6w0")
-theme_override_icons/unchecked_disabled_mirrored = SubResource("AtlasTexture_7pjlf")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5ux8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_35lc5")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4bgkj")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p678q")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0qo0d")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w1pxa")
-action_mode = 0
-button_group = ExtResource("4_oluv8")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton6"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer/CheckButton6/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("3_ipheb")
-stretch_mode = 5
+button_group = SubResource("ButtonGroup_gqlqf")
 
 [node name="FAQButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 64
 text = "ЧаВо для нубиков"
 
 [node name="QuitPlayHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]

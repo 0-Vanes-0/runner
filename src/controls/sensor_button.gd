@@ -3,6 +3,7 @@ extends Control
 
 @export var texture_normal: AtlasTexture
 @export var texture_pressed: AtlasTexture
+@export var flip_v: bool = false
 var progress_time: float = 0.0
 var is_progressing: bool = false
 
@@ -14,8 +15,18 @@ var on_press: Callable
 
 
 func _ready() -> void:
-	button.texture_normal = texture_normal
-	button.texture_pressed = texture_pressed
+	if flip_v:
+		var image_normal := texture_normal.get_image()
+		var image_pressed := texture_pressed.get_image()
+		image_normal.flip_y()
+		image_pressed.flip_y()
+		var flipped_normal := ImageTexture.create_from_image(image_normal)
+		var flipped_pressed := ImageTexture.create_from_image(image_pressed)
+		button.texture_normal = flipped_normal
+		button.texture_pressed = flipped_pressed
+	else:
+		button.texture_normal = texture_normal
+		button.texture_pressed = texture_pressed
 	(button.shape as RectangleShape2D).size = texture_normal.get_size()
 	button.scale = Global.SENSOR_BUTTON_SIZE / texture_normal.get_size()
 	
@@ -29,7 +40,7 @@ func _ready() -> void:
 	self.modulate = Color.WHITE
 
 
-func init_abstract(is_enabled: Callable, on_press: Callable):
+func init_functions(is_enabled: Callable, on_press: Callable):
 	self.is_enabled = Callable(is_enabled)
 	self.on_press = Callable(on_press)
 

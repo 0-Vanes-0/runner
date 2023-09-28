@@ -3,21 +3,34 @@ class_name SettingsMenu
 extends Control
 
 @export var _apply_button: Button
-@export var _dodge_swipe_button: CheckButton
-@export var _reload_swipe_button: CheckButton
-@export var _switch_weapon_swipe_button: CheckButton
-@export var _activity_swipe_button: CheckButton
-@export var _music_button: CheckButton
+@export var _sections_vbox: VBoxContainer
 
 
 func _ready() -> void:
-	assert(_apply_button and _dodge_swipe_button and _reload_swipe_button and _switch_weapon_swipe_button and _activity_swipe_button and _music_button)
+	assert(_apply_button and _sections_vbox)
 	# Set buttons state according to settings:
-	_dodge_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.DODGE_SWIPE])
-	_reload_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.RELOAD_SWIPE])
-	_switch_weapon_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.SWITCH_WEAPON_SWIPE])
-	_activity_swipe_button.set_pressed_no_signal(Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE])
-	_music_button.set_pressed_no_signal(Global.settings[Text.AUDIO][Text.MUSIC])
+	for section_name in Global.settings.keys() as Array[String]:
+		var section := VBoxContainer.new()
+		section.name = section_name + "VBox"
+		var section_name_label := Label.new()
+		section_name_label.name = section_name + "Label"
+		section_name_label.text = section_name
+		
+		section.add_child(section_name_label)
+		_sections_vbox.add_child(section)
+		
+		for setting_name in Global.settings.get(section_name).keys() as Array[String]:
+			var switch_button := CheckButton.new()
+			switch_button.name = setting_name + "Button"
+			switch_button.text = setting_name
+			switch_button.toggled.connect(
+					func(button_pressed: bool):
+						Global.settings[section_name][setting_name] = button_pressed
+						SaveLoad.save_settings()
+						_apply_button.disabled = false
+			)
+			switch_button.set_pressed_no_signal(Global.settings.get(section_name).get(setting_name))
+			section.add_child(switch_button)
 
 
 func _on_back_button_pressed() -> void:
@@ -30,36 +43,6 @@ func _on_back_button_pressed() -> void:
 func _on_apply_button_pressed() -> void:
 	Global.need_apply_settings.emit()
 	_apply_button.disabled = true
-
-
-func _on_dodge_swipe_toggled(button_pressed: bool) -> void:
-	Global.settings[Text.CONTROLS][Text.DODGE_SWIPE] = button_pressed
-	SaveLoad.save_settings(Global.settings)
-	_apply_button.disabled = false
-
-
-func _on_reload_swipe_toggled(button_pressed: bool) -> void:
-	Global.settings[Text.CONTROLS][Text.RELOAD_SWIPE] = button_pressed
-	SaveLoad.save_settings(Global.settings)
-	_apply_button.disabled = false
-
-
-func _on_switch_swipe_toggled(button_pressed: bool) -> void:
-	Global.settings[Text.CONTROLS][Text.SWITCH_WEAPON_SWIPE] = button_pressed
-	SaveLoad.save_settings(Global.settings)
-	_apply_button.disabled = false
-
-
-func _on_activity_swipe_toggled(button_pressed: bool) -> void:
-	Global.settings[Text.CONTROLS][Text.ACTIVITY_SWIPE] = button_pressed
-	SaveLoad.save_settings(Global.settings)
-	_apply_button.disabled = false
-
-
-func _on_music_toggled(button_pressed: bool) -> void:
-	Global.settings[Text.AUDIO][Text.MUSIC] = button_pressed
-	SaveLoad.save_settings(Global.settings)
-	_apply_button.disabled = false
 
 
 func _on_rr_button_pressed() -> void:

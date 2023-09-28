@@ -71,7 +71,7 @@ theme_override_constants/separation = 20
 [node name="StatsTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 80
 toggle_mode = true
 button_pressed = true
 button_group = ExtResource("3_5djap")
@@ -80,7 +80,7 @@ text = "Stats"
 [node name="WeaponsTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 80
 toggle_mode = true
 button_group = ExtResource("3_5djap")
 text = "Weapons"
@@ -88,7 +88,7 @@ text = "Weapons"
 [node name="ActivityTabButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 80
 toggle_mode = true
 button_group = ExtResource("3_5djap")
 text = "Activity"
@@ -115,7 +115,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_kid2x")
 bbcode_enabled = true
-text = "cggghg"
+text = "Your actual stat here (empty)"
 fit_content = true
 scroll_active = false
 
@@ -124,10 +124,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_kid2x")
 bbcode_enabled = true
-text = "Info info
-Info!!!
-And info
-more info and info and info and info and info and info and info and info"
+text = "Collection of buffs (empty)"
 fit_content = true
 scroll_active = false
 
@@ -160,6 +157,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_kid2x")
 bbcode_enabled = true
+text = "Weapon 1 (empty)"
 
 [node name="Weapon2VBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer/Weapons/HBoxContainer"]
 layout_mode = 2
@@ -178,6 +176,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_kid2x")
 bbcode_enabled = true
+text = "Weapon 2 (empty)"
 
 [node name="Activity" type="TabBar" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/TabContainer"]
 visible = false
@@ -204,9 +203,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_kid2x")
 bbcode_enabled = true
-text = "sdjghjdfhgdfhgdfjghjdfhgjdfhjgdfjgdfjjhgdfg
-fgfgfgfg
-fgf"
+text = "Activity (empty)"
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

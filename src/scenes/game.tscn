@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cbhc564a8a6e"]
+[gd_scene load_steps=31 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
 [ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
@@ -10,16 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://dr5r31lkwfgnn" path="res://src/scenes/menus/game_over_menu.tscn" id="5_2syq0"]
 [ext_resource type="Texture2D" uid="uid://et8hwutneabo" path="res://assets/sprites/interface/dodge_button_pressed.png" id="5_5hunf"]
 [ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
-[ext_resource type="Texture2D" uid="uid://bh2jeeb748362" path="res://assets/sprites/interface/reload_button.png" id="6_74d7t"]
 [ext_resource type="PackedScene" uid="uid://cjk1sxt21gprp" path="res://src/scenes/menus/pause_menu.tscn" id="6_d8b13"]
-[ext_resource type="Texture2D" uid="uid://datr5skbkaxbc" path="res://assets/sprites/interface/reload_button_pressed.png" id="7_7jj8h"]
 [ext_resource type="Texture2D" uid="uid://bxwvl8njophpc" path="res://assets/sprites/interface/switch_button.png" id="8_3hswu"]
 [ext_resource type="Texture2D" uid="uid://bxecltnpwwvaj" path="res://assets/sprites/interface/switch_button_pressed.png" id="9_oemju"]
 [ext_resource type="Texture2D" uid="uid://brsilg77l805r" path="res://assets/sprites/interface/activity_button.png" id="10_7kbpd"]
 [ext_resource type="Texture2D" uid="uid://vi2wpwbci4ot" path="res://assets/sprites/interface/activity_button_pressed.png" id="11_qlpqs"]
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="12_ln7id"]
+[ext_resource type="Texture2D" uid="uid://n1nhua8wbot1" path="res://assets/sprites/interface/jump_button.png" id="13_pjoel"]
+[ext_resource type="Texture2D" uid="uid://7p68222w4vgf" path="res://assets/sprites/interface/jump_button_pressed.png" id="14_tg6dn"]
 [ext_resource type="PackedScene" uid="uid://b7icnfn8n355f" path="res://src/scenes/menus/reward_menu.tscn" id="17_f8b0e"]
-[ext_resource type="Script" path="res://src/scenes/tips.gd" id="20_o3jrt"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
 b = Vector2(100, 0)
@@ -66,7 +65,7 @@ segments = NodePath("Level/Segments")
 enemies = NodePath("Level/Enemies")
 shoot_field = NodePath("Level/ShootField")
 player_sensor = NodePath("HUD/PlayerSensor")
-left_menu = NodePath("HUD/PlayerSensor/Control/MainHBox/LeftMenu")
+left_menu = NodePath("HUD/PlayerSensor/MainHBox/LeftMenu")
 shoot_sensor = NodePath("HUD/ShootSensor")
 game_over_menu = NodePath("HUD/GameOverMenu")
 reward_menu = NodePath("HUD/RewardMenu")
@@ -98,33 +97,32 @@ shape = SubResource("SegmentShape2D_q0vek")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="PlayerSensor" type="Marker2D" parent="HUD" node_paths=PackedStringArray("control", "dodge_button", "reload_button", "switch_button", "activity_button")]
-gizmo_extents = 100.0
-script = ExtResource("4_8ttyi")
-control = NodePath("Control")
-dodge_button = NodePath("Control/MainHBox/ButtonsVBox/DodgeButton")
-reload_button = NodePath("Control/MainHBox/ButtonsVBox/ReloadButton")
-switch_button = NodePath("Control/MainHBox/ButtonsVBox/SwitchButton")
-activity_button = NodePath("Control/MainHBox/ButtonsVBox/ActivityButton")
-switch_weapon_disabled_time = 3.0
-
-[node name="Control" type="Control" parent="HUD/PlayerSensor"]
+[node name="PlayerSensor" type="Control" parent="HUD" node_paths=PackedStringArray("activity_button", "switch_button", "dodge_button", "jump_up_button", "jump_down_button")]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("12_ln7id")
+script = ExtResource("4_8ttyi")
+activity_button = NodePath("MainHBox/ButtonsVBox/ActivityButton")
+switch_button = NodePath("MainHBox/ButtonsVBox/SwitchButton")
+dodge_button = NodePath("MainHBox/ButtonsVBox/DodgeButton")
+jump_up_button = NodePath("MainHBox/ButtonsVBox/JumpUpButton")
+jump_down_button = NodePath("MainHBox/ButtonsVBox/JumpDownButton")
+switch_weapon_disabled_time = 3.0
 
-[node name="MainHBox" type="HBoxContainer" parent="HUD/PlayerSensor/Control"]
+[node name="MainHBox" type="HBoxContainer" parent="HUD/PlayerSensor"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 144.0
 grow_vertical = 2
 
-[node name="LeftMenu" type="VBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox" node_paths=PackedStringArray("meter_label", "hp_bar", "stamina_bar", "ammo_bar")]
+[node name="LeftMenu" type="VBoxContainer" parent="HUD/PlayerSensor/MainHBox" node_paths=PackedStringArray("meter_label", "hp_bar", "stamina_bar", "ammo_bar")]
 layout_mode = 2
 script = ExtResource("4_u4atb")
 meter_label = NodePath("PanelContainer/MeterLabel")
@@ -132,28 +130,28 @@ hp_bar = NodePath("PanelContainer2/BarsHBox/HPBar")
 stamina_bar = NodePath("PanelContainer2/BarsHBox/StaminaBar")
 ammo_bar = NodePath("PanelContainer2/BarsHBox/AmmoBar")
 
-[node name="PauseButton" type="Button" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu"]
+[node name="PauseButton" type="Button" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "||"
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu"]
+[node name="PanelContainer" type="PanelContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
 layout_mode = 2
 
-[node name="MeterLabel" type="Label" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer"]
+[node name="MeterLabel" type="Label" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "100 m"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu"]
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BarsHBox" type="HBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2"]
+[node name="BarsHBox" type="HBoxContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2"]
 layout_mode = 2
 
-[node name="HPBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+[node name="HPBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -161,7 +159,7 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_jnf7q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_idl52")
 value = 85.0
 
-[node name="StaminaBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+[node name="StaminaBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -170,44 +168,42 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_bj1op")
 value = 39.0
 snap_step = 20
 
-[node name="AmmoBar" parent="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+[node name="AmmoBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxEmpty_q50yw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_punxy")
 
-[node name="ButtonsVBox" type="VBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox"]
+[node name="ButtonsVBox" type="VBoxContainer" parent="HUD/PlayerSensor/MainHBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="StatusesHBox" type="HBoxContainer" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox"]
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="DodgeButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
-layout_mode = 2
-texture_normal = ExtResource("4_5m647")
-texture_pressed = ExtResource("5_5hunf")
-
-[node name="ReloadButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
-layout_mode = 2
-texture_normal = ExtResource("6_74d7t")
-texture_pressed = ExtResource("7_7jj8h")
-
-[node name="SwitchButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
-layout_mode = 2
-texture_normal = ExtResource("8_3hswu")
-texture_pressed = ExtResource("9_oemju")
-
-[node name="ActivityButton" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
+[node name="ActivityButton" parent="HUD/PlayerSensor/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
 texture_normal = ExtResource("10_7kbpd")
 texture_pressed = ExtResource("11_qlpqs")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/PlayerSensor/Control/MainHBox/ButtonsVBox"]
+[node name="SwitchButton" parent="HUD/PlayerSensor/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
 layout_mode = 2
-size_flags_vertical = 10
+texture_normal = ExtResource("8_3hswu")
+texture_pressed = ExtResource("9_oemju")
+
+[node name="DodgeButton" parent="HUD/PlayerSensor/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
+layout_mode = 2
+texture_normal = ExtResource("4_5m647")
+texture_pressed = ExtResource("5_5hunf")
+
+[node name="JumpUpButton" parent="HUD/PlayerSensor/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
+layout_mode = 2
+texture_normal = ExtResource("13_pjoel")
+texture_pressed = ExtResource("14_tg6dn")
+
+[node name="JumpDownButton" parent="HUD/PlayerSensor/MainHBox/ButtonsVBox" instance=ExtResource("4_261ek")]
+layout_mode = 2
+texture_normal = ExtResource("13_pjoel")
+texture_pressed = ExtResource("14_tg6dn")
+flip_v = true
 
 [node name="ShootSensor" type="Marker2D" parent="HUD"]
 position = Vector2(960, 0)
@@ -249,13 +245,4 @@ horizontal_alignment = 2
 script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
 
-[node name="Tips" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("20_o3jrt")
-
-[connection signal="pressed" from="HUD/PlayerSensor/Control/MainHBox/LeftMenu/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="HUD/PlayerSensor/MainHBox/LeftMenu/PauseButton" to="." method="_on_pause_button_pressed"]

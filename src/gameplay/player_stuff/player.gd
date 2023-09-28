@@ -72,14 +72,13 @@ func _ready() -> void:
 						activate_weapon1()
 	)
 	player_sensor.dodge.connect(state_machine.transition_to.bind(state_dodge))
-	player_sensor.reload.connect(weapon.reload)
 	player_sensor.activity.connect(
 			func():
 				if activity != null:
 					activity.activate()
 	)
-	player_sensor.tap_up.connect(state_machine.transition_to.bind(state_jump_up))
-	player_sensor.tap_down.connect(state_machine.transition_to.bind(state_jump_down))
+	player_sensor.jump_up.connect(state_machine.transition_to.bind(state_jump_up))
+	player_sensor.jump_down.connect(state_machine.transition_to.bind(state_jump_down))
 	
 	shoot_sensor.shoot_activated.connect(
 			func(target_position: Vector2):

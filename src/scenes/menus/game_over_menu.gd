@@ -34,4 +34,4 @@ func appear():
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().change_scene_to_packed(Preloader.main_menu_scene)
+	Global.switch_to_scene(Preloader.main_menu_scene)

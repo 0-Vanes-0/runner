@@ -1,23 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4vx8yyktgv1x"]
 
-[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_d3ab8"]
 [ext_resource type="Script" path="res://src/scenes/menus/settings_menu.gd" id="2_1b7x5"]
+[ext_resource type="Theme" uid="uid://d1kp6b00fn1hj" path="res://assets/themes_styles_groups/settings_theme.tres" id="3_2jjca"]
 
-[node name="SettingsMenu" type="ColorRect" node_paths=PackedStringArray("_apply_button", "_dodge_swipe_button", "_reload_swipe_button", "_switch_weapon_swipe_button", "_activity_swipe_button", "_music_button")]
+[node name="SettingsMenu" type="ColorRect" node_paths=PackedStringArray("_apply_button", "_sections_vbox")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_d3ab8")
+theme = ExtResource("3_2jjca")
 color = Color(0, 0, 0, 0.501961)
 script = ExtResource("2_1b7x5")
 _apply_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ApplyButton")
-_dodge_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/DodgeSwipeCheckButton")
-_reload_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/ReloadSwipeCheckButton")
-_switch_weapon_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/SwitchSwipeCheckButton")
-_activity_swipe_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/ActivitySwipeCheckButton")
-_music_button = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/AudioContainer/MusicCheckButton")
+_sections_vbox = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBox")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -69,57 +65,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Reset+restart"
 
-[node name="SectionsVBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SectionsVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
-
-[node name="ControlsContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="SectionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 96
-text = "CONTROLS"
-
-[node name="DodgeSwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "Swipe right to dodge"
-
-[node name="ReloadSwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "Swipe down to reload weapon"
-
-[node name="SwitchSwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "Swipe left to switch weapon"
-
-[node name="ActivitySwipeCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "Swipe up to use activity"
-
-[node name="AudioContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer"]
-layout_mode = 2
-
-[node name="SectionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/AudioContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 96
-text = "AUDIO"
-
-[node name="MusicCheckButton" type="CheckButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/AudioContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "Music"
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
 [connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RRButton" to="." method="_on_rr_button_pressed"]
-[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/DodgeSwipeCheckButton" to="." method="_on_dodge_swipe_toggled"]
-[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/ReloadSwipeCheckButton" to="." method="_on_reload_swipe_toggled"]
-[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/SwitchSwipeCheckButton" to="." method="_on_switch_swipe_toggled"]
-[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/ControlsContainer/ActivitySwipeCheckButton" to="." method="_on_activity_swipe_toggled"]
-[connection signal="toggled" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/SectionsVBoxContainer/AudioContainer/MusicCheckButton" to="." method="_on_music_toggled"]
