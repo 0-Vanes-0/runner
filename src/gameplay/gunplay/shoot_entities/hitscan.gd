@@ -30,7 +30,7 @@ func _init(resource: HitscanSER, entity_owner: ShootEntity.Owner, start_position
 	
 	line2d = Line2D.new()
 	line2d.default_color = resource.color
-	line2d.width = resource.get_beam_width() if resource.beam_width > 0 else 10
+	line2d.width = resource.get_beam_width() if resource.beam_width > 0 else 10.0
 	line2d.add_point(start_position)
 	var direction_vector := Vector2(target_position - start_position)
 	direction_vector = direction_vector * (Global.SCREEN_WIDTH / direction_vector.length())

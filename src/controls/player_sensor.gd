@@ -19,8 +19,6 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 @export var jump_down_button: SensorButton
 @export var switch_weapon_disabled_time: float # REMOVE LATER
 
-var _touch_start_position: Vector2
-
 
 func _ready() -> void:
 	assert(dodge_button and switch_button and activity_button and jump_up_button and jump_down_button)

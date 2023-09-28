@@ -15,7 +15,7 @@ func set_max_value(max_value: int, snap_step: int = 0):
 	self.max_value = max_value
 	if snap_step > 0:
 		self.snap_step = snap_step
-	self.snap_step = clampi(self.snap_step, self.min_value, self.max_value)
+	self.snap_step = clampi(self.snap_step, int(self.min_value), int(self.max_value))
 	
 	resized.emit()
 	

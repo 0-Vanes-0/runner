@@ -22,7 +22,6 @@ func _ready() -> void:
 	for child in _demons_hboxcontainer.get_children():
 		child.queue_free()
 	
-	_demon_info_label.hint_underlined
 	for i in GameInfo.demon_datas.size():
 		var button: DemonButton = Preloader.choose_demon_button.instantiate() as DemonButton
 		var texture_rect := button.get_child(0).get_child(0) as TextureRect

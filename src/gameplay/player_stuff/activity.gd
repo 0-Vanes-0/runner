@@ -24,7 +24,7 @@ func activate():
 	if not is_reloading():
 		reload_timer = 0.0
 		activity_resource.action(rarity)
-		await get_tree().create_timer(duration_time)
+		await get_tree().create_timer(duration_time).timeout
 		activity_resource.action_end(rarity)
 
 

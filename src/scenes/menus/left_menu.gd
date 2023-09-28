@@ -38,6 +38,6 @@ func init_connections():
 	)
 	has_connects = true
 	
-	hp_bar.set_max_value(player.health_comp.health_max)
-	stamina_bar.set_max_value(player.stamina_max)
-	ammo_bar.set_max_value(player.weapon.ammo_max, player.weapon.get_ammo_snap_step())
+	hp_bar.set_max_value(int(player.health_comp.health_max))
+	stamina_bar.set_max_value(int(player.stamina_max))
+	ammo_bar.set_max_value(int(player.weapon.ammo_max), player.weapon.get_ammo_snap_step())
