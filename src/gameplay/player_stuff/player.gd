@@ -81,21 +81,21 @@ func _ready() -> void:
 	player_sensor.jump_down.connect(state_machine.transition_to.bind(state_jump_down))
 	
 	shoot_sensor.shoot_activated.connect(
-			func(target_position: Vector2):
+			func(target_position_y: float):
 				if(
 						not state_machine.state is DodgePlayerState 
 						and not state_machine.state is DeadPlayerState
 						and not state_machine.state is LevelEndPlayerState
 				):
-					weapon.shoot(weapon.get_start_shoot_position(), target_position)
+					weapon.shoot(weapon.get_start_shoot_position(), Vector2(Global.ENEMY_X_POSITION, target_position_y))
 				
-				elif weapon.existing_shoot_entity != null:
+				else:
 					weapon.stop_shoot()
 	)
 	shoot_sensor.shoot_disabled.connect(
 			func():
-				if weapon.existing_shoot_entity != null:
-					weapon.stop_shoot()
+				weapon.stop_shoot()
+				weapon.reload()
 	)
 
 ## Inits player without recreating new instance.

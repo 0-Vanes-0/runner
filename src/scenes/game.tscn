@@ -66,7 +66,7 @@ enemies = NodePath("Level/Enemies")
 shoot_field = NodePath("Level/ShootField")
 player_sensor = NodePath("HUD/PlayerSensor")
 left_menu = NodePath("HUD/PlayerSensor/MainHBox/LeftMenu")
-shoot_sensor = NodePath("HUD/ShootSensor")
+shoot_sensor = NodePath("HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor")
 game_over_menu = NodePath("HUD/GameOverMenu")
 reward_menu = NodePath("HUD/RewardMenu")
 black_color_rect = NodePath("HUD/BlackColorRect")
@@ -117,41 +117,42 @@ switch_weapon_disabled_time = 3.0
 
 [node name="MainHBox" type="HBoxContainer" parent="HUD/PlayerSensor"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 144.0
+grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftMenu" type="VBoxContainer" parent="HUD/PlayerSensor/MainHBox" node_paths=PackedStringArray("meter_label", "hp_bar", "stamina_bar", "ammo_bar")]
 layout_mode = 2
 script = ExtResource("4_u4atb")
-meter_label = NodePath("PanelContainer/MeterLabel")
-hp_bar = NodePath("PanelContainer2/BarsHBox/HPBar")
-stamina_bar = NodePath("PanelContainer2/BarsHBox/StaminaBar")
-ammo_bar = NodePath("PanelContainer2/BarsHBox/AmmoBar")
+meter_label = NodePath("MeterPanel/MeterLabel")
+hp_bar = NodePath("BarsPanel/BarsHBox/HPBar")
+stamina_bar = NodePath("BarsPanel/BarsHBox/StaminaBar")
+ammo_bar = NodePath("BarsPanel/BarsHBox/AmmoBar")
 
 [node name="PauseButton" type="Button" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "||"
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
+[node name="MeterPanel" type="PanelContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
 layout_mode = 2
 
-[node name="MeterLabel" type="Label" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer"]
+[node name="MeterLabel" type="Label" parent="HUD/PlayerSensor/MainHBox/LeftMenu/MeterPanel"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "100 m"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
+[node name="BarsPanel" type="PanelContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BarsHBox" type="HBoxContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2"]
+[node name="BarsHBox" type="HBoxContainer" parent="HUD/PlayerSensor/MainHBox/LeftMenu/BarsPanel"]
 layout_mode = 2
 
-[node name="HPBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+[node name="HPBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/BarsPanel/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -159,7 +160,7 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_jnf7q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_idl52")
 value = 85.0
 
-[node name="StaminaBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+[node name="StaminaBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/BarsPanel/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -168,7 +169,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_bj1op")
 value = 39.0
 snap_step = 20
 
-[node name="AmmoBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/PanelContainer2/BarsHBox" instance=ExtResource("4_i804r")]
+[node name="AmmoBar" parent="HUD/PlayerSensor/MainHBox/LeftMenu/BarsPanel/BarsHBox" instance=ExtResource("4_i804r")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -205,9 +206,20 @@ texture_normal = ExtResource("13_pjoel")
 texture_pressed = ExtResource("14_tg6dn")
 flip_v = true
 
-[node name="ShootSensor" type="Marker2D" parent="HUD"]
-position = Vector2(960, 0)
-gizmo_extents = 100.0
+[node name="ShootContainer" type="MarginContainer" parent="HUD/PlayerSensor/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 120
+
+[node name="ShootSensor" type="VSlider" parent="HUD/PlayerSensor/MainHBox/ShootContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+min_value = -540.0
+max_value = 1620.0
+step = 0.0
+scrollable = false
 script = ExtResource("5_ysdi3")
 
 [node name="GameOverMenu" parent="HUD" instance=ExtResource("5_2syq0")]
@@ -246,3 +258,5 @@ script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="HUD/PlayerSensor/MainHBox/LeftMenu/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="drag_ended" from="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" to="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" method="_on_drag_ended"]
+[connection signal="drag_started" from="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" to="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" method="_on_drag_started"]

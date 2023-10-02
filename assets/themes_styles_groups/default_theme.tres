@@ -1,8 +1,9 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cua1s23yijxy2"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cua1s23yijxy2"]
 
 [ext_resource type="FontFile" uid="uid://dv1loa1pu1eml" path="res://assets/fonts/Fairfax.ttf" id="1_rnkhf"]
 [ext_resource type="StyleBox" uid="uid://ciaa4e4ky1v3g" path="res://assets/themes_styles_groups/button_style_box_flat.tres" id="1_sl4go"]
 [ext_resource type="StyleBox" uid="uid://ctkcbim14c7tb" path="res://assets/themes_styles_groups/button_pressed_style_box_flat.tres" id="2_psifc"]
+[ext_resource type="Texture2D" uid="uid://b4xeskgs3768s" path="res://assets/sprites/shoot_entities/fire_orb.png" id="3_6enud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xiv67"]
 content_margin_left = 20.0
@@ -20,6 +21,17 @@ anti_aliasing = false
 bg_color = Color(0.188235, 0.188235, 0.188235, 1)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vxlq"]
+bg_color = Color(0.533333, 0.8, 0.262745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y244u"]
+bg_color = Color(0.533333, 0.8, 0.262745, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1fu1x"]
+color = Color(0.533333, 0.8, 0.262745, 1)
+thickness = 80
+vertical = true
+
 [resource]
 default_font = ExtResource("1_rnkhf")
 default_font_size = 24
@@ -35,3 +47,9 @@ Button/styles/hover = ExtResource("1_sl4go")
 Button/styles/normal = ExtResource("1_sl4go")
 Button/styles/pressed = ExtResource("2_psifc")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_bn2kh")
+VSlider/constants/center_grabber = 1
+VSlider/icons/grabber = ExtResource("3_6enud")
+VSlider/icons/grabber_highlight = ExtResource("3_6enud")
+VSlider/styles/grabber_area = SubResource("StyleBoxFlat_7vxlq")
+VSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_y244u")
+VSlider/styles/slider = SubResource("StyleBoxLine_1fu1x")

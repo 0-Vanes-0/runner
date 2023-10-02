@@ -16,7 +16,7 @@ func enter():
 	var tween := get_tree().create_tween()
 	tween.tween_property(
 			enemy, "position:x", 
-			Global.SCREEN_WIDTH * 0.8,
+			Global.ENEMY_X_POSITION,
 			ENTER_TIME
 	)
 	tween.tween_callback(transition_to_random_battle_state)

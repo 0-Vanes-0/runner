@@ -70,7 +70,7 @@ bbcode_enabled = true
 
 [node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card1/MarginContainer/DescriptionVBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 80
 text = "Replace"
 
 [node name="Card2" type="PanelContainer" parent="MarginContainer/CardsHBox"]
@@ -101,7 +101,7 @@ bbcode_enabled = true
 
 [node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card2/MarginContainer/DescriptionVBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 80
 text = "Replace"
 
 [node name="Card3" type="PanelContainer" parent="MarginContainer/CardsHBox"]
@@ -132,5 +132,5 @@ bbcode_enabled = true
 
 [node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 80
 text = "Melt"

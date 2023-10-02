@@ -23,6 +23,8 @@ const MAX_FLOORS: int = 4
 var FLOORS_GAP: float
 ## Array of 4 spots of spawning enemies.
 var ENEMY_Y_SPOTS: Array[float]
+## Default enemy x position.
+var ENEMY_X_POSITION: float
 ## Structure: [code]{ String: { String: Variant } }[/code].
 var DEFAULT_SETTINGS: Dictionary = {
 	Text.CONTROLS: {
@@ -68,6 +70,7 @@ func setup():
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 2.5)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 1.5)
 	ENEMY_Y_SPOTS.append(FLOORS_GAP * 0.5)
+	ENEMY_X_POSITION = Global.SCREEN_WIDTH * 0.8
 	
 	settings = SaveLoad.load_settings()
 	

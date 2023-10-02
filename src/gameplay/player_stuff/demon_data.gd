@@ -66,7 +66,7 @@ func _init(rarity: Rarity, skin_resource: SkinResource) -> void:
 	
 	self.weapon_resource = Preloader.base_weapon_resources.pick_random()
 	
-	base_stamina_regen = 10.0
+	base_stamina_regen = 20.0
 	dodge_time = 0.5
 
 

@@ -1,38 +1,50 @@
 class_name ShootSensor
-extends Marker2D
+extends VSlider
 
-signal shoot_activated(target_position: Vector2)
+signal shoot_activated(target_position_y: float)
 signal shoot_disabled()
 
-var _size: Vector2
+var _LOWEST_Y: float
+var _VERT_DISTANCE: float
 var _is_shooting: bool
-var _shoot_position: Vector2
 
 
 func _ready() -> void:
-	self.position = Vector2(Global.SCREEN_WIDTH / 2, 0)
-	_size.x = Global.SCREEN_WIDTH / 2
-	_size.y = Global.SCREEN_HEIGHT
+	_reset_slider()
+	self.min_value = 0.0
+	self.max_value = 1.0
+	_LOWEST_Y = Global.SCREEN_HEIGHT * 1.5
+	_VERT_DISTANCE = Global.SCREEN_HEIGHT * 2.0
+	
+	var image := self.get_theme_icon("grabber").get_image()
+	var image_h := self.get_theme_icon("grabber_highlight").get_image()
+	image.resize(self.size.x * 2, self.size.x * 2, Image.INTERPOLATE_NEAREST)
+	image_h.resize(self.size.x * 2, self.size.x * 2, Image.INTERPOLATE_NEAREST)
+	var texture := ImageTexture.create_from_image(image)
+	var texture_h := ImageTexture.create_from_image(image_h)
+	self.add_theme_icon_override("grabber", texture)
+	self.add_theme_icon_override("grabber_highlight", texture_h)
 
 
 func _physics_process(delta: float) -> void:
 	if _is_shooting:
-		shoot_activated.emit(_shoot_position)
+		shoot_activated.emit(_LOWEST_Y - _VERT_DISTANCE * self.value)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventScreenTouch:
-		if _is_position_within(event.position):
-			if event.pressed:
-				_shoot_position = event.position
-				_is_shooting = true
-			else:
-				_is_shooting = false
-				shoot_disabled.emit()
-	elif event is InputEventScreenDrag:
-		if _is_position_within(event.position) and _is_shooting:
-			_shoot_position = event.position
+func _on_drag_started() -> void:
+	_is_shooting = true
 
 
-func _is_position_within(position: Vector2) -> bool:
-	return self.position < position and position < self.position + _size
+func _on_drag_ended(value_changed: bool) -> void:
+	_reset_slider()
+	shoot_disabled.emit()
+
+
+func disable(time: float):
+	self.editable = false
+	await get_tree().create_timer(time)
+
+
+func _reset_slider():
+	_is_shooting = false
+	self.value = 0.5

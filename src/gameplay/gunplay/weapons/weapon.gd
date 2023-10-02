@@ -89,14 +89,13 @@ func shoot(start_position: Vector2, target_position: Vector2):
 				shoot_timer = 0
 				ammo -= 1
 		else:
+			stop_shoot()
 			reload()
-			if existing_shoot_entity != null:
-				existing_shoot_entity.toggle_shoot_entity(false)
 
 
 func stop_shoot():
-	assert(existing_shoot_entity)
-	existing_shoot_entity.toggle_shoot_entity(false)
+	if existing_shoot_entity != null:
+		existing_shoot_entity.toggle_shoot_entity(false)
 
 
 func _spawn_entity(start_position: Vector2, target_position: Vector2) -> void:
@@ -123,7 +122,7 @@ func _spawn_entity(start_position: Vector2, target_position: Vector2) -> void:
 
 ## Waits until [member reload_time] passes and restores [member ammo] to [member ammo_max].
 func reload():
-	if reload_time > 0.0:
+	if reload_time > 0.0 and ammo < ammo_max:
 		if not is_reloading:
 			is_reloading = true
 			var color = self.modulate
