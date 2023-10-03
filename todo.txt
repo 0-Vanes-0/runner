@@ -1,5 +1,6 @@
 - ERROR ON ANDROID
 - One weapon?
+- Add reload progress to ShootSensor
 
 - Add proper reload progress time to Activity
 - Make richtextlabel hints (using push_meta() and calling custom scene on it)

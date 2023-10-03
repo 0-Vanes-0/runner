@@ -6,15 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="4_bauan"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="5_ihvey"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_45647"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_exepn"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_3ee3a"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_4c1bx"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ishck"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_vfw4o"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_upw41"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_v5my1"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_3se5c"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_cbbio"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fss2q"]
 bg_color = Color(0, 0, 0, 0.894118)
@@ -109,23 +109,23 @@ layout_mode = 2
 
 [node name="ChooseDemonButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_45647")
+button_group = SubResource("ButtonGroup_exepn")
 
 [node name="ChooseDemonButton2" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_3ee3a")
+button_group = SubResource("ButtonGroup_4c1bx")
 
 [node name="ChooseDemonButton3" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_ishck")
+button_group = SubResource("ButtonGroup_vfw4o")
 
 [node name="ChooseDemonButton4" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_upw41")
+button_group = SubResource("ButtonGroup_v5my1")
 
 [node name="ChooseDemonButton5" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_3se5c")
+button_group = SubResource("ButtonGroup_cbbio")
 
 [node name="FAQButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2

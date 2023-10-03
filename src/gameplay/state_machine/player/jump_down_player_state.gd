@@ -22,7 +22,7 @@ func enter():
 		player.velocity.y = player.jump_speed / 6
 		is_passing_platform = true
 		player.body_shape.disabled = true
-		await get_tree().create_timer(JUMP_DOWN_DISABLE_TIME).timeout
+		await get_tree().create_timer(JUMP_DOWN_DISABLE_TIME, false, true).timeout
 		player.body_shape.disabled = false
 		is_passing_platform = false
 

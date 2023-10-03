@@ -96,6 +96,8 @@ func _ready() -> void:
 			func():
 				weapon.stop_shoot()
 				weapon.reload()
+				if weapon.is_reloading:
+					shoot_sensor.disable(weapon.reload_time)
 	)
 
 ## Inits player without recreating new instance.

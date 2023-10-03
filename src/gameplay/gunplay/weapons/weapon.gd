@@ -127,7 +127,7 @@ func reload():
 			is_reloading = true
 			var color = self.modulate
 			self.modulate.a = 0.5
-			await get_tree().create_timer(reload_time).timeout
+			await get_tree().create_timer(reload_time, false, true).timeout
 			ammo = ammo_max
 			self.modulate = color
 			is_reloading = false

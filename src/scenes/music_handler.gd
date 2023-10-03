@@ -31,7 +31,7 @@ func _on_scene_changed(current_scene: Node):
 		self.stream = main_menu_music
 	elif current_scene is GameScene:
 		_transition_current_volume()
-		await get_tree().create_timer(FADE_OUT_TIME).timeout
+		await get_tree().create_timer(FADE_OUT_TIME, false, true).timeout
 		self.stream = game_music
 	
 	if not self.playing and is_music_on:

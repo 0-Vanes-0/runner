@@ -7,6 +7,7 @@ signal shoot_disabled()
 var _LOWEST_Y: float
 var _VERT_DISTANCE: float
 var _is_shooting: bool
+var t: Texture2D
 
 
 func _ready() -> void:
@@ -18,12 +19,17 @@ func _ready() -> void:
 	
 	var image := self.get_theme_icon("grabber").get_image()
 	var image_h := self.get_theme_icon("grabber_highlight").get_image()
+	var image_d := self.get_theme_icon("grabber_disabled").get_image()
 	image.resize(self.size.x * 2, self.size.x * 2, Image.INTERPOLATE_NEAREST)
 	image_h.resize(self.size.x * 2, self.size.x * 2, Image.INTERPOLATE_NEAREST)
+	image_d.resize(self.size.x * 2, self.size.x * 2, Image.INTERPOLATE_NEAREST)
+	image_d.fill(Color.WEB_GRAY)
 	var texture := ImageTexture.create_from_image(image)
 	var texture_h := ImageTexture.create_from_image(image_h)
+	var texture_d := ImageTexture.create_from_image(image_d)
 	self.add_theme_icon_override("grabber", texture)
 	self.add_theme_icon_override("grabber_highlight", texture_h)
+	self.add_theme_icon_override("grabber_disabled", texture_d)
 
 
 func _physics_process(delta: float) -> void:
@@ -42,7 +48,8 @@ func _on_drag_ended(value_changed: bool) -> void:
 
 func disable(time: float):
 	self.editable = false
-	await get_tree().create_timer(time)
+	await get_tree().create_timer(time, false, true).timeout
+	self.editable = true
 
 
 func _reset_slider():

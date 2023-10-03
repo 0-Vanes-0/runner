@@ -70,7 +70,7 @@ func take_damage(damage: int) -> void:
 ## Turns off collision for [param time].
 func switch_collision(time: float):
 	turn_off_collision()
-	await get_tree().create_timer(time).timeout
+	await get_tree().create_timer(time, false, true).timeout
 	turn_on_collision()
 	switched_collision.emit()
 

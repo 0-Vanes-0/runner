@@ -49,6 +49,7 @@ Button/styles/pressed = ExtResource("2_psifc")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_bn2kh")
 VSlider/constants/center_grabber = 1
 VSlider/icons/grabber = ExtResource("3_6enud")
+VSlider/icons/grabber_disabled = ExtResource("3_6enud")
 VSlider/icons/grabber_highlight = ExtResource("3_6enud")
 VSlider/styles/grabber_area = SubResource("StyleBoxFlat_7vxlq")
 VSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_y244u")
