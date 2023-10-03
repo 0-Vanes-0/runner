@@ -1,6 +1,6 @@
-- ERROR ON ANDROID
 - One weapon?
 - Add reload progress to ShootSensor
+- Add shoot marker
 
 - Add proper reload progress time to Activity
 - Make richtextlabel hints (using push_meta() and calling custom scene on it)
@@ -11,6 +11,8 @@
 -¿ Add load seed screen after pressing Play (if is_run_seed_generated is false)
 
 
+
++ ERROR ON ANDROID
 + RESOLVE SHOOT SENSOR DILEMMA (AND PLAYER)
 + MAKE BUTTONS MORE FOR FINGERS
 + ADD ANY ICON AND REMOVE GODOT ENGINE HI
