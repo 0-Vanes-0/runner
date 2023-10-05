@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://lx587a088gd7"]
+[gd_scene load_steps=24 format=3 uid="uid://lx587a088gd7"]
 
 [ext_resource type="Script" path="res://game_recources/preloader.gd" id="1_n2y2j"]
 [ext_resource type="Resource" uid="uid://bflurtgmvyqs2" path="res://game_recources/reward_resource.tres" id="2_py63j"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cbhc564a8a6e" path="res://src/scenes/game.tscn" id="4_hc7ic"]
 [ext_resource type="PackedScene" uid="uid://cn3r3nrthn2xv" path="res://assets/tilemap/segment_tile_map.tscn" id="5_agqe2"]
 [ext_resource type="PackedScene" uid="uid://dt3oww1tlogys" path="res://src/gameplay/player_stuff/player.tscn" id="6_6xeq5"]
+[ext_resource type="PackedScene" uid="uid://c4t5gfnr842qo" path="res://src/scenes/faq_panel.tscn" id="6_t2kpn"]
 [ext_resource type="PackedScene" uid="uid://dxqll81u0kwn8" path="res://src/gameplay/enviroment/platform.tscn" id="7_i1os7"]
 [ext_resource type="PackedScene" uid="uid://dfrttu63j8rto" path="res://src/gameplay/enviroment/segment.tscn" id="8_w1kjr"]
 [ext_resource type="PackedScene" uid="uid://dqls351hv05l7" path="res://src/gameplay/roguelike/chest.tscn" id="9_hffe5"]
@@ -29,6 +30,7 @@ reward_resource = ExtResource("2_py63j")
 main_menu_scene = ExtResource("3_pygxa")
 game_scene = ExtResource("4_hc7ic")
 segment_tilemap_scene = ExtResource("5_agqe2")
+faq_panel = ExtResource("6_t2kpn")
 player = ExtResource("6_6xeq5")
 platform_scene = ExtResource("7_i1os7")
 segment_scene = ExtResource("8_w1kjr")

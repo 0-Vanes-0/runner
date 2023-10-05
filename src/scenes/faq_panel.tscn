@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4t5gfnr842qo"]
+
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_fpott"]
+[ext_resource type="Script" path="res://src/scenes/faq_panel.gd" id="2_6ng0m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fss2q"]
+bg_color = Color(0, 0, 0, 0.894118)
+
+[node name="FAQPanel" type="Panel"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fpott")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fss2q")
+script = ExtResource("2_6ng0m")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="XButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "X"
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "Версия от 05.10.2023
+
+9 уровней увеличивающейся длины. Пока что есть 1 готовый биом.
+Перед началом игры выбирается один из сгенерированных персов, сверху пишется инфа об их статах.
+Красный = легендарный (1 легендарная стата), жёлтый = эпический (2 эпических статы), оранжевый = редкий (3 редких статы), белый = обычный.
+
+Управление:
+Звезда - активная способность
+Стрелки - поменять оружие
+Человечек вправо - уворот
+Стрелка вверх - прыжок вверх
+Стрелка вниз - прыжок вниз
+Слайдер справа отвечает за направление выстрелов, удерживайте, чтобы стрелять и отпустите, если хотите перезарядиться.
+
+После прохождения уровня вы выбираете портал, над ним написана будущая награда. Пока только можно получать пассивки, активки и оружия.
+"
+autowrap_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/XButton" to="." method="_on_x_button_pressed"]

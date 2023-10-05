@@ -68,11 +68,7 @@ func _on_city_button_pressed() -> void:
 
 
 func _on_faq_button_pressed() -> void:
-	$FAQPanel.show()
-
-
-func _on_x_button_pressed() -> void:
-	$FAQPanel.hide()
+	self.add_child(Preloader.faq_panel.instantiate())
 
 
 func _on_demon_info_label_meta_clicked(meta) -> void:

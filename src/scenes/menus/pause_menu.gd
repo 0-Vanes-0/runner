@@ -110,3 +110,7 @@ func _on_weapons_tab_button_toggled(button_pressed: bool) -> void:
 func _on_activity_tab_button_toggled(button_pressed: bool) -> void:
 	if button_pressed == true:
 		_tab_container.current_tab = 2
+
+
+func _on_faq_button_pressed() -> void:
+	get_parent().add_child(Preloader.faq_panel.instantiate())

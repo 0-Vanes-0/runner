@@ -8,6 +8,7 @@ signal loaded
 @export var main_menu_scene: PackedScene
 @export var game_scene: PackedScene
 @export var segment_tilemap_scene: PackedScene
+@export var faq_panel: PackedScene
 
 @export_group("Game Objects")
 @export var player: PackedScene
