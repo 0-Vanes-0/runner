@@ -1,6 +1,4 @@
 - One weapon?
-- Add reload progress to ShootSensor
-- Add shoot marker
 
 - Add proper reload progress time to Activity
 - Make richtextlabel hints (using push_meta() and calling custom scene on it)
@@ -12,6 +10,7 @@
 
 
 
++ Add reload progress to ShootSensor
 + ERROR ON ANDROID
 + RESOLVE SHOOT SENSOR DILEMMA (AND PLAYER)
 + MAKE BUTTONS MORE FOR FINGERS

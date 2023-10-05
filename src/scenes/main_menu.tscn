@@ -6,15 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://d3f5us1v4x1jj" path="res://src/scenes/buttons/choose_demon_button.tscn" id="4_bauan"]
 [ext_resource type="PackedScene" uid="uid://c4vx8yyktgv1x" path="res://src/scenes/menus/settings_menu.tscn" id="5_ihvey"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ib7r1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_lf3he"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_c0pu7"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_r0iay"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_hxou8"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_tugi6"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_unrp1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_u3wd6"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_jcovy"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_g6jqn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fss2q"]
 bg_color = Color(0, 0, 0, 0.894118)
@@ -109,23 +109,23 @@ layout_mode = 2
 
 [node name="ChooseDemonButton" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_ib7r1")
+button_group = SubResource("ButtonGroup_lf3he")
 
 [node name="ChooseDemonButton2" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_c0pu7")
+button_group = SubResource("ButtonGroup_r0iay")
 
 [node name="ChooseDemonButton3" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_hxou8")
+button_group = SubResource("ButtonGroup_tugi6")
 
 [node name="ChooseDemonButton4" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_unrp1")
+button_group = SubResource("ButtonGroup_u3wd6")
 
 [node name="ChooseDemonButton5" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/ScrollContainer/DemonsHBoxContainer" instance=ExtResource("4_bauan")]
 layout_mode = 2
-button_group = SubResource("ButtonGroup_jcovy")
+button_group = SubResource("ButtonGroup_g6jqn")
 
 [node name="FAQButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -207,15 +207,14 @@ text = "Версия от 16.09.2023
 9 уровней увеличивающейся длины. Пока что есть 1 готовый биом.
 Перед началом игры выбирается один из сгенерированных персов, сверху пишется инфа об их статах.
 Красный = легендарный (1 легендарная стата), жёлтый = эпический (2 эпических статы), оранжевый = редкий (3 редких статы), белый = обычный.
-Левый тап наверх = прыжок вверх, левый тап вниз = прыжок вниз.
-Остальное управление через кнопки слева или через свайпы (в настройках можно выбрать свайпы или кнопки).
+Звезда - активная способность
+Стрелки - поменять оружие
+Человечек вправо - уворот
+Стрелка вверх - прыжок вверх
+Стрелка вниз - прыжок вниз
 
-После прохождения уровня вы выбираете портал, над ним написана будущая награда. Пока только можно получать пассивки и оружия.
-
-STM = стамина, на прыжки и уклоны
-AMM = боезапас оружия
-SPD = горизонт. скорость
-VRT SPD = верт. скорость"
+После прохождения уровня вы выбираете портал, над ним написана будущая награда. Пока только можно получать пассивки, активки и оружия.
+"
 autowrap_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CitySettingsHBoxContainer/CityButton" to="." method="_on_city_button_pressed"]
