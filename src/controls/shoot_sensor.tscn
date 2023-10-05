@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://p26mwbs4wt7h"]
+
+[ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="1_fs3ic"]
+[ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="1_lqpqx"]
+
+[node name="ShootSensor" type="VSlider" node_paths=PackedStringArray("_progress_bar")]
+offset_right = 80.0
+offset_bottom = 720.0
+size_flags_horizontal = 8
+theme = ExtResource("1_lqpqx")
+max_value = 1.0
+step = 0.0
+value = 0.5
+scrollable = false
+script = ExtResource("1_fs3ic")
+_progress_bar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 3
+
+[connection signal="drag_ended" from="." to="." method="_on_drag_ended"]
+[connection signal="drag_started" from="." to="." method="_on_drag_started"]

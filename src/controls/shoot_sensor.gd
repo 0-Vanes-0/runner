@@ -4,6 +4,8 @@ extends VSlider
 signal shoot_activated(target_position_y: float)
 signal shoot_disabled()
 
+@export var _progress_bar: ProgressBar
+
 var _LOWEST_Y: float
 var _VERT_DISTANCE: float
 var _is_shooting: bool
@@ -11,11 +13,14 @@ var t: Texture2D
 
 
 func _ready() -> void:
+	assert(_progress_bar)
+	_progress_bar.hide()
+	
 	_reset_slider()
 	self.min_value = 0.0
 	self.max_value = 1.0
-	_LOWEST_Y = Global.SCREEN_HEIGHT * 1.5
-	_VERT_DISTANCE = Global.SCREEN_HEIGHT * 2.0
+	_LOWEST_Y = Global.SCREEN_HEIGHT * 1.0
+	_VERT_DISTANCE = Global.SCREEN_HEIGHT * 1.0
 	
 	var image := self.get_theme_icon("grabber").get_image()
 	var image_h := self.get_theme_icon("grabber_highlight").get_image()
@@ -50,6 +55,19 @@ func disable(time: float):
 	self.editable = false
 	await get_tree().create_timer(time, false, true).timeout
 	self.editable = true
+
+
+func progress_reload(time: float):
+	if not _progress_bar.visible:
+		_progress_bar.show()
+		_progress_bar.value = 0.0
+		var tween := create_tween()
+		tween.tween_property(
+			_progress_bar, "value",
+			_progress_bar.max_value,
+			time
+		)
+		tween.tween_callback(_progress_bar.hide)
 
 
 func _reset_slider():

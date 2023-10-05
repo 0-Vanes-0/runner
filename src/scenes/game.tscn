@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://src/scenes/menus/left_menu.gd" id="4_u4atb"]
 [ext_resource type="PackedScene" uid="uid://dr5r31lkwfgnn" path="res://src/scenes/menus/game_over_menu.tscn" id="5_2syq0"]
 [ext_resource type="Texture2D" uid="uid://et8hwutneabo" path="res://assets/sprites/interface/dodge_button_pressed.png" id="5_5hunf"]
-[ext_resource type="Script" path="res://src/controls/shoot_sensor.gd" id="5_ysdi3"]
 [ext_resource type="PackedScene" uid="uid://cjk1sxt21gprp" path="res://src/scenes/menus/pause_menu.tscn" id="6_d8b13"]
 [ext_resource type="Texture2D" uid="uid://bxwvl8njophpc" path="res://assets/sprites/interface/switch_button.png" id="8_3hswu"]
 [ext_resource type="Texture2D" uid="uid://bxecltnpwwvaj" path="res://assets/sprites/interface/switch_button_pressed.png" id="9_oemju"]
@@ -18,6 +17,7 @@
 [ext_resource type="Theme" uid="uid://cua1s23yijxy2" path="res://assets/themes_styles_groups/default_theme.tres" id="12_ln7id"]
 [ext_resource type="Texture2D" uid="uid://n1nhua8wbot1" path="res://assets/sprites/interface/jump_button.png" id="13_pjoel"]
 [ext_resource type="Texture2D" uid="uid://7p68222w4vgf" path="res://assets/sprites/interface/jump_button_pressed.png" id="14_tg6dn"]
+[ext_resource type="PackedScene" uid="uid://p26mwbs4wt7h" path="res://src/controls/shoot_sensor.tscn" id="15_v32dy"]
 [ext_resource type="PackedScene" uid="uid://b7icnfn8n355f" path="res://src/scenes/menus/reward_menu.tscn" id="17_f8b0e"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
@@ -213,14 +213,8 @@ theme_override_constants/margin_top = 120
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 120
 
-[node name="ShootSensor" type="VSlider" parent="HUD/PlayerSensor/MainHBox/ShootContainer"]
+[node name="ShootSensor" parent="HUD/PlayerSensor/MainHBox/ShootContainer" instance=ExtResource("15_v32dy")]
 layout_mode = 2
-size_flags_horizontal = 8
-min_value = -540.0
-max_value = 1620.0
-step = 0.0
-scrollable = false
-script = ExtResource("5_ysdi3")
 
 [node name="GameOverMenu" parent="HUD" instance=ExtResource("5_2syq0")]
 visible = false
@@ -258,5 +252,3 @@ script = ExtResource("4_shxdo")
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="HUD/PlayerSensor/MainHBox/LeftMenu/PauseButton" to="." method="_on_pause_button_pressed"]
-[connection signal="drag_ended" from="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" to="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" method="_on_drag_ended"]
-[connection signal="drag_started" from="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" to="HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor" method="_on_drag_started"]

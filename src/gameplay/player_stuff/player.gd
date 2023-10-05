@@ -88,6 +88,8 @@ func _ready() -> void:
 						and not state_machine.state is LevelEndPlayerState
 				):
 					weapon.shoot(weapon.get_start_shoot_position(), Vector2(Global.ENEMY_X_POSITION, target_position_y))
+					if weapon.is_reloading:
+						shoot_sensor.progress_reload(weapon.reload_time)
 				
 				else:
 					weapon.stop_shoot()
@@ -96,8 +98,7 @@ func _ready() -> void:
 			func():
 				weapon.stop_shoot()
 				weapon.reload()
-				if weapon.is_reloading:
-					shoot_sensor.disable(weapon.reload_time)
+				shoot_sensor.progress_reload(weapon.reload_time)
 	)
 
 ## Inits player without recreating new instance.
