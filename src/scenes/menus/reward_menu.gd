@@ -4,6 +4,12 @@ extends Control
 signal choosed
 signal need_kill_tween
 
+enum Cards {
+	REPLACE_1,
+	REPLACE_2,
+	TAKE_OR_CONSUME_3,
+}
+
 @export var _card1: PanelContainer
 @export var _card2: PanelContainer
 @export var _card3: PanelContainer
@@ -26,116 +32,52 @@ func _ready() -> void:
 	_card3.hide()
 
 
-func show_weapons(with_reward: Reward):
-	assert(with_reward.get_type() == Reward.WEAPON)
-	var player := Global.player as Player
+func show_weapons():
+	assert(GameInfo.current_reward.get_type() == Reward.WEAPON)
 	
-	_texture_rect1.texture = player.weapon1.get_preview()
-	_label1.text = player.weapon1.get_description()
-	_button1.pressed.connect(
-			func():
-				choosed.emit()
-				player.weapon1.queue_free()
-				player.weapon1 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
-				player.activate_weapon1()
-				player.weapon_marker.add_child(player.weapon1)
-				GameInfo.current_reward = null
-				hide_all()
+	var player := Global.player as Player
+	var reward := GameInfo.current_reward as Reward
+	_fill_card(
+			Cards.REPLACE_1, 
+			player.weapon1.get_preview(), 
+			player.weapon1.get_description()
 	)
-	_button1.text = "Replace"
-	_card1.show()
-	
 	if player.weapon2 != null:
-		_texture_rect2.texture = player.weapon2.get_preview()
-		_label2.text = player.weapon2.get_description()
-		_button2.pressed.connect(
-				func():
-					choosed.emit()
-					player.weapon2.queue_free()
-					player.weapon2 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
-					player.activate_weapon2()
-					player.weapon_marker.add_child(player.weapon2)
-					GameInfo.current_reward = null
-					hide_all()
+		_fill_card(
+				Cards.REPLACE_2, 
+				player.weapon2.get_preview(), 
+				player.weapon2.get_description()
 		)
-		_button2.text = "Replace"
-		_card2.show()
-		
-		_button3.pressed.connect(
-				func():
-					choosed.emit()
-					# Add exp?
-					GameInfo.current_reward = null
-					hide_all()
-		)
-		_button3.text = "Consume"
+	_fill_card(
+		Cards.TAKE_OR_CONSUME_3, 
+		reward.get_as_weapon_res().get_preview(), 
+		reward.get_as_weapon_res().get_description(reward.get_rarity(), true)
+	)
 	
-	else:
-		_button3.pressed.connect(
-				func():
-					choosed.emit()
-					player.weapon2 = Weapon.new(with_reward.get_as_weapon_res(), with_reward.get_rarity(), ShootEntity.Owner.PLAYER)
-					player.activate_weapon2()
-					player.weapon_marker.add_child(player.weapon2)
-					GameInfo.current_reward = null
-					hide_all()
-		)
-		_button3.text = "Take"
-	
-	_texture_rect3.texture = with_reward.get_as_weapon_res().get_preview()
-	_label3.text = with_reward.get_as_weapon_res().get_description(with_reward.get_rarity(), true)
-	_card3.show()
-	
-	play_intro()
+	_play_intro()
 
 
-func show_activities(with_reward: Reward):
-	assert(with_reward.get_type() == Reward.ACTIVITY)
+func show_activities():
+	assert(GameInfo.current_reward.get_type() == Reward.ACTIVITY)
+	
 	var player := Global.player as Player
-	
+	var reward := GameInfo.current_reward as Reward
 	if player.activity != null:
-		_texture_rect1.texture = player.activity.get_preview()
-		_label1.text = player.activity.get_description()
-		_button1.pressed.connect(
-				func():
-					choosed.emit()
-					player.activity.queue_free()
-					player.activity = Activity.new(with_reward.get_as_activity_res(), with_reward.get_rarity())
-					player.add_child(player.activity)
-					GameInfo.current_reward = null
-					hide_all()
+		_fill_card(
+				Cards.REPLACE_1, 
+				player.activity.get_preview(), 
+				player.activity.get_description()
 		)
-		_button1.text = "Replace"
-		_card1.show()
-		
-		_button3.pressed.connect(
-				func():
-					choosed.emit()
-					# Add exp?
-					GameInfo.current_reward = null
-					hide_all()
-		)
-		_button3.text = "Consume"
+	_fill_card(
+		Cards.TAKE_OR_CONSUME_3, 
+		reward.get_as_activity_res().get_preview(), 
+		reward.get_as_activity_res().get_description(reward.get_rarity(), true)
+	)
 	
-	else:
-		_button3.pressed.connect(
-				func():
-					choosed.emit()
-					player.activity = Activity.new(with_reward.get_as_activity_res(), with_reward.get_rarity())
-					player.add_child(player.activity)
-					GameInfo.current_reward = null
-					hide_all()
-		)
-		_button3.text = "Take"
-		
-	_texture_rect3.texture = with_reward.get_as_activity_res().get_preview()
-	_label3.text = with_reward.get_as_activity_res().get_description(with_reward.get_rarity())
-	_card3.show()
-	
-	play_intro()
+	_play_intro()
 
 
-func play_intro():
+func _play_intro():
 	self.position.y = Global.SCREEN_HEIGHT
 	self.show()
 	var tween := create_tween()
@@ -150,8 +92,125 @@ func play_intro():
 	)
 
 
-func hide_all():
+func _fill_card(card_number: Cards, texture: Texture2D, text: String):
+	var card: PanelContainer = (
+			_card1 if card_number == Cards.REPLACE_1
+			else _card2 if card_number == Cards.REPLACE_2
+			else _card3 if card_number == Cards.TAKE_OR_CONSUME_3
+			else null
+	)
+	var texture_rect: TextureRect = (
+			_texture_rect1 if card_number == Cards.REPLACE_1
+			else _texture_rect2 if card_number == Cards.REPLACE_2
+			else _texture_rect3 if card_number == Cards.TAKE_OR_CONSUME_3
+			else null
+	)
+	var label: RichTextLabel = (
+			_label1 if card_number == Cards.REPLACE_1
+			else _label2 if card_number == Cards.REPLACE_2
+			else _label3 if card_number == Cards.TAKE_OR_CONSUME_3
+			else null
+	)
+	var button: Button = (
+			_button1 if card_number == Cards.REPLACE_1
+			else _button2 if card_number == Cards.REPLACE_2
+			else _button3 if card_number == Cards.TAKE_OR_CONSUME_3
+			else null
+	)
+	assert(card and texture_rect and label and button)
+	
+	texture_rect.texture = texture
+	label.text = text
+	
+	var player := Global.player as Player
+	var type: int = GameInfo.current_reward.get_type()
+	
+	if type == Reward.WEAPON or type == Reward.ACTIVITY:
+		
+		if card_number == Cards.REPLACE_1 or card_number == Cards.REPLACE_2:
+			button.text = "Replace"
+			button.pressed.connect(
+					func():
+						_apply_reward_and_hide(card_number)
+			)
+		elif (
+				type == Reward.WEAPON and player.weapon2 == null
+				or 
+				type == Reward.ACTIVITY and player.activity == null
+			):
+			button.text = "Take"
+			button.pressed.connect(
+					func():
+						_apply_reward_and_hide(Cards.TAKE_OR_CONSUME_3)
+			)
+		else:
+			button.text = "Consume"
+			button.pressed.connect(
+					func():
+						GameInfo.exp += 100 # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			)
+	
+	else:
+		
+		button.text = "Take"
+		button.pressed.connect(
+				func():
+					_apply_reward_and_hide(card_number)
+		)
+	
+	card.show()
+
+
+func _apply_reward_and_hide(card_number: Cards):
+	var player := Global.player as Player
+	choosed.emit()
+	var type: int = GameInfo.current_reward.get_type()
+	match type:
+		Reward.WEAPON:
+			if card_number == Cards.REPLACE_1:
+				player.weapon1.queue_free()
+				player.weapon1 = Weapon.new(GameInfo.current_reward.get_as_weapon_res(), GameInfo.current_reward.get_rarity(), ShootEntity.Owner.PLAYER)
+				player.activate_weapon1()
+				player.weapon_marker.add_child(player.weapon1)
+			elif card_number == Cards.REPLACE_2:
+				player.weapon2.queue_free()
+				player.weapon2 = Weapon.new(GameInfo.current_reward.get_as_weapon_res(), GameInfo.current_reward.get_rarity(), ShootEntity.Owner.PLAYER)
+				player.activate_weapon2()
+				player.weapon_marker.add_child(player.weapon2)
+			elif card_number == Cards.TAKE_OR_CONSUME_3:
+				player.weapon2 = Weapon.new(GameInfo.current_reward.get_as_weapon_res(), GameInfo.current_reward.get_rarity(), ShootEntity.Owner.PLAYER)
+				player.activate_weapon2()
+				player.weapon_marker.add_child(player.weapon2)
+		
+		Reward.ACTIVITY:
+			if not card_number == Cards.TAKE_OR_CONSUME_3:
+				player.activity.queue_free()
+			player.activity = Activity.new(GameInfo.current_reward.get_as_activity_res(), GameInfo.current_reward.get_rarity())
+			player.add_child(player.activity)
+		
+		Reward.DEMON_PASSIVITY:
+			player.apply_demon_passivity(GameInfo.current_reward.get_as_demon_passivity_res(), GameInfo.current_reward.get_rarity())
+		
+		Reward.WEAPON_PASSIVITY:
+			pass
+		
+		Reward.SHOOT_ENTITY_STATUS:
+			pass
+		
+		_:
+			assert(false, "Wrong type = " + str(type))
+	
+	GameInfo.current_reward = null
+	
+	
 	need_kill_tween.emit()
+	for dict in _button1.pressed.get_connections() as Array[Dictionary]:
+		_button1.pressed.disconnect(dict["callable"])
+	for dict in _button2.pressed.get_connections() as Array[Dictionary]:
+		_button2.pressed.disconnect(dict["callable"])
+	for dict in _button3.pressed.get_connections() as Array[Dictionary]:
+		_button3.pressed.disconnect(dict["callable"])
+	
 	var tween := create_tween()
 	tween.tween_property(
 			self, "position:y",
@@ -160,17 +219,9 @@ func hide_all():
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_callback(
 			func():
-				for dict in _button1.pressed.get_connections() as Array[Dictionary]:
-					_button1.pressed.disconnect(dict["callable"])
-				for dict in _button2.pressed.get_connections() as Array[Dictionary]:
-					_button2.pressed.disconnect(dict["callable"])
-				for dict in _button3.pressed.get_connections() as Array[Dictionary]:
-					_button3.pressed.disconnect(dict["callable"])
-				
 				_card1.hide()
 				_card2.hide()
 				_card3.hide()
-				
 				self.hide()
 	)
 	tween.finished.connect(tween.kill, CONNECT_ONE_SHOT)

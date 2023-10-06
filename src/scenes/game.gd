@@ -159,17 +159,23 @@ func process_level_end_objects():
 	segments.add_child(chest)
 	chest.clicked.connect(
 			func():
-				match chest.reward.get_type():
+				match GameInfo.current_reward.get_type():
 					Reward.WEAPON:
-						reward_menu.show_weapons(chest.reward)
+						reward_menu.show_weapons()
 						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
 					Reward.ACTIVITY:
-						reward_menu.show_activities(chest.reward)
+						reward_menu.show_activities()
 						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
 					Reward.DEMON_PASSIVITY:
-						player.apply_passivity(chest.reward.get_as_demon_passivity_res(), chest.reward.get_rarity())
+#						reward_menu.show_demon_passivities()
+#						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
+						player.apply_demon_passivity(GameInfo.current_reward.get_as_demon_passivity_res(), GameInfo.current_reward.get_rarity())
 						GameInfo.current_reward = null
 						_spawn_portals()
+					Reward.WEAPON_PASSIVITY:
+						pass
+#						reward_menu.show_weapon_passivities()
+#						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
 				
 				player.in_portal.connect(
 						func():

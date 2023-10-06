@@ -36,20 +36,18 @@ func get_value(rarity: Rarity) -> int:
 			return 0
 
 
-func get_description(rarity: Rarity) -> String:
+func get_description(rarity: Rarity, bbcode := false) -> String:
 	var text := String(description)
 	text = text.replace(
 			"$1", 
-			"[color=#" + Rarity.get_color_hex(rarity) + "]" 
-			+ str(get_value(rarity))
-			+ "[/color]"
+			str(get_value(rarity))
 	)
 	text = text.replace(
 			"$2", 
 			" during " + str(duration_time).pad_decimals(2) + " s"
 	)
 	text = text.replace("$3", str(reload_time).pad_decimals(2))
-	return text
+	return text if not bbcode else ("[color=#" + Rarity.get_color_hex(rarity) + "]" + text + "[/color]")
 
 
 func get_preview() -> Texture2D:

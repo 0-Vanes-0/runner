@@ -1,3 +1,4 @@
+- Redo rewards of DemonPassivity, Weapon Passivity and Shoot Entity Status
 - One weapon?
 
 - Add proper reload progress time to Activity

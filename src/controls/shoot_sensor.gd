@@ -3,6 +3,7 @@ extends VSlider
 
 signal shoot_activated(target_position_y: float)
 signal shoot_disabled()
+signal need_kill_tween
 
 @export var _progress_bar: ProgressBar
 
@@ -68,6 +69,12 @@ func progress_reload(time: float):
 			time
 		)
 		tween.tween_callback(_progress_bar.hide)
+		need_kill_tween.connect(tween.kill)
+
+
+func stop_progress_reload():
+	need_kill_tween.emit()
+	_progress_bar.hide()
 
 
 func _reset_slider():

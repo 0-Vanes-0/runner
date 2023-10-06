@@ -133,4 +133,4 @@ bbcode_enabled = true
 [node name="Button" type="Button" parent="MarginContainer/CardsHBox/Card3/MarginContainer/DescriptionVBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
-text = "Melt"
+text = "Consume"

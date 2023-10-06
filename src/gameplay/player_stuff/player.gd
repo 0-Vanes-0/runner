@@ -70,6 +70,7 @@ func _ready() -> void:
 						activate_weapon2()
 					elif weapon2.is_active:
 						activate_weapon1()
+					shoot_sensor.stop_progress_reload()
 	)
 	player_sensor.dodge.connect(state_machine.transition_to.bind(state_dodge))
 	player_sensor.activity.connect(
@@ -86,7 +87,7 @@ func _ready() -> void:
 						not state_machine.state is DodgePlayerState 
 						and not state_machine.state is DeadPlayerState
 						and not state_machine.state is LevelEndPlayerState
-				):
+					):
 					weapon.shoot(weapon.get_start_shoot_position(), Vector2(Global.ENEMY_X_POSITION, target_position_y))
 					if weapon.is_reloading:
 						shoot_sensor.progress_reload(weapon.reload_time)
@@ -131,7 +132,7 @@ func apply_player_data():
 	weapon_marker.add_child(weapon1)
 
 
-func apply_passivity(resource: DemonPassivityResource, rarity: Rarity):
+func apply_demon_passivity(resource: DemonPassivityResource, rarity: Rarity):
 	var passivity := DemonPassivity.new(resource, rarity)
 	match passivity.get_type():
 		DemonPassivityResource.Types.HP_BUFF:
@@ -149,12 +150,28 @@ func apply_passivity(resource: DemonPassivityResource, rarity: Rarity):
 		DemonPassivityResource.Types.SPEED_BUFF:
 			var buff: int = roundi(Global.player_data.base_speed * passivity.get_value_as_percent())
 			run_speed += buff
-		DemonPassivityResource.Types.SPEED_ACC_BUFF:
-			pass
-			# WIP
 		_:
-			assert(false, "Unknown type of passivity: " + DemonPassivityResource.Types.keys()[passivity.get_type()])
+			assert(false, "Unknown type of passivity: " + str(passivity.get_type()))
 	passivities.append(passivity)
+
+
+func apply_weapon_passivity(choosed_weapon: Weapon, resource: WeaponPassivityResource, rarity: Rarity):
+	var passivity := WeaponPassivity.new(resource, rarity)
+	match passivity.get_type():
+		WeaponPassivityResource.Types.DAMAGE_BUFF:
+			var buff: int = roundi(choosed_weapon.damage * passivity.get_value_as_percent())
+			choosed_weapon.damage += buff
+		WeaponPassivityResource.Types.SHOOT_RATE_BUFF:
+			var reduce: int = roundi(choosed_weapon.shoot_rate_time * passivity.get_value_as_percent())
+			choosed_weapon.shoot_rate_time -= reduce
+		WeaponPassivityResource.Types.AMMO_BUFF:
+			var buff: int = roundi(choosed_weapon.ammo_max * passivity.get_value_as_percent())
+			choosed_weapon.ammo_max += buff
+		WeaponPassivityResource.Types.RELOAD_TIME_BUFF:
+			var reduce: int = roundi(choosed_weapon.reload_time * passivity.get_value_as_percent())
+			choosed_weapon.reload_time -= reduce
+		_:
+			assert(false, "Unknown type of passivity: " + str(passivity.get_type()))
 
 
 func get_game_size() -> Vector2:

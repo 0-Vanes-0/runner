@@ -4,8 +4,7 @@ extends Resource
 enum Types {
 	NONE = 0,
 	HP_BUFF = 11,
-	STAMINA_BUFF = 21, GRAVITY_BUFF = 22,
-	SPEED_BUFF = 31, SPEED_ACC_BUFF = 32,
+	STAMINA_BUFF = 21, GRAVITY_BUFF = 22, SPEED_BUFF = 23,
 }
 @export var type: Types = Types.NONE
 @export_group("Values", "value_")
@@ -19,7 +18,6 @@ const _NAMES := {
 	Types.STAMINA_BUFF: "STM +_%",
 	Types.GRAVITY_BUFF: "VRT SPD +_%",
 	Types.SPEED_BUFF: "RUN SPD +_%",
-	Types.SPEED_ACC_BUFF: "RUN ACC +_%",
 }
 
 

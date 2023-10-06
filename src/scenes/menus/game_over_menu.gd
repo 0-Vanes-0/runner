@@ -29,6 +29,7 @@ func appear():
 	_anim_player.play("start")
 	_left_label.text = (
 			"Enemies killed: " + str(GameInfo.kills_count) + "\n"
+			+ "Exp from consumptions: " + str(GameInfo.exp) + "\n"
 			+ "Died on level " + str(GameInfo.level_number) + " in biome " + str(GameInfo.biome_number) + "\n"
 	)
 
