@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cbhc564a8a6e"]
+[gd_scene load_steps=32 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
 [ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
@@ -34,6 +34,9 @@ b = Vector2(0, 100)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_q0vek"]
 b = Vector2(0, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olasq"]
+size = Vector2(3120, 40)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jnf7q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idl52"]
@@ -52,7 +55,7 @@ bg_color = Color(0.737255, 0.760784, 0.0980392, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_aavuu"]
 font_size = 24
 
-[node name="GameScene" type="Node2D" node_paths=PackedStringArray("level", "bounds", "bounds_top", "bounds_right", "bounds_bottom", "bounds_left", "segments", "enemies", "shoot_field", "player_sensor", "left_menu", "shoot_sensor", "game_over_menu", "reward_menu", "black_color_rect", "pause_menu", "info_label")]
+[node name="GameScene" type="Node2D" node_paths=PackedStringArray("level", "bounds", "bounds_top", "bounds_right", "bounds_bottom", "bounds_left", "segments", "enemies", "shoot_field", "camera", "player_sensor", "left_menu", "shoot_sensor", "game_over_menu", "reward_menu", "black_color_rect", "pause_menu", "info_label")]
 process_mode = 1
 script = ExtResource("1_njila")
 level = NodePath("Level")
@@ -64,6 +67,7 @@ bounds_left = NodePath("Level/Bounds/Left")
 segments = NodePath("Level/Segments")
 enemies = NodePath("Level/Enemies")
 shoot_field = NodePath("Level/ShootField")
+camera = NodePath("Level/Camera2D")
 player_sensor = NodePath("HUD/PlayerSensor")
 left_menu = NodePath("HUD/PlayerSensor/MainHBox/LeftMenu")
 shoot_sensor = NodePath("HUD/PlayerSensor/MainHBox/ShootContainer/ShootSensor")
@@ -94,6 +98,21 @@ shape = SubResource("SegmentShape2D_q0vek")
 [node name="Enemies" type="Node2D" parent="Level"]
 
 [node name="ShootField" type="Node2D" parent="Level"]
+
+[node name="Camera2D" type="Camera2D" parent="Level"]
+position = Vector2(960, 540)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="DeadArea" type="Area2D" parent="Level"]
+position = Vector2(959, 1440)
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DeadArea"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_olasq")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

@@ -28,6 +28,7 @@ func enter():
 
 
 func physics_update(delta: float):
+	super(delta)
 	if not is_passing_platform and get_colliding_platform() != null:
 		state_machine.transition_to(player.state_run)
 	apply_player_gravity(delta)

@@ -26,4 +26,5 @@ func enter():
 
 
 func physics_update(delta: float):
+	super(delta)
 	apply_player_gravity(delta)

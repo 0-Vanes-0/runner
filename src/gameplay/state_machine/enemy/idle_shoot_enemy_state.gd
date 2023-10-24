@@ -15,6 +15,6 @@ func physics_update(delta: float):
 	if is_player_alive():
 		shoot_counter = shoot_at_player(shoot_times, shoot_counter)
 		if shoot_counter == shoot_times:
-				transition_to_random_battle_state()
+			transition_to_random_battle_state()
 	else:
 		enemy.state_machine.transition_to(enemy.state_go_away, true)

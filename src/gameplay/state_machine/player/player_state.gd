@@ -23,6 +23,11 @@ func update(delta: float):
 			player.sprite.play()
 
 
+func physics_update(delta: float):
+	if player.current_run_speed > 0 and player.platforms_left > 0:
+		player.platforms_left -= (player.current_run_speed / Platform.SIZE.x) * delta
+
+
 func set_anim_looped():
 	is_anim_looped = true
 

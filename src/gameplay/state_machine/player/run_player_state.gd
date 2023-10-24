@@ -8,6 +8,7 @@ func enter():
 
 
 func physics_update(delta: float):
+	super(delta)
 	if player.stamina < player.stamina_max:
 		player.stamina += player.stamina_regen * delta
 	else:

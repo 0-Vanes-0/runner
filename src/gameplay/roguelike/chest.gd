@@ -18,10 +18,7 @@ func _ready() -> void:
 	_label.modulate.a = 0.0
 	if reward.get_type() == Reward.DEMON_PASSIVITY:
 		var res := reward.get_as_demon_passivity_res()
-		_label.text = (
-				res.Types.keys()[ res.Types.values().find(res.type) ] 
-				+ " +" + str(res.get_value(reward.get_rarity())) + "%"
-		)
+		_label.text = DemonPassivityResource.get_text(res.type, res.get_value(reward.get_rarity()))
 	_label.set_scale(Vector2(1/self.scale.x, 1/self.scale.y))
 	_label.position = Vector2.LEFT * _label.get_minimum_size().x * _label.scale.x
 	self.add_child(_label)
@@ -46,6 +43,10 @@ func open():
 	tween.tween_callback(
 			func():
 				clicked.emit()
+	)
+	tween.tween_callback(
+			func():
+				(get_node("CollisionShape2D") as CollisionShape2D).disabled = true
 	)
 	if not _label.text.is_empty():
 		tween.tween_property(

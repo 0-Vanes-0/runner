@@ -1,5 +1,6 @@
+- Draw proper segments
 - Redo rewards of DemonPassivity, Weapon Passivity and Shoot Entity Status
-- One weapon?
+- Add current weapon icon on switch button
 
 - Add proper reload progress time to Activity
 - Make richtextlabel hints (using push_meta() and calling custom scene on it)
@@ -11,6 +12,7 @@
 
 
 
++ ADD QUEUE TRANSITION INTO STATE MACHINE
 + Add reload progress to ShootSensor
 + ERROR ON ANDROID
 + RESOLVE SHOOT SENSOR DILEMMA (AND PLAYER)

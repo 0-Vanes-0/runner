@@ -12,6 +12,7 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 @export var segments: Node2D
 @export var enemies: Node2D
 @export var shoot_field: Node2D
+@export var camera: Camera2D
 
 @export var player_sensor: PlayerSensor
 @export var left_menu: LeftMenu
@@ -25,13 +26,18 @@ var is_enemies_permitted: bool ## If [code]true[/code], enemies can spawn. It be
 
 func _ready() -> void:
 	assert(
-			level and bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and shoot_field
+			level and bounds and bounds_top and bounds_right and bounds_bottom and bounds_left and segments and enemies and shoot_field and camera
 			and info_label and player_sensor and left_menu and shoot_sensor and game_over_menu and reward_menu and pause_menu and black_color_rect
 	)
 	black_color_rect.color = Color(0, 0, 0, 0)
 	game_over_menu.restart_called.connect(
 			func():
 				init_game()
+	)
+	$Level/DeadArea.body_entered.connect( # Just for debugging
+			func(body: Node2D):
+				if body is Player:
+					body.state_machine.transition_to(body.state_dead, true)
 	)
 	
 	Global.need_apply_settings.emit()
@@ -44,13 +50,16 @@ func _physics_process(delta: float) -> void:
 		for segment in segments.get_children() as Array[Segment]:
 			segment.move(delta * Global.player.current_run_speed)
 	
-	if is_enemies_permitted and enemies.get_child_count() == 0:
+	if is_enemies_permitted and enemies.get_child_count() < 3:
 		var enemy: Enemy = Preloader.enemy_sphere_mage.instantiate()
 		enemy.dead.connect(
 				func():
 					GameInfo.kills_count += 1
 		, CONNECT_ONE_SHOT)
 		enemies.add_child(enemy)
+	
+	if Global.player != null:
+		camera.position = Global.player.position
 
 
 func _notification(what: int) -> void:
@@ -125,6 +134,8 @@ func setup_level():
 	segments.add_child(plane)
 	
 	Global.player.platforms_left = LEVEL_LENGTH
+
+	Global.camera.position_smoothing_speed = 1.0
 	
 	var tween := create_tween()
 	tween.tween_property(
@@ -221,23 +232,36 @@ func _spawn_portals():
 
 
 func _init_bounds():
-	(bounds_top.shape as SegmentShape2D).a = Vector2(0, 0)
-	(bounds_top.shape as SegmentShape2D).b = Vector2(Global.SCREEN_WIDTH, 0)
-	(bounds_right.shape as SegmentShape2D).a = Vector2(Global.SCREEN_WIDTH, 0)
-	(bounds_right.shape as SegmentShape2D).b = Vector2(Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT)
-	(bounds_bottom.shape as SegmentShape2D).a = Vector2(Global.SCREEN_WIDTH, Global.SCREEN_HEIGHT)
-	(bounds_bottom.shape as SegmentShape2D).b = Vector2(0, Global.SCREEN_HEIGHT)
-	(bounds_left.shape as SegmentShape2D).a = Vector2(0, Global.SCREEN_HEIGHT)
-	(bounds_left.shape as SegmentShape2D).b = Vector2(0, 0)
+	var left_top := Vector2(Global.BORDER_LEFT, Global.BORDER_TOP)
+	var right_top := Vector2(Global.BORDER_RIGHT, Global.BORDER_TOP)
+	var right_bottom := Vector2(Global.BORDER_RIGHT, Global.BORDER_BOTTOM)
+	var left_bottom := Vector2(Global.BORDER_LEFT, Global.BORDER_BOTTOM)
+	(bounds_top.shape as SegmentShape2D).a = left_top
+	(bounds_top.shape as SegmentShape2D).b = right_top
+	(bounds_right.shape as SegmentShape2D).a = right_top
+	(bounds_right.shape as SegmentShape2D).b = right_bottom
+	(bounds_bottom.shape as SegmentShape2D).a = right_bottom
+	(bounds_bottom.shape as SegmentShape2D).b = left_bottom
+	(bounds_left.shape as SegmentShape2D).a = left_bottom
+	(bounds_left.shape as SegmentShape2D).b = left_top
 	Global.clean_layers(bounds).set_collision_layer_value(Global.Layers.BOUNDS, true)
+
+	camera.limit_top = Global.BORDER_TOP
+	camera.limit_right = Global.BORDER_RIGHT
+	camera.limit_bottom = Global.BORDER_BOTTOM
+	camera.limit_left = Global.BORDER_LEFT
+	Global.camera = camera
 
 
 func _on_level_complete():
 	is_level_complete = true
-	Global.player.state_machine.transition_to(Global.player.state_level_end)
+	Global.player.state_machine.queue_transition_to(Global.player.state_level_end)
+	Global.player.status_handler.clear_statuses()
+	Global.player.sprite.modulate = Global.player.health_comp.orig_modulate
+	Global.camera.position_smoothing_speed = 10.0
 
 
 func _remove_enemies():
 	is_enemies_permitted = false
 	for enemy in enemies.get_children() as Array[Enemy]:
-		enemy.state_machine.transition_to(enemy.state_go_away, true)
+		enemy.state_machine.transition_to(enemy.state_go_away)

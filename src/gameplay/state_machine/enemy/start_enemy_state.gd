@@ -7,7 +7,7 @@ const ENTER_TIME := 1.5
 
 
 func enter():
-	enemy.current_floor = FLOORS.pick_random()
+	enemy.current_floor = range(1, Global.MAX_FLOORS + 1).pick_random()
 	enemy.position.x = Global.SCREEN_WIDTH + enemy.get_game_size().x / 2
 	enemy.position.y = Global.ENEMY_Y_SPOTS[enemy.current_floor]
 	enemy.sprite.play("default")

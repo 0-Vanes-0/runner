@@ -7,21 +7,6 @@
 script = ExtResource("1_bproq")
 metadata/_edit_lock_ = true
 
-[node name="Floor4" type="Node2D" parent="."]
-position = Vector2(0, -360)
-metadata/_edit_lock_ = true
-
-[node name="Floor3" type="Node2D" parent="."]
-position = Vector2(0, -240)
-metadata/_edit_lock_ = true
-
-[node name="Floor2" type="Node2D" parent="."]
-position = Vector2(0, -120)
-metadata/_edit_lock_ = true
-
-[node name="Floor1" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-
 [node name="End" type="Marker2D" parent="."]
 position = Vector2(-60, -60)
 gizmo_extents = 100.0

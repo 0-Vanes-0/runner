@@ -17,7 +17,7 @@ func enter():
 	
 	enemy.weapon.add_extra_spread_angle(extra_spread_angle)
 	
-	var alt_floors: Array[int] = FLOORS.duplicate()
+	var alt_floors := range(1, Global.MAX_FLOORS + 1)
 	alt_floors.erase(enemy.current_floor)
 	target_floor = alt_floors.pick_random()
 	path_length = absi(enemy.current_floor - target_floor)

@@ -9,7 +9,7 @@ signal dead
 @export var weapon_resource: WeaponResource ## WIP: Array of Weapons, pick random when spawn.
 #@export var clothes: ClothesResource
 @export_group("Children")
-@export var fact_size_area: Area2D
+@export var visibler: VisibleOnScreenNotifier2D
 @export var sprite: AnimatedSprite2D
 @export var health_comp: HealthComponent
 @export var weapon_marker: Marker2D
@@ -26,7 +26,7 @@ var current_floor: int
 
 func _ready() -> void:
 	assert(weapon_resource)
-	assert(sprite and health_comp and weapon_marker and state_machine and status_handler)
+	assert(visibler and sprite and health_comp and weapon_marker and state_machine and status_handler)
 	
 	Global.clean_layers(health_comp).set_collision_layer_value(Global.Layers.ENEMY, true)
 	health_comp.set_collision_mask_value(Global.Layers.SHOOT_ENTITY_PLAYER, true)
@@ -42,13 +42,16 @@ func _ready() -> void:
 		elif state is GoAwayEnemyState:
 			state_go_away = state
 		elif not state is StartEnemyState:
-			battle_states.append(state as EnemyState)
+			battle_states.append(state)
+	
+	for state in battle_states:
+		state.connections.append(state_go_away)
 	
 	self.add_to_group(Text.ENEMY_GROUP)
 
 
 func get_fact_size() -> Vector2:
-	return ((fact_size_area.get_child(0) as CollisionShape2D).shape as RectangleShape2D).size
+	return visibler.rect.size * visibler.scale
 
 
 func get_game_size() -> Vector2:
@@ -58,3 +61,7 @@ func get_game_size() -> Vector2:
 
 func get_adjust_scale() -> Vector2:
 	return get_game_size() / get_fact_size()
+
+
+func is_on_screen() -> bool:
+	return visibler.is_on_screen()

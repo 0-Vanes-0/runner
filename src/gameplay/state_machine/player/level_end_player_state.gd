@@ -8,8 +8,6 @@ var is_x_right: bool = false
 
 
 func enter():
-	player.status_handler.clear_statuses()
-	player.sprite.modulate = player.health_comp.orig_modulate
 	player.sprite.play(ANIM_RUN)
 	set_anim_looped()
 	
@@ -67,11 +65,13 @@ func enter():
 
 
 func physics_update(delta: float):
+	super(delta)
 	if player.stamina < player.stamina_max:
 		player.stamina += player.stamina_regen * delta
 	else:
 		player.stamina = player.stamina_max
 	apply_player_gravity(delta)
+
 	if player.is_on_floor() and is_x_right:
 		is_x_right = false
 		player.current_run_speed = 0.0

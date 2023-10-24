@@ -3,7 +3,7 @@ extends Resource
 
 enum Types {
 	NONE = 0,
-	HP_BUFF = 11,
+	HP_BUFF = 11, HP_MINIMUM = 12,
 	STAMINA_BUFF = 21, GRAVITY_BUFF = 22, SPEED_BUFF = 23,
 }
 @export var type: Types = Types.NONE
@@ -15,6 +15,7 @@ enum Types {
 
 const _NAMES := {
 	Types.HP_BUFF: "HP +_%",
+	Types.HP_MINIMUM: "HP MIN +_",
 	Types.STAMINA_BUFF: "STM +_%",
 	Types.GRAVITY_BUFF: "VRT SPD +_%",
 	Types.SPEED_BUFF: "RUN SPD +_%",
@@ -32,7 +33,7 @@ func get_value(rarity: Rarity) -> float:
 		Rarity.LEGENDARY:
 			return value_legendary
 		_:
-			print_debug("Wrong rarity type: ", rarity.get_type())
+			assert(false, "Wrong rarity type: " + str(rarity.get_type()))
 			return 0.0
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://15u7mwhuw7y"]
 
-[ext_resource type="Script" path="res://src/singletons/game_info_singleton.gd" id="1_syts5"]
+[ext_resource type="Script" path="res://game_recources/singletons/game_info_singleton.gd" id="1_syts5"]
 
 [node name="GameInfo" type="Node"]
 script = ExtResource("1_syts5")

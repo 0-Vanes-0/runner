@@ -44,7 +44,7 @@ var weapon2: Weapon
 var passivities: Array[DemonPassivity]
 var activity: Activity
 
-var platforms_left: int ## Simple counter of platforms left to finish a level.
+var platforms_left: float ## Simple counter of platforms left to finish a level.
 
 
 func _ready() -> void:
@@ -87,8 +87,10 @@ func _ready() -> void:
 						not state_machine.state is DodgePlayerState 
 						and not state_machine.state is DeadPlayerState
 						and not state_machine.state is LevelEndPlayerState
-					):
-					weapon.shoot(weapon.get_start_shoot_position(), Vector2(Global.ENEMY_X_POSITION, target_position_y))
+				):
+					var from_vector := weapon.get_start_shoot_position()
+					var to_vector := Vector2(Global.ENEMY_X_POSITION, Global.camera.get_screen_center_position().y + target_position_y)
+					weapon.shoot(from_vector, to_vector)
 					if weapon.is_reloading:
 						shoot_sensor.progress_reload(weapon.reload_time)
 				
@@ -105,7 +107,7 @@ func _ready() -> void:
 ## Inits player without recreating new instance.
 func prepare_to_run():
 	self.position = Vector2(Global.SCREEN_WIDTH * 0.25, Global.SCREEN_HEIGHT / 2)
-	var jump_height: float = (Global.SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS + Platform.SIZE.y
+	var jump_height: float = (Global.SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_SCREEN_FLOORS + Platform.SIZE.y
 	jump_speed = sqrt(2 * gravity * jump_height)
 	stamina = stamina_max
 	state_machine.transition_to(state_run)

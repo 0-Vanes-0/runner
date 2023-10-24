@@ -98,10 +98,11 @@ func start_preload():
 		for i in biome_tilemap.get_layers_count():
 			var segment_data: Array[Vector2i] = biome_tilemap.get_used_cells_by_id(i, 0, non_empty)
 			var segment := segment_scene.instantiate() as Segment
+			segment.instantiate_ready()
 			var width := Platform.SIZE.x
 			
 			for v in segment_data:
-				var floor_number: int = 4 - v.y
+				var floor_number: int = - v.y
 				var platfrom := platform_scene.instantiate() as Platform
 				platfrom.position.x = v.x * width
 				platfrom.order_number = v.x

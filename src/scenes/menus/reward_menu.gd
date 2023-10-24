@@ -137,7 +137,7 @@ func _fill_card(card_number: Cards, texture: Texture2D, text: String):
 				type == Reward.WEAPON and player.weapon2 == null
 				or 
 				type == Reward.ACTIVITY and player.activity == null
-			):
+		):
 			button.text = "Take"
 			button.pressed.connect(
 					func():
@@ -148,6 +148,8 @@ func _fill_card(card_number: Cards, texture: Texture2D, text: String):
 			button.pressed.connect(
 					func():
 						GameInfo.exp += 100 # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						choosed.emit()
+						hide_all()
 			)
 	
 	else:
@@ -202,7 +204,9 @@ func _apply_reward_and_hide(card_number: Cards):
 	
 	GameInfo.current_reward = null
 	
-	
+	hide_all()
+
+func hide_all():
 	need_kill_tween.emit()
 	for dict in _button1.pressed.get_connections() as Array[Dictionary]:
 		_button1.pressed.disconnect(dict["callable"])

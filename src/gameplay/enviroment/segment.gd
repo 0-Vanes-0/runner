@@ -7,22 +7,26 @@ signal level_end
 var is_last := false
 var is_level_about_to_end_emitted := false
 var is_level_end_emitted := false
+var floors: Array[Node2D] = []
 
 
-func _ready() -> void:
+func instantiate_ready():
 	self.position.y = Global.SCREEN_HEIGHT
 	var platform_h := Platform.SIZE.y
 	var gap := Global.FLOORS_GAP
-	
-	$Floor1.position.y = - platform_h
-	$Floor2.position.y = - platform_h - 1 * gap
-	$Floor3.position.y = - platform_h - 2 * gap
-	$Floor4.position.y = - platform_h - 3 * gap
+
+	for i in range(1, Global.MAX_FLOORS + 1):
+		var floor_node := Node2D.new()
+		floor_node.name = "Floor" + str(i)
+		floor_node.position.y = - platform_h - (i-1) * gap
+		self.add_child(floor_node)
+		floors.append(floor_node)
 
 
 func clone() -> Segment:
 	var segment := self.duplicate() as Segment
 	for i in range(1, Global.MAX_FLOORS + 1):
+		segment.floors.append(segment.get_node("Floor" + str(i)))
 		for j in segment.get_floor(i).get_child_count():
 			var orig := self.get_floor(i).get_child(j) as Platform
 			var dup := segment.get_floor(i).get_child(j) as Platform
@@ -45,15 +49,7 @@ func move(speed: float):
 
 
 func get_floor(number: int) -> Node2D:
-	if number == 1:
-		return $Floor1
-	if number == 2:
-		return $Floor2
-	if number == 3:
-		return $Floor3
-	if number == 4:
-		return $Floor4
-	return null
+	return floors[number - 1]
 
 
 func set_end_x(x: float):
@@ -65,20 +61,13 @@ func get_width() -> float:
 
 
 func get_length() -> int:
-	return $Floor1.get_child_count()
+	return floors[0].get_child_count()
 
 
 func cut_segment_at(index: int):
-	for platform in $Floor1.get_children() as Array[Platform]:
-		if platform.order_number >= index:
-			set_end_x(minf(get_width(), platform.position.x))
-			platform.queue_free()
-	for platform in $Floor2.get_children() as Array[Platform]:
-		if platform.order_number >= index:
-			platform.queue_free()
-	for platform in $Floor3.get_children() as Array[Platform]:
-		if platform.order_number >= index:
-			platform.queue_free()
-	for platform in $Floor4.get_children() as Array[Platform]:
-		if platform.order_number >= index:
-			platform.queue_free()
+	for i in floors.size():
+		for platform in floors[i].get_children() as Array[Platform]:
+			if platform.order_number >= index:
+				platform.queue_free()
+				if i == 0:
+					set_end_x(minf(get_width(), platform.position.x))

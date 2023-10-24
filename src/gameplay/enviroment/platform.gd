@@ -15,5 +15,11 @@ func _ready() -> void:
 
 
 func _on_visibler_exited() -> void:
-	if floor_number == 1:
-		Global.player.platforms_left -= 1
+	if floor_number != 1:
+		self.hide()
+		self.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _on_visibler_entered() -> void:
+	self.process_mode = Node.PROCESS_MODE_INHERIT
+	self.show()

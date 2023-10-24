@@ -18,9 +18,16 @@ enum Layers {
 	BOUNDS = 6,
 }
 ## Max amount of floors in game.
-const MAX_FLOORS: int = 4
+const MAX_FLOORS: int = 8
+## Max amount of floors that can be seen in one screen.
+const MAX_SCREEN_FLOORS: int = 4
 ## Const distance between floors.
 var FLOORS_GAP: float
+## 
+var BORDER_TOP: float
+var BORDER_RIGHT: float
+var BORDER_BOTTOM: float
+var BORDER_LEFT: float
 ## Array of 4 spots of spawning enemies.
 var ENEMY_Y_SPOTS: Array[float]
 ## Default enemy x position.
@@ -43,6 +50,7 @@ var SENSOR_BUTTON_SIZE: Vector2
 ## For more comfort access the Player is moved here and this field must be updated on every Player creation.
 var player: Player
 var player_data: DemonData
+var camera: Camera2D
 ## This variable controls if all assets are loaded. (WIP: add progress bar class or smth)
 var game_res_loaded := false
 ## This variable stores settings data from file (see [SaveLoadSingleton]).
@@ -61,15 +69,19 @@ func setup():
 	var gcd := _gcd(SCREEN_WIDTH, SCREEN_HEIGHT)
 	RATIO = str(SCREEN_WIDTH / gcd) + RATIO + str(SCREEN_HEIGHT / gcd)
 	print_debug("\t", "SCREEN_WIDTH=", SCREEN_WIDTH, ", SCREEN_HEIGHT=", SCREEN_HEIGHT, ", RATIO=", RATIO)
-	
+
 	Platform.SIZE = Vector2(Global.SCREEN_WIDTH / 4, Global.SCREEN_HEIGHT / 30)
 	SENSOR_BUTTON_SIZE = Vector2.ONE * SCREEN_HEIGHT * 0.2
-	FLOORS_GAP = (SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_FLOORS
+	FLOORS_GAP = (SCREEN_HEIGHT - Platform.SIZE.y) / Global.MAX_SCREEN_FLOORS
+	
+	BORDER_TOP = Global.SCREEN_HEIGHT - (Global.MAX_FLOORS + 1) * (Global.FLOORS_GAP + Platform.SIZE.y)
+	BORDER_RIGHT = Global.SCREEN_WIDTH
+	BORDER_BOTTOM = Global.SCREEN_HEIGHT
+	BORDER_LEFT = 0.0
+
 	ENEMY_Y_SPOTS.append(0.0)
-	ENEMY_Y_SPOTS.append(FLOORS_GAP * 3.5)
-	ENEMY_Y_SPOTS.append(FLOORS_GAP * 2.5)
-	ENEMY_Y_SPOTS.append(FLOORS_GAP * 1.5)
-	ENEMY_Y_SPOTS.append(FLOORS_GAP * 0.5)
+	for i in MAX_FLOORS:
+		ENEMY_Y_SPOTS.append(SCREEN_HEIGHT - FLOORS_GAP * (0.5 + i))
 	ENEMY_X_POSITION = Global.SCREEN_WIDTH * 0.8
 	
 	settings = SaveLoad.load_settings()

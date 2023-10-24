@@ -1,7 +1,6 @@
 class_name EnemyState
 extends State
 
-const FLOORS: Array[int] = [1, 2, 3, 4]
 var enemy: Enemy
 var is_anim_looped := false
 
@@ -39,7 +38,7 @@ func get_player_position() -> Vector2:
 
 
 func is_player_alive() -> bool:
-	return Global.player.health_comp.health > 0
+	return not Global.player.state_machine.state is DeadPlayerState
 
 
 func transition_to_random_battle_state():
@@ -49,7 +48,8 @@ func transition_to_random_battle_state():
 
 func shoot_at_player(shoot_times: int = -1, shoot_counter: int = 0) -> int:
 	if enemy.weapon.is_shoot_time_ok():
-		enemy.weapon.shoot(get_weapon_position(), get_player_position())
+		if enemy.is_on_screen():
+			enemy.weapon.shoot(get_weapon_position(), get_player_position())
 		if shoot_times != -1:
 			shoot_counter += 1
 	return shoot_counter if shoot_times != -1 else 0

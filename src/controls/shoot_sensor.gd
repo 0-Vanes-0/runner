@@ -20,7 +20,7 @@ func _ready() -> void:
 	_reset_slider()
 	self.min_value = 0.0
 	self.max_value = 1.0
-	_LOWEST_Y = Global.SCREEN_HEIGHT * 1.0
+	_LOWEST_Y = Global.SCREEN_HEIGHT * 0.5
 	_VERT_DISTANCE = Global.SCREEN_HEIGHT * 1.0
 	
 	var image := self.get_theme_icon("grabber").get_image()

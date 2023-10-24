@@ -8,7 +8,7 @@ var tween: Tween
 func enter():
 	enemy.sprite.play("default")
 	set_anim_looped()
-	var alt_floors: Array[int] = FLOORS.duplicate()
+	var alt_floors := range(1, Global.MAX_FLOORS + 1)
 	alt_floors.erase(enemy.current_floor)
 	enemy.current_floor = alt_floors.pick_random()
 	tween = create_tween()

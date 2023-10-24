@@ -15,7 +15,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var player := Global.player as Player
 	if is_instance_valid(player) and has_connects:
-		meter_label.text = str(player.platforms_left) + " m"
+		meter_label.text = str(ceili(player.platforms_left)) + " m"
 		
 		hp_bar.value = player.health_comp.health
 		stamina_bar.value = player.stamina
