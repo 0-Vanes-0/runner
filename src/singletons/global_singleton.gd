@@ -21,6 +21,8 @@ enum Layers {
 const MAX_FLOORS: int = 8
 ## Max amount of floors that can be seen in one screen.
 const MAX_SCREEN_FLOORS: int = 4
+## Time of switching weapons.
+const SWITCHING_WEAPON_TIME: float = 3.0
 ## Const distance between floors.
 var FLOORS_GAP: float
 ## 

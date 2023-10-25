@@ -22,7 +22,7 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 
 func _ready() -> void:
 	assert(dodge_button and switch_button and activity_button and jump_up_button and jump_down_button)
-	dodge_button.init_functions(
+	dodge_button.new_functions(
 			func() -> bool:
 				var player := Global.player as Player
 				return player.stamina >= DodgePlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
@@ -30,8 +30,7 @@ func _ready() -> void:
 			func():
 				send_dodge()
 	)
-	switch_button.progress_time = switch_weapon_disabled_time
-	switch_button.init_functions(
+	switch_button.new_functions(
 			func() -> bool:
 				var player := Global.player as Player
 				return not (
@@ -42,8 +41,11 @@ func _ready() -> void:
 	,
 			func():
 				send_switch()
+	,
+			func() -> float:
+				return Global.SWITCHING_WEAPON_TIME
 	)
-	activity_button.init_functions(
+	activity_button.new_functions(
 			func() -> bool:
 				var player := Global.player as Player
 				return not (
@@ -55,8 +57,15 @@ func _ready() -> void:
 	,
 			func():
 				send_activity()
+	,
+			func() -> float:
+				var player := Global.player as Player
+				if player.activity != null:
+					return player.activity.reload_time
+				else:
+					return 0.0
 	)
-	jump_down_button.init_functions(
+	jump_down_button.new_functions(
 			func() -> bool:
 				var player := Global.player as Player
 				return player.stamina >= JumpDownPlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
@@ -64,7 +73,7 @@ func _ready() -> void:
 			func():
 				send_jump_down()
 	)
-	jump_up_button.init_functions(
+	jump_up_button.new_functions(
 			func() -> bool:
 				var player := Global.player as Player
 				return player.stamina >= JumpUpPlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState

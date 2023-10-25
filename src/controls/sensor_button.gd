@@ -4,11 +4,11 @@ extends Control
 @export var texture_normal: AtlasTexture
 @export var texture_pressed: AtlasTexture
 @export var flip_v: bool = false
-var progress_time: float = 0.0
 var is_progressing: bool = false
 
 var is_enabled: Callable
 var on_press: Callable
+var get_progress_time: Callable
 
 @onready var button := $TouchScreenButton as TouchScreenButton
 @onready var progress_bar := $TextureProgressBar as TextureProgressBar
@@ -38,11 +38,18 @@ func _ready() -> void:
 	
 	self.custom_minimum_size = Global.SENSOR_BUTTON_SIZE
 	self.modulate = Color.WHITE
+	
+	button.pressed.connect(
+			func():
+				if is_enabled.call() == true:
+					on_press.call()
+	)
 
-
-func init_functions(is_enabled: Callable, on_press: Callable):
+## is_enabled() -> bool, on_press() -> void, get_progress_time() -> float
+func new_functions(is_enabled: Callable, on_press: Callable, get_progress_time: Callable = Callable()):
 	self.is_enabled = Callable(is_enabled)
 	self.on_press = Callable(on_press)
+	self.get_progress_time = Callable(get_progress_time)
 
 
 func _process(delta: float) -> void:
@@ -53,17 +60,12 @@ func _process(delta: float) -> void:
 			self.modulate.a = 0.5
 
 
-func _physics_process(delta: float) -> void:
-	if button.is_pressed():
-		if is_enabled.call() == true:
-			on_press.call()
-
-
 func progress_enabling():
 	is_progressing = true
 	button.hide()
 	progress_bar.show()
 	progress_bar.value = progress_bar.min_value
+	var progress_time: float = get_progress_time.call() if not get_progress_time.is_null() else 0.0
 	var tween := create_tween()
 	tween.tween_property(
 			progress_bar, "value",
@@ -71,6 +73,7 @@ func progress_enabling():
 			progress_time
 	)
 	await tween.finished
+	tween.kill()
 	progress_bar.hide()
 	button.show()
 	is_progressing = false

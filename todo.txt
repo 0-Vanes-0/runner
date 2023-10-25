@@ -2,7 +2,6 @@
 - Redo rewards of DemonPassivity, Weapon Passivity and Shoot Entity Status
 - Add current weapon icon on switch button
 
-- Add proper reload progress time to Activity
 - Make richtextlabel hints (using push_meta() and calling custom scene on it)
 - Make new attacks from enemies with pretrajectory
 - Add status box for actions above sensor buttons
@@ -12,6 +11,7 @@
 
 
 
++ Add proper reload progress time to Activity
 + ADD QUEUE TRANSITION INTO STATE MACHINE
 + Add reload progress to ShootSensor
 + ERROR ON ANDROID
