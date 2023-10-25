@@ -17,7 +17,6 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 @export var dodge_button: SensorButton
 @export var jump_up_button: SensorButton
 @export var jump_down_button: SensorButton
-@export var switch_weapon_disabled_time: float # REMOVE LATER
 
 
 func _ready() -> void:
@@ -164,3 +163,7 @@ func send_switch():
 	if not switch_button.is_progressing and player.weapon1 != null and player.weapon2 != null:
 		switch.emit()
 		switch_button.progress_enabling()
+
+
+func update_switch_icon(texture: Texture2D):
+	switch_button.set_icon(texture)

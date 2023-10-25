@@ -12,6 +12,7 @@ var get_progress_time: Callable
 
 @onready var button := $TouchScreenButton as TouchScreenButton
 @onready var progress_bar := $TextureProgressBar as TextureProgressBar
+@onready var icon := $Icon as Sprite2D
 
 
 func _ready() -> void:
@@ -29,6 +30,9 @@ func _ready() -> void:
 		button.texture_pressed = texture_pressed
 	(button.shape as RectangleShape2D).size = texture_normal.get_size()
 	button.scale = Global.SENSOR_BUTTON_SIZE / texture_normal.get_size()
+	
+	icon.position = texture_normal.get_size() / 2
+	icon.hide()
 	
 	progress_bar.texture_under = texture_pressed
 	progress_bar.texture_progress = texture_normal
@@ -77,3 +81,10 @@ func progress_enabling():
 	progress_bar.hide()
 	button.show()
 	is_progressing = false
+
+
+func set_icon(texture: Texture2D):
+	icon.texture = texture
+	var scale_value: float = (texture_normal.get_size().x / 2) / texture.get_size().x
+	icon.scale = Vector2.ONE * scale_value
+	icon.show()

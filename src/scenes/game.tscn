@@ -132,7 +132,6 @@ switch_button = NodePath("MainHBox/ButtonsVBox/SwitchButton")
 dodge_button = NodePath("MainHBox/ButtonsVBox/DodgeButton")
 jump_up_button = NodePath("MainHBox/ButtonsVBox/JumpUpButton")
 jump_down_button = NodePath("MainHBox/ButtonsVBox/JumpDownButton")
-switch_weapon_disabled_time = 3.0
 
 [node name="MainHBox" type="HBoxContainer" parent="HUD/PlayerSensor"]
 layout_mode = 1

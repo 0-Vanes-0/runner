@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqqwp7m1spla6"]
+[gd_scene load_steps=6 format=3 uid="uid://bqqwp7m1spla6"]
 
 [ext_resource type="Script" path="res://src/controls/sensor_button.gd" id="1_ryux0"]
 [ext_resource type="Texture2D" uid="uid://brsilg77l805r" path="res://assets/sprites/interface/activity_button.png" id="2_7vbrq"]
 [ext_resource type="Texture2D" uid="uid://vi2wpwbci4ot" path="res://assets/sprites/interface/activity_button_pressed.png" id="3_bf2vc"]
+[ext_resource type="Texture2D" uid="uid://q2x1dpbutcp2" path="res://assets/sprites/weapons/rifle/rifle.png" id="4_ttv4w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_knfgi"]
 
@@ -25,3 +26,8 @@ layout_mode = 0
 offset_right = 256.0
 offset_bottom = 256.0
 fill_mode = 4
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(130, 130)
+scale = Vector2(6, 6)
+texture = ExtResource("4_ttv4w")

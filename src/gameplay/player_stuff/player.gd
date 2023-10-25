@@ -226,7 +226,7 @@ func get_current_stats() -> String:
 	return text
 
 
-func activate_weapon1():
+func activate_weapon1(): # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! COMMON CODE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	if weapon.existing_shoot_entity != null:
 		weapon.stop_shoot()
 	if weapon2 != null:
@@ -235,6 +235,7 @@ func activate_weapon1():
 	weapon = weapon1
 	weapon.ammo = weapon.ammo_max
 	ammo_max_changed.emit(weapon1.ammo_max)
+	player_sensor.update_switch_icon(weapon.get_preview())
 
 
 func activate_weapon2():
@@ -245,4 +246,5 @@ func activate_weapon2():
 	weapon = weapon2
 	weapon.ammo = weapon.ammo_max
 	ammo_max_changed.emit(weapon2.ammo_max)
+	player_sensor.update_switch_icon(weapon.get_preview())
 
