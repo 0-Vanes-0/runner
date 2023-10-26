@@ -4,9 +4,9 @@ extends Node
 
 #var seed: String
 ## Current biome. (WIP: create Biome class?)
-@export_range(1, 5) var biome_number: int = 1
+var biome_number: int = 1
 ## Current level.
-@export_range(1, 9) var level_number: int = 1
+var level_number: int = 1
 var current_reward: Reward
 ## Amount of kills of Enemy by Player.
 var kills_count: int = 0
@@ -38,7 +38,7 @@ var demon_datas: Array[DemonData]
 func setup_game_info():
 	exp = 0
 	kills_count = 0
-	biome_number = 1
+	biome_number = 0
 	level_number = 1
 	current_reward = Reward.generate_reward(Reward.WEAPON)
 
@@ -47,7 +47,7 @@ func generate_game_info():
 	for biome_i in Preloader.segments.keys() as Array[int]:
 		BIOME_SEGMENT_TYPES_COUNT[biome_i] = (Preloader.segments.get(biome_i) as Array[Segment]).size()
 	
-	for biome_i in range(1, BIOMES_COUNT + 1):
+	for biome_i in range(0, BIOMES_COUNT + 1):
 		_segments_in_levels[biome_i] = {}
 		rewards_in_levels[biome_i] = {}
 		for level_i in range(1, LEVELS_COUNT + 1):

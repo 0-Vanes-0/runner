@@ -90,6 +90,7 @@ func start_preload():
 			else:
 				assert(false, "Failed to load: " + resource)
 	
+	var is_coord_correct: Callable = func(value: int): return value == clamp(value, - Global.MAX_FLOORS, -1)
 	var non_empty := Vector2i(1, 0)
 	var segment_tilemap := segment_tilemap_scene.instantiate() as SegmentTileMap
 	for n in segment_tilemap.get_biomes_tilemaps().size():
@@ -102,6 +103,7 @@ func start_preload():
 			var width := Platform.SIZE.x
 			
 			for v in segment_data:
+				assert(is_coord_correct.call(v.y), "Wrong platform position in res://assets/tilemap/segment_tile_map.tscn!")
 				var floor_number: int = - v.y
 				var platfrom := platform_scene.instantiate() as Platform
 				platfrom.position.x = v.x * width
@@ -116,7 +118,7 @@ func start_preload():
 			else:
 				segment_array.append(segment)
 			
-		segments[n+1] = segment_array
+		segments[n] = segment_array
 		segments_counter += 1
 	
 	
