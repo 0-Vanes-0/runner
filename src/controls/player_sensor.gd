@@ -18,9 +18,28 @@ const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than
 @export var jump_up_button: SensorButton
 @export var jump_down_button: SensorButton
 
+@export var shoot_sensor: ShootSensor
+@export var crosshair: Node2D
+
 
 func _ready() -> void:
 	assert(dodge_button and switch_button and activity_button and jump_up_button and jump_down_button)
+	assert(shoot_sensor and crosshair)
+	
+	crosshair.hide()
+	shoot_sensor.shoot_activated.connect(
+			func(target_position_y: float):
+				crosshair.show()
+				crosshair.position = Vector2(
+						Global.ENEMY_X_POSITION,
+						Global.SCREEN_HEIGHT / 2 + target_position_y
+				)
+	)
+	shoot_sensor.shoot_disabled.connect(
+			func():
+				crosshair.hide()
+	)
+	
 	dodge_button.new_functions(
 			func() -> bool:
 				var player := Global.player as Player

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cbhc564a8a6e"]
+[gd_scene load_steps=33 format=3 uid="uid://cbhc564a8a6e"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_njila"]
 [ext_resource type="Texture2D" uid="uid://bun26r8omijrj" path="res://assets/sprites/interface/dodge_button.png" id="4_5m647"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://n1nhua8wbot1" path="res://assets/sprites/interface/jump_button.png" id="13_pjoel"]
 [ext_resource type="Texture2D" uid="uid://7p68222w4vgf" path="res://assets/sprites/interface/jump_button_pressed.png" id="14_tg6dn"]
 [ext_resource type="PackedScene" uid="uid://p26mwbs4wt7h" path="res://src/controls/shoot_sensor.tscn" id="15_v32dy"]
+[ext_resource type="Texture2D" uid="uid://b667e4crj2iy" path="res://assets/tilemap/tile.png" id="16_6afsu"]
 [ext_resource type="PackedScene" uid="uid://b7icnfn8n355f" path="res://src/scenes/menus/reward_menu.tscn" id="17_f8b0e"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wbvkj"]
@@ -116,7 +117,7 @@ shape = SubResource("RectangleShape2D_olasq")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="PlayerSensor" type="Control" parent="HUD" node_paths=PackedStringArray("activity_button", "switch_button", "dodge_button", "jump_up_button", "jump_down_button")]
+[node name="PlayerSensor" type="Control" parent="HUD" node_paths=PackedStringArray("activity_button", "switch_button", "dodge_button", "jump_up_button", "jump_down_button", "shoot_sensor", "crosshair")]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
@@ -132,6 +133,8 @@ switch_button = NodePath("MainHBox/ButtonsVBox/SwitchButton")
 dodge_button = NodePath("MainHBox/ButtonsVBox/DodgeButton")
 jump_up_button = NodePath("MainHBox/ButtonsVBox/JumpUpButton")
 jump_down_button = NodePath("MainHBox/ButtonsVBox/JumpDownButton")
+shoot_sensor = NodePath("MainHBox/ShootContainer/ShootSensor")
+crosshair = NodePath("Crosshair")
 
 [node name="MainHBox" type="HBoxContainer" parent="HUD/PlayerSensor"]
 layout_mode = 1
@@ -233,6 +236,33 @@ theme_override_constants/margin_bottom = 120
 
 [node name="ShootSensor" parent="HUD/PlayerSensor/MainHBox/ShootContainer" instance=ExtResource("15_v32dy")]
 layout_mode = 2
+
+[node name="Crosshair" type="Node2D" parent="HUD/PlayerSensor"]
+modulate = Color(1, 1, 1, 0.752941)
+position = Vector2(1680, 540)
+
+[node name="Sprite1" type="Sprite2D" parent="HUD/PlayerSensor/Crosshair"]
+position = Vector2(30, 0)
+scale = Vector2(10, 5)
+texture = ExtResource("16_6afsu")
+
+[node name="Sprite2" type="Sprite2D" parent="HUD/PlayerSensor/Crosshair"]
+position = Vector2(0, 30)
+rotation = 1.5708
+scale = Vector2(10, 5)
+texture = ExtResource("16_6afsu")
+
+[node name="Sprite3" type="Sprite2D" parent="HUD/PlayerSensor/Crosshair"]
+position = Vector2(-30, 0)
+rotation = 3.14159
+scale = Vector2(10, 5)
+texture = ExtResource("16_6afsu")
+
+[node name="Sprite4" type="Sprite2D" parent="HUD/PlayerSensor/Crosshair"]
+position = Vector2(0, -30)
+rotation = 4.71239
+scale = Vector2(10, 5)
+texture = ExtResource("16_6afsu")
 
 [node name="GameOverMenu" parent="HUD" instance=ExtResource("5_2syq0")]
 visible = false
