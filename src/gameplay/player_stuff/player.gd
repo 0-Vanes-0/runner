@@ -28,13 +28,14 @@ var shoot_sensor: ShootSensor ## Input object for shooting.
 @export var state_dodge: DodgePlayerState ## State when dodge is active.
 @export var state_dead: DeadPlayerState ## State when [member HealthComponent.health] is 0.
 @export var state_level_end: LevelEndPlayerState ## State when level is finished.
+#@export var state_jetpack: JetpackPlayerState ## State when player is using jetpack.
 
 var jump_speed: float ## Describes how fast player jumps in pixels. Depends on [member gravity], do not change this value outside [method prepare_to_run]!
 var run_speed: float ## Describes how fast [Segment]s are moving in pixels (player doesn't move horizontally actually :P ).
 var current_run_speed: float
 var dodge_time: float ## Describes how long is [DodgePlayerState].
 var stamina: float ## This value is spent on jumps and dodges. Restores during [RunPlayerState].
-var stamina_max: float = 100 ## Maximum value of [member stamina].
+var stamina_max: float = 100.0 ## Maximum value of [member stamina].
 var stamina_regen: float
 var gravity: float ## The more it is, the faster player moves vertically.
 
@@ -45,11 +46,12 @@ var passivities: Array[DemonPassivity]
 var activity: Activity
 
 var platforms_left: float ## Simple counter of platforms left to finish a level.
+var is_jetpacking: bool = false
 
 
 func _ready() -> void:
 	assert(player_sensor and shoot_sensor)
-	assert(state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end)
+	assert(state_run and state_jump_up and state_jump_down and state_dodge and state_dead and state_level_end) # and state_jetpack
 	assert(fact_size_area and sprite and body_shape and weapon_marker and health_comp and state_machine and status_handler)
 	self.name = "Player"
 	
@@ -72,14 +74,32 @@ func _ready() -> void:
 						activate_weapon1()
 					shoot_sensor.stop_progress_reload()
 	)
-	player_sensor.dodge.connect(state_machine.transition_to.bind(state_dodge))
+	player_sensor.dodge.connect(
+			func():
+				state_machine.transition_to(state_dodge)
+	)
 	player_sensor.activity.connect(
 			func():
 				if activity != null:
 					activity.activate()
 	)
-	player_sensor.jump_up.connect(state_machine.transition_to.bind(state_jump_up))
-	player_sensor.jump_down.connect(state_machine.transition_to.bind(state_jump_down))
+	player_sensor.jump_up.connect(
+			func():
+				state_machine.transition_to(state_jump_up)
+	)
+	player_sensor.jump_down.connect(
+			func():
+				state_machine.transition_to(state_jump_down)
+	)
+#	player_sensor.jetpack_on.connect(
+#			func():
+#				state_machine.transition_to(state_jetpack)
+#				is_jetpacking = true
+#	)
+#	player_sensor.jetpack_off.connect(
+#			func():
+#				is_jetpacking = false
+#	)
 	
 	shoot_sensor.shoot_activated.connect(
 			func(target_position_y: float):

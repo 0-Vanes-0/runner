@@ -1,3 +1,4 @@
+- Add jetpack
 - Draw proper segments
 - Redo rewards of DemonPassivity, Weapon Passivity and Shoot Entity Status
 

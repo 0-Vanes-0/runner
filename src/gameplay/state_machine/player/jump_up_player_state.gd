@@ -3,6 +3,7 @@ extends PlayerState
 
 const STAMINA_COST: int = 10
 
+
 func can_go_to_state() -> bool:
 	var platform := get_colliding_platform()
 	var floor_number := 0 if platform == null else platform.floor_number
@@ -12,8 +13,7 @@ func can_go_to_state() -> bool:
 func enter():
 	player.sprite.play("jump_up")
 	player.sprite.set_frame_and_progress(0, 0.0)
-	player.velocity.y = Vector2.UP.y * player.jump_speed
-	
+	player.velocity = Vector2.UP * player.jump_speed
 
 
 func physics_update(delta: float):

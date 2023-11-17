@@ -5,10 +5,13 @@ extends Control
 @export var texture_pressed: AtlasTexture
 @export var flip_v: bool = false
 var is_progressing: bool = false
+var timer := 0.0
+const HOLD_TIME := 0.2 # sec
 
-var is_enabled: Callable
-var on_press: Callable
-var get_progress_time: Callable
+var _is_enabled: Callable
+var _on_press: Callable
+var _get_progress_time: Callable
+var _on_hold: Callable
 
 @onready var button := $TouchScreenButton as TouchScreenButton
 @onready var progress_bar := $TextureProgressBar as TextureProgressBar
@@ -16,6 +19,11 @@ var get_progress_time: Callable
 
 
 func _ready() -> void:
+	self._is_enabled = func(): return true
+	self._on_press = Callable()
+	self._get_progress_time = func(): return 0.0
+	self._on_hold = Callable()
+	
 	if flip_v:
 		var image_normal := texture_normal.get_image()
 		var image_pressed := texture_pressed.get_image()
@@ -42,23 +50,44 @@ func _ready() -> void:
 	
 	self.custom_minimum_size = Global.SENSOR_BUTTON_SIZE
 	self.modulate = Color.WHITE
-	
-	button.pressed.connect(
-			func():
-				if is_enabled.call() == true:
-					on_press.call()
-	)
 
-## is_enabled() -> bool, on_press() -> void, get_progress_time() -> float
-func new_functions(is_enabled: Callable, on_press: Callable, get_progress_time: Callable = Callable()):
-	self.is_enabled = Callable(is_enabled)
-	self.on_press = Callable(on_press)
-	self.get_progress_time = Callable(get_progress_time)
+
+func define_on_press(function: Callable):
+	self._on_press = Callable(function)
+
+
+func define_is_enabled(function: Callable):
+	self._is_enabled = Callable(function)
+
+
+func define_get_progress_time(function: Callable):
+	self._get_progress_time = Callable(function)
+
+
+func define_on_hold(function: Callable):
+	self._on_hold = Callable(function)
+
+
+func _physics_process(delta: float) -> void:
+	if button.is_pressed():
+		assert(not _on_press.is_null() or not _on_hold.is_null(), "_on_press() function was not defined! Use method define_on_press(function: Callable) first!")
+		if _is_enabled.call() == true:
+			if not _on_hold.is_null():
+				timer += delta
+				if timer >= HOLD_TIME:
+					timer = HOLD_TIME
+					_on_hold.call()
+				elif not _on_press.is_null():
+					_on_press.call()
+			else:
+				_on_press.call()
+	else:
+		timer = 0.0
 
 
 func _process(delta: float) -> void:
 	if button.visible:
-		if is_enabled.is_valid() and is_enabled.call() == true:
+		if _is_enabled.is_valid() and _is_enabled.call() == true:
 			self.modulate.a = 1.0
 		else:
 			self.modulate.a = 0.5
@@ -69,7 +98,7 @@ func progress_enabling():
 	button.hide()
 	progress_bar.show()
 	progress_bar.value = progress_bar.min_value
-	var progress_time: float = get_progress_time.call() if not get_progress_time.is_null() else 0.0
+	var progress_time: float = _get_progress_time.call() if not _get_progress_time.is_null() else 0.0
 	var tween := create_tween()
 	tween.tween_property(
 			progress_bar, "value",

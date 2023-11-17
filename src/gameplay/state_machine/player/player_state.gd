@@ -33,7 +33,7 @@ func set_anim_looped():
 
 
 func apply_player_gravity(delta: float):
-	player.velocity.y += player.gravity * delta
+	player.velocity += Vector2.DOWN * player.gravity * delta
 	player.move_and_slide()
 
 

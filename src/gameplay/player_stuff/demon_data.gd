@@ -20,14 +20,14 @@ var _BASE_STAMINA := {
 	Rarity.LEGENDARY: 200,
 }
 var _BASE_GRAVITY := {
-	Rarity.NORMAL: 1000,
-	Rarity.RARE: 1500,
-	Rarity.EPIC: 2000,
-	Rarity.LEGENDARY: 4000,
+	Rarity.NORMAL: 2000,
+	Rarity.RARE: 2500,
+	Rarity.EPIC: 3000,
+	Rarity.LEGENDARY: 5000,
 }
 var _RARITY_STATS := {
-	Rarity.NORMAL: 5,
-	Rarity.RARE: 3,
+	Rarity.NORMAL: STATS_AMOUNT,
+	Rarity.RARE: ceili(STATS_AMOUNT / 2.0),
 	Rarity.EPIC: 2,
 	Rarity.LEGENDARY: 1,
 }

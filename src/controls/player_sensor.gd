@@ -6,8 +6,10 @@ signal dodge
 signal reload
 signal activity
 signal switch
-signal jump_up ## Signal for tapping at top half of screen.
-signal jump_down ## Signal for tapping at bottom half of screen.
+signal jump_up
+signal jump_down
+signal jetpack_on
+signal jetpack_off
 
 const SWIPE_MAX_DIAGONAL_SLOPE := 1.35 ## This constant is a limit of diagonal swipe. Totally diagonal swipe has value 1.44 as sqrt(2). This constant can be changed but 1.35 is best as tested.
 const TAP_MAX_VECTOR := Vector2.ONE * 10 ## Tap gesture can have a bit more than Vector2(0, 0), and for that reason this constant exists.
@@ -40,15 +42,14 @@ func _ready() -> void:
 				crosshair.hide()
 	)
 	
-	dodge_button.new_functions(
+	dodge_button.define_is_enabled(
 			func() -> bool:
 				var player := Global.player as Player
 				return player.stamina >= DodgePlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
-	,
-			func():
-				send_dodge()
 	)
-	switch_button.new_functions(
+	dodge_button.define_on_press(send_dodge)
+	
+	switch_button.define_is_enabled(
 			func() -> bool:
 				var player := Global.player as Player
 				return not (
@@ -56,14 +57,14 @@ func _ready() -> void:
 						or player.weapon2 == null
 						or switch_button.is_progressing
 				)
-	,
-			func():
-				send_switch()
-	,
+	)
+	switch_button.define_on_press(send_switch)
+	switch_button.define_get_progress_time(
 			func() -> float:
 				return Global.SWITCHING_WEAPON_TIME
 	)
-	activity_button.new_functions(
+	
+	activity_button.define_is_enabled(
 			func() -> bool:
 				var player := Global.player as Player
 				return not (
@@ -72,10 +73,9 @@ func _ready() -> void:
 						or player.activity.is_reloading()
 						or activity_button.is_progressing
 				)
-	,
-			func():
-				send_activity()
-	,
+	)
+	activity_button.define_on_press(send_activity)
+	activity_button.define_get_progress_time(
 			func() -> float:
 				var player := Global.player as Player
 				if player.activity != null:
@@ -83,22 +83,24 @@ func _ready() -> void:
 				else:
 					return 0.0
 	)
-	jump_down_button.new_functions(
-			func() -> bool:
-				var player := Global.player as Player
-				return player.stamina >= JumpDownPlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
-	,
-			func():
-				send_jump_down()
-	)
-	jump_up_button.new_functions(
+	
+	jump_up_button.define_is_enabled(
 			func() -> bool:
 				var player := Global.player as Player
 				return player.stamina >= JumpUpPlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
-	,
-			func():
-				send_jump_up()
 	)
+	jump_up_button.define_on_press(send_jump_up)
+	jump_up_button.define_on_hold(
+			func():
+				send_jetpack_on()
+	)
+	
+	jump_down_button.define_is_enabled(
+			func() -> bool:
+				var player := Global.player as Player
+				return player.stamina >= JumpDownPlayerState.STAMINA_COST and not player.get_current_state() is LevelEndPlayerState
+	)
+	jump_down_button.define_on_press(send_jump_down)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -182,6 +184,14 @@ func send_switch():
 	if not switch_button.is_progressing and player.weapon1 != null and player.weapon2 != null:
 		switch.emit()
 		switch_button.progress_enabling()
+
+
+func send_jetpack_on():
+	jetpack_on.emit()
+
+
+func send_jetpack_off():
+	jetpack_off.emit()
 
 
 func update_switch_icon(texture: Texture2D):
