@@ -106,6 +106,6 @@ func get_shoot_rate_time(rarity: Rarity) -> float:
 	return shoot_rate_time[rarity.get_name()]
 
 
-func get_preview() -> Texture:
+func get_preview() -> Texture2D:
 	var t: Texture2D = sprite_frames.get_frame_texture("default", 0) 
 	return t if t != null else Texture2D.new()

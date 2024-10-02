@@ -39,9 +39,9 @@ func apply_player_gravity(delta: float):
 
 func get_colliding_platform() -> Platform:
 	for i in player.get_slide_collision_count():
-		var collider = player.get_slide_collision(i).get_collider()
+		var collider := player.get_slide_collision(i).get_collider()
 		if collider is Platform:
-			return collider
+			return collider as Platform
 	return null
 
 

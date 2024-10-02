@@ -162,7 +162,7 @@ func deactivate():
 
 
 func get_start_shoot_position() -> Vector2:
-	var grandpa = (get_parent() as Marker2D).get_parent()
+	var grandpa := (get_parent() as Marker2D).get_parent() as Node2D
 	assert(grandpa is Player or grandpa is Enemy)
 	return grandpa.position + get_parent().position
 

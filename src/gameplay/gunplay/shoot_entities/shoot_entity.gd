@@ -27,8 +27,9 @@ func _init(resource: ShootEntityResource, entity_owner: Owner, start_position: V
 func create_animated_sprite(resource: ShootEntityResource) -> AnimatedSprite2D:
 	var sprite := AnimatedSprite2D.new()
 	sprite.sprite_frames = resource.sprite_frames
-	var game_size: Vector2 = Vector2(resource.size_x_percent, resource.size_y_percent) / 100 * Global.SCREEN_HEIGHT
-	sprite.scale = Vector2(game_size / resource.get_sprite_size())
+	if resource.get("size_x_percent") and resource.get("size_y_percent"):
+		var game_size: Vector2 = Vector2(resource.get("size_x_percent"), resource.get("size_y_percent")) / 100 * Global.SCREEN_HEIGHT
+		sprite.scale = Vector2(game_size / resource.get_sprite_size())
 	return sprite
 
 

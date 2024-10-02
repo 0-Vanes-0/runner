@@ -37,31 +37,7 @@ func enter():
 			0.0
 	)
 	
-	player.go_to_portal.connect(
-		func(portal_position: Vector2):
-			var anon_tween := create_tween()
-			if portal_position.x - player.position.x < 0:
-				anon_tween.tween_callback(
-						func():
-							player.scale.x = -abs(player.scale.x)
-							player.scale.y = abs(player.scale.y)
-							player.rotation_degrees = 0
-				)
-			anon_tween.tween_callback(player.sprite.play.bind(ANIM_FLY))
-			anon_tween.tween_property(
-					player, "position",
-					portal_position,
-					1.0
-			).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-			anon_tween.tween_callback(
-					func():
-						player.scale.x = abs(player.scale.x)
-						player.scale.y = abs(player.scale.y)
-						player.rotation_degrees = 0
-						player.in_portal.emit()
-						player.current_run_speed = player.run_speed
-			)
-	, CONNECT_ONE_SHOT)
+	player.go_to_portal.connect(_on_go_to_portal, CONNECT_ONE_SHOT)
 
 
 func physics_update(delta: float):
@@ -77,3 +53,29 @@ func physics_update(delta: float):
 		player.current_run_speed = 0.0
 		player.sprite.play(ANIM_DEFAULT)
 		player.call_level_end_objects.emit()
+
+
+
+func _on_go_to_portal(portal_position: Vector2):
+	var anon_tween := create_tween()
+	if portal_position.x - player.position.x < 0:
+		anon_tween.tween_callback(
+				func():
+					player.scale.x = -abs(player.scale.x)
+					player.scale.y = abs(player.scale.y)
+					player.rotation_degrees = 0
+		)
+	anon_tween.tween_callback(player.sprite.play.bind(ANIM_FLY))
+	anon_tween.tween_property(
+			player, "position",
+			portal_position,
+			1.0
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	anon_tween.tween_callback(
+			func():
+				player.scale.x = abs(player.scale.x)
+				player.scale.y = abs(player.scale.y)
+				player.rotation_degrees = 0
+				player.in_portal.emit()
+				player.current_run_speed = player.run_speed
+	)

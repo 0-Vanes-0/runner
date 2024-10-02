@@ -43,6 +43,11 @@ var segments: Dictionary # { int: Array[Segment] }
 var default_segment: Segment
 
 
+func _ready() -> void:
+	var sh := DeadPlayerState.new()
+	var array := [DeadPlayerState, DodgePlayerState, JumpDownPlayerState]
+	print("in" if sh in array else "...")
+
 
 func start_preload():
 	var export_counter := 0
@@ -131,9 +136,7 @@ func start_preload():
 			all_res_size
 			+ segment_tilemap.get_biomes_tilemaps().size()
 	)
-	if load_result == load_goal:
-		loaded.emit()
-	else:
+	if not load_result == load_goal:
 		print_debug(
 				"Signal 'loaded' condition failed:", "\n",
 				"\t", "export_resources: ", export_counter, "/", all_res_size, "\n",

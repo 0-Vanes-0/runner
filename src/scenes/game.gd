@@ -94,11 +94,10 @@ func setup_player(need_create_instance: bool = false):
 		player.player_sensor = player_sensor
 		player.shoot_sensor = shoot_sensor
 		player.apply_player_data()
-		player.state_dead.died.connect(
-				func():
+		player.state_dead.died.connect( func():
 					game_over_menu.appear()
 					is_enemies_permitted = false
-		)
+		, CONNECT_ONE_SHOT)
 		player.call_level_end_objects.connect(process_level_end_objects)
 		level.add_child(player)
 		left_menu.init_connections()
@@ -188,8 +187,7 @@ func process_level_end_objects():
 #						reward_menu.show_weapon_passivities()
 #						reward_menu.choosed.connect(_spawn_portals, CONNECT_ONE_SHOT)
 				
-				player.in_portal.connect(
-						func():
+				player.in_portal.connect( func():
 							GameInfo.level_number = clampi(GameInfo.level_number + 1, 1, GameInfo.LEVELS_COUNT)
 							setup_player()
 							setup_level()
@@ -209,7 +207,7 @@ func _spawn_portals():
 		player.position + Vector2.LEFT * Global.SCREEN_WIDTH / 5 + Vector2.UP * player.get_game_size(),
 		player.position + Vector2.UP * Global.SCREEN_HEIGHT / 3 + Vector2.UP * player.get_game_size(),
 	]
-	var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number) as Array[Reward]
+	var rewards := GameInfo.get_rewards_array(GameInfo.biome_number, GameInfo.level_number)
 	for i in rewards.size():
 		var portal := Preloader.portal.instantiate() as Portal
 		portal.set_reward(rewards[i])
@@ -221,11 +219,7 @@ func _spawn_portals():
 						GameInfo.current_reward = reward
 						player.go_to_portal.emit(portal_poses[i])
 						var anon_tween := create_tween()
-						anon_tween.tween_property(
-								black_color_rect, "color:a",
-								1.0,
-								1.0
-						)
+						anon_tween.tween_property(black_color_rect, "color:a", 1.0, 1.0)
 		, CONNECT_ONE_SHOT)
 		
 		segments.add_child(portal)

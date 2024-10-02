@@ -11,7 +11,7 @@ var current_reward: Reward
 ## Amount of kills of Enemy by Player.
 var kills_count: int = 0
 ## Amount of experience.
-var exp: int = 0
+var experience: int = 0
 
 ## Flag for checking if seed generated.
 var is_run_seed_generated: bool = false
@@ -36,7 +36,7 @@ var demon_datas: Array[DemonData]
 
 
 func setup_game_info():
-	exp = 0
+	experience = 0
 	kills_count = 0
 	biome_number = 0
 	level_number = 1

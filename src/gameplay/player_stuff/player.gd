@@ -103,11 +103,7 @@ func _ready() -> void:
 	
 	shoot_sensor.shoot_activated.connect(
 			func(target_position_y: float):
-				if(
-						not state_machine.state is DodgePlayerState 
-						and not state_machine.state is DeadPlayerState
-						and not state_machine.state is LevelEndPlayerState
-				):
+				if not state_machine.state in [DodgePlayerState, DeadPlayerState, LevelEndPlayerState]:
 					var from_vector := weapon.get_start_shoot_position()
 					var to_vector := Vector2(Global.ENEMY_X_POSITION, Global.camera.get_screen_center_position().y + target_position_y)
 					weapon.shoot(from_vector, to_vector)
@@ -117,6 +113,7 @@ func _ready() -> void:
 				else:
 					weapon.stop_shoot()
 	)
+
 	shoot_sensor.shoot_disabled.connect(
 			func():
 				weapon.stop_shoot()
@@ -213,7 +210,7 @@ func get_health_comp_position() -> Vector2:
 
 
 func get_current_state() -> PlayerState:
-	return state_machine.state
+	return state_machine.state as PlayerState
 
 
 func get_meters_per_sec() -> String:

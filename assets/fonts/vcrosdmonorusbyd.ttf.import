@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/vcrosdmonorusbyd.ttf-271f75fb1f0c10b3795c1061
 Rendering=null
 antialiasing=0
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

@@ -20,7 +20,7 @@ func _ready() -> void:
 	assert(_shape != null)
 	
 	Global.clean_layers(self)
-	var parent = get_parent()
+	var parent := get_parent()
 	assert(
 			debug_mode 
 			or parent != null and (parent is Player or parent is Enemy)

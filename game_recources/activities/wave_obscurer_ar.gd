@@ -1,4 +1,4 @@
-class_name WaveObcurerAR
+class_name WaveObscurerAr
 extends ActivityResource
 
 

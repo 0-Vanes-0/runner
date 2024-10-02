@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="RewardResource" load_steps=12 format=3 uid="uid://bflurtgmvyqs2"]
+[gd_resource type="Resource" script_class="RewardResource" load_steps=16 format=3 uid="uid://bflurtgmvyqs2"]
 
 [ext_resource type="Script" path="res://game_recources/reward_resource.gd" id="1_aab76"]
 [ext_resource type="Resource" uid="uid://dfg67knvc7cpy" path="res://game_recources/activities/wave_obscurer_ar.tres" id="1_cjex6"]
 [ext_resource type="Script" path="res://game_recources/resource_classes/demon_passivity_resource.gd" id="1_mcjol"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/activity_resource.gd" id="1_nnkjj"]
 [ext_resource type="Resource" uid="uid://v01lyjgoknbj" path="res://game_recources/weapons/auto_rifle.tres" id="3_640te"]
 [ext_resource type="Resource" uid="uid://cpi8o3rnhvu8j" path="res://game_recources/weapons/crossbow.tres" id="4_8xk3n"]
 [ext_resource type="Resource" uid="uid://8rfmxyrugmct" path="res://game_recources/weapons/revolver.tres" id="5_r0q7p"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/status_resource.gd" id="5_y3og5"]
 [ext_resource type="Resource" uid="uid://cr7xqdjn4hvxu" path="res://game_recources/weapons/ring_of_fire.tres" id="6_csnxk"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/weapon_passivity_resource.gd" id="6_u1fps"]
 [ext_resource type="Resource" uid="uid://ck0ena0kktg35" path="res://game_recources/weapons/test_laser.tres" id="7_he7yk"]
+[ext_resource type="Script" path="res://game_recources/resource_classes/weapon_resource.gd" id="7_rglv8"]
 
 [sub_resource type="Resource" id="Resource_kmteq"]
 script = ExtResource("1_mcjol")
@@ -36,7 +40,7 @@ value_legendary = 50.0
 [resource]
 script = ExtResource("1_aab76")
 demon_passivities = Array[ExtResource("1_mcjol")]([SubResource("Resource_kmteq"), SubResource("Resource_17lcr"), SubResource("Resource_on02l")])
-weapon_passivities = Array[Resource("res://game_recources/resource_classes/weapon_passivity_resource.gd")]([])
-statuses = Array[Resource("res://game_recources/resource_classes/status_resource.gd")]([])
-weapons = Array[Resource("res://game_recources/resource_classes/weapon_resource.gd")]([ExtResource("3_640te"), ExtResource("4_8xk3n"), ExtResource("5_r0q7p"), ExtResource("6_csnxk"), ExtResource("7_he7yk")])
-activities = Array[Resource("res://game_recources/resource_classes/activity_resource.gd")]([ExtResource("1_cjex6")])
+weapon_passivities = Array[ExtResource("6_u1fps")]([])
+statuses = Array[ExtResource("5_y3og5")]([])
+weapons = Array[ExtResource("7_rglv8")]([ExtResource("3_640te"), ExtResource("4_8xk3n"), ExtResource("5_r0q7p"), ExtResource("6_csnxk"), ExtResource("7_he7yk")])
+activities = Array[ExtResource("1_nnkjj")]([ExtResource("1_cjex6")])

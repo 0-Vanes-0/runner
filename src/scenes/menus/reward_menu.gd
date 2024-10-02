@@ -147,7 +147,7 @@ func _fill_card(card_number: Cards, texture: Texture2D, text: String):
 			button.text = "Consume"
 			button.pressed.connect(
 					func():
-						GameInfo.exp += 100 # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						GameInfo.experience += 100 # WIP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 						choosed.emit()
 						hide_all()
 			)

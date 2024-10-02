@@ -67,10 +67,9 @@ func _ready() -> void:
 	tween.tween_callback(
 			func():
 				label.set_scale(Vector2(1/self.scale.x, 1/self.scale.y))
-				label.position = Vector2(
-						- label.get_minimum_size().x / 2,
-						- (coll_shape.shape as RectangleShape2D).size.y
-				) * label.scale
+				var x := - label.get_minimum_size().x / 2;
+				var y := - (coll_shape.shape as RectangleShape2D).size.y;
+				label.position = Vector2(x, y) * label.scale
 	)
 	tween.tween_property(
 			label, "modulate:a",

@@ -5,7 +5,7 @@ var _label: Label
 
 
 func _ready() -> void:
-	var parent = get_parent()
+	var parent := get_parent()
 	assert(parent != null and (parent is Player or parent is Enemy))
 	_label = Global.create_ui_label(24)
 	self.add_child(_label)

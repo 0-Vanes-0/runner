@@ -33,7 +33,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var collision: KinematicCollision2D = body.move_and_collide(_direction * speed * delta)
 	if collision:
-		var motion = collision.get_remainder().bounce(collision.get_normal())
+		var motion := collision.get_remainder().bounce(collision.get_normal())
 		_direction = _direction.bounce(collision.get_normal())
 		body.move_and_collide(motion)
 	

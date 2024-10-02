@@ -102,7 +102,7 @@ func clean_layers(obj: CollisionObject2D) -> CollisionObject2D:
 
 ## Tells to [SceneHandler] to switch to [PackedScene].
 func switch_to_scene(scene: PackedScene):
-	var scene_handler = get_tree().current_scene
+	var scene_handler := get_tree().current_scene
 	if scene_handler is SceneHandler:
 		scene_handler.switch_to_scene(scene)
 	else:
@@ -110,7 +110,7 @@ func switch_to_scene(scene: PackedScene):
 
 ## Returns current scene of [SceneHandler].
 func get_current_scene() -> Node:
-	var scene_handler = get_tree().current_scene
+	var scene_handler := get_tree().current_scene
 	if scene_handler is SceneHandler:
 		return scene_handler.current_scene
 	else:
@@ -119,7 +119,7 @@ func get_current_scene() -> Node:
 
 ## Returns current scene as [GameScene]. If it's not, returns null.
 func get_game_scene() -> GameScene:
-	var scene = get_current_scene()
+	var scene := get_current_scene()
 	if scene is GameScene:
 		return scene
 	else:

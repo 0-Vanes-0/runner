@@ -11,14 +11,9 @@ var current_scene: Node ## Current scene on screen. Can be changed by [method sw
 
 func _ready() -> void:
 	if not Global.game_res_loaded:
-		Preloader.loaded.connect(
-				func():
-					Global.game_res_loaded = true
-					_on_ready()
-		, CONNECT_ONE_SHOT)
 		Preloader.start_preload()
-	else:
-		_on_ready()
+		Global.game_res_loaded = true
+	_on_ready()
 
 func _on_ready():
 	current_scene = Preloader.main_menu_scene.instantiate()
@@ -28,10 +23,7 @@ func _on_ready():
 
 ## Firstly removes current scene from tree and queues it for freeing, then instantiates a new [param scene].
 func switch_to_scene(scene: PackedScene):
-	get_tree().node_removed.connect(
-			func(node: Node):
-				node.queue_free()
-	, CONNECT_ONE_SHOT)
+	get_tree().node_removed.connect( func(node: Node): node.queue_free(), CONNECT_ONE_SHOT)
 	self.remove_child(current_scene)
 	current_scene = scene.instantiate()
 	self.add_child(current_scene)

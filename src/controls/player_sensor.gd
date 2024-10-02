@@ -32,10 +32,7 @@ func _ready() -> void:
 	shoot_sensor.shoot_activated.connect(
 			func(target_position_y: float):
 				crosshair.show()
-				crosshair.position = Vector2(
-						Global.ENEMY_X_POSITION,
-						Global.SCREEN_HEIGHT / 2 + target_position_y
-				)
+				crosshair.position = Vector2(Global.ENEMY_X_POSITION, Global.SCREEN_HEIGHT / 2 + target_position_y)
 	)
 	shoot_sensor.shoot_disabled.connect(
 			func():
@@ -52,11 +49,7 @@ func _ready() -> void:
 	switch_button.define_is_enabled(
 			func() -> bool:
 				var player := Global.player as Player
-				return not (
-						player.get_current_state() is LevelEndPlayerState 
-						or player.weapon2 == null
-						or switch_button.is_progressing
-				)
+				return not (player.get_current_state() is LevelEndPlayerState or player.weapon2 == null or switch_button.is_progressing)
 	)
 	switch_button.define_on_press(send_switch)
 	switch_button.define_get_progress_time(
@@ -67,12 +60,7 @@ func _ready() -> void:
 	activity_button.define_is_enabled(
 			func() -> bool:
 				var player := Global.player as Player
-				return not (
-						player.get_current_state() is LevelEndPlayerState 
-						or player.activity == null
-						or player.activity.is_reloading()
-						or activity_button.is_progressing
-				)
+				return not (player.get_current_state() is LevelEndPlayerState or player.activity == null or player.activity.is_reloading() or activity_button.is_progressing)
 	)
 	activity_button.define_on_press(send_activity)
 	activity_button.define_get_progress_time(
@@ -150,9 +138,9 @@ func _unhandled_input(event: InputEvent) -> void:
 #				_touch_start_position = Vector2.ZERO
 
 
-func update_activity_button_progress_time():
-	var player := Global.player as Player
-	activity_button.progress_time = player.activity.reload_time
+#func update_activity_button_progress_time(): # WIP
+#	var player := Global.player as Player
+#	activity_button.progress_time = player.activity.reload_time
 
 
 func send_jump_up():
@@ -172,7 +160,7 @@ func send_reload():
 
 
 func send_activity():
-	update_activity_button_progress_time()
+#	update_activity_button_progress_time()
 	var player := Global.player as Player
 	if not activity_button.is_progressing and player.activity != null:
 		activity.emit()
